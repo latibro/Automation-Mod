@@ -75,3 +75,6 @@ processResources {
         exclude 'mcmod.info'
     }
 }
+
+// Strange hack for resources to be found when running from Intellij. https://www.minecraftforum.net/forums/mapping-and-modding-java-edition/minecraft-mods/modification-development/3041364-trouble-with-mcmod-info-and-getting-textures-to
+sourceSets { main { output.resourcesDir = output.classesDir } }
