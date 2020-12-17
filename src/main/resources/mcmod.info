@@ -1,0 +1,11 @@
+[
+  {
+    "modid": "boilerplate",
+    "name": "Boilerplate",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "authorList": [
+      "Latibro"
+    ]
+  }
+]
