@@ -1,7 +1,7 @@
-package latibro.boilerplate.proxy;
+package latibro.automation.proxy;
 
-import latibro.boilerplate.ModBlocks;
-import latibro.boilerplate.ModItems;
+import latibro.automation.ModBlocks;
+import latibro.automation.ModItems;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;

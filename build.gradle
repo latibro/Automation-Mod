@@ -12,8 +12,8 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 
 
 version = "0.0.1-SNAPSHOT"
-group = "latibro.boilerplate" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "boilerplate"
+group = "latibro.automation" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "automation"
 
 sourceCompatibility = targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 compileJava {

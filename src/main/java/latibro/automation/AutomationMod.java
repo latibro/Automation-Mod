@@ -1,6 +1,6 @@
-package latibro.boilerplate;
+package latibro.automation;
 
-import latibro.boilerplate.proxy.CommonProxy;
+import latibro.automation.proxy.CommonProxy;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -9,18 +9,18 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.Logger;
 
-@Mod(modid = BoilerplateMod.MODID, name = BoilerplateMod.NAME, version = BoilerplateMod.VERSION)
-public class BoilerplateMod {
+@Mod(modid = AutomationMod.MODID, name = AutomationMod.NAME, version = AutomationMod.VERSION)
+public class AutomationMod {
 
-    public static final String MODID = "boilerplate";
-    public static final String NAME = "Boilerplate";
+    public static final String MODID = "automation";
+    public static final String NAME = "Automation";
     public static final String VERSION = "0.0.1";
 
-    @SidedProxy(clientSide = "latibro.boilerplate.proxy.ClientProxy", serverSide = "latibro.boilerplate.proxy.ServerProxy")
+    @SidedProxy(clientSide = "latibro.automation.proxy.ClientProxy", serverSide = "latibro.automation.proxy.ServerProxy")
     public static CommonProxy proxy;
 
     @Mod.Instance
-    public static BoilerplateMod instance;
+    public static AutomationMod instance;
 
     private static Logger logger;
 

@@ -1,4 +1,4 @@
-package latibro.boilerplate.proxy;
+package latibro.automation.proxy;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;

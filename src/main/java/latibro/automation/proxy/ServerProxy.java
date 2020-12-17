@@ -1,4 +1,4 @@
-package latibro.boilerplate.proxy;
+package latibro.automation.proxy;
 
 public class ServerProxy extends CommonProxy {
 
