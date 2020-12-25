@@ -22,7 +22,7 @@ public class AutomationMod {
     @Mod.Instance
     public static AutomationMod instance;
 
-    private static Logger logger;
+    public static Logger logger;
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
