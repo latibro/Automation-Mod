@@ -4,25 +4,24 @@ import dan200.computercraft.api.lua.ILuaContext;
 import dan200.computercraft.api.lua.LuaException;
 import dan200.computercraft.api.peripheral.IComputerAccess;
 import dan200.computercraft.api.peripheral.IPeripheral;
-import latibro.automation.AutomationMod;
+import latibro.automation.integration.lua.LuaObjectProxy;
 import latibro.automation.source.SourceBoxComputerIntegration;
 import latibro.automation.source.SourceBoxTileEntity;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.*;
 
 // https://github.com/SquidDev-CC/CC-Tweaked/blob/master/src/main/java/dan200/computercraft/api/peripheral/IPeripheral.java
 public class SourceBoxPeripheral implements IPeripheral {
 
     private final SourceBoxTileEntity tileEntity;
     private final SourceBoxComputerIntegration computerIntegration;
-    private final ComputerCraftWrappedObject proxy;
+    private final ComputerCraftObjectProxy proxy;
 
     public SourceBoxPeripheral(SourceBoxTileEntity tileEntity) {
         this.tileEntity = tileEntity;
         computerIntegration = new SourceBoxComputerIntegration();
-        proxy = new ComputerCraftWrappedObject(computerIntegration);
+        proxy = new ComputerCraftObjectProxy(new LuaObjectProxy(computerIntegration));
     }
 
     @Nonnull
@@ -41,12 +40,8 @@ public class SourceBoxPeripheral implements IPeripheral {
     @Override
     public Object[] callMethod(@Nonnull IComputerAccess computerAccess, @Nonnull ILuaContext context, int methodIndex, @Nonnull Object[] arguments) throws LuaException, InterruptedException {
 
-        Object x = new Object();
-
-        return new Object[]{x};
-
-//        Object[] result = proxy.callMethod(context, methodIndex, arguments);
-//        return result;
+        Object[] result = proxy.callMethod(context, methodIndex, arguments);
+        return result;
 
 //        Object wrappedResult;
 //        if (computerAccess.getClass().getPackage().getName().startsWith("li.cil.oc")) {
