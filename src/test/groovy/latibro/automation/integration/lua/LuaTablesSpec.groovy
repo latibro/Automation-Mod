@@ -216,4 +216,50 @@ class LuaTablesSpec extends Specification {
         thrown(ClassCastException)
     }
 
+    // ***** isList
+
+    @Unroll
+    def "isList - #name - #expected"() {
+        when:
+        def output = LuaTables.isList(input)
+        then:
+        output == expected
+        where:
+        name                         | input                                           || expected
+        "null"                       | null                                            || false
+        "empty Map"                  | (Map) [:]                                       || true
+        "keys in sequence"           | (Map) [1d: "first", 2d: "second", 3d: "third"]  || true
+        "keys out of sequence"       | (Map) [2d: "second", 1d: "first", 3d: "third"]  || true
+        "keys with gaps in sequence" | (Map) [1d: "first", 2d: "second", 10d: "tenth"] || false
+        "wrong key type"             | (Map) [1d: "first", test: "test"]               || false
+    }
+
+    // ***** toList
+
+    @Unroll
+    def "toList - #name - fail"() {
+        when:
+        LuaTables.toList(input)
+        then:
+        thrown(IllegalArgumentException)
+        where:
+        name                         | input
+        "null"                       | null
+        "keys with gaps in sequence" | (Map) [1d: "first", 2d: "second", 10d: "tenth"]
+        "wrong key type"             | (Map) [1d: "first", test: "test"]
+    }
+
+    @Unroll
+    def "toList - #name - return list"() {
+        when:
+        def output = LuaTables.toList(input)
+        then:
+        output == expected
+        where:
+        name                         | input                                           || expected
+        "empty Map"                  | (Map) [:]                                       || (List) []
+        "keys in sequence"           | (Map) [1d: "first", 2d: "second", 3d: "third"]  || (List) ["first", "second", "third"]
+        "keys out of sequence"       | (Map) [2d: "second", 1d: "first", 3d: "third"]  || (List) ["first", "second", "third"]
+    }
+
 }

@@ -88,7 +88,27 @@ public final class LuaTables {
         }
     }
 
-    //TODO methods to check if Map looks like list (keys in number sequence)
-    //TODO methods to transform LuaTable to array/list
+    public static boolean isList(Map map) {
+        if (map == null) {
+            return false;
+        }
+        for (int index=0; index < map.size(); index++) {
+            if (!map.containsKey(LuaObjects.toLuaObject(index+1))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static List toList(Map map) {
+        if (!isList(map)) {
+            throw new IllegalArgumentException("Not a list");
+        }
+        List list = new ArrayList();
+        for (int index=0; index < map.size(); index++) {
+            list.add(index, map.get(LuaObjects.toLuaObject(index+1)));
+        }
+        return list;
+    }
 
 }
