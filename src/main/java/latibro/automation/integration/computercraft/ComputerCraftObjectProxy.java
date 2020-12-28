@@ -54,7 +54,7 @@ public class ComputerCraftObjectProxy implements ILuaObject {
             //TODO maybe return null or empty array if result is null?
             return new Object[] {ccResult};
         } catch (Exception e) {
-            AutomationMod.logger.error("CCWrapper.callMethod - exception", e);
+            AutomationMod.logger.error("CCProxy.callMethod - exception", e);
             e.printStackTrace();
             throw new LuaException(e.getClass().getName() + ": " + e.getMessage());
         }

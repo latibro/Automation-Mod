@@ -15,12 +15,12 @@ class ComputerCraftObjectsSpec extends Specification {
         AutomationMod.logger = Mock(Logger.class)
     }
 
-    // ***** isComputerCraftSafe
+    // ***** isSafeComputerCraftObject
 
     @Unroll
-    def "isComputerCraftSafe - #name - #expected"() {
+    def "isSafeComputerCraftObject - #name - #expected"() {
         when:
-        def output = ComputerCraftObjects.isComputerCraftSafe(input)
+        def output = ComputerCraftObjects.isSafeComputerCraftObject(input)
         then:
         output == expected
         where:
@@ -142,8 +142,8 @@ class ComputerCraftObjectsSpec extends Specification {
         def output = ComputerCraftObjects.toComputerCraftObject(input)
         then:
         output instanceof Map
-        !ComputerCraftObjects.isComputerCraftSafe(input)
-        ComputerCraftObjects.isComputerCraftSafe(output)
+        !ComputerCraftObjects.isSafeComputerCraftObject(input)
+        ComputerCraftObjects.isSafeComputerCraftObject(output)
     }
 
     def "toComputerCraftObject - Map with nested unsafe map - fails"() {

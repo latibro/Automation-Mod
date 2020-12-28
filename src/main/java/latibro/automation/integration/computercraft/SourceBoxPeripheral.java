@@ -15,13 +15,11 @@ import javax.annotation.Nullable;
 public class SourceBoxPeripheral implements IPeripheral {
 
     private final SourceBoxTileEntity tileEntity;
-    private final SourceBoxComputerIntegration computerIntegration;
     private final ComputerCraftObjectProxy proxy;
 
     public SourceBoxPeripheral(SourceBoxTileEntity tileEntity) {
         this.tileEntity = tileEntity;
-        computerIntegration = new SourceBoxComputerIntegration();
-        proxy = new ComputerCraftObjectProxy(new LuaObjectProxy(computerIntegration));
+        proxy = new ComputerCraftObjectProxy(new LuaObjectProxy(new SourceBoxComputerIntegration()));
     }
 
     @Nonnull
@@ -39,9 +37,14 @@ public class SourceBoxPeripheral implements IPeripheral {
     @Nullable
     @Override
     public Object[] callMethod(@Nonnull IComputerAccess computerAccess, @Nonnull ILuaContext context, int methodIndex, @Nonnull Object[] arguments) throws LuaException, InterruptedException {
+        try {
+            if (computerAccess.getClass().getPackage().getName().startsWith("li.cil.oc")) {
+                //TODO for some reason methods, found on both CC and OC, it seems the CC version has priority over OC methods when called from OC. Maybe because of use of OC ManagedPeripheral
+                System.out.println("CC called from OC");
+            }
 
-        Object[] result = proxy.callMethod(context, methodIndex, arguments);
-        return result;
+            Object[] result = proxy.callMethod(context, methodIndex, arguments);
+            return result;
 
 //        Object wrappedResult;
 //        if (computerAccess.getClass().getPackage().getName().startsWith("li.cil.oc")) {
@@ -54,6 +57,10 @@ public class SourceBoxPeripheral implements IPeripheral {
 //        }
 //
 //        return new Object[]{wrappedResult};
+        } catch (Throwable e) {
+            e.printStackTrace();
+            throw e;
+        }
     }
 
     @Override

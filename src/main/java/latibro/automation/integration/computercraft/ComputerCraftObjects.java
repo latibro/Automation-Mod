@@ -11,7 +11,7 @@ public final class ComputerCraftObjects {
     private ComputerCraftObjects() {
     }
 
-    public static boolean isComputerCraftSafe(Object object) {
+    public static boolean isSafeComputerCraftObject(Object object) {
         if (object == null) {
             // Null - No need to do anything
             return true;
@@ -31,7 +31,7 @@ public final class ComputerCraftObjects {
             return !((Map) object).entrySet().stream().anyMatch(o -> {
                 Object key = ((Map.Entry) o).getKey();
                 Object value = ((Map.Entry) o).getValue();
-                return !isComputerCraftSafe(key) || !isComputerCraftSafe(value);
+                return !isSafeComputerCraftObject(key) || !isSafeComputerCraftObject(value);
             });
         } else {
             return false;
@@ -39,7 +39,7 @@ public final class ComputerCraftObjects {
     }
 
     public static Object toComputerCraftObject(Object object) {
-        if (isComputerCraftSafe(object)) {
+        if (isSafeComputerCraftObject(object)) {
             return object;
         } else if (object instanceof LuaObjectProxy) {
             return new ComputerCraftObjectProxy((LuaObjectProxy) object);

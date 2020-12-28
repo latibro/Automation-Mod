@@ -3,8 +3,10 @@ package latibro.automation.proxy;
 import dan200.computercraft.api.ComputerCraftAPI;
 import latibro.automation.ModBlocks;
 import latibro.automation.integration.computercraft.SourceBoxPeripheralProvider;
+import latibro.automation.integration.opencomputers.SourceBoxDriver;
 import latibro.automation.source.SourceBoxBlock;
 import latibro.automation.source.SourceBoxTileEntity;
+import li.cil.oc.api.API;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -25,6 +27,7 @@ public class CommonProxy {
 
     public void init(FMLInitializationEvent e) {
         ComputerCraftAPI.registerPeripheralProvider(new SourceBoxPeripheralProvider());
+        API.driver.add(new SourceBoxDriver());
     }
 
     public void postInit(FMLPostInitializationEvent e) {

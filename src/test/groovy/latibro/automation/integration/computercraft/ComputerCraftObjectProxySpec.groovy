@@ -163,7 +163,7 @@ class ComputerCraftObjectProxySpec extends Specification {
         result instanceof Object[]
         def array = (Object[]) result
         array.length == 1
-        ComputerCraftObjects.isComputerCraftSafe(array[0])
+        ComputerCraftObjects.isSafeComputerCraftObject(array[0])
         array[0] instanceof ComputerCraftObjectProxy
     }
 
