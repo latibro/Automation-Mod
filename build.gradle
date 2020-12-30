@@ -70,6 +70,8 @@ dependencies {
     //runtime "org.squiddev:cc-tweaked-1.12.2:1.89.+"
     compile "org.squiddev:cc-tweaked-1.12.2:1.89.+"
 
+    compile group: 'org.codehaus.groovy', name: 'groovy-all', version: '3.0.7', ext: 'pom'
+
     testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.7.0-M1'
     testCompile group: 'org.spockframework', name: 'spock-core', version: '2.0-M3-groovy-3.0'
     testCompile group: 'net.bytebuddy', name: 'byte-buddy', version: '1.10.19'
@@ -94,6 +96,3 @@ processResources {
         exclude 'mcmod.info'
     }
 }
-
-// Strange hack for resources to be found when running from Intellij. https://www.minecraftforum.net/forums/mapping-and-modding-java-edition/minecraft-mods/modification-development/3041364-trouble-with-mcmod-info-and-getting-textures-to
-sourceSets { main { output.resourcesDir = output.classesDir } }
