@@ -1,6 +1,4 @@
-package latibro.automation.core.context;
-
-import java.util.Map;
+package latibro.automation.core.context
 
 public interface ContextProvider {
 

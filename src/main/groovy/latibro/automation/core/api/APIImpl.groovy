@@ -1,8 +1,8 @@
-package latibro.automation.core.api;
+package latibro.automation.core.api
 
-import latibro.automation.core.context.Context;
-import latibro.automation.core.context.ContextProvider;
-import net.minecraft.world.World;
+import latibro.automation.core.context.Context
+import latibro.automation.core.context.ContextProvider
+import net.minecraft.world.World
 
 public abstract class APIImpl {
 

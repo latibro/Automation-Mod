@@ -1,7 +1,7 @@
-package latibro.automation.interfacebox;
+package latibro.automation.interfacebox
 
-import latibro.automation.core.api.API;
-import latibro.automation.core.peripheral.PeripheralTileEntity;
+import latibro.automation.core.api.API
+import latibro.automation.core.peripheral.PeripheralTileEntity
 
 public class InterfaceBoxTileEntity extends PeripheralTileEntity {
 

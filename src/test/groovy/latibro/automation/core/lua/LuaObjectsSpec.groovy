@@ -1,8 +1,8 @@
 package latibro.automation.core.lua
 
 import latibro.automation.AutomationMod
-import spock.lang.Specification
 import org.apache.logging.log4j.Logger
+import spock.lang.Specification
 import spock.lang.Unroll
 
 class LuaObjectsSpec extends Specification {

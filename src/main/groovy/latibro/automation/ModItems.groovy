@@ -1,7 +1,7 @@
-package latibro.automation;
+package latibro.automation
 
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side
+import net.minecraftforge.fml.relauncher.SideOnly
 
 public class ModItems {
 

@@ -1,8 +1,7 @@
-package latibro.automation.core.lua;
+package latibro.automation.core.lua
 
-import javax.annotation.Nullable;
-import java.util.*;
-import java.util.stream.IntStream;
+import javax.annotation.Nullable
+import java.util.stream.IntStream
 
 public final class LuaTables {
 

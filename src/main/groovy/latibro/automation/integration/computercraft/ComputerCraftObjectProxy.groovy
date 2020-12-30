@@ -1,15 +1,13 @@
-package latibro.automation.integration.computercraft;
+package latibro.automation.integration.computercraft
 
-import dan200.computercraft.api.lua.ILuaContext;
-import dan200.computercraft.api.lua.ILuaObject;
-import dan200.computercraft.api.lua.LuaException;
-import latibro.automation.AutomationMod;
-import latibro.automation.core.lua.LuaObjectProxy;
+import dan200.computercraft.api.lua.ILuaContext
+import dan200.computercraft.api.lua.ILuaObject
+import dan200.computercraft.api.lua.LuaException
+import latibro.automation.AutomationMod
+import latibro.automation.core.lua.LuaObjectProxy
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.util.Arrays;
-import java.util.Objects;
+import javax.annotation.Nonnull
+import javax.annotation.Nullable
 
 // https://github.com/SquidDev-CC/CC-Tweaked/blob/master/src/main/java/dan200/computercraft/api/lua/ILuaObject.java
 public class ComputerCraftObjectProxy implements ILuaObject {

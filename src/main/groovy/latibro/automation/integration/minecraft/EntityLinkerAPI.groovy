@@ -1,9 +1,7 @@
-package latibro.automation.integration.minecraft;
+package latibro.automation.integration.minecraft
 
-import latibro.automation.core.api.API;
-import latibro.automation.core.lua.LuaMethod;
-
-import java.util.UUID;
+import latibro.automation.core.api.API
+import latibro.automation.core.lua.LuaMethod
 
 public interface EntityLinkerAPI extends API {
 

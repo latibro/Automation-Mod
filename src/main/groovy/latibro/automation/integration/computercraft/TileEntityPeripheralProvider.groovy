@@ -1,13 +1,13 @@
-package latibro.automation.integration.computercraft;
+package latibro.automation.integration.computercraft
 
-import dan200.computercraft.api.peripheral.IPeripheral;
-import dan200.computercraft.api.peripheral.IPeripheralProvider;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import dan200.computercraft.api.peripheral.IPeripheral
+import dan200.computercraft.api.peripheral.IPeripheralProvider
+import net.minecraft.util.EnumFacing
+import net.minecraft.util.math.BlockPos
+import net.minecraft.world.World
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import javax.annotation.Nonnull
+import javax.annotation.Nullable
 
 public class TileEntityPeripheralProvider implements IPeripheralProvider {
 

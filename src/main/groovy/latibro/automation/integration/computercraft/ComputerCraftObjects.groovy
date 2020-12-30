@@ -1,10 +1,6 @@
-package latibro.automation.integration.computercraft;
+package latibro.automation.integration.computercraft
 
-import latibro.automation.core.lua.LuaObjectProxy;
-
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import latibro.automation.core.lua.LuaObjectProxy
 
 public final class ComputerCraftObjects {
 

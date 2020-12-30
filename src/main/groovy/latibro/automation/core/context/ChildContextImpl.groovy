@@ -1,9 +1,6 @@
-package latibro.automation.core.context;
+package latibro.automation.core.context
 
-import net.minecraft.world.World;
-
-import java.util.Collections;
-import java.util.Map;
+import net.minecraft.world.World
 
 public class ChildContextImpl extends ContextImpl implements ChildContext {
 

@@ -1,10 +1,10 @@
-package latibro.automation.interfacebox;
+package latibro.automation.interfacebox
 
-import latibro.automation.core.api.API;
-import latibro.automation.core.api.APIImpl;
-import latibro.automation.core.context.ContextProvider;
-import latibro.automation.core.lua.LuaMethod;
-import latibro.automation.integration.minecraft.EntityLinker;
+import latibro.automation.core.api.API
+import latibro.automation.core.api.APIImpl
+import latibro.automation.core.context.ContextProvider
+import latibro.automation.core.lua.LuaMethod
+import latibro.automation.integration.minecraft.EntityLinker
 
 public class InterfaceBox extends APIImpl implements InterfaceBoxAPI {
 

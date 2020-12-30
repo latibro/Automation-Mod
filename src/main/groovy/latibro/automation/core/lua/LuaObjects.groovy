@@ -1,7 +1,6 @@
-package latibro.automation.core.lua;
+package latibro.automation.core.lua
 
-import javax.annotation.Nullable;
-import java.util.*;
+import javax.annotation.Nullable
 
 public final class LuaObjects {
 

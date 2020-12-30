@@ -1,8 +1,4 @@
-package latibro.automation.core.context;
-
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+package latibro.automation.core.context
 
 public abstract class ContextImpl implements Context, ContextProvider {
 

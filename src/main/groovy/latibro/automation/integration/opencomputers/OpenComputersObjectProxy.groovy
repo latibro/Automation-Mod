@@ -1,15 +1,13 @@
-package latibro.automation.integration.opencomputers;
+package latibro.automation.integration.opencomputers
 
-import latibro.automation.AutomationMod;
-import latibro.automation.core.lua.LuaObjectProxy;
-import li.cil.oc.api.machine.Arguments;
-import li.cil.oc.api.machine.Context;
-import li.cil.oc.api.network.ManagedPeripheral;
-import li.cil.oc.api.prefab.AbstractValue;
+import latibro.automation.AutomationMod
+import latibro.automation.core.lua.LuaObjectProxy
+import li.cil.oc.api.machine.Arguments
+import li.cil.oc.api.machine.Context
+import li.cil.oc.api.network.ManagedPeripheral
+import li.cil.oc.api.prefab.AbstractValue
 
-import javax.annotation.Nonnull;
-import java.util.Arrays;
-import java.util.Objects;
+import javax.annotation.Nonnull
 
 public class OpenComputersObjectProxy extends AbstractValue implements ManagedPeripheral {
 

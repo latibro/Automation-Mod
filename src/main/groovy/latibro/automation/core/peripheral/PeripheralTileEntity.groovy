@@ -1,24 +1,23 @@
-package latibro.automation.core.peripheral;
+package latibro.automation.core.peripheral
 
-import dan200.computercraft.api.lua.ILuaContext;
-import dan200.computercraft.api.lua.LuaException;
-import dan200.computercraft.api.peripheral.IComputerAccess;
-import dan200.computercraft.api.peripheral.IPeripheral;
-import latibro.automation.core.api.API;
-import latibro.automation.core.context.Context;
-import latibro.automation.core.context.ContextProvider;
-import latibro.automation.integration.computercraft.ComputerCraftObjectProxy;
-import latibro.automation.core.lua.LuaObjectProxy;
-import latibro.automation.integration.opencomputers.OpenComputersObjectProxy;
-import li.cil.oc.api.Network;
-import li.cil.oc.api.machine.Arguments;
-import li.cil.oc.api.network.ManagedPeripheral;
-import li.cil.oc.api.network.Visibility;
-import li.cil.oc.api.prefab.TileEntityEnvironment;
+import dan200.computercraft.api.lua.ILuaContext
+import dan200.computercraft.api.lua.LuaException
+import dan200.computercraft.api.peripheral.IComputerAccess
+import dan200.computercraft.api.peripheral.IPeripheral
+import latibro.automation.core.api.API
+import latibro.automation.core.context.Context
+import latibro.automation.core.context.ContextProvider
+import latibro.automation.core.lua.LuaObjectProxy
+import latibro.automation.integration.computercraft.ComputerCraftObjectProxy
+import latibro.automation.integration.opencomputers.OpenComputersObjectProxy
+import li.cil.oc.api.Network
+import li.cil.oc.api.machine.Arguments
+import li.cil.oc.api.network.ManagedPeripheral
+import li.cil.oc.api.network.Visibility
+import li.cil.oc.api.prefab.TileEntityEnvironment
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.util.Map;
+import javax.annotation.Nonnull
+import javax.annotation.Nullable
 
 // https://github.com/PC-Logix/OpenFM/blob/master/src/main/java/pcl/OpenFM/TileEntity/TileEntityRadio.java
 // https://github.com/Vexatos/Computronics/blob/master/src/main/java/pl/asie/computronics/tile/TileEntityPeripheralBase.java

@@ -1,9 +1,7 @@
-package latibro.automation.integration.minecraft;
+package latibro.automation.integration.minecraft
 
-import latibro.automation.core.context.ChildContextImpl;
-import latibro.automation.core.context.Context;
-
-import java.util.Map;
+import latibro.automation.core.context.ChildContextImpl
+import latibro.automation.core.context.Context
 
 public class EntityLinkContext extends ChildContextImpl {
 

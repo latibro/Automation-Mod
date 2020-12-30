@@ -1,9 +1,7 @@
-package latibro.automation.core.peripheral;
+package latibro.automation.core.peripheral
 
-import latibro.automation.core.context.ContextImpl;
-import net.minecraft.world.World;
-
-import java.util.Map;
+import latibro.automation.core.context.ContextImpl
+import net.minecraft.world.World
 
 public class PeripheralContext extends ContextImpl {
 
