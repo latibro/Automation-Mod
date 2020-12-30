@@ -1,16 +1,11 @@
-package latibro.automation.integration.minecraft;
+package latibro.automation.integration.minecraft
 
-import com.google.common.base.Predicate;
-import latibro.automation.core.api.APIImpl;
-import latibro.automation.core.context.ContextProvider;
-import latibro.automation.core.lua.LuaMethod;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.math.BlockPos;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import com.google.common.base.Predicate
+import latibro.automation.core.api.APIImpl
+import latibro.automation.core.context.ContextProvider
+import latibro.automation.core.lua.LuaMethod
+import net.minecraft.entity.Entity
+import net.minecraft.util.math.BlockPos
 
 public class EntityLink extends APIImpl implements EntityLinkAPI {
 
@@ -70,7 +65,7 @@ public class EntityLink extends APIImpl implements EntityLinkAPI {
     }
 
     private Entity findEntity() {
-        Predicate p = (Predicate<Entity>) input -> input.getUniqueID().equals(getUUID());
+        Predicate p = (Predicate<Entity>) (input) -> input.getUniqueID().equals(getUUID());
         List entities = getWorld().getEntities(Entity.class, p);
         if (entities.isEmpty()) {
             return null;

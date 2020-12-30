@@ -1,11 +1,9 @@
-package latibro.automation.core.lua;
+package latibro.automation.core.lua
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.lang.reflect.Method;
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.stream.Stream;
+import javax.annotation.Nonnull
+import javax.annotation.Nullable
+import java.lang.reflect.Method
+import java.util.stream.Stream
 
 public class LuaObjectProxy {
 
@@ -46,12 +44,21 @@ public class LuaObjectProxy {
         return matchingMethods[0];
     }
 
+    private MetaMethod findMetaMethod(String methodName, Object[] arguments) throws NoSuchMethodException {
+        def method = source.metaClass.getMetaMethod(methodName, arguments);
+        if (!method) {
+            throw new NoSuchMethodException("No method match");
+        } else {
+            return method;
+        }
+    }
+
     @Nonnull
     public String[] getMethodNames() {
         return Arrays.stream(getMethodList()).map(Method::getName).distinct().toArray(String[]::new);
     }
 
-    private Object callMethod(Method method, Object[] arguments) throws Exception {
+    private Object _callMethod(Method method, Object[] arguments) throws Exception {
         return method.invoke(source, arguments);
     }
 
@@ -61,7 +68,11 @@ public class LuaObjectProxy {
 
         Method method = findMethod(methodName, nativeArguments);
 
-        Object nativeResult = callMethod(method, nativeArguments);
+        def metaMethod = findMetaMethod(methodName, nativeArguments);
+        Object nativeResult = metaMethod.doMethodInvoke(source, nativeArguments);
+
+        //Object nativeResult = source.invokeMethod(method.getName(), nativeArguments);
+        //Object nativeResult = _callMethod(method, nativeArguments);
 
         Object luaResult = toLuaResult(nativeResult);
 
