@@ -4,7 +4,7 @@ import dan200.computercraft.api.lua.ILuaContext;
 import dan200.computercraft.api.lua.ILuaObject;
 import dan200.computercraft.api.lua.LuaException;
 import latibro.automation.AutomationMod;
-import latibro.automation.integration.lua.LuaObjectProxy;
+import latibro.automation.core.lua.LuaObjectProxy;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

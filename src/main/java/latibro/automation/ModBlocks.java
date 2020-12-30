@@ -1,18 +1,18 @@
 package latibro.automation;
 
-import latibro.automation.source.SourceBoxBlock;
+import latibro.automation.interfacebox.InterfaceBoxBlock;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ModBlocks {
 
-    @GameRegistry.ObjectHolder("automation:source_box")
-    public static SourceBoxBlock sourceBox;
+    @GameRegistry.ObjectHolder("automation:interface_box")
+    public static InterfaceBoxBlock interfaceBox;
 
     @SideOnly(Side.CLIENT)
     public static void initModels() {
-        sourceBox.initModel();
+        interfaceBox.initModel();
     }
 
 }

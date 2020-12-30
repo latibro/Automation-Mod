@@ -1,4 +1,4 @@
-package latibro.automation.integration.lua
+package latibro.automation.core.lua
 
 import latibro.automation.AutomationMod
 import spock.lang.Specification

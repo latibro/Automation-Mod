@@ -1,6 +1,6 @@
 package latibro.automation.integration.computercraft;
 
-import latibro.automation.integration.lua.LuaObjectProxy;
+import latibro.automation.core.lua.LuaObjectProxy;
 
 import java.util.Collections;
 import java.util.HashMap;

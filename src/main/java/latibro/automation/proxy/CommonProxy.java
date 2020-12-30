@@ -2,11 +2,9 @@ package latibro.automation.proxy;
 
 import dan200.computercraft.api.ComputerCraftAPI;
 import latibro.automation.ModBlocks;
-import latibro.automation.integration.computercraft.SourceBoxPeripheralProvider;
-import latibro.automation.integration.opencomputers.SourceBoxDriver;
-import latibro.automation.source.SourceBoxBlock;
-import latibro.automation.source.SourceBoxTileEntity;
-import li.cil.oc.api.API;
+import latibro.automation.integration.computercraft.TileEntityPeripheralProvider;
+import latibro.automation.interfacebox.InterfaceBoxBlock;
+import latibro.automation.interfacebox.InterfaceBoxTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -26,8 +24,7 @@ public class CommonProxy {
     }
 
     public void init(FMLInitializationEvent e) {
-        ComputerCraftAPI.registerPeripheralProvider(new SourceBoxPeripheralProvider());
-        API.driver.add(new SourceBoxDriver());
+        ComputerCraftAPI.registerPeripheralProvider(new TileEntityPeripheralProvider());
     }
 
     public void postInit(FMLPostInitializationEvent e) {
@@ -35,13 +32,13 @@ public class CommonProxy {
 
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
-        event.getRegistry().register(new SourceBoxBlock());
-        GameRegistry.registerTileEntity(SourceBoxTileEntity.class, new ResourceLocation("source_box"));
+        event.getRegistry().register(new InterfaceBoxBlock());
+        GameRegistry.registerTileEntity(InterfaceBoxTileEntity.class, new ResourceLocation("interface_box"));
     }
 
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
-        event.getRegistry().register(new ItemBlock(ModBlocks.sourceBox).setRegistryName(ModBlocks.sourceBox.getRegistryName()));
+        event.getRegistry().register(new ItemBlock(ModBlocks.interfaceBox).setRegistryName(ModBlocks.interfaceBox.getRegistryName()));
     }
 
 }

@@ -1,4 +1,4 @@
-package latibro.automation.source;
+package latibro.automation.interfacebox;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
@@ -14,12 +14,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 
-public class SourceBoxBlock extends Block implements ITileEntityProvider {
+public class InterfaceBoxBlock extends Block implements ITileEntityProvider {
 
-    public SourceBoxBlock() {
+    public InterfaceBoxBlock() {
         super(Material.IRON);
-        setRegistryName("source_box");
-        setUnlocalizedName("automation.source_box");
+        setRegistryName("interface_box");
+        setUnlocalizedName("automation.interface_box");
         setCreativeTab(CreativeTabs.MISC);
     }
 
@@ -30,8 +30,8 @@ public class SourceBoxBlock extends Block implements ITileEntityProvider {
 
     @Nullable
     @Override
-    public TileEntity createNewTileEntity(World worldIn, int meta) {
-        return new SourceBoxTileEntity();
+    public TileEntity createNewTileEntity(World world, int meta) {
+        return new InterfaceBoxTileEntity();
     }
 
 }

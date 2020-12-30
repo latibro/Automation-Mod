@@ -1,4 +1,4 @@
-package latibro.automation.integration.lua
+package latibro.automation.core.lua
 
 import latibro.automation.AutomationMod
 import org.apache.logging.log4j.Logger
@@ -51,6 +51,7 @@ class LuaObjectProxySpec extends Specification {
     def "getMethodNames - contains public method"() {
         given:
         def source = new Object() {
+            @LuaMethod
             public void publicMethod() {}
         }
         def proxy = new LuaObjectProxy(source)
@@ -60,9 +61,27 @@ class LuaObjectProxySpec extends Specification {
         methods.contains("publicMethod")
     }
 
+    def "getMethodNames - only contains methods annotated with LuaMethod"() {
+        given:
+        def source = new Object() {
+            @LuaMethod
+            public void luaMethod() {}
+
+            public void anotherMethod() {}
+        }
+        def proxy = new LuaObjectProxy(source)
+        when:
+        def methods = proxy.getMethodNames()
+        then:
+        methods.size() == 1
+        methods.contains("luaMethod")
+        !methods.contains("anotherMethod")
+    }
+
     def "getMethodNames - does not contain private method"() {
         given:
         def source = new Object() {
+            @LuaMethod
             private void privateMethod() {}
         }
         def proxy = new LuaObjectProxy(source)
@@ -75,7 +94,10 @@ class LuaObjectProxySpec extends Specification {
     def "getMethodNames - only has method name once"() {
         given:
         def source = new Object() {
+            @LuaMethod
             public void publicMethod() {}
+
+            @LuaMethod
             public void publicMethod(def input) {}
         }
         def proxy = new LuaObjectProxy(source)
@@ -90,6 +112,7 @@ class LuaObjectProxySpec extends Specification {
     def "callMethod - unknown method - fails"() {
         given:
         def source = new Object() {
+            @LuaMethod
             public void testMethod() {}
         }
         def proxy = new LuaObjectProxy(source)
@@ -102,9 +125,11 @@ class LuaObjectProxySpec extends Specification {
     def "callMethod - null as arguments - calls method with no arguments"() {
         given:
         def source = Spy(new Object() {
+            @LuaMethod
             public void testMethod() {}
         })
-        def proxy = new LuaObjectProxy(source)
+        def proxy = Spy(new LuaObjectProxy(source))
+        proxy.isLuaMethod(_) >> true
         when:
         proxy.callMethod("testMethod", null)
         then:
@@ -114,9 +139,11 @@ class LuaObjectProxySpec extends Specification {
     def "callMethod - empty array as arguments - calls method with no arguments"() {
         given:
         def source = Spy(new Object() {
+            @LuaMethod
             public void testMethod() {}
         })
-        def proxy = new LuaObjectProxy(source)
+        def proxy = Spy(new LuaObjectProxy(source))
+        proxy.isLuaMethod(_) >> true
         when:
         proxy.callMethod("testMethod", [] as Object[])
         then:
@@ -126,9 +153,11 @@ class LuaObjectProxySpec extends Specification {
     def "callMethod - arguments - passes arguments to method"() {
         given:
         def source = Spy(new Object() {
+            @LuaMethod
             public void testMethod(def arg1, def arg2, def arg3) {}
         })
-        def proxy = new LuaObjectProxy(source)
+        def proxy = Spy(new LuaObjectProxy(source))
+        proxy.isLuaMethod(_) >> true
         when:
         proxy.callMethod("testMethod", ["first", "second", 3] as Object[])
         then:
@@ -138,6 +167,7 @@ class LuaObjectProxySpec extends Specification {
     def "callMethod - too many arguments - fails"() {
         given:
         def source = new Object() {
+            @LuaMethod
             public void testMethod(def arg1) {}
         }
         def proxy = new LuaObjectProxy(source)
@@ -150,6 +180,7 @@ class LuaObjectProxySpec extends Specification {
     def "callMethod - too few arguments - fails"() {
         given:
         def source = new Object() {
+            @LuaMethod
             public void testMethod(def arg1, def arg2) {}
         }
         def proxy = new LuaObjectProxy(source)
@@ -164,7 +195,8 @@ class LuaObjectProxySpec extends Specification {
         def source = Spy(new Object() {
             public void testMethod(def arg1, def arg2, def arg3) {}
         })
-        def proxy = new LuaObjectProxy(source)
+        def proxy = Spy(new LuaObjectProxy(source))
+        proxy.isLuaMethod(_) >> true
         when:
         proxy.callMethod("testMethod", [new LuaObjectProxy("Hello world"), "second", 3] as Object[])
         then:
@@ -174,6 +206,7 @@ class LuaObjectProxySpec extends Specification {
     def "callMethod - method result is returned"() {
         given:
         def source = new Object() {
+            @LuaMethod
             public Object testMethod() {
                 return "Hello world"
             }
@@ -188,6 +221,7 @@ class LuaObjectProxySpec extends Specification {
     def "callMethod - method returns unsafe lua object - transforms result before returning it"() {
         given:
         def source = new Object() {
+            @LuaMethod
             public Object testMethod() {
                 return LuaObjectsSpec.UNSAFE_LUA_OBJECT
             }
@@ -202,12 +236,15 @@ class LuaObjectProxySpec extends Specification {
     def "callMethod - multiple methods with name - fails"() {
         given:
         def source = new Object() {
+            @LuaMethod
             public void publicMethod() {}
+
+            @LuaMethod
             public void publicMethod(def input) {}
         }
         def proxy = new LuaObjectProxy(source)
         when:
-        def result = proxy.callMethod("testMethod", null)
+        proxy.callMethod("testMethod", null)
         then:
         thrown(NoSuchMethodException)
     }
@@ -215,11 +252,12 @@ class LuaObjectProxySpec extends Specification {
     def "callMethod - wrong argument types - fails"() {
         given:
         def source = new Object() {
+            @LuaMethod
             public void testMethod(Boolean input) {}
         }
         def proxy = new LuaObjectProxy(source)
         when:
-        def result = proxy.callMethod("testMethod", ["Hello world"] as Object[])
+        proxy.callMethod("testMethod", ["Hello world"] as Object[])
         then:
         thrown(IllegalArgumentException)
     }

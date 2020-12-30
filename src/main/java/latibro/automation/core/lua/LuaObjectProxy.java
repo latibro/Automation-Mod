@@ -1,10 +1,11 @@
-package latibro.automation.integration.lua;
+package latibro.automation.core.lua;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 public class LuaObjectProxy {
 
@@ -19,8 +20,20 @@ public class LuaObjectProxy {
         return source;
     }
 
+    protected boolean isLuaMethod(Method method) {
+        if (source.getClass().isAnnotationPresent(LuaObject.class)) {
+            LuaObject annotation = source.getClass().getAnnotation(LuaObject.class);
+            if (annotation.allMethods()) {
+                return true;
+            }
+        }
+        return method.isAnnotationPresent(LuaMethod.class);
+    }
+
     private Method[] getMethodList() {
-        return source.getClass().getMethods();
+        Stream<Method> stream = Arrays.stream(source.getClass().getMethods());
+        stream = stream.filter(this::isLuaMethod);
+        return stream.toArray(Method[]::new);
     }
 
     private Method findMethod(String methodName, Object[] arguments) throws NoSuchMethodException {

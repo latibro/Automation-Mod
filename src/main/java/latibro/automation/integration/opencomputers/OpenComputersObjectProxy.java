@@ -1,7 +1,7 @@
 package latibro.automation.integration.opencomputers;
 
 import latibro.automation.AutomationMod;
-import latibro.automation.integration.lua.LuaObjectProxy;
+import latibro.automation.core.lua.LuaObjectProxy;
 import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Context;
 import li.cil.oc.api.network.ManagedPeripheral;
@@ -35,10 +35,13 @@ public class OpenComputersObjectProxy extends AbstractValue implements ManagedPe
         try {
             try {
                 //TODO OC fails if input is is array-like {"first", "second"} https://github.com/MightyPirates/OpenComputers/issues/2319
-                for (Object o : arguments) {
-                    String.valueOf(o);
+                if (arguments != null) {
+                    for (Object o : arguments.toArray()) {
+                        String.valueOf(o);
+                    }
                 }
             } catch (Throwable e) {
+                e.printStackTrace();
                 throw new IllegalArgumentException("OC is unable to parse array-like tables");
             }
 

@@ -2,7 +2,7 @@ package latibro.automation.integration.computercraft
 
 import dan200.computercraft.api.lua.LuaException
 import latibro.automation.AutomationMod
-import latibro.automation.integration.lua.LuaObjectProxy
+import latibro.automation.core.lua.LuaObjectProxy
 import org.apache.logging.log4j.Logger
 import spock.lang.Specification
 

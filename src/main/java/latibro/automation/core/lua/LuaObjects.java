@@ -1,4 +1,4 @@
-package latibro.automation.integration.lua;
+package latibro.automation.core.lua;
 
 import javax.annotation.Nullable;
 import java.util.*;

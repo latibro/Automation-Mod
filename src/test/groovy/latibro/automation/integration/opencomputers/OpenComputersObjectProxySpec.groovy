@@ -1,7 +1,7 @@
 package latibro.automation.integration.opencomputers
 
 import latibro.automation.AutomationMod
-import latibro.automation.integration.lua.LuaObjectProxy
+import latibro.automation.core.lua.LuaObjectProxy
 import li.cil.oc.api.machine.Arguments
 import org.apache.logging.log4j.Logger
 import spock.lang.Specification
