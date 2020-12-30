@@ -1,8 +1,8 @@
-package latibro.automation.integration.immersiverailroading;
+package latibro.automation.integration.immersiverailroading
 
-import latibro.automation.core.api.API;
+import latibro.automation.core.api.API
 
-public interface CabControlsAPI extends API {
+interface CabControlsAPI extends API {
 
     void setThrottleLevel(Number level);
 

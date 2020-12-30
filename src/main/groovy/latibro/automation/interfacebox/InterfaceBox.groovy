@@ -6,25 +6,25 @@ import latibro.automation.core.context.ContextProvider
 import latibro.automation.core.lua.LuaMethod
 import latibro.automation.integration.minecraft.EntityLinker
 
-public class InterfaceBox extends APIImpl implements InterfaceBoxAPI {
+class InterfaceBox extends APIImpl implements InterfaceBoxAPI {
 
-    public InterfaceBox(ContextProvider contextProvider) {
-        super(contextProvider);
+    InterfaceBox(ContextProvider contextProvider) {
+        super(contextProvider)
     }
 
     @LuaMethod
     @Override
-    public String[] list() {
-        return new String[] {"entity_linker"};
+    String[] list() {
+        return new String[] {"entity_linker"}
     }
 
     @LuaMethod
     @Override
-    public API require(String name) {
+    API require(String name) {
         if (name.equals("entity_linker")) {
-            return new EntityLinker(getContext());
+            return new EntityLinker(getContext())
         } else {
-            throw new IllegalArgumentException("Unknown API");
+            throw new IllegalArgumentException("Unknown API")
         }
     }
 

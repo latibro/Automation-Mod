@@ -1,4 +1,4 @@
-package latibro.automation.core.api;
+package latibro.automation.core.api
 
-public interface API {
+interface API {
 }

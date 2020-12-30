@@ -52,7 +52,7 @@ class LuaObjectProxySpec extends Specification {
         given:
         def source = new Object() {
             @LuaMethod
-            public void publicMethod() {}
+            void publicMethod() {}
         }
         def proxy = new LuaObjectProxy(source)
         when:
@@ -65,9 +65,9 @@ class LuaObjectProxySpec extends Specification {
         given:
         def source = new Object() {
             @LuaMethod
-            public void luaMethod() {}
+            void luaMethod() {}
 
-            public void anotherMethod() {}
+            void anotherMethod() {}
         }
         def proxy = new LuaObjectProxy(source)
         when:
@@ -95,10 +95,10 @@ class LuaObjectProxySpec extends Specification {
         given:
         def source = new Object() {
             @LuaMethod
-            public void publicMethod() {}
+            void publicMethod() {}
 
             @LuaMethod
-            public void publicMethod(def input) {}
+            void publicMethod(def input) {}
         }
         def proxy = new LuaObjectProxy(source)
         when:
@@ -113,7 +113,7 @@ class LuaObjectProxySpec extends Specification {
         given:
         def source = new Object() {
             @LuaMethod
-            public void testMethod() {}
+            void testMethod() {}
         }
         def proxy = new LuaObjectProxy(source)
         when:
@@ -126,7 +126,7 @@ class LuaObjectProxySpec extends Specification {
         given:
         def source = Spy(new Object() {
             @LuaMethod
-            public void testMethod() {}
+            void testMethod() {}
         })
         def proxy = Spy(new LuaObjectProxy(source))
         proxy.isLuaMethod(_) >> true
@@ -140,7 +140,7 @@ class LuaObjectProxySpec extends Specification {
         given:
         def source = Spy(new Object() {
             @LuaMethod
-            public void testMethod() {}
+            void testMethod() {}
         })
         def proxy = Spy(new LuaObjectProxy(source))
         proxy.isLuaMethod(_) >> true
@@ -154,7 +154,7 @@ class LuaObjectProxySpec extends Specification {
         given:
         def source = Spy(new Object() {
             @LuaMethod
-            public void testMethod(def arg1, def arg2, def arg3) {}
+            void testMethod(def arg1, def arg2, def arg3) {}
         })
         def proxy = Spy(new LuaObjectProxy(source))
         proxy.isLuaMethod(_) >> true
@@ -168,7 +168,7 @@ class LuaObjectProxySpec extends Specification {
         given:
         def source = new Object() {
             @LuaMethod
-            public void testMethod(def arg1) {}
+            void testMethod(def arg1) {}
         }
         def proxy = new LuaObjectProxy(source)
         when:
@@ -181,7 +181,7 @@ class LuaObjectProxySpec extends Specification {
         given:
         def source = new Object() {
             @LuaMethod
-            public void testMethod(def arg1, def arg2) {}
+            void testMethod(def arg1, def arg2) {}
         }
         def proxy = new LuaObjectProxy(source)
         when:
@@ -193,7 +193,7 @@ class LuaObjectProxySpec extends Specification {
     def "callMethod - lua specific argument - transforms argument before passing it to method"() {
         given:
         def source = Spy(new Object() {
-            public void testMethod(def arg1, def arg2, def arg3) {}
+            void testMethod(def arg1, def arg2, def arg3) {}
         })
         def proxy = Spy(new LuaObjectProxy(source))
         proxy.isLuaMethod(_) >> true
@@ -207,7 +207,7 @@ class LuaObjectProxySpec extends Specification {
         given:
         def source = new Object() {
             @LuaMethod
-            public Object testMethod() {
+            Object testMethod() {
                 return "Hello world"
             }
         }
@@ -222,7 +222,7 @@ class LuaObjectProxySpec extends Specification {
         given:
         def source = new Object() {
             @LuaMethod
-            public Object testMethod() {
+            Object testMethod() {
                 return LuaObjectsSpec.UNSAFE_LUA_OBJECT
             }
         }
@@ -237,10 +237,10 @@ class LuaObjectProxySpec extends Specification {
         given:
         def source = new Object() {
             @LuaMethod
-            public void publicMethod() {}
+            void publicMethod() {}
 
             @LuaMethod
-            public void publicMethod(def input) {}
+            void publicMethod(def input) {}
         }
         def proxy = new LuaObjectProxy(source)
         when:
@@ -253,7 +253,7 @@ class LuaObjectProxySpec extends Specification {
         given:
         def source = new Object() {
             @LuaMethod
-            public void testMethod(Map input) {}
+            void testMethod(Map input) {}
         }
         def proxy = new LuaObjectProxy(source)
         when:

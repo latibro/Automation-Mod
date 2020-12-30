@@ -1,6 +1,6 @@
 package latibro.automation.core.context
 
-public interface ContextProvider {
+interface ContextProvider {
 
     Context createContext();
 

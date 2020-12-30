@@ -1,5 +1,5 @@
-package latibro.automation.proxy;
+package latibro.automation.proxy
 
-public class ServerProxy extends CommonProxy {
+class ServerProxy extends CommonProxy {
 
 }

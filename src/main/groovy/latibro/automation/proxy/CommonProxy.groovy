@@ -18,27 +18,27 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.fml.common.registry.GameRegistry
 
 @Mod.EventBusSubscriber
-public class CommonProxy {
+class CommonProxy {
 
-    public void preInit(FMLPreInitializationEvent e) {
+    void preInit(FMLPreInitializationEvent e) {
     }
 
-    public void init(FMLInitializationEvent e) {
-        ComputerCraftAPI.registerPeripheralProvider(new TileEntityPeripheralProvider());
+    void init(FMLInitializationEvent e) {
+        ComputerCraftAPI.registerPeripheralProvider(new TileEntityPeripheralProvider())
     }
 
-    public void postInit(FMLPostInitializationEvent e) {
-    }
-
-    @SubscribeEvent
-    public static void registerBlocks(RegistryEvent.Register<Block> event) {
-        event.getRegistry().register(new InterfaceBoxBlock());
-        GameRegistry.registerTileEntity(InterfaceBoxTileEntity.class, new ResourceLocation("interface_box"));
+    void postInit(FMLPostInitializationEvent e) {
     }
 
     @SubscribeEvent
-    public static void registerItems(RegistryEvent.Register<Item> event) {
-        event.getRegistry().register(new ItemBlock(ModBlocks.interfaceBox).setRegistryName(ModBlocks.interfaceBox.getRegistryName()));
+    static void registerBlocks(RegistryEvent.Register<Block> event) {
+        event.getRegistry().register(new InterfaceBoxBlock())
+        GameRegistry.registerTileEntity(InterfaceBoxTileEntity.class, new ResourceLocation("interface_box"))
+    }
+
+    @SubscribeEvent
+    static void registerItems(RegistryEvent.Register<Item> event) {
+        event.getRegistry().register(new ItemBlock(ModBlocks.interfaceBox).setRegistryName(ModBlocks.interfaceBox.getRegistryName()))
     }
 
 }

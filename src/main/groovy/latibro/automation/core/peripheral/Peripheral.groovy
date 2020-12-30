@@ -1,8 +1,8 @@
-package latibro.automation.core.peripheral;
+package latibro.automation.core.peripheral
 
-import net.minecraft.world.World;
+import net.minecraft.world.World
 
-public interface Peripheral {
+interface Peripheral {
 
     World getWorld();
 

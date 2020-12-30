@@ -9,15 +9,15 @@ import net.minecraft.world.World
 import javax.annotation.Nonnull
 import javax.annotation.Nullable
 
-public class TileEntityPeripheralProvider implements IPeripheralProvider {
+class TileEntityPeripheralProvider implements IPeripheralProvider {
 
     @Nullable
     @Override
-    public IPeripheral getPeripheral(@Nonnull World world, @Nonnull BlockPos blockPos, @Nonnull EnumFacing enumFacing) {
+    IPeripheral getPeripheral(@Nonnull World world, @Nonnull BlockPos blockPos, @Nonnull EnumFacing enumFacing) {
         if (world.getTileEntity(blockPos) instanceof IPeripheral) {
-            return (IPeripheral) world.getTileEntity(blockPos);
+            return (IPeripheral) world.getTileEntity(blockPos)
         } else {
-            return null;
+            return null
         }
     }
 

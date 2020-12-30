@@ -1,6 +1,6 @@
-package latibro.automation.core.context;
+package latibro.automation.core.context
 
-public interface ChildContext extends Context{
+interface ChildContext extends Context{
 
     Context getParentContext();
 

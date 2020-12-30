@@ -2,7 +2,7 @@ package latibro.automation.core.context
 
 import net.minecraft.world.World
 
-public interface Context extends ContextProvider {
+interface Context extends ContextProvider {
 
     Map getProperties();
 

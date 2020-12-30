@@ -6,33 +6,33 @@ import latibro.automation.core.context.ContextProvider
 import latibro.automation.core.lua.LuaMethod
 import net.minecraft.entity.Entity
 
-public class EntityLinker extends APIImpl implements EntityLinkerAPI {
+class EntityLinker extends APIImpl implements EntityLinkerAPI {
 
-    public EntityLinker(ContextProvider contextProvider) {
-        super(contextProvider);
+    EntityLinker(ContextProvider contextProvider) {
+        super(contextProvider)
     }
 
     @Override
-    public EntityLinkAPI fromUUID(UUID uuid) {
-        return createEntityLink(uuid);
-    }
-
-    @LuaMethod
-    @Override
-    public EntityLinkAPI fromUUID(String uuid) {
-        return fromUUID(UUID.fromString(uuid));
+    EntityLinkAPI fromUUID(UUID uuid) {
+        return createEntityLink(uuid)
     }
 
     @LuaMethod
     @Override
-    public EntityLinkAPI[] currentLoaded() {
-        Predicate p = (Predicate<Entity>) (input) -> true;
-        List<Entity> entities = getWorld().getEntities(Entity.class, p);
-        return entities.stream().map(entity -> createEntityLink(entity.getUniqueID())).toArray(EntityLinkAPI[]::new);
+    EntityLinkAPI fromUUID(String uuid) {
+        return fromUUID(UUID.fromString(uuid))
+    }
+
+    @LuaMethod
+    @Override
+    EntityLinkAPI[] currentLoaded() {
+        Predicate p = (Predicate<Entity>) (input) -> true
+        List<Entity> entities = getWorld().getEntities(Entity.class, p)
+        return entities.stream().map(entity -> createEntityLink(entity.getUniqueID())).toArray(EntityLinkAPI[]::new)
     }
 
     private EntityLink createEntityLink(UUID uuid) {
-        return new EntityLink(getContext(), uuid);
+        return new EntityLink(getContext(), uuid)
     }
 
 }

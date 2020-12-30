@@ -4,7 +4,7 @@ import latibro.automation.core.api.API
 import latibro.automation.core.lua.LuaMethod
 import net.minecraft.entity.Entity
 
-public interface EntityLinkAPI extends API {
+interface EntityLinkAPI extends API {
 
     UUID getUUID();
 

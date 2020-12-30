@@ -14,24 +14,24 @@ import net.minecraftforge.fml.relauncher.SideOnly
 
 import javax.annotation.Nullable
 
-public class InterfaceBoxBlock extends Block implements ITileEntityProvider {
+class InterfaceBoxBlock extends Block implements ITileEntityProvider {
 
-    public InterfaceBoxBlock() {
-        super(Material.IRON);
-        setRegistryName("interface_box");
-        setUnlocalizedName("automation.interface_box");
-        setCreativeTab(CreativeTabs.MISC);
+    InterfaceBoxBlock() {
+        super(Material.IRON)
+        setRegistryName("interface_box")
+        setUnlocalizedName("automation.interface_box")
+        setCreativeTab(CreativeTabs.MISC)
     }
 
     @SideOnly(Side.CLIENT)
-    public void initModel() {
-        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "inventory"));
+    void initModel() {
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "inventory"))
     }
 
     @Nullable
     @Override
-    public TileEntity createNewTileEntity(World world, int meta) {
-        return new InterfaceBoxTileEntity();
+    TileEntity createNewTileEntity(World world, int meta) {
+        return new InterfaceBoxTileEntity()
     }
 
 }
