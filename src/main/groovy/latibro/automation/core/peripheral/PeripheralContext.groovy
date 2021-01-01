@@ -8,7 +8,7 @@ class PeripheralContext extends ContextImpl {
     private final Peripheral peripheral
 
     PeripheralContext(Peripheral peripheral) {
-        this(peripheral, null)
+        this(peripheral, [:])
     }
 
     PeripheralContext(Peripheral peripheral, Map properties) {

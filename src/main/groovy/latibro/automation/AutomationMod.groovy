@@ -35,7 +35,7 @@ class AutomationMod {
         proxy.init(event)
     }
 
-    @Mod.EventHandler
+    @EventHandler
     void postInit(FMLPostInitializationEvent event) {
         proxy.postInit(event)
     }

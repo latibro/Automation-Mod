@@ -1,9 +1,9 @@
 package latibro.automation.core.lua
 
+import org.codehaus.groovy.reflection.CachedMethod
+
 import javax.annotation.Nonnull
 import javax.annotation.Nullable
-import java.lang.reflect.Method
-import java.util.stream.Stream
 
 class LuaObjectProxy {
 
@@ -18,76 +18,71 @@ class LuaObjectProxy {
         return source
     }
 
-    protected boolean isLuaMethod(Method method) {
-        if (source.getClass().isAnnotationPresent(LuaObject.class)) {
-            LuaObject annotation = source.getClass().getAnnotation(LuaObject.class)
-            if (annotation.allMethods()) {
+    protected boolean isLuaMethod(CachedMethod method) {
+        if (getLuaObjectAnnotation()) {
+            if (getLuaObjectAnnotation().allMethods()) {
                 return true
             }
         }
-        return method.isAnnotationPresent(LuaMethod.class)
+        return getLuaMethodAnnotation(method)
     }
 
-    private Method[] getMethodList() {
-        Stream<Method> stream = Arrays.stream(source.getClass().getMethods())
-        stream = stream.filter(this::isLuaMethod)
-        return stream.toArray(Method[]::new)
+    private LuaObject getLuaObjectAnnotation() {
+        return source.getClass().getAnnotation(LuaObject.class)
     }
 
-    private Method findMethod(String methodName, Object[] arguments) throws NoSuchMethodException {
-        Method[] matchingMethods = Arrays.stream(getMethodList()).filter(m -> m.getName().equals(methodName)).toArray(Method[]::new)
-        if (matchingMethods.length == 0) {
-            throw new NoSuchMethodException("No method match")
-        } else if (matchingMethods.length > 1) {
-            throw new NoSuchMethodException("Multiple methods match")
-        }
-        return matchingMethods[0]
+    private static LuaMethod getLuaMethodAnnotation(CachedMethod method) {
+        return method?.getAnnotation(LuaMethod.class)
     }
 
-    private MetaMethod findMetaMethod(String methodName, Object[] arguments) throws NoSuchMethodException {
-        def method = source.metaClass.getMetaMethod(methodName, arguments)
-        if (!method) {
-            throw new NoSuchMethodException("No method match")
-        } else {
+    private List<CachedMethod> getMethodList() {
+        return source.metaClass.getMethods().collect { it instanceof CachedMethod ? (CachedMethod) it : null }.findAll(this::isLuaMethod)
+    }
+
+    private CachedMethod findMethod(String methodName, Object[] arguments) throws NoSuchMethodException {
+        def aliasedMethodName = getMethodList().find { getLuaMethodAnnotation(it)?.name() == methodName }?.getName()
+        def correctMethodName = aliasedMethodName ?: methodName
+        def method = (CachedMethod) source.metaClass.getMetaMethod(correctMethodName, arguments)
+        if (isLuaMethod(method)) {
             return method
         }
+        throw new NoSuchMethodException("No method match")
+    }
+
+    private static String getMethodName(CachedMethod method) {
+        return getLuaMethodAnnotation(method)?.name() ?: method.getName()
     }
 
     @Nonnull
     String[] getMethodNames() {
-        return Arrays.stream(getMethodList()).map(Method::getName).distinct().toArray(String[]::new)
+        return getMethodList().collect(this::getMethodName).unique()
     }
 
-    private Object _callMethod(Method method, Object[] arguments) throws Exception {
-        return method.invoke(source, arguments)
+    private Object callCachedMethod(CachedMethod method, Object[] arguments) throws Exception {
+        return method.doMethodInvoke(source, arguments)
     }
 
     @Nullable
     Object callMethod(@Nonnull String methodName, @Nullable Object[] arguments) throws Exception {
         Object[] nativeArguments = fromLuaArguments(arguments)
 
-        Method method = findMethod(methodName, nativeArguments)
+        def method = findMethod(methodName, nativeArguments)
 
-        def metaMethod = findMetaMethod(methodName, nativeArguments)
-        Object nativeResult = metaMethod.doMethodInvoke(source, nativeArguments)
-
-        //Object nativeResult = source.invokeMethod(method.getName(), nativeArguments);
-        //Object nativeResult = _callMethod(method, nativeArguments);
+        Object nativeResult = callCachedMethod(method, nativeArguments)
 
         Object luaResult = toLuaResult(nativeResult)
 
         return luaResult
     }
 
-    private Object[] fromLuaArguments(Object[] arguments) {
+    private static Object[] fromLuaArguments(Object[] arguments) {
         if (arguments == null) {
             return null
-        } else {
-            return Arrays.stream(arguments).map(LuaObjects::fromLuaObject).toArray()
         }
+        return arguments.collect(LuaObjects::fromLuaObject)
     }
 
-    private Object toLuaResult(Object result) {
+    private static Object toLuaResult(Object result) {
         return LuaObjects.toLuaObject(result)
     }
 

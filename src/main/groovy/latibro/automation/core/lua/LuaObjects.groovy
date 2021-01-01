@@ -27,9 +27,8 @@ final class LuaObjects {
         } else if (object instanceof LuaObjectProxy) {
             // Proxy object
             return true
-        } else {
-            return false
         }
+        return false
     }
 
     @Nullable
@@ -43,10 +42,9 @@ final class LuaObjects {
         } else if (LuaTables.isLuaTableCandidate(object)) {
             // Turn to lua table
             return LuaTables.toLuaTable(object)
-        } else {
-            // Everyting else - Wrapping it
-            return new LuaObjectProxy(object)
         }
+        // Anything else - Wrapping it
+        return new LuaObjectProxy(object)
     }
 
     @Nullable
@@ -65,9 +63,8 @@ final class LuaObjects {
         } else if (object instanceof Map) {
             // Map - Lua tables
             return LuaTables.fromLuaTable(object)
-        } else {
-            throw new ClassCastException(object.toString())
         }
+        throw new ClassCastException(object.toString())
     }
 
 }

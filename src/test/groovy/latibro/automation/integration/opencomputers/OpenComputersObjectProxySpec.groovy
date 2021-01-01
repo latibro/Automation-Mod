@@ -19,7 +19,7 @@ class OpenComputersObjectProxySpec extends Specification {
 
     def "constructor - LuaObjectProxy - success"() {
         when:
-        new OpenComputersObjectProxy(new LuaObjectProxy({ }))
+        new OpenComputersObjectProxy(new LuaObjectProxy({}))
         then:
         noExceptionThrown()
     }
@@ -83,9 +83,7 @@ class OpenComputersObjectProxySpec extends Specification {
         given:
         def source = Mock(LuaObjectProxy)
         def proxy = new OpenComputersObjectProxy(source)
-        def arguments = Mock(Arguments) {
-            toArray() >> (Object[]) []
-        }
+        def arguments = Spy([]) as Arguments
         when:
         proxy.invoke("testMethod", null, arguments)
         then:
@@ -96,9 +94,7 @@ class OpenComputersObjectProxySpec extends Specification {
         given:
         def source = Mock(LuaObjectProxy)
         def proxy = new OpenComputersObjectProxy(source)
-        def arguments = Mock(Arguments) {
-            toArray() >> (Object[]) ["first", "second"]
-        }
+        def arguments = Spy(["first", "second"]) as Arguments
         when:
         proxy.invoke("testMethod", null, arguments)
         then:
@@ -109,9 +105,7 @@ class OpenComputersObjectProxySpec extends Specification {
         given:
         def source = Mock(LuaObjectProxy)
         def proxy = new OpenComputersObjectProxy(source)
-        def arguments = Mock(Arguments) {
-            toArray() >> (Object[]) [new OpenComputersObjectProxy(DUMMY_LUA_OBJECT_PROXY), "second"]
-        }
+        def arguments = Spy([new OpenComputersObjectProxy(DUMMY_LUA_OBJECT_PROXY), "second"]) as Arguments
         when:
         proxy.invoke("testMethod", null, arguments)
         then:
@@ -149,7 +143,7 @@ class OpenComputersObjectProxySpec extends Specification {
         array[0] instanceof OpenComputersObjectProxy
     }
 
-    def "callMethod - method throws exception - throw LuaException"() {
+    def "invoke - method throws exception - throw Exception"() {
         given:
         def source = Mock(LuaObjectProxy) {
             callMethod(*_) >> { throw new Exception() }

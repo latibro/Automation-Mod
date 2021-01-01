@@ -93,7 +93,7 @@ class OpenComputersObjectsSpec extends Specification {
         then:
         output instanceof Map
         def map = (Map) output
-        map.keySet().getAt(0) instanceof OpenComputersObjectProxy
+        map.keySet()[0] instanceof OpenComputersObjectProxy
     }
 
     def "toOpenComputersObject - safe Map - transforms values"() {
@@ -228,9 +228,51 @@ class OpenComputersObjectsSpec extends Specification {
         given:
         def input = {}
         when:
-        def output = OpenComputersObjects.fromOpenComputersObject(input)
+        OpenComputersObjects.fromOpenComputersObject(input)
         then:
         thrown(ClassCastException)
+    }
+
+    def "fromOpenComputersObject - array-like map (without n entry) - transforms to safe array map"() {
+        given:
+        def input = (Map) [1d: "first", 2d: "second"]
+        def spy = GroovySpy(OpenComputersObjects, global: true)
+        // Faking that input is an instance of OC build-in object
+        OpenComputersObjects.isInstanceOfOCBuildInObject({input.is(it)}) >> true
+        when:
+        def output = OpenComputersObjects.fromOpenComputersObject(input)
+        then:
+        output instanceof Map
+        output == [1d: "first", 2d: "second"]
+        !input.is(output)
+        //1 * spy.toListLikeMap(_) //TODO check that toListLikeMap has been called
+    }
+
+    def "fromOpenComputersObject - array-like map (with n entry) - transforms to safe array map (without n entry)"() {
+        given:
+        def input = (Map) [1d: "first", 2d: "second", "n": 2d]
+        def spy = GroovySpy(OpenComputersObjects, global: true)
+        // Faking that input is an instance of OC build-in object
+        OpenComputersObjects.isInstanceOfOCBuildInObject({input.is(it)}) >> true
+        when:
+        def output = OpenComputersObjects.fromOpenComputersObject(input)
+        then:
+        output instanceof Map
+        output == [1d: "first", 2d: "second"]
+        !input.is(output)
+        //1 * spy.toListLikeMap(_) //TODO check that toListLikeMap has been called
+    }
+
+    def "fromOpenComputersObject - array-like map (with n entry wrong number) - normal map (keeps n entry)"() {
+        given:
+        def input = (Map) [1d: "first", 2d: "second", "n": 10d]
+        def spy = GroovySpy(OpenComputersObjects, global: true)
+        // Faking that input is an instance of OC build-in object
+        OpenComputersObjects.isInstanceOfOCBuildInObject({input.is(it)}) >> true
+        when:
+        def output = OpenComputersObjects.fromOpenComputersObject(input)
+        then:
+        output == input
     }
 
 }

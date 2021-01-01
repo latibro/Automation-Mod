@@ -7,7 +7,7 @@ class ChildContextImpl extends ContextImpl implements ChildContext {
     private final Context parent
 
     ChildContextImpl(Context parent) {
-        this(parent, null)
+        this(parent, [:])
     }
 
     ChildContextImpl(Context parent, Map properties) {
@@ -22,9 +22,9 @@ class ChildContextImpl extends ContextImpl implements ChildContext {
 
     @Override
     Map getProperties() {
-        Map map = getParentContext().getProperties()
+        def map = getParentContext().getProperties()
         map.putAll(super.getProperties())
-        return Collections.unmodifiableMap(map)
+        return map.asUnmodifiable()
     }
 
     @Override

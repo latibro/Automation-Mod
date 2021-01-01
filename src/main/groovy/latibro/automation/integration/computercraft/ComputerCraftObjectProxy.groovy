@@ -3,7 +3,6 @@ package latibro.automation.integration.computercraft
 import dan200.computercraft.api.lua.ILuaContext
 import dan200.computercraft.api.lua.ILuaObject
 import dan200.computercraft.api.lua.LuaException
-import latibro.automation.AutomationMod
 import latibro.automation.core.lua.LuaObjectProxy
 
 import javax.annotation.Nonnull
@@ -32,9 +31,8 @@ class ComputerCraftObjectProxy implements ILuaObject {
     private String getMethodName(int methodIndex) throws NoSuchMethodException {
         if (methodIndex >= getMethodNames().length) {
             throw new NoSuchMethodException()
-        } else {
-            return getMethodNames()[methodIndex]
         }
+        return getMethodNames()[methodIndex]
     }
 
     @Nullable
@@ -50,23 +48,20 @@ class ComputerCraftObjectProxy implements ILuaObject {
             Object ccResult = toComputerCraftResult(luaResult)
 
             //TODO maybe return null or empty array if result is null?
-            return new Object[] {ccResult}
+            return new Object[]{ccResult}
         } catch (Exception e) {
-            AutomationMod.logger.error("CCProxy.callMethod - exception", e)
-            e.printStackTrace()
             throw new LuaException(e.getClass().getName() + ": " + e.getMessage())
         }
     }
 
-    private Object[] fromComputerCraftArguments(Object[] arguments) {
+    private static Object[] fromComputerCraftArguments(Object[] arguments) {
         if (arguments == null) {
             return null
-        } else {
-            return Arrays.stream(arguments).map(ComputerCraftObjects::fromComputerCraftObject).toArray()
         }
+        return arguments.collect(ComputerCraftObjects::fromComputerCraftObject)
     }
 
-    private Object toComputerCraftResult(Object result) {
+    private static Object toComputerCraftResult(Object result) {
         return ComputerCraftObjects.toComputerCraftObject(result)
     }
 

@@ -26,9 +26,8 @@ class EntityLinker extends APIImpl implements EntityLinkerAPI {
     @LuaMethod
     @Override
     EntityLinkAPI[] currentLoaded() {
-        Predicate p = (Predicate<Entity>) (input) -> true
-        List<Entity> entities = getWorld().getEntities(Entity.class, p)
-        return entities.stream().map(entity -> createEntityLink(entity.getUniqueID())).toArray(EntityLinkAPI[]::new)
+        List<Entity> entities = getWorld().getEntities(Entity.class, true as Predicate<? super Entity>)
+        return entities.collect { createEntityLink(it.getUniqueID()) }
     }
 
     private EntityLink createEntityLink(UUID uuid) {

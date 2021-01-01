@@ -21,7 +21,7 @@ class InterfaceBox extends APIImpl implements InterfaceBoxAPI {
     @LuaMethod
     @Override
     API require(String name) {
-        if (name.equals("entity_linker")) {
+        if (name == "entity_linker") {
             return new EntityLinker(getContext())
         } else {
             throw new IllegalArgumentException("Unknown API")

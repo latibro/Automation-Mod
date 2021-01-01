@@ -5,19 +5,19 @@ abstract class ContextImpl implements Context, ContextProvider {
     private final Map properties
 
     protected ContextImpl() {
-        this.properties = new HashMap()
+        this.properties = [:]
     }
 
     protected ContextImpl(Map properties) {
         this()
-        if (properties != null) {
+        if (properties) {
             this.properties.putAll(properties)
         }
     }
 
     @Override
     Map getProperties() {
-        return Collections.unmodifiableMap(properties)
+        return properties.asUnmodifiable()
     }
 
     @Override

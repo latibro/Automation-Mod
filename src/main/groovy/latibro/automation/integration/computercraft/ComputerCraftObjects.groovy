@@ -24,14 +24,9 @@ final class ComputerCraftObjects {
             // Proxy object
             return true
         } else if (object instanceof Map) {
-            return !((Map) object).entrySet().stream().anyMatch(o -> {
-                Object key = ((Map.Entry) o).getKey()
-                Object value = ((Map.Entry) o).getValue()
-                return !isSafeComputerCraftObject(key) || !isSafeComputerCraftObject(value)
-            })
-        } else {
-            return false
+            return !object.any { key, value -> !isSafeComputerCraftObject(key) || !isSafeComputerCraftObject(value) }
         }
+        return false
     }
 
     static Object toComputerCraftObject(Object object) {
@@ -40,18 +35,10 @@ final class ComputerCraftObjects {
         } else if (object instanceof LuaObjectProxy) {
             return new ComputerCraftObjectProxy((LuaObjectProxy) object)
         } else if (object instanceof Map) {
-            Map map = new HashMap()
-            ((Map) object).entrySet().forEach(o -> {
-                Object key = ((Map.Entry) o).getKey()
-                Object value = ((Map.Entry) o).getValue()
-                Object ccKey = toComputerCraftObject(key)
-                Object ccValue = toComputerCraftObject(value)
-                map.put(ccKey, ccValue)
-            })
-            return Collections.unmodifiableMap(map)
-        } else {
-            throw new ClassCastException()
+            def map = object.collectEntries { key, value -> [toComputerCraftObject(key), toComputerCraftObject(value)] }
+            return map.asUnmodifiable()
         }
+        throw new ClassCastException()
     }
 
     static Object fromComputerCraftObject(Object object) {
@@ -66,18 +53,10 @@ final class ComputerCraftObjects {
         } else if (object instanceof ComputerCraftObjectProxy) {
             return ((ComputerCraftObjectProxy) object).getSource()
         } else if (object instanceof Map) {
-            Map map = new HashMap()
-            ((Map) object).entrySet().forEach(o -> {
-                Object luaKey = ((Map.Entry) o).getKey()
-                Object luaValue = ((Map.Entry) o).getValue()
-                Object key = fromComputerCraftObject(luaKey)
-                Object value = fromComputerCraftObject(luaValue)
-                map.put(key, value)
-            })
+            def map = object.collectEntries { key, value -> [fromComputerCraftObject(key), fromComputerCraftObject(value)] }
             return map
-        } else {
-            throw new ClassCastException(object.toString())
         }
+        throw new ClassCastException(object.toString())
     }
 
 }

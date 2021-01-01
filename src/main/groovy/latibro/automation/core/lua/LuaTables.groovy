@@ -1,7 +1,6 @@
 package latibro.automation.core.lua
 
 import javax.annotation.Nullable
-import java.util.stream.IntStream
 
 final class LuaTables {
 
@@ -11,29 +10,27 @@ final class LuaTables {
     static boolean isSafeLuaTable(@Nullable Object object) {
         if (object == null) {
             return true
-        } else if (object instanceof Map) {
-            return !((Map) object).entrySet().stream().anyMatch(o -> {
-                Object key = ((Map.Entry) o).getKey()
-                Object value = ((Map.Entry) o).getValue()
-                return !LuaObjects.isSafeLuaObject(key) || !LuaObjects.isSafeLuaObject(value)
-            })
-        } else {
-            return false
         }
+        if (object instanceof Map) {
+            return !object.any { key, value -> !LuaObjects.isSafeLuaObject(key) || !LuaObjects.isSafeLuaObject(value) }
+        }
+        return false
     }
 
     static boolean isLuaTableCandidate(@Nullable Object object) {
         if (object instanceof Map) {
             return true
-        } else if (object instanceof List) {
-            return true
-        } else if (object instanceof Object[]) {
-            return true
-        } else if (object instanceof Collection) {
-            return true
-        } else {
-            return false
         }
+        if (object instanceof List) {
+            return true
+        }
+        if (object instanceof Object[]) {
+            return true
+        }
+        if (object instanceof Collection) {
+            return true
+        }
+        return false
     }
 
     @Nullable
@@ -41,31 +38,17 @@ final class LuaTables {
         if (isSafeLuaTable(object)) {
             return object
         } else if (object instanceof Map) {
-            Map map = new HashMap()
-            ((Map) object).entrySet().forEach(o -> {
-                Object key = ((Map.Entry) o).getKey()
-                Object value = ((Map.Entry) o).getValue()
-                Object luaKey = LuaObjects.toLuaObject(key)
-                Object luaValue = LuaObjects.toLuaObject(value)
-                map.put(luaKey, luaValue)
-            })
-            return Collections.unmodifiableMap(map)
+            def map = object.collectEntries { key, value -> [LuaObjects.toLuaObject(key), LuaObjects.toLuaObject(value)] }
+            return map.asUnmodifiable()
         } else if (object instanceof List) {
-            List list = (List) object
-            Map map = new HashMap()
-            IntStream.range(0, list.size()).forEach(index -> {
-                Object key = index+1 // Lua work with 1 as first on array/list
-                Object value = list.get(index)
-                map.put(key, value)
-            })
-            return toLuaTable(Collections.unmodifiableMap(map))
+            def map = object.withIndex(1).collectEntries { k, v -> [v, k] }
+            return toLuaTable(map.asUnmodifiable())
         } else if (object instanceof Object[]) {
-            return toLuaTable(Arrays.asList((Object[]) object))
+            return toLuaTable(object as List)
         } else if (object instanceof Collection) {
-            return toLuaTable(new ArrayList((Collection) object))
-        } else {
-            throw new ClassCastException()
+            return toLuaTable(object as List)
         }
+        throw new ClassCastException()
     }
 
     @Nullable
@@ -73,41 +56,26 @@ final class LuaTables {
         if (object == null) {
             return null
         } else if (object instanceof Map) {
-            Map map = new HashMap()
-            ((Map) object).entrySet().forEach(o -> {
-                Object luaKey = ((Map.Entry) o).getKey()
-                Object luaValue = ((Map.Entry) o).getValue()
-                Object key = LuaObjects.fromLuaObject(luaKey)
-                Object value = LuaObjects.fromLuaObject(luaValue)
-                map.put(key, value)
-            })
+            def map = object.collectEntries { key, value -> [LuaObjects.fromLuaObject(key), LuaObjects.fromLuaObject(value)] }
             return map
-        } else {
-            throw new ClassCastException()
         }
+        throw new ClassCastException()
     }
 
     static boolean isList(Map map) {
         if (map == null) {
             return false
+        } else if (map.isEmpty()) {
+            return true
         }
-        for (int index=0; index < map.size(); index++) {
-            if (!map.containsKey(LuaObjects.toLuaObject(index+1))) {
-                return false
-            }
-        }
-        return true
+        return (1..map.size()).every { index -> map.containsKey(LuaObjects.toLuaObject(index)) }
     }
 
     static List toList(Map map) {
         if (!isList(map)) {
             throw new IllegalArgumentException("Not a list")
         }
-        List list = new ArrayList()
-        for (int index=0; index < map.size(); index++) {
-            list.add(index, map.get(LuaObjects.toLuaObject(index+1)))
-        }
-        return list
+        return map.sort { it.key }.collect { it.value }
     }
 
 }
