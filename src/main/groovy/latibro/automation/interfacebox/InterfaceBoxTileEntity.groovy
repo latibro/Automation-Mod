@@ -9,7 +9,7 @@ class InterfaceBoxTileEntity extends PeripheralTileEntity {
     InterfaceBoxTileEntity() {
     }
 
-    protected String getComponentName() {
+    String getComponentName() {
         return "interface_box"
     }
 
