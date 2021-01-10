@@ -1,14 +1,20 @@
 package latibro.automation.interfacebox
 
-import latibro.automation.core.api.API
-import latibro.automation.core.lua.LuaMethod
 
-interface InterfaceBoxAPI extends API {
+import latibro.automation.api.core.lua.LuaMethod
 
-    @LuaMethod
-    String[] list();
+interface InterfaceBoxAPI {
 
-    @LuaMethod
-    API require(String name);
+    @LuaMethod(
+            name = "listAPI",
+            doc = "function() : array<string>"
+    )
+    List<String> findAllAvailableAPIAsStrings();
+
+    @LuaMethod(
+            name = "getAPI",
+            doc = "function(name : string) : API"
+    )
+    Object getAPI(String name);
 
 }

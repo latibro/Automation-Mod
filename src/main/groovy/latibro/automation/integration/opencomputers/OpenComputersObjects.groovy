@@ -53,6 +53,8 @@ class OpenComputersObjects {
             return object
         } else if (object instanceof Boolean) {
             return object
+        } else if (object instanceof byte[]) {
+            return new String(object)
         } else if (object instanceof OpenComputersObjectProxy) {
             return ((OpenComputersObjectProxy) object).getSource()
         } else if (isListLikeOCTable(object)) {
@@ -61,7 +63,7 @@ class OpenComputersObjects {
         } else if (object instanceof Map) {
             return object.collectEntries { key, value -> [fromOpenComputersObject(key), fromOpenComputersObject(value)] }
         }
-        throw new ClassCastException()
+        throw new ClassCastException(object as String)
     }
 
     /*

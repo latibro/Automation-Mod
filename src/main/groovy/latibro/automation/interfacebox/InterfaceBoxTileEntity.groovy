@@ -1,6 +1,7 @@
 package latibro.automation.interfacebox
 
-import latibro.automation.core.api.API
+
+import latibro.automation.core.api.HostedAPI
 import latibro.automation.core.peripheral.PeripheralTileEntity
 
 class InterfaceBoxTileEntity extends PeripheralTileEntity {
@@ -12,8 +13,8 @@ class InterfaceBoxTileEntity extends PeripheralTileEntity {
         return "interface_box"
     }
 
-    protected API getPeripheralAPI() {
-        return new InterfaceBox(this)
+    protected HostedAPI getPeripheralAPI() {
+        return new InterfaceBoxAPIImpl(this)
     }
 
 }

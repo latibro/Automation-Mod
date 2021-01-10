@@ -1,6 +1,8 @@
 package latibro.automation.core.lua
 
 import latibro.automation.AutomationMod
+import latibro.automation.api.core.lua.LuaMethod
+import latibro.automation.api.core.lua.LuaObject
 import org.apache.logging.log4j.Logger
 import spock.lang.Specification
 
@@ -197,8 +199,42 @@ class LuaObjectProxySpec extends Specification {
         when:
         proxy.callMethod("aliasMethod", null)
         then:
-        1 * source.testMethod()
         0 * source.aliasMethod()
+        1 * source.testMethod()
+    }
+
+    def "callMethod - two methods with same alias - call method with matching parameters"() {
+        given:
+        def source = Spy(new DummyAnnotatedLuaObjectWithAllMethodsTrue() {
+            @LuaMethod(name="aliasMethod")
+            void testMethod() {}
+
+            @LuaMethod(name="aliasMethod")
+            void anotherMethod(String param) {}
+        })
+        def proxy = new LuaObjectProxy(source)
+        when:
+        proxy.callMethod("aliasMethod", ["test"] as Object[])
+        then:
+        0 * source.aliasMethod()
+        0 * source.testMethod()
+        1 * source.anotherMethod("test")
+    }
+
+    def "callMethod - two methods with same alias and same args - fails"() {
+        given:
+        def source = Spy(new DummyAnnotatedLuaObjectWithAllMethodsTrue() {
+            @LuaMethod(name="aliasMethod")
+            void testMethod(String param) {}
+
+            @LuaMethod(name="aliasMethod")
+            void anotherMethod(String param) {}
+        })
+        def proxy = new LuaObjectProxy(source)
+        when:
+        proxy.callMethod("aliasMethod", ["test"] as Object[])
+        then:
+        thrown(NoSuchMethodException)
     }
 
     def "callMethod - null as arguments - calls method with no arguments"() {
@@ -250,7 +286,7 @@ class LuaObjectProxySpec extends Specification {
         when:
         proxy.callMethod("testMethod", ["first", "second"] as Object[])
         then:
-        thrown(NoSuchMethodException) //TODO was expecting IllegalArgumentException
+        thrown(NoSuchMethodException)
     }
 
     def "callMethod - too few arguments - fails"() {
@@ -263,7 +299,7 @@ class LuaObjectProxySpec extends Specification {
         when:
         proxy.callMethod("testMethod", ["first"] as Object[])
         then:
-        thrown(NoSuchMethodException) //TODO was expecting IllegalArgumentException
+        thrown(NoSuchMethodException)
     }
 
     def "callMethod - lua specific argument - transforms argument before passing it to method"() {

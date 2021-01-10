@@ -25,6 +25,7 @@ class CommonProxy {
 
     void init(FMLInitializationEvent e) {
         ComputerCraftAPI.registerPeripheralProvider(new TileEntityPeripheralProvider())
+        ComputerCraftAPI.registerAPIFactory()
     }
 
     void postInit(FMLPostInitializationEvent e) {

@@ -4,9 +4,8 @@ import dan200.computercraft.api.lua.ILuaContext
 import dan200.computercraft.api.lua.LuaException
 import dan200.computercraft.api.peripheral.IComputerAccess
 import dan200.computercraft.api.peripheral.IPeripheral
-import latibro.automation.core.api.API
-import latibro.automation.core.context.Context
-import latibro.automation.core.context.ContextProvider
+import latibro.automation.core.api.APIHost
+import latibro.automation.core.api.HostedAPI
 import latibro.automation.core.lua.LuaObjectProxy
 import latibro.automation.integration.computercraft.ComputerCraftObjectProxy
 import latibro.automation.integration.opencomputers.OpenComputersObjectProxy
@@ -15,13 +14,14 @@ import li.cil.oc.api.machine.Arguments
 import li.cil.oc.api.network.ManagedPeripheral
 import li.cil.oc.api.network.Visibility
 import li.cil.oc.api.prefab.TileEntityEnvironment
+import net.minecraft.world.World
 
 import javax.annotation.Nonnull
 import javax.annotation.Nullable
 
 // https://github.com/PC-Logix/OpenFM/blob/master/src/main/java/pcl/OpenFM/TileEntity/TileEntityRadio.java
 // https://github.com/Vexatos/Computronics/blob/master/src/main/java/pl/asie/computronics/tile/TileEntityPeripheralBase.java
-abstract class PeripheralTileEntity extends TileEntityEnvironment implements ManagedPeripheral, IPeripheral, Peripheral, ContextProvider {
+abstract class PeripheralTileEntity extends TileEntityEnvironment implements ManagedPeripheral, IPeripheral, Peripheral, APIHost {
 
     protected PeripheralTileEntity() {
         init()
@@ -34,20 +34,15 @@ abstract class PeripheralTileEntity extends TileEntityEnvironment implements Man
 
     protected abstract String getComponentName();
 
-    protected abstract API getPeripheralAPI();
+    protected abstract HostedAPI getPeripheralAPI();
+
+    @Override
+    World getMinecraftWorld() {
+        return getWorld()
+    }
 
     private LuaObjectProxy getPeripheralAPIProxy() {
         return new LuaObjectProxy(getPeripheralAPI())
-    }
-
-    @Override
-    Context createContext() {
-        return new PeripheralContext(this)
-    }
-
-    @Override
-    Context createContext(Map properties) {
-        return new PeripheralContext(this, properties)
     }
 
     // **** OpenComputers
@@ -98,7 +93,7 @@ abstract class PeripheralTileEntity extends TileEntityEnvironment implements Man
         try {
             if (computerAccess.getClass().getPackage().getName().startsWith("li.cil.oc")) {
                 //TODO for some reason methods, found on both CC and OC, it seems the CC version has priority over OC methods when called from OC. Maybe because of use of OC ManagedPeripheral
-                System.out.println("CC called from OC")
+                throw new RuntimeException("CC called from OC")
             }
 
             Object[] result = getPeripheralCCProxy().callMethod(context, methodIndex, arguments)

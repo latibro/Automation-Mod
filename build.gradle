@@ -39,6 +39,13 @@ repositories {
     maven { url = "http://maven.cil.li/" } // OC
     maven { url = "https://cc.crzd.me/maven/" } // CC
     maven { url 'https://squiddev.cc/maven/' } // CC:T
+    maven {
+        name = "CurseForge"
+        url = "https://minecraft.curseforge.com/api/maven/"
+    }
+    maven {
+        url = "https://www.cursemaven.com"
+    }
 }
 
 dependencies {
@@ -62,6 +69,12 @@ dependencies {
     // for more info...
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
+
+
+    //compile "universal-mod-core:UniversalModCore-0.1.0:1.12.2:forge" // UniversalModCore-0.1.0-1.12.2-forge.jar
+    compile "immersive-railroading:ImmersiveRailroading:1.7.3_1.12.2" // ImmersiveRailroading-1.7.3_1.12.2.jar
+    //compile "track-api:TrackAPI:1.2" // TrackAPI-1.2.jar
+    runtime "track-api:TrackAPI:1.1_1.12" // TrackAPI-1.1_1.12.jar
 
     compile "li.cil.oc:OpenComputers:MC1.12.2-1.7.+:api"
     runtime "li.cil.oc:OpenComputers:MC1.12.2-1.7.+"
