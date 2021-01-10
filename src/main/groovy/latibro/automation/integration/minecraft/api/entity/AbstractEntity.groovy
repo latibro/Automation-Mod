@@ -12,4 +12,9 @@ abstract class AbstractEntity implements Entity {
         return entityManager
     }
 
+    @Override
+    String getUUIDString() {
+        return getUUID().toString()
+    }
+
 }

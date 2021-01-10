@@ -5,11 +5,13 @@ import latibro.automation.ModBlocks
 import latibro.automation.integration.computercraft.TileEntityPeripheralProvider
 import latibro.automation.interfacebox.InterfaceBoxBlock
 import latibro.automation.interfacebox.InterfaceBoxTileEntity
+import latibro.devoplment.DebugToolItem
 import net.minecraft.block.Block
 import net.minecraft.item.Item
 import net.minecraft.item.ItemBlock
 import net.minecraft.util.ResourceLocation
 import net.minecraftforge.event.RegistryEvent
+import net.minecraftforge.fml.common.Loader
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.common.event.FMLInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent
@@ -24,8 +26,10 @@ class CommonProxy {
     }
 
     void init(FMLInitializationEvent e) {
-        ComputerCraftAPI.registerPeripheralProvider(new TileEntityPeripheralProvider())
-        ComputerCraftAPI.registerAPIFactory()
+        if (Loader.isModLoaded("computercraft")) {
+            ComputerCraftAPI.registerPeripheralProvider(new TileEntityPeripheralProvider())
+            ComputerCraftAPI.registerAPIFactory()
+        }
     }
 
     void postInit(FMLPostInitializationEvent e) {
@@ -40,6 +44,8 @@ class CommonProxy {
     @SubscribeEvent
     static void registerItems(RegistryEvent.Register<Item> event) {
         event.getRegistry().register(new ItemBlock(ModBlocks.interfaceBox).setRegistryName(ModBlocks.interfaceBox.getRegistryName()))
+
+        event.getRegistry().register(new DebugToolItem())
     }
 
 }

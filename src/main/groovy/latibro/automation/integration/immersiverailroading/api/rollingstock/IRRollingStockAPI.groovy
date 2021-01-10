@@ -7,6 +7,7 @@ import latibro.automation.core.api.APIHost
 import latibro.automation.core.api.AbstractHostedAPI
 import latibro.automation.integration.minecraft.api.entity.DirectEntity
 import latibro.automation.integration.minecraft.api.entity.EntityAPIImpl
+import latibro.automation.integration.rail.api.vehicle.rollingstock.RollingStock
 import latibro.automation.integration.rail.api.vehicle.rollingstock.RollingStockAPI
 
 import javax.annotation.Nonnull
@@ -18,9 +19,31 @@ class IRRollingStockAPI extends AbstractHostedAPI implements RollingStockAPI {
     }
 
     @Override
+    List<String> getAllLoadedAsUUIDString() {
+        return getAllLoadedAsUUID().collect { it.toString() }
+    }
+
+    @Override
+    List<UUID> getAllLoadedAsUUID() {
+        return getAllLoaded().collect { it.getUUID() }
+    }
+
+    @Override
+    List<RollingStock> getAllLoaded() {
+        return host.minecraftWorld.loadedEntityList.findAll {
+            return it instanceof ModdedEntity && it.self instanceof EntityRollingStock
+        }.collect { getByUUID(it.getUniqueID()) }
+    }
+
+    @Override
     @Nonnull
-    IRRollingStock getRollingStockByUUID(@Nonnull String uuid) {
-        def entity = new EntityAPIImpl(host).getDirectEntityByUUID(uuid)
+    IRRollingStock getByUUIDString(@Nonnull String uuid) {
+        return getByUUID(UUID.fromString(uuid))
+    }
+
+    @Nonnull
+    IRRollingStock getByUUID(@Nonnull UUID uuid) {
+        def entity = new EntityAPIImpl(host).getByUUID(uuid)
         if (entity instanceof DirectEntity) {
             if (entity.minecraftEntity instanceof ModdedEntity) {
                 def moddedEntity = ((ModdedEntity) entity.minecraftEntity).self

@@ -42,7 +42,7 @@ class LinkedEntityImpl extends AbstractEntity implements LinkedEntity {
 
     @Override
     DirectEntity asDirectEntity() {
-        return entityManager.getDirectEntityByUUID(entityUUID)
+        return entityManager.getByUUID(entityUUID)
     }
 
 }

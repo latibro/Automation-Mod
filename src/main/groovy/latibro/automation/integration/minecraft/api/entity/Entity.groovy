@@ -8,9 +8,12 @@ interface Entity {
     net.minecraft.entity.Entity getMinecraftEntity()
 
     @LuaMethod(
+            name = "getUUID",
             usage = "function() : string"
     )
     //@LuaMethodReturn(transformer = String)
+    String getUUIDString()
+
     UUID getUUID()
 
     @LuaMethod(

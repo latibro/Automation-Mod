@@ -10,10 +10,10 @@ class IRRollingStock extends AbstractRollingStockImpl {
 
     protected IRRollingStock(DirectEntity entity) {
         super(entity)
-        assert IRRollingStock
+        //assert IRRollingStock
     }
 
-    EntityRollingStock getIRRollingStock() {
+    protected EntityRollingStock getIREntity() {
         return (EntityRollingStock) ((ModdedEntity) entity.minecraftEntity).self
     }
 

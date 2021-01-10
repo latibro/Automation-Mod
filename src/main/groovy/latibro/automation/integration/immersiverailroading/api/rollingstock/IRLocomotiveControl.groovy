@@ -6,24 +6,24 @@ import latibro.automation.integration.rail.api.vehicle.traction.engine.EngineCon
 
 class IRLocomotiveControl extends IRRollingStockControl implements BrakeControl, EngineControl {
 
-    IRLocomotiveControl(IRRollingStock rollingStock) {
+    IRLocomotiveControl(IRLocomotive rollingStock) {
         super(rollingStock)
     }
 
-    protected Locomotive getIRLocomotive() {
-        return (Locomotive) rollingStock
+    protected Locomotive getIREntity() {
+        return (Locomotive) super.getIREntity()
     }
 
     @Override
     void setBrakeLevel(double level) {
         assert level >= 0
         assert level <= 100
-        getIRLocomotive().setAirBrake((level / 100d) as float)
+        getIREntity().setAirBrake((level / 100d) as float)
     }
 
     @Override
     double getBrakeLevel() {
-        return getIRLocomotive().getAirBrake() * 100d
+        return getIREntity().getAirBrake() * 100d
     }
 
 
@@ -31,12 +31,12 @@ class IRLocomotiveControl extends IRRollingStockControl implements BrakeControl,
     void setThrottleLevel(double level) {
         assert level >= -100
         assert level <= 100
-        getIRLocomotive().setThrottle((level / 100d) as float)
+        getIREntity().setThrottle((level / 100d) as float)
     }
 
     @Override
     double getThrottleLevel() {
-        return getIRLocomotive().getThrottle() * 100d
+        return getIREntity().getThrottle() * 100d
     }
 
 }

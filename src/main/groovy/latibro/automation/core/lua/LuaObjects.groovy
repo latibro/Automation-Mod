@@ -34,7 +34,7 @@ final class LuaObjects {
     @Nullable
     static Object toLuaObject(@Nullable Object object) {
         if (isSafeLuaObject(object)) {
-            // Null - No need to do anything
+            // Safe - No need to do anything
             return object
         } else if (object instanceof Number) {
             // Number is safe in Double

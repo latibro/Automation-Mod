@@ -2,7 +2,6 @@ package latibro.automation.core.lua
 
 import latibro.automation.AutomationMod
 import latibro.automation.api.core.lua.LuaMethod
-import latibro.automation.api.core.lua.LuaObject
 import org.apache.logging.log4j.Logger
 import spock.lang.Specification
 
@@ -99,38 +98,6 @@ class LuaObjectProxySpec extends Specification {
         !methods.contains("anotherMethod")
     }
 
-    def "getMethodNames - object annotated with LuaObject with allMethods=true - all methods included"() {
-        given:
-        def source = new DummyAnnotatedLuaObjectWithAllMethodsTrue() {
-            @LuaMethod
-            void luaMethod() {}
-
-            void anotherMethod() {}
-        }
-        def proxy = new LuaObjectProxy(source)
-        when:
-        def methods = proxy.getMethodNames()
-        then:
-        methods.contains("luaMethod")
-        methods.contains("anotherMethod")
-    }
-
-    def "getMethodNames - object annotated with LuaObject with allMethods=false - only annotated methods included"() {
-        given:
-        def source = new DummyAnnotatedLuaObjectWithAllMethodsFalse() {
-            @LuaMethod
-            void luaMethod() {}
-
-            void anotherMethod() {}
-        }
-        def proxy = new LuaObjectProxy(source)
-        when:
-        def methods = proxy.getMethodNames()
-        then:
-        methods.size() == 1
-        methods.contains("luaMethod")
-        !methods.contains("anotherMethod")
-    }
 
     def "getMethodNames - does not contain private method"() {
         given:
@@ -178,7 +145,7 @@ class LuaObjectProxySpec extends Specification {
 
     def "callMethod - found method - call method"() {
         given:
-        def source = Spy(new DummyAnnotatedLuaObjectWithAllMethodsTrue() {
+        def source = Spy(new Object() {
             @LuaMethod
             void testMethod() {}
         })
@@ -191,7 +158,7 @@ class LuaObjectProxySpec extends Specification {
 
     def "callMethod - alias method - call method"() {
         given:
-        def source = Spy(new DummyAnnotatedLuaObjectWithAllMethodsTrue() {
+        def source = Spy(new Object() {
             @LuaMethod(name="aliasMethod")
             void testMethod() {}
         })
@@ -205,7 +172,7 @@ class LuaObjectProxySpec extends Specification {
 
     def "callMethod - two methods with same alias - call method with matching parameters"() {
         given:
-        def source = Spy(new DummyAnnotatedLuaObjectWithAllMethodsTrue() {
+        def source = Spy(new Object() {
             @LuaMethod(name="aliasMethod")
             void testMethod() {}
 
@@ -223,7 +190,7 @@ class LuaObjectProxySpec extends Specification {
 
     def "callMethod - two methods with same alias and same args - fails"() {
         given:
-        def source = Spy(new DummyAnnotatedLuaObjectWithAllMethodsTrue() {
+        def source = Spy(new Object() {
             @LuaMethod(name="aliasMethod")
             void testMethod(String param) {}
 
@@ -239,7 +206,7 @@ class LuaObjectProxySpec extends Specification {
 
     def "callMethod - null as arguments - calls method with no arguments"() {
         given:
-        def source = Spy(new DummyAnnotatedLuaObjectWithAllMethodsTrue() {
+        def source = Spy(new Object() {
             @LuaMethod
             void testMethod() {}
         })
@@ -252,7 +219,7 @@ class LuaObjectProxySpec extends Specification {
 
     def "callMethod - empty array as arguments - calls method with no arguments"() {
         given:
-        def source = Spy(new DummyAnnotatedLuaObjectWithAllMethodsTrue() {
+        def source = Spy(new Object() {
             @LuaMethod
             void testMethod() {}
         })
@@ -265,7 +232,7 @@ class LuaObjectProxySpec extends Specification {
 
     def "callMethod - arguments - passes arguments to method"() {
         given:
-        def source = Spy(new DummyAnnotatedLuaObjectWithAllMethodsTrue() {
+        def source = Spy(new Object() {
             @LuaMethod
             void testMethod(def arg1, def arg2, def arg3) {}
         })
@@ -304,7 +271,8 @@ class LuaObjectProxySpec extends Specification {
 
     def "callMethod - lua specific argument - transforms argument before passing it to method"() {
         given:
-        def source = Spy(new DummyAnnotatedLuaObjectWithAllMethodsTrue() {
+        def source = Spy(new Object() {
+            @LuaMethod
             void testMethod(def arg1, def arg2, def arg3) {}
         })
         def proxy = new LuaObjectProxy(source)
@@ -371,21 +339,6 @@ class LuaObjectProxySpec extends Specification {
         proxy.callMethod("testMethod", ["Hello world"] as Object[])
         then:
         thrown(NoSuchMethodException) //TODO was expecting IllegalArgumentException
-    }
-    
-    private static class  DummyWithoutLuaObjectAnnotation {
-    }
-
-    @LuaObject(allMethods = true)
-    private static class  DummyAnnotatedLuaObjectWithAllMethodsTrue {
-    }
-
-    @LuaObject(allMethods = false)
-    private static class  DummyAnnotatedLuaObjectWithAllMethodsFalse {
-    }
-
-    @LuaObject
-    private static class  DummyAnnotatedLuaObjectWithoutAllMethods {
     }
 
 }

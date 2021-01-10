@@ -3,7 +3,7 @@ package latibro.automation.integration.minecraft.api.entity
 import latibro.automation.core.lua.LuaObjectProxy
 import spock.lang.Specification
 
-class DirectEntityImplTest extends Specification {
+class DirectEntityImplSpec extends Specification {
 
     def "LuaMethods"() {
         given:

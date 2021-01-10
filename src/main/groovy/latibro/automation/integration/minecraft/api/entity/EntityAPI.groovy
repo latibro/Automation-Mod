@@ -5,17 +5,27 @@ import latibro.automation.api.core.lua.LuaMethod
 interface EntityAPI {
 
     @LuaMethod(
-            name = "linkByUUID",
-            usage = "function(uuid: string) : LinkedEntity"
+            name = "getAllLoadedAsUUID",
+            usage = "function() : array<uuid : string>"
     )
-    LinkedEntity getLinkedEntityFromUUID(UUID uuid)
+    List<String> getAllLoadedAsUUIDString()
+
+    List<UUID> getAllLoadedAsUUID()
+
+    @LuaMethod(
+            name = "getAllLoaded",
+            usage = "function() : array<entity : userdata<Entity>>"
+    )
+    List<DirectEntity> getAllLoaded()
 
     @LuaMethod(
             name = "getByUUID",
-            usage = "function(uuid: string) : DirectEntity"
+            usage = "function(uuid: string) : userdata<Entity>"
     )
-    DirectEntity getDirectEntityByUUID(String uuid)
+    DirectEntity getByUUIDString(String uuid)
 
-    DirectEntity getDirectEntityByUUID(UUID uuid)
+    DirectEntity getByUUID(UUID uuid)
+
+    LinkedEntity linkByUUID(UUID uuid)
 
 }

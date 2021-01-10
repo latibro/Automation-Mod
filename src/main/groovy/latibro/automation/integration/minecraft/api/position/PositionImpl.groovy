@@ -31,8 +31,8 @@ class PositionImpl implements Position {
     Map<String, Number> asMap() {
         return [
                 "x": getX(),
-                "y": getX(),
-                "z": getX()
+                "y": getY(),
+                "z": getZ()
         ]
     }
 

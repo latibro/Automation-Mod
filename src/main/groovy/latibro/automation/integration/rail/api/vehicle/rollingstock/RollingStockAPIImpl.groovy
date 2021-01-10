@@ -13,9 +13,29 @@ class RollingStockAPIImpl extends AbstractHostedAPI implements RollingStockAPI {
     }
 
     @Override
+    List<String> getAllLoadedAsUUIDString() {
+        return null
+    }
+
+    @Override
+    List<UUID> getAllLoadedAsUUID() {
+        return null
+    }
+
+    @Override
+    List<RollingStock> getAllLoaded() {
+        return null
+    }
+
+    @Override
     @Nonnull
-    RollingStock getRollingStockByUUID(@Nonnull String uuid) {
-        return new IRRollingStockAPI(host).getRollingStockByUUID(uuid)
+    RollingStock getByUUIDString(@Nonnull String uuid) {
+        return new IRRollingStockAPI(host).getByUUIDString(uuid)
+    }
+
+    @Override
+    RollingStock getByUUID(@Nonnull UUID uuid) {
+        return null
     }
 
 }

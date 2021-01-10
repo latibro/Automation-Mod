@@ -5,12 +5,12 @@ import latibro.automation.integration.rail.api.vehicle.traction.engine.DieselEng
 
 class IRDieselLocomotiveControl extends IRLocomotiveControl implements DieselEngineControl {
 
-    IRDieselLocomotiveControl(IRRollingStock rollingStock) {
+    IRDieselLocomotiveControl(IRDieselLocomotive rollingStock) {
         super(rollingStock)
     }
 
-    protected LocomotiveDiesel getIRLocomotiveDiesel() {
-        return (LocomotiveDiesel) getIRLocomotive()
+    protected LocomotiveDiesel getIREntity() {
+        return (LocomotiveDiesel) super.getIREntity()
     }
 
     @Override
@@ -25,12 +25,12 @@ class IRDieselLocomotiveControl extends IRLocomotiveControl implements DieselEng
 
     @Override
     void setTurnedOn(boolean state) {
-        getIRLocomotiveDiesel().setTurnedOn(state)
+        getIREntity().setTurnedOn(state)
     }
 
     @Override
     boolean isTurnedOn() {
-        getIRLocomotiveDiesel().isTurnedOn()
+        getIREntity().isTurnedOn()
     }
 
 }
