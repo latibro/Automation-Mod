@@ -47,9 +47,6 @@ repositories {
         name = "CurseForge"
         url = "https://minecraft.curseforge.com/api/maven/"
     }
-    maven {
-        url = "https://www.cursemaven.com"
-    }
 }
 
 dependencies {
@@ -74,21 +71,30 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
+    // Immersive Railroading
+    // https://www.curseforge.com/minecraft/mc-mods/immersive-railroading/files/all?filter-game-version=2020709689%3A6756
+    // https://www.curseforge.com/minecraft/mc-mods/universal-mod-core/files/all?filter-game-version=2020709689%3A6756
+    // https://www.curseforge.com/minecraft/mc-mods/track-api/files/all?filter-game-version=2020709689%3A6756
+    //compile group: 'universal-mod-core', name: 'UniversalModCore-0.1.0', version: '1.12.2', classifier: 'forge'
+    compile group: 'immersive-railroading', name: 'ImmersiveRailroading', version: '1.7.3_1.12.2'
+    runtime group: 'track-api', name: 'TrackAPI', version: '1.1_1.12'
 
-    //compile "universal-mod-core:UniversalModCore-0.1.0:1.12.2:forge" // UniversalModCore-0.1.0-1.12.2-forge.jar
-    compile "immersive-railroading:ImmersiveRailroading:1.7.3_1.12.2" // ImmersiveRailroading-1.7.3_1.12.2.jar
-    //compile "track-api:TrackAPI:1.2" // TrackAPI-1.2.jar
-    runtime "track-api:TrackAPI:1.1_1.12" // TrackAPI-1.1_1.12.jar
+    // OpenComputers
+    // https://www.curseforge.com/minecraft/mc-mods/opencomputers/files/all?filter-game-version=2020709689%3A6756
+    compile group: 'li.cil.oc', name: 'OpenComputers', version: 'MC1.12.2-1.7.+', classifier: 'api'
+    runtime group: 'li.cil.oc', name: 'OpenComputers', version: 'MC1.12.2-1.7.+'
 
-    compile "li.cil.oc:OpenComputers:MC1.12.2-1.7.+:api"
-    runtime "li.cil.oc:OpenComputers:MC1.12.2-1.7.+"
+    // ComputerCraft
+    // https://www.curseforge.com/minecraft/mc-mods/cc-tweaked/files/all?filter-game-version=2020709689%3A6756
+    //compileOnly group: 'dan200.computercraft', name: 'ComputerCraft', version: '1.80pr1-build5'
+    //runtime group: 'org.squiddev', name: 'cc-tweaked-1.12.2', version: '1.89.+'
+    compile group: 'org.squiddev', name: 'cc-tweaked-1.12.2', version: '1.89.+'
 
-    //compileOnly "dan200.computercraft:ComputerCraft:1.80pr1-build5"
-    //runtime "org.squiddev:cc-tweaked-1.12.2:1.89.+"
-    compile "org.squiddev:cc-tweaked-1.12.2:1.89.+"
+    // GroovyForge
+    compile group: 'com.thesledgehammer.GroovyForge', name: 'GroovyForge_1.12.2', version: '+', classifier: 'universal'
 
+    // Groovy
     compile group: 'org.codehaus.groovy', name: 'groovy-all', version: '3.0.7', ext: 'pom'
-    compile "com.thesledgehammer.GroovyForge:GroovyForge_1.12.2:+:universal"
 
     testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.7.0-M1'
     testCompile group: 'org.spockframework', name: 'spock-core', version: '2.0-M3-groovy-3.0'
