@@ -40,6 +40,10 @@ repositories {
     maven { url = "https://cc.crzd.me/maven/" } // CC
     maven { url 'https://squiddev.cc/maven/' } // CC:T
     maven {
+        name = "GroovyForge"
+        url = "https://dl.bintray.com/thesledgehammer/development/"
+    }
+    maven {
         name = "CurseForge"
         url = "https://minecraft.curseforge.com/api/maven/"
     }
@@ -84,6 +88,7 @@ dependencies {
     compile "org.squiddev:cc-tweaked-1.12.2:1.89.+"
 
     compile group: 'org.codehaus.groovy', name: 'groovy-all', version: '3.0.7', ext: 'pom'
+    compile "com.thesledgehammer.GroovyForge:GroovyForge_1.12.2:+:universal"
 
     testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.7.0-M1'
     testCompile group: 'org.spockframework', name: 'spock-core', version: '2.0-M3-groovy-3.0'

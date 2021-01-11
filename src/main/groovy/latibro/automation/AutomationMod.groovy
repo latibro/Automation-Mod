@@ -9,7 +9,12 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent
 import org.apache.logging.log4j.Logger
 
-@Mod(modid = MODID, name = NAME, version = VERSION)
+@Mod(modid = MODID,
+        name = NAME,
+        version = VERSION,
+        modLanguageAdapter = "com.thesledgehammer.groovyforge.GroovyLanguageAdapter",
+        dependencies = "required-after:groovyforge@[1.0,);after:opencomputers@[1.7,);after:computercraft@[1.89,);after:immersiverailroading@[1.7,)"
+)
 class AutomationMod {
 
     static final String MODID = "automation"
