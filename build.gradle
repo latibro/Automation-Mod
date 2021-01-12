@@ -25,7 +25,7 @@ compileJava {
 minecraft {
     version = "1.12.2-14.23.5.2778"
     runDir = "run"
-    
+
     // the mappings can be changed at any time, and must be in the following format.
     // snapshot_YYYYMMDD   snapshot are built nightly.
     // stable_#            stables are built at the discretion of the MCP team.
@@ -36,17 +36,12 @@ minecraft {
 }
 
 repositories {
-    maven { url = "http://maven.cil.li/" } // OC
-    maven { url = "https://cc.crzd.me/maven/" } // CC
-    maven { url 'https://squiddev.cc/maven/' } // CC:T
-    maven {
-        name = "GroovyForge"
-        url = "https://dl.bintray.com/thesledgehammer/development/"
-    }
-    maven {
-        name = "CurseForge"
-        url = "https://minecraft.curseforge.com/api/maven/"
-    }
+    maven { url = "http://maven.cil.li/" } // OpenComputers
+    maven { url = "https://cc.crzd.me/maven/" } // ComputerCraft
+    maven { url 'https://squiddev.cc/maven/' } // ComputerCraft:Tweaked
+    maven { url = 'https://teamopenindustry.cc/maven/' } // ImmersiveRailroading
+    maven { url = "https://dl.bintray.com/thesledgehammer/development/" } // GroovyForge
+    maven { url = "https://minecraft.curseforge.com/api/maven/" } // CurseForge
 }
 
 dependencies {
@@ -54,7 +49,7 @@ dependencies {
     // or you may define them like so..
     //compile "some.group:artifact:version:classifier"
     //compile "some.group:artifact:version"
-      
+
     // real examples
     //compile 'com.mod-buildcraft:buildcraft:6.0.8:dev'  // adds buildcraft to the dev env
     //compile 'com.googlecode.efficient-java-matrix-library:ejml:0.24' // adds ejml to the dev env
@@ -75,9 +70,12 @@ dependencies {
     // https://www.curseforge.com/minecraft/mc-mods/immersive-railroading/files/all?filter-game-version=2020709689%3A6756
     // https://www.curseforge.com/minecraft/mc-mods/universal-mod-core/files/all?filter-game-version=2020709689%3A6756
     // https://www.curseforge.com/minecraft/mc-mods/track-api/files/all?filter-game-version=2020709689%3A6756
-    //compile group: 'universal-mod-core', name: 'UniversalModCore-0.1.0', version: '1.12.2', classifier: 'forge'
-    compile group: 'immersive-railroading', name: 'ImmersiveRailroading', version: '1.7.3_1.12.2'
-    runtime group: 'track-api', name: 'TrackAPI', version: '1.1_1.12'
+    //compile group: 'cam72cam.universalmodcore', name: 'UniversalModCore', version: '1.12.2-forge-1.0.+'
+    compile(group: 'cam72cam.immersiverailroading', name: 'ImmersiveRailroading', version: '1.12.2-forge-1.8.+') {
+        exclude group: 'li.cil.oc', module: 'OpenComputers'
+        exclude group: 'dan200.computercraft', module: 'ComputerCraft'
+    }
+    //runtime group: 'trackapi', name: 'TrackAPI', version: '1.12.2-forge-1.+'
 
     // OpenComputers
     // https://www.curseforge.com/minecraft/mc-mods/opencomputers/files/all?filter-game-version=2020709689%3A6756
@@ -110,11 +108,11 @@ processResources {
     // replace stuff in mcmod.info, nothing else
     from(sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
-                
+
         // replace version and mcversion
-        expand 'version':project.version, 'mcversion':project.minecraft.version
+        expand 'version': project.version, 'mcversion': project.minecraft.version
     }
-        
+
     // copy everything else except the mcmod.info
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
