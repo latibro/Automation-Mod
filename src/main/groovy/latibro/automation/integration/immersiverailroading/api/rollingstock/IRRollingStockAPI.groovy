@@ -3,15 +3,16 @@ package latibro.automation.integration.immersiverailroading.api.rollingstock
 import cam72cam.immersiverailroading.entity.EntityRollingStock
 import cam72cam.immersiverailroading.entity.LocomotiveDiesel
 import cam72cam.mod.entity.ModdedEntity
+import groovy.transform.CompileStatic
 import latibro.automation.core.api.APIHost
 import latibro.automation.core.api.AbstractHostedAPI
 import latibro.automation.integration.minecraft.api.entity.DirectEntity
 import latibro.automation.integration.minecraft.api.entity.EntityAPIImpl
-import latibro.automation.integration.rail.api.vehicle.rollingstock.RollingStock
 import latibro.automation.integration.rail.api.vehicle.rollingstock.RollingStockAPI
 
 import javax.annotation.Nonnull
 
+@CompileStatic
 class IRRollingStockAPI extends AbstractHostedAPI implements RollingStockAPI {
 
     IRRollingStockAPI(@Nonnull APIHost host) {
@@ -29,7 +30,7 @@ class IRRollingStockAPI extends AbstractHostedAPI implements RollingStockAPI {
     }
 
     @Override
-    List<RollingStock> getAllLoaded() {
+    List<IRRollingStock> getAllLoaded() {
         return host.minecraftWorld.loadedEntityList.findAll {
             return it instanceof ModdedEntity && it.self instanceof EntityRollingStock
         }.collect { getByUUID(it.getUniqueID()) }

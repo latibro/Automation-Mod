@@ -1,6 +1,6 @@
 package latibro.automation.integration.opencomputers
 
-
+import latibro.automation.AutomationMod
 import latibro.automation.core.lua.LuaObjectProxy
 import li.cil.oc.api.machine.Arguments
 import li.cil.oc.api.machine.Context
@@ -30,14 +30,19 @@ class OpenComputersObjectProxy extends AbstractValue implements ManagedPeriphera
 
     @Override
     Object[] invoke(String method, Context context, Arguments arguments) throws Exception {
-        Object[] luaArguments = fromOpenComputersArguments(arguments)
+        try {
+            Object[] luaArguments = fromOpenComputersArguments(arguments)
 
-        Object luaResult = source.callMethod(method, luaArguments)
+            Object luaResult = source.callMethod(method, luaArguments)
 
-        Object ocResult = toOpenComputersResult(luaResult)
+            Object ocResult = toOpenComputersResult(luaResult)
 
-        //TODO maybe return null or empty array if result is null?
-        return ocResult ? new Object[]{ocResult} : ocResult
+            //TODO maybe return null or empty array if result is null?
+            return ocResult ? new Object[]{ocResult} : ocResult
+        } catch (Exception e) {
+            AutomationMod.logger.warn(e)
+            throw e
+        }
     }
 
     private static Object[] fromOpenComputersArguments(Arguments arguments) {

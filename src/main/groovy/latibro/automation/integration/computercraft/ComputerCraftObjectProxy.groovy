@@ -3,6 +3,7 @@ package latibro.automation.integration.computercraft
 import dan200.computercraft.api.lua.ILuaContext
 import dan200.computercraft.api.lua.ILuaObject
 import dan200.computercraft.api.lua.LuaException
+import latibro.automation.AutomationMod
 import latibro.automation.core.lua.LuaObjectProxy
 
 import javax.annotation.Nonnull
@@ -50,6 +51,7 @@ class ComputerCraftObjectProxy implements ILuaObject {
             //TODO maybe return null or empty array if result is null?
             return new Object[]{ccResult}
         } catch (Exception e) {
+            AutomationMod.logger.warn(e)
             throw new LuaException(e.getClass().getName() + ": " + e.getMessage())
         }
     }

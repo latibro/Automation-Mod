@@ -4,7 +4,7 @@ import java.lang.annotation.*;
 
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.METHOD})
-public @interface LuaMethodReturn {
-    //TODO Object transformer() default "";
+@Target([ElementType.PARAMETER])
+public @interface LuaMethodParameter {
+    //TODO Object transformer() default ""
 }

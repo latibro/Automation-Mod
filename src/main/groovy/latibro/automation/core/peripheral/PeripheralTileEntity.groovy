@@ -1,5 +1,6 @@
 package latibro.automation.core.peripheral
 
+import groovy.transform.CompileStatic
 import latibro.automation.core.api.APIHost
 import latibro.automation.core.api.HostedAPI
 import latibro.automation.core.lua.LuaObjectProxy
@@ -11,6 +12,7 @@ import net.minecraft.world.World
 import net.minecraftforge.fml.common.Loader
 import net.minecraftforge.fml.common.Optional
 
+@CompileStatic
 @Optional.InterfaceList([
     @Optional.Interface(iface = "latibro.automation.integration.opencomputers.OCTileEntityEnvironmentTrait", modid = "opencomputers"),
     @Optional.Interface(iface = "latibro.automation.integration.computercraft.CCPeripheralTrait", modid = "computercraft"),

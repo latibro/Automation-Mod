@@ -4,11 +4,11 @@ import java.lang.annotation.*;
 
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.METHOD})
+@Target([ElementType.METHOD])
 public @interface LuaMethod {
-    String name() default "";
+    String name() default ""
 
-    String doc() default "";
+    String doc() default ""
 
-    String usage() default "";
+    String usage() default ""
 }

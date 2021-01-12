@@ -1,10 +1,12 @@
 package latibro.automation.integration.minecraft.api.entity
 
+import groovy.transform.CompileStatic
 import latibro.automation.core.api.APIHost
 import latibro.automation.core.api.AbstractHostedAPI
 
 import javax.annotation.Nonnull
 
+@CompileStatic
 class EntityAPIImpl extends AbstractHostedAPI implements EntityAPI {
 
     EntityAPIImpl(@Nonnull APIHost host) {
@@ -23,7 +25,7 @@ class EntityAPIImpl extends AbstractHostedAPI implements EntityAPI {
 
     @Override
     List<DirectEntity> getAllLoaded() {
-        return host.minecraftWorld.loadedEntityList.collect { getByUUID(it.getUniqueID()) }
+        return host.minecraftWorld.loadedEntityList.collect { getByUUID(it.uniqueID) }
     }
 
     @Override
@@ -36,7 +38,7 @@ class EntityAPIImpl extends AbstractHostedAPI implements EntityAPI {
     @Nonnull
     DirectEntity getByUUID(@Nonnull UUID uuid) {
         Objects.requireNonNull(uuid)
-        def entities = host.minecraftWorld.loadedEntityList.findAll { it.getUniqueID() == uuid }
+        def entities = host.minecraftWorld.loadedEntityList.findAll { it.uniqueID == uuid }
         if (entities.isEmpty()) {
             throw new RuntimeException("Entity is not available") //TODO better exception
         } else if (entities.size() > 1) {

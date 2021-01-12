@@ -1,8 +1,10 @@
 package latibro.automation.integration.minecraft.api.entity
 
+import groovy.transform.CompileStatic
 import latibro.automation.integration.minecraft.api.position.Position
 import latibro.automation.integration.minecraft.api.position.PositionImpl
 
+@CompileStatic
 class DirectEntityImpl extends AbstractEntity implements DirectEntity {
 
     private final net.minecraft.entity.Entity minecraftEntity

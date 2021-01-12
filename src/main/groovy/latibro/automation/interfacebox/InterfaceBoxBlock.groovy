@@ -1,5 +1,6 @@
 package latibro.automation.interfacebox
 
+import groovy.transform.CompileStatic
 import net.minecraft.block.Block
 import net.minecraft.block.ITileEntityProvider
 import net.minecraft.block.material.Material
@@ -14,6 +15,7 @@ import net.minecraftforge.fml.relauncher.SideOnly
 
 import javax.annotation.Nullable
 
+@CompileStatic
 class InterfaceBoxBlock extends Block implements ITileEntityProvider {
 
     InterfaceBoxBlock() {

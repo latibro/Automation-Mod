@@ -1,5 +1,6 @@
 package latibro.devoplment
 
+import groovy.transform.CompileStatic
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityLivingBase
@@ -13,6 +14,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.text.TextComponentString
 import net.minecraft.world.World
 
+@CompileStatic
 class DebugToolItem extends Item {
 
     DebugToolItem() {

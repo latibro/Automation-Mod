@@ -2,6 +2,7 @@ package latibro.automation.integration.computercraft
 
 import dan200.computercraft.api.peripheral.IPeripheral
 import dan200.computercraft.api.peripheral.IPeripheralProvider
+import groovy.transform.CompileStatic
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
@@ -9,6 +10,7 @@ import net.minecraft.world.World
 import javax.annotation.Nonnull
 import javax.annotation.Nullable
 
+@CompileStatic
 class TileEntityPeripheralProvider implements IPeripheralProvider {
 
     @Nullable

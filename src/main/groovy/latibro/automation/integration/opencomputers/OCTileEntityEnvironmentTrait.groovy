@@ -1,5 +1,6 @@
 package latibro.automation.integration.opencomputers
 
+import groovy.transform.CompileStatic
 import latibro.automation.core.lua.LuaObjectProxy
 import li.cil.oc.api.Network
 import li.cil.oc.api.machine.Arguments
@@ -8,6 +9,7 @@ import li.cil.oc.api.network.*
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.tileentity.TileEntity
 
+@CompileStatic
 trait OCTileEntityEnvironmentTrait implements ManagedPeripheral, Environment {
 
     private static final String TAG_NODE = "oc:node";
