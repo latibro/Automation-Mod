@@ -33,28 +33,6 @@ class EntityAPIImplSpec extends Specification {
         facade instanceof EntityAPI
     }
 
-    // ***** linkByUUID(UUID) -
-
-    def "linkByUUID(UUID) - null - fails"() {
-        given:
-        def facade = new EntityAPIImpl(Mock(APIHost))
-        when:
-        facade.linkByUUID((UUID) null)
-        then:
-        thrown(NullPointerException)
-    }
-
-    def "linkByUUID(UUID) - valid UUID - success"() {
-        given:
-        def facade = new EntityAPIImpl(Mock(APIHost))
-        def uuid = UUID.randomUUID()
-        when:
-        def entity = facade.linkByUUID(uuid)
-        then:
-        entity instanceof LinkedEntity
-        entity.getUUID() == uuid
-    }
-
     // ***** getByUUID(UUID) -
 
     def "getByUUID(UUID) - null - fails"() {

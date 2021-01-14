@@ -1,8 +1,9 @@
 package latibro.automation.integration.minecraft.api.entity
 
 import latibro.automation.api.core.lua.LuaMethod
+import latibro.automation.core.api.API
 
-interface EntityAPI {
+interface EntityAPI extends API {
 
     @LuaMethod(
             name = "getAllLoadedAsUUID",
@@ -10,22 +11,18 @@ interface EntityAPI {
     )
     List<String> getAllLoadedAsUUIDString()
 
-    List<UUID> getAllLoadedAsUUID()
-
     @LuaMethod(
             name = "getAllLoaded",
             usage = "function() : array<entity : userdata<Entity>>"
     )
-    List<DirectEntity> getAllLoaded()
+    List<Entity> getAllLoaded()
 
     @LuaMethod(
             name = "getByUUID",
             usage = "function(uuid: string) : userdata<Entity>"
     )
-    DirectEntity getByUUIDString(String uuid)
+    Entity getByUUIDString(String uuid)
 
-    DirectEntity getByUUID(UUID uuid)
-
-    LinkedEntity linkByUUID(UUID uuid)
+    Entity getByUUID(UUID uuid)
 
 }

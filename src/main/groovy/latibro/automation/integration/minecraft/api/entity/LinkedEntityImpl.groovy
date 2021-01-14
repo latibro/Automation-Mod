@@ -6,14 +6,14 @@ class LinkedEntityImpl extends AbstractEntity implements LinkedEntity {
 
     private final UUID entityUUID;
 
-    LinkedEntityImpl(EntityAPI entityManager, UUID entityUUID) {
-        super(entityManager)
+    LinkedEntityImpl(EntityAPI host, UUID entityUUID) {
+        super(host)
         this.entityUUID = Objects.requireNonNull(entityUUID)
     }
 
     @Override
     net.minecraft.entity.Entity getMinecraftEntity() {
-        return asDirectEntity().getMinecraftEntity()
+        return asLoadedEntity().getMinecraftEntity()
     }
 
     @Override
@@ -23,26 +23,26 @@ class LinkedEntityImpl extends AbstractEntity implements LinkedEntity {
 
     @Override
     String getType() {
-        return asDirectEntity().getType()
+        return asLoadedEntity().getType()
     }
 
     @Override
     Position getPosition() {
-        return asDirectEntity().getPosition()
+        return asLoadedEntity().getPosition()
     }
 
     @Override
     boolean isAvailable() {
         try {
-            return asDirectEntity().isAvailable()
+            return asLoadedEntity().isAvailable()
         } catch (Exception ignored) {
             return false
         }
     }
 
     @Override
-    DirectEntity asDirectEntity() {
-        return entityManager.getByUUID(entityUUID)
+    Entity asLoadedEntity() {
+        return host.getByUUID(entityUUID)
     }
 
 }

@@ -39,8 +39,8 @@ class OpenComputersObjectProxy extends AbstractValue implements ManagedPeriphera
 
             //TODO maybe return null or empty array if result is null?
             return ocResult ? new Object[]{ocResult} : ocResult
-        } catch (Exception e) {
-            AutomationMod.logger.warn(e)
+        } catch (Throwable e) {
+            AutomationMod.logger.warn(e.getMessage(), e)
             throw e
         }
     }

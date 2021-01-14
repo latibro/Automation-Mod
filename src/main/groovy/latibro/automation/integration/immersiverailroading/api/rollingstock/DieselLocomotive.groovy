@@ -1,8 +1,8 @@
-package latibro.automation.integration.rail.api.vehicle.traction.engine
+package latibro.automation.integration.immersiverailroading.api.rollingstock
 
 import latibro.automation.api.core.lua.LuaMethod
 
-interface DieselEngineControl extends EngineControl {
+interface DieselLocomotive extends Locomotive {
 
     @LuaMethod
     void turnOn()

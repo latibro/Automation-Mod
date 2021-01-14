@@ -1,14 +1,12 @@
 package latibro.automation.core.peripheral
 
 import groovy.transform.CompileStatic
-import latibro.automation.core.api.APIHost
-import latibro.automation.core.api.HostedAPI
+import latibro.automation.core.api.API
 import latibro.automation.core.lua.LuaObjectProxy
 import latibro.automation.integration.computercraft.CCPeripheralTrait
 import latibro.automation.integration.opencomputers.OCTileEntityEnvironmentTrait
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.tileentity.TileEntity
-import net.minecraft.world.World
 import net.minecraftforge.fml.common.Loader
 import net.minecraftforge.fml.common.Optional
 
@@ -17,7 +15,7 @@ import net.minecraftforge.fml.common.Optional
     @Optional.Interface(iface = "latibro.automation.integration.opencomputers.OCTileEntityEnvironmentTrait", modid = "opencomputers"),
     @Optional.Interface(iface = "latibro.automation.integration.computercraft.CCPeripheralTrait", modid = "computercraft"),
 ])
-abstract class PeripheralTileEntity extends TileEntity implements OCTileEntityEnvironmentTrait, CCPeripheralTrait, Peripheral, APIHost {
+abstract class PeripheralTileEntity extends TileEntity implements OCTileEntityEnvironmentTrait, CCPeripheralTrait {
 
     protected PeripheralTileEntity() {
         if (Loader.isModLoaded("opencomputers")) {
@@ -31,12 +29,7 @@ abstract class PeripheralTileEntity extends TileEntity implements OCTileEntityEn
 
     abstract String getComponentName();
 
-    protected abstract HostedAPI getPeripheralAPI();
-
-    @Override
-    World getMinecraftWorld() {
-        return getWorld()
-    }
+    protected abstract API getPeripheralAPI();
 
     LuaObjectProxy getPeripheralAPIProxy() {
         return new LuaObjectProxy(getPeripheralAPI())

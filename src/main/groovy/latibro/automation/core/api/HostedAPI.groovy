@@ -1,6 +1,6 @@
 package latibro.automation.core.api
 
-interface HostedAPI {
+interface HostedAPI extends API {
 
     APIHost getHost()
 

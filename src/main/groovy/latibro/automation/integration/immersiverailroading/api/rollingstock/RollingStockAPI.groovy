@@ -1,10 +1,9 @@
-package latibro.automation.integration.rail.api.vehicle.rollingstock
+package latibro.automation.integration.immersiverailroading.api.rollingstock
 
 import latibro.automation.api.core.lua.LuaMethod
+import latibro.automation.core.api.API
 
-import javax.annotation.Nonnull
-
-interface RollingStockAPI {
+interface RollingStockAPI extends API {
 
     @LuaMethod(
             name = "getAllLoadedAsUUID",
@@ -12,16 +11,10 @@ interface RollingStockAPI {
     )
     List<String> getAllLoadedAsUUIDString()
 
-    List<UUID> getAllLoadedAsUUID()
-
-    List<RollingStock> getAllLoaded()
-
     @LuaMethod(
             name = "getByUUID",
-            usage = "function(uuid: string) : RollingStock"
+            usage = "function(uuid: string) : RollingStockImpl"
     )
     RollingStock getByUUIDString(String uuid)
-
-    RollingStock getByUUID(@Nonnull UUID uuid)
 
 }

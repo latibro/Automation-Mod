@@ -9,8 +9,8 @@ class DirectEntityImpl extends AbstractEntity implements DirectEntity {
 
     private final net.minecraft.entity.Entity minecraftEntity
 
-    DirectEntityImpl(EntityAPI entityManager, net.minecraft.entity.Entity minecraftEntity) {
-        super(entityManager)
+    DirectEntityImpl(EntityAPI host, net.minecraft.entity.Entity minecraftEntity) {
+        super(host)
         this.minecraftEntity = Objects.requireNonNull(minecraftEntity)
     }
 

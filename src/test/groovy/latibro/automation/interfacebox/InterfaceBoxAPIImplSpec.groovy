@@ -1,8 +1,8 @@
 package latibro.automation.interfacebox
 
 import latibro.automation.AutomationMod
-import latibro.automation.core.api.APIHost
 import latibro.automation.core.lua.LuaObjectProxy
+import latibro.automation.integration.immersiverailroading.api.rollingstock.RollingStockAPI
 import latibro.automation.integration.minecraft.api.entity.EntityAPI
 import net.minecraft.init.Bootstrap
 import net.minecraftforge.fml.common.DummyModContainer
@@ -28,7 +28,7 @@ class InterfaceBoxAPIImplSpec extends Specification {
 
     def "LuaMethods"() {
         given:
-        def api = new InterfaceBoxAPIImpl(Mock(APIHost))
+        def api = new InterfaceBoxAPIImpl(Mock(InterfaceBoxTileEntity))
         def proxy = new LuaObjectProxy(api)
         when:
         def methodNames = proxy.getMethodNames()
@@ -47,41 +47,41 @@ class InterfaceBoxAPIImplSpec extends Specification {
 
     def "constructor - world - success"() {
         when:
-        def interfaceBox = new InterfaceBoxAPIImpl(Mock(APIHost))
+        def interfaceBox = new InterfaceBoxAPIImpl(Mock(InterfaceBoxTileEntity))
         then:
         interfaceBox instanceof InterfaceBoxAPI
     }
 
-    // ***** getAllNameOfAPIAsString
+    // ***** getAllAPIAsNameString
 
-    def "getAllNameOfAPIAsString - only build-in mod"() {
+    def "getAllAPIAsNameString - only build-in mod"() {
         given:
-        def interfaceBox = new InterfaceBoxAPIImpl(Mock(APIHost))
+        def interfaceBox = new InterfaceBoxAPIImpl(Mock(InterfaceBoxTileEntity))
         when:
-        def apis = interfaceBox.getAllNameOfAPIAsString()
+        def apis = interfaceBox.getAllAPIAsNameString()
         then:
         apis == ["entity"] as Set
     }
 
-    def "getAllNameOfAPIAsString - immersiverailroading installed"() {
+    def "getAllAPIAsNameString - immersiverailroading installed"() {
         given:
         Loader.instance().setupTestHarness(new DummyModContainer(new ModMetadata() {
             {
                 modId = "immersiverailroading"
             }
         }))
-        def interfaceBox = new InterfaceBoxAPIImpl(Mock(APIHost))
+        def interfaceBox = new InterfaceBoxAPIImpl(Mock(InterfaceBoxTileEntity))
         when:
-        def apis = interfaceBox.getAllNameOfAPIAsString()
+        def apis = interfaceBox.getAllAPIAsNameString()
         then:
-        apis.contains("rolling_stock")
+        apis.contains("immersive_railroading.rolling_stock")
     }
 
     // ***** initiateAPI
 
     def "getAPIByName - unknown - fails"() {
         given:
-        def interfaceBox = new InterfaceBoxAPIImpl(Mock(APIHost))
+        def interfaceBox = new InterfaceBoxAPIImpl(Mock(InterfaceBoxTileEntity))
         when:
         interfaceBox.getAPIByName()
         then:
@@ -90,11 +90,20 @@ class InterfaceBoxAPIImplSpec extends Specification {
 
     def "getAPIByName - entity - return EntityAPI"() {
         given:
-        def interfaceBox = new InterfaceBoxAPIImpl(Mock(APIHost))
+        def interfaceBox = new InterfaceBoxAPIImpl(Mock(InterfaceBoxTileEntity))
         when:
         def api = interfaceBox.getAPIByName("entity")
         then:
         api instanceof EntityAPI
+    }
+
+    def "getAPIByName - immersive_railroading.rolling_stock - return EntityAPI"() {
+        given:
+        def interfaceBox = new InterfaceBoxAPIImpl(Mock(InterfaceBoxTileEntity))
+        when:
+        def api = interfaceBox.getAPIByName("immersive_railroading.rolling_stock")
+        then:
+        api instanceof RollingStockAPI
     }
 
 }

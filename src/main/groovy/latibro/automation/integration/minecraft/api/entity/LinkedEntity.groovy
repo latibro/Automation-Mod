@@ -5,9 +5,9 @@ import latibro.automation.api.core.lua.LuaMethod
 interface LinkedEntity extends Entity {
 
     @LuaMethod(
-            name = "load",
-            usage = "function() : DirectEntity"
+            name = "asLoaded",
+            usage = "function() : Entity"
     )
-    DirectEntity asDirectEntity()
+    Entity asLoadedEntity()
 
 }

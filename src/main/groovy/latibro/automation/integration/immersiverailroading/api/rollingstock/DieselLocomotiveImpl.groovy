@@ -1,16 +1,12 @@
 package latibro.automation.integration.immersiverailroading.api.rollingstock
 
 import cam72cam.immersiverailroading.entity.LocomotiveDiesel
-import latibro.automation.integration.rail.api.vehicle.traction.engine.DieselEngineControl
+import latibro.automation.integration.minecraft.api.entity.Entity
 
-class IRDieselLocomotiveControl extends IRLocomotiveControl implements DieselEngineControl {
+class DieselLocomotiveImpl extends LocomotiveImpl<LocomotiveDiesel> implements DieselLocomotive {
 
-    IRDieselLocomotiveControl(IRDieselLocomotive rollingStock) {
-        super(rollingStock)
-    }
-
-    protected LocomotiveDiesel getIREntity() {
-        return (LocomotiveDiesel) super.getIREntity()
+    protected DieselLocomotiveImpl(Entity entity) {
+        super(entity)
     }
 
     @Override
