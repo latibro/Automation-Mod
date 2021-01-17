@@ -35,6 +35,10 @@ class DirectEntityImpl extends AbstractEntity implements DirectEntity {
         return new PositionImpl(blockPos.x, blockPos.y, blockPos.z)
     }
 
+    String getFacingAsString() {
+        return minecraftEntity.getHorizontalFacing().name
+    }
+
     @Override
     boolean isAvailable() {
         return minecraftEntity.isAddedToWorld() //TODO maybe also isDead() and more

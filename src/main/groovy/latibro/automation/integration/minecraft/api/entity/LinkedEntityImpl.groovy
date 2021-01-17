@@ -32,6 +32,11 @@ class LinkedEntityImpl extends AbstractEntity implements LinkedEntity {
     }
 
     @Override
+    String getFacingAsString() {
+        return asLoadedEntity().getFacingAsString()
+    }
+
+    @Override
     boolean isAvailable() {
         try {
             return asLoadedEntity().isAvailable()

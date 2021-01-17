@@ -16,4 +16,9 @@ interface Locomotive extends RollingStock {
     @LuaMethod
     double getThrottleLevel()
 
+    @LuaMethod(
+            name = "getCurrentSpeed"
+    )
+    double getCurrentSpeedInKMH()
+
 }

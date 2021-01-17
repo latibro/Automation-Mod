@@ -20,7 +20,6 @@ class LocomotiveImpl<E extends cam72cam.immersiverailroading.entity.Locomotive> 
         return getIREntity().getAirBrake()
     }
 
-
     @Override
     void setThrottleLevel(double level) {
         assert level >= -1
@@ -31,6 +30,10 @@ class LocomotiveImpl<E extends cam72cam.immersiverailroading.entity.Locomotive> 
     @Override
     double getThrottleLevel() {
         return getIREntity().getThrottle()
+    }
+
+    double getCurrentSpeedInKMH() {
+        return getIREntity().getCurrentSpeed().metric()
     }
 
 }

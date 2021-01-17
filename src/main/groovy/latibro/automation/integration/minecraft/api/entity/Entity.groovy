@@ -17,17 +17,26 @@ interface Entity {
     UUID getUUID()
 
     @LuaMethod(
+            name = "getType",
             usage = "function() : string"
     )
     String getType()
 
     @LuaMethod(
+            name = "getPosition",
             usage = "function() : Position"
     )
     //@LuaMethodReturn(transformer = Table(["x":"getX" ,"y":getY","z":"getZ"]))
     Position getPosition()
 
     @LuaMethod(
+            name = "getFacing",
+            usage = "function() : string"
+    )
+    String getFacingAsString()
+
+    @LuaMethod(
+            name = "isAvailable",
             usage = "function() : boolean"
     )
     boolean isAvailable()
