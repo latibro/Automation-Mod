@@ -1,49 +1,57 @@
 package latibro.automation.integration.minecraft.api.entity
 
 import groovy.transform.CompileStatic
-import latibro.automation.core.api.APIHost
-import latibro.automation.core.api.AbstractHostedAPI
-
-import javax.annotation.Nonnull
+import latibro.automation.core.context.entity.AbstractEntityContext
+import latibro.automation.core.context.entity.EntityContext
+import latibro.automation.integration.minecraft.api.position.PositionAPI
+import latibro.automation.integration.minecraft.api.position.PositionAPIImpl
+import net.minecraft.entity.Entity
 
 @CompileStatic
-class EntityAPIImpl extends AbstractHostedAPI implements EntityAPI {
+class EntityAPIImpl implements EntityAPI {
 
-    EntityAPIImpl(@Nonnull APIHost host) {
-        super(host)
+    private final EntityContext<Entity> context
+
+    EntityAPIImpl(EntityContext context) {
+        this.context = Objects.requireNonNull(context)
+    }
+
+    EntityAPIImpl(Entity minecraftEntity) {
+        this(new AbstractEntityContext() {
+            @Override
+            Entity getMinecraftEntity() {
+                return minecraftEntity
+            }
+        })
     }
 
     @Override
-    List<String> getAllLoadedAsUUIDString() {
-        return getAllLoadedAsUUID().collect { it.toString() }
+    boolean isLoaded() {
+        return context.minecraftEntity?.isAddedToWorld()
     }
 
-    List<UUID> getAllLoadedAsUUID() {
-        return getAllLoaded().collect { it.getUUID() }
-    }
-
-    @Override
-    List<Entity> getAllLoaded() {
-        return host.minecraftWorld.loadedEntityList.collect { getByUUID(it.uniqueID) }
+    UUID getUUID() {
+        return context.minecraftEntity.uniqueID
     }
 
     @Override
-    @Nonnull
-    Entity getByUUIDString(@Nonnull String uuid) {
-        return getByUUID(UUID.fromString(uuid))
+    String getUUIDAsString() {
+        return getUUID().toString()
     }
 
     @Override
-    @Nonnull
-    Entity getByUUID(@Nonnull UUID uuid) {
-        Objects.requireNonNull(uuid)
-        def entities = host.minecraftWorld.loadedEntityList.findAll { it.uniqueID == uuid }
-        if (entities.isEmpty()) {
-            throw new RuntimeException("Entity is not available") //TODO better exception
-        } else if (entities.size() > 1) {
-            throw new RuntimeException("Multiple entity are available") //TODO better exception
-        }
-        return new DirectEntityImpl(this, entities.first())
+    PositionAPI getPosition() {
+        return new PositionAPIImpl(context.positionContext)
+    }
+
+    @Override
+    String getTypeAsString() {
+        return null
+    }
+
+    @Override
+    String getFacingAsString() {
+        return null
     }
 
 }

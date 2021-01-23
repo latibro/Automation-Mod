@@ -3,26 +3,29 @@ package latibro.automation.interfacebox
 import groovy.transform.CompileStatic
 import latibro.automation.core.api.API
 import latibro.automation.core.api.APIHost
-import latibro.automation.core.api.HostedAPI
-import latibro.automation.integration.immersiverailroading.api.rollingstock.RollingStockAPIImpl
-import latibro.automation.integration.minecraft.api.entity.EntityAPIImpl
-import net.minecraft.world.World
-import net.minecraftforge.fml.common.Loader
+import latibro.automation.core.context.tileentity.AbstractTileEntityContext
+import latibro.automation.integration.minecraft.api.server.ServerAPIImpl
+import latibro.automation.integration.minecraft.api.world.WorldAPIImpl
+import net.minecraft.tileentity.TileEntity
 
 @CompileStatic
 class InterfaceBoxAPIImpl implements InterfaceBoxAPI, APIHost {
 
-    private final Map<String, HostedAPI> apis = [:]
+    private final Map<String, API> apis = [:]
     private final InterfaceBoxTileEntity tileEntity
 
     InterfaceBoxAPIImpl(InterfaceBoxTileEntity tileEntity) {
         this.tileEntity = Objects.requireNonNull(tileEntity)
 
-        apis.put("entity", new EntityAPIImpl(this))
-
-        if (Loader.isModLoaded("immersiverailroading")) {
-            apis.put("immersive_railroading.rolling_stock", new RollingStockAPIImpl(this))
+        def context = new AbstractTileEntityContext() {
+            @Override
+            TileEntity getMinecraftTileEntity() {
+                return tileEntity
+            }
         }
+
+        apis.put("server", new ServerAPIImpl(context.getWorldContext().getServerContext()))
+        apis.put("world", new WorldAPIImpl(context.getWorldContext()))
     }
 
     @Override
@@ -31,7 +34,7 @@ class InterfaceBoxAPIImpl implements InterfaceBoxAPI, APIHost {
     }
 
     @Override
-    HostedAPI getAPIByName(String name) {
+    API getAPIByName(String name) {
         def api = apis.get(name)
         if (api) {
             return api
@@ -51,11 +54,6 @@ class InterfaceBoxAPIImpl implements InterfaceBoxAPI, APIHost {
             throw new RuntimeException("Multiple found")
         }
         return (T) apis.first()
-    }
-
-    @Override
-    World getMinecraftWorld() {
-        return tileEntity.getWorld()
     }
 
 }

@@ -1,28 +1,38 @@
 package latibro.automation.integration.minecraft.api.entity
 
 import latibro.automation.api.core.lua.LuaMethod
-import latibro.automation.core.api.API
+import latibro.automation.integration.minecraft.api.position.PositionAPI
 
-interface EntityAPI extends API {
-
-    @LuaMethod(
-            name = "getAllLoadedAsUUID",
-            usage = "function() : array<uuid : string>"
-    )
-    List<String> getAllLoadedAsUUIDString()
+interface EntityAPI {
 
     @LuaMethod(
-            name = "getAllLoaded",
-            usage = "function() : array<entity : userdata<Entity>>"
+            name = "isLoaded",
+            usage = "function() : boolean"
     )
-    List<Entity> getAllLoaded()
+    boolean isLoaded()
 
     @LuaMethod(
-            name = "getByUUID",
-            usage = "function(uuid: string) : userdata<Entity>"
+            name = "getUUID",
+            usage = "function() : string"
     )
-    Entity getByUUIDString(String uuid)
+    String getUUIDAsString()
 
-    Entity getByUUID(UUID uuid)
+    @LuaMethod(
+            name = "getType",
+            usage = "function() : string"
+    )
+    String getTypeAsString()
+
+    @LuaMethod(
+            name = "getPosition",
+            usage = "function() : PositionAPI"
+    )
+    PositionAPI getPosition()
+
+    @LuaMethod(
+            name = "getFacing",
+            usage = "function() : string"
+    )
+    String getFacingAsString()
 
 }

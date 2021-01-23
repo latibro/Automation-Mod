@@ -1,9 +1,7 @@
 package latibro.automation.interfacebox
 
-
 import latibro.automation.api.core.lua.LuaMethod
 import latibro.automation.core.api.API
-import latibro.automation.core.api.HostedAPI
 
 interface InterfaceBoxAPI extends API {
 
@@ -17,6 +15,6 @@ interface InterfaceBoxAPI extends API {
             name = "getAPI",
             doc = "function(name : string) : userdata<API>"
     )
-    HostedAPI getAPIByName(String name);
+    API getAPIByName(String name);
 
 }
