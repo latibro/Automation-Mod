@@ -2,7 +2,7 @@ package latibro.automation.integration.immersiverailroading.api.rollingstock
 
 import latibro.automation.api.core.lua.LuaMethod
 
-interface DieselLocomotive extends Locomotive {
+interface DieselLocomotiveAPI extends LocomotiveAPI {
 
     @LuaMethod
     void turnOn()

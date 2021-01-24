@@ -2,7 +2,7 @@ package latibro.automation.integration.immersiverailroading.api.rollingstock
 
 import latibro.automation.api.core.lua.LuaMethod
 
-interface Locomotive extends RollingStock {
+interface LocomotiveAPI extends RollingStockAPI {
 
     @LuaMethod
     void setAirBrakeLevel(double level)

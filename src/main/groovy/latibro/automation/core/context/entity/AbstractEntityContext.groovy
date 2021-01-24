@@ -11,7 +11,7 @@ import net.minecraft.world.World
 
 abstract class AbstractEntityContext<T extends Entity> implements EntityContext<T> {
 
-    def final self = this
+    private final def self = this
 
     abstract T getMinecraftEntity()
 

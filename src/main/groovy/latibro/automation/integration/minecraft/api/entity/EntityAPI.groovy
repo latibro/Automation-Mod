@@ -35,4 +35,7 @@ interface EntityAPI {
     )
     String getFacingAsString()
 
+    @LuaMethod
+    EntityAPI asAPI(String name)
+
 }

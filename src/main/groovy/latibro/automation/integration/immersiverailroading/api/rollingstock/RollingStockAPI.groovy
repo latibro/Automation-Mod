@@ -1,20 +1,8 @@
 package latibro.automation.integration.immersiverailroading.api.rollingstock
 
-import latibro.automation.api.core.lua.LuaMethod
-import latibro.automation.core.api.API
 
-interface RollingStockAPI extends API {
+import latibro.automation.integration.minecraft.api.entity.EntityAPI
 
-    @LuaMethod(
-            name = "getAllLoadedAsUUID",
-            usage = "function() : array<uuid : string>"
-    )
-    List<String> getAllLoadedAsUUIDString()
-
-    @LuaMethod(
-            name = "getByUUID",
-            usage = "function(uuid: string) : RollingStockImpl"
-    )
-    RollingStock getByUUIDString(String uuid)
+interface RollingStockAPI extends EntityAPI {
 
 }

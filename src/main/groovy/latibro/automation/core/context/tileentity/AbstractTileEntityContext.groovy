@@ -8,7 +8,7 @@ import net.minecraft.world.World
 
 abstract class AbstractTileEntityContext<T extends TileEntity> implements TileEntityContext<T> {
 
-    def final self = this
+    private final def self = this
 
     abstract T getMinecraftTileEntity()
 

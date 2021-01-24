@@ -21,7 +21,10 @@ class EntityCollectionAPIImpl implements EntityCollectionAPI {
         })
     }
 
-    @Override
+    EntityAPI getByUUIDString(String uuid) {
+        return getByUUID(UUID.fromString(uuid))
+    }
+
     EntityAPI getByUUID(UUID uuid) {
         def matches = context.getAllMinecraftEntity().findAll { it.uniqueID == uuid }
         if (!matches) {

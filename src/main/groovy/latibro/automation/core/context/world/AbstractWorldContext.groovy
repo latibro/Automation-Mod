@@ -10,7 +10,7 @@ import net.minecraft.world.World
 
 abstract class AbstractWorldContext implements WorldContext {
 
-    def final self = this
+    private final def self = this
 
     @Override
     abstract World getMinecraftWorld()

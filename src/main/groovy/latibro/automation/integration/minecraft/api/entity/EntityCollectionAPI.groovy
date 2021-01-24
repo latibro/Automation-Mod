@@ -4,8 +4,10 @@ import latibro.automation.api.core.lua.LuaMethod
 
 interface EntityCollectionAPI {
 
-    @LuaMethod
-    EntityAPI getByUUID(UUID uuid)
+    @LuaMethod(
+            name = "getByUUID"
+    )
+    EntityAPI getByUUIDString(String uuid)
 
     @LuaMethod
     Collection<EntityAPI> getAll()
