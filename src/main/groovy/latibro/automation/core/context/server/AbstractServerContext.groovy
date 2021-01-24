@@ -17,7 +17,7 @@ abstract class AbstractServerContext implements ServerContext {
             @Override
             Collection getAllMinecraftEntity() {
                 def entities = []
-                minecraftServer.worlds.findResults { it }.each { entities + it.loadedEntityList }
+                minecraftServer.worlds.findResults { it }.each { entities.addAll(it.loadedEntityList) }
                 return entities
             }
         }

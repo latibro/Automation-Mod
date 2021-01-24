@@ -23,7 +23,7 @@ class EntityCollectionAPIImpl implements EntityCollectionAPI {
         })
     }
 
-    EntityAPI getByUUIDString(String uuid) {
+    EntityAPI getByUUIDAsString(String uuid) {
         return getByUUID(UUID.fromString(uuid))
     }
 
@@ -41,6 +41,21 @@ class EntityCollectionAPIImpl implements EntityCollectionAPI {
     @Override
     Collection<EntityAPI> getAll() {
         return context.getAllMinecraftEntity().collect { new EntityAPIImpl(it) } as Collection<EntityAPI>
+    }
+
+    @Override
+    Collection<String> getAllAsUUIDAsString() {
+        return context.getAllMinecraftEntity().collect { it.uniqueID.toString() } as Collection<String>
+    }
+
+    @Override
+    int size() {
+        return context.getAllMinecraftEntity().size()
+    }
+
+    @Override
+    EntityAPI getAt(int index) {
+        return new EntityAPIImpl(context.getAllMinecraftEntity().getAt(index))
     }
 
 }

@@ -7,9 +7,26 @@ interface EntityCollectionAPI {
     @LuaMethod(
             name = "getByUUID"
     )
-    EntityAPI getByUUIDString(String uuid)
+    EntityAPI getByUUIDAsString(String uuid)
 
-    @LuaMethod
+    @LuaMethod(
+            name = "getAll"
+    )
     Collection<EntityAPI> getAll()
+
+    @LuaMethod(
+            name = "getAllAsUUID"
+    )
+    Collection<String> getAllAsUUIDAsString()
+
+    @LuaMethod(
+            name = "size"
+    )
+    int size()
+
+    @LuaMethod(
+            name = "getAt"
+    )
+    EntityAPI getAt(int index)
 
 }
