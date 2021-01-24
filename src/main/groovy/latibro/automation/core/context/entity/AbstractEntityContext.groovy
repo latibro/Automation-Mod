@@ -1,5 +1,6 @@
 package latibro.automation.core.context.entity
 
+import groovy.transform.CompileStatic
 import latibro.automation.core.context.position.PositionContext
 import latibro.automation.core.context.server.AbstractServerContext
 import latibro.automation.core.context.server.ServerContext
@@ -9,9 +10,10 @@ import net.minecraft.entity.Entity
 import net.minecraft.server.MinecraftServer
 import net.minecraft.world.World
 
+@CompileStatic
 abstract class AbstractEntityContext<T extends Entity> implements EntityContext<T> {
 
-    private final def self = this
+    private final EntityContext self = this
 
     abstract T getMinecraftEntity()
 

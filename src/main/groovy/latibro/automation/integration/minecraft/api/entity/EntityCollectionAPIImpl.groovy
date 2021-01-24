@@ -1,9 +1,11 @@
 package latibro.automation.integration.minecraft.api.entity
 
+import groovy.transform.CompileStatic
 import latibro.automation.core.context.entity.AbstractEntityCollectionContext
 import latibro.automation.core.context.entity.EntityCollectionContext
 import net.minecraft.entity.Entity
 
+@CompileStatic
 class EntityCollectionAPIImpl implements EntityCollectionAPI {
 
     private final EntityCollectionContext<Entity> context
@@ -38,7 +40,7 @@ class EntityCollectionAPIImpl implements EntityCollectionAPI {
 
     @Override
     Collection<EntityAPI> getAll() {
-        return context.getAllMinecraftEntity().collect { new EntityAPIImpl(it) }
+        return context.getAllMinecraftEntity().collect { new EntityAPIImpl(it) } as Collection<EntityAPI>
     }
 
 }

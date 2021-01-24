@@ -1,9 +1,11 @@
 package latibro.automation.core.context.server
 
+import groovy.transform.CompileStatic
 import latibro.automation.core.context.entity.AbstractEntityCollectionContext
 import latibro.automation.core.context.entity.EntityCollectionContext
 import net.minecraft.server.MinecraftServer
 
+@CompileStatic
 abstract class AbstractServerContext implements ServerContext {
 
     @Override

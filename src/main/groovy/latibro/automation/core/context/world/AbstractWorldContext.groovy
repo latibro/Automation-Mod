@@ -1,5 +1,6 @@
 package latibro.automation.core.context.world
 
+import groovy.transform.CompileStatic
 import latibro.automation.core.context.entity.AbstractEntityCollectionContext
 import latibro.automation.core.context.entity.EntityCollectionContext
 import latibro.automation.core.context.position.PositionContext
@@ -8,9 +9,10 @@ import latibro.automation.core.context.server.ServerContext
 import net.minecraft.server.MinecraftServer
 import net.minecraft.world.World
 
+@CompileStatic
 abstract class AbstractWorldContext implements WorldContext {
 
-    private final def self = this
+    private final WorldContext self = this
 
     @Override
     abstract World getMinecraftWorld()

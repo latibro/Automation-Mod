@@ -12,7 +12,7 @@ class EntityAPIImplSpec extends Specification {
         when:
         def methodNames = proxy.getMethodNames()
         then:
-        methodNames.sort() == ["getUUID", "getType", "getPosition", "isAvailable"].sort()
+        methodNames.sort() == ["isLoaded", "getUUID", "getType", "getPosition", "getFacing", "asAPI"].sort()
     }
 
 }

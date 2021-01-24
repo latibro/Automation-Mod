@@ -1,14 +1,16 @@
 package latibro.automation.core.context.tileentity
 
+import groovy.transform.CompileStatic
 import latibro.automation.core.context.position.PositionContext
 import latibro.automation.core.context.world.AbstractWorldContext
 import latibro.automation.core.context.world.WorldContext
 import net.minecraft.tileentity.TileEntity
 import net.minecraft.world.World
 
+@CompileStatic
 abstract class AbstractTileEntityContext<T extends TileEntity> implements TileEntityContext<T> {
 
-    private final def self = this
+    private final TileEntityContext self = this
 
     abstract T getMinecraftTileEntity()
 
