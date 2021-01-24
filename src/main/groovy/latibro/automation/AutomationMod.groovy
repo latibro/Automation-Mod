@@ -19,7 +19,7 @@ class AutomationMod {
 
     static final String MODID = "automation"
     static final String NAME = "Automation"
-    static final String VERSION = "0.1.0"
+    static final String VERSION = "0.1.0-alpha"
 
     @SidedProxy(clientSide = "latibro.automation.proxy.ClientProxy", serverSide = "latibro.automation.proxy.ServerProxy")
     static CommonProxy proxy
