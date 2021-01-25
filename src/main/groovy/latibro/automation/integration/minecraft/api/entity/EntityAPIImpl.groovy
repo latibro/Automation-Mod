@@ -1,6 +1,6 @@
 package latibro.automation.integration.minecraft.api.entity
 
-import cam72cam.mod.entity.ModdedEntity
+
 import groovy.transform.CompileStatic
 import latibro.automation.core.context.entity.AbstractEntityContext
 import latibro.automation.core.context.entity.EntityContext
@@ -13,12 +13,12 @@ import latibro.automation.integration.minecraft.api.position.PositionAPIImpl
 import net.minecraft.entity.Entity
 
 @CompileStatic
-class EntityAPIImpl implements EntityAPI {
+class EntityAPIImpl<T extends Entity> implements EntityAPI {
 
-    private final EntityContext<Entity> context
+    private final EntityContext context
 
     EntityAPIImpl(EntityContext context) {
-        this.context = Objects.requireNonNull(context)
+        this.context = Objects.requireNonNull(context) as EntityContext
     }
 
     EntityAPIImpl(Entity minecraftEntity) {
@@ -30,7 +30,7 @@ class EntityAPIImpl implements EntityAPI {
         })
     }
 
-    protected EntityContext getContext() {
+    protected EntityContext<T> getContext() {
         return context
     }
 
@@ -76,6 +76,9 @@ class EntityAPIImpl implements EntityAPI {
         if (name == "immersive_railroading.diesel_locomotive") {
             def context = new RollingStockContextImpl(this.context as EntityContext<ModdedEntity>)
             return new DieselLocomotiveAPIImpl(context)
+        }
+        if (name == "minecraft.living_entity") {
+            return new LivingEntityAPIImpl(context)
         }
         throw new NullPointerException()
     }

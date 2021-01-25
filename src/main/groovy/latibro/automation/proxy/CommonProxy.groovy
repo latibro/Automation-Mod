@@ -6,6 +6,7 @@ import latibro.automation.integration.computercraft.TileEntityPeripheralProvider
 import latibro.automation.interfacebox.InterfaceBoxBlock
 import latibro.automation.interfacebox.InterfaceBoxTileEntity
 import latibro.devoplment.DebugToolItem
+import latibro.devoplment.EntityMountToolItem
 import net.minecraft.block.Block
 import net.minecraft.item.Item
 import net.minecraft.item.ItemBlock
@@ -46,6 +47,7 @@ class CommonProxy {
         event.getRegistry().register(new ItemBlock(ModBlocks.interfaceBox).setRegistryName(ModBlocks.interfaceBox.getRegistryName()))
 
         event.getRegistry().register(new DebugToolItem())
+        event.getRegistry().register(new EntityMountToolItem())
     }
 
 }

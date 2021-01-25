@@ -14,7 +14,7 @@ class EntityCollectionAPIImpl implements EntityCollectionAPI {
         this.context = Objects.requireNonNull(context)
     }
 
-    EntityCollectionAPIImpl(Collection<Entity> minecraftEntityCollection) {
+    EntityCollectionAPIImpl(Collection minecraftEntityCollection) {
         this(new AbstractEntityCollectionContext() {
             @Override
             Collection getAllMinecraftEntity() {
