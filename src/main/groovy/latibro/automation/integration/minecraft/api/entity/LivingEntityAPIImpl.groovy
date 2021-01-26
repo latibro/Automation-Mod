@@ -1,36 +1,32 @@
 package latibro.automation.integration.minecraft.api.entity
 
-import groovy.transform.CompileStatic
-import latibro.automation.AutomationMod
+import latibro.automation.core.api.entity.EntityAPIImpl
 import latibro.automation.core.context.entity.EntityContext
-import net.minecraft.entity.EntityLiving
+import latibro.automation.integration.minecraft.context.entity.LivingEntityContext
+import latibro.automation.integration.minecraft.context.entity.LivingEntityContextTrait
 
-@CompileStatic
 class LivingEntityAPIImpl extends EntityAPIImpl implements LivingEntityAPI {
 
     LivingEntityAPIImpl(EntityContext context) {
         super(context)
     }
 
+    protected LivingEntityContext getContext() {
+        return Object.context as LivingEntityContextTrait
+    }
+
     boolean navigateTo(double x, double y, double z) {
-        def livingEntity = (EntityLiving) context.minecraftEntity
-        def navigator = livingEntity.getNavigator()
-        def path = navigator.getPathToXYZ(x, y, z)
-        AutomationMod.logger.info("found path: " + path?.getFinalPathPoint()?.toString())
-        return navigator.setPath(path, 1)
-        //TODO should return some sort of task object, to track the progress of the move
+        return context.navigateTo(x, y, z)
     }
 
     @Override
     boolean isAIEnabled() {
-        def livingEntity = (EntityLiving) context.minecraftEntity
-        return !livingEntity.isAIDisabled()
+        return context.isAIEnabled()
     }
 
     @Override
     void setAIEnabled(boolean enabled) {
-        def livingEntity = (EntityLiving) context.minecraftEntity
-        livingEntity.setNoAI(!enabled)
+        context.setAIEnabled(enabled)
     }
 
     @Override

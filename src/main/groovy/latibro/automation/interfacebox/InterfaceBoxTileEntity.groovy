@@ -1,19 +1,31 @@
 package latibro.automation.interfacebox
 
-
+import latibro.automation.nativeimpl.context.tileentity.AbstractNativeTileEntityContext
 import latibro.automation.core.peripheral.PeripheralTileEntity
+import net.minecraft.tileentity.TileEntity
 
 class InterfaceBoxTileEntity extends PeripheralTileEntity {
 
-    InterfaceBoxTileEntity() {
-    }
-
+    @Override
     String getComponentName() {
         return "interface_box"
     }
 
+    @Override
     protected InterfaceBoxAPI getPeripheralAPI() {
-        return new InterfaceBoxAPIImpl(this)
+        def context = new AbstractNativeTileEntityContext() {
+            @Override
+            TileEntity getNativeTileEntity() {
+                return self
+            }
+
+            @Override
+            InterfaceBoxAPI getAPI() {
+                return new InterfaceBoxAPIImpl(this)
+            }
+        }
+
+        return context.getAPI()
     }
 
 }

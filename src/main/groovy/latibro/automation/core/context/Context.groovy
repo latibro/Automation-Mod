@@ -1,5 +1,9 @@
 package latibro.automation.core.context
 
-interface Context {
+import latibro.automation.core.api.API
+
+interface Context<T extends API> {
+
+    T getAPI()
 
 }

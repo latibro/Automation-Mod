@@ -1,5 +1,6 @@
 package latibro.automation.integration.minecraft.api.entity
 
+import latibro.automation.core.api.entity.EntityAPI
 import latibro.automation.core.lua.LuaObjectProxy
 import spock.lang.Specification
 
@@ -12,7 +13,7 @@ class EntityAPIImplSpec extends Specification {
         when:
         def methodNames = proxy.getMethodNames()
         then:
-        methodNames.sort() == ["isLoaded", "getUUID", "getType", "getPosition", "getFacing", "asAPI"].sort()
+        methodNames.sort() == ["isLoaded", "getUUID", "getPosition", "asType", "getAPI"].sort()
     }
 
 }

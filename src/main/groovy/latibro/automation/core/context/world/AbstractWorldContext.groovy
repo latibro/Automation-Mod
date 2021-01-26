@@ -1,68 +1,19 @@
 package latibro.automation.core.context.world
 
-import groovy.transform.CompileStatic
-import latibro.automation.core.context.entity.AbstractEntityCollectionContext
-import latibro.automation.core.context.entity.EntityCollectionContext
+import latibro.automation.core.api.world.WorldAPI
+import latibro.automation.core.api.world.WorldAPIImpl
+import latibro.automation.core.context.position.CoordinatePositionContext
 import latibro.automation.core.context.position.PositionContext
-import latibro.automation.core.context.server.AbstractServerContext
-import latibro.automation.core.context.server.ServerContext
-import net.minecraft.server.MinecraftServer
-import net.minecraft.world.World
 
-@CompileStatic
 abstract class AbstractWorldContext implements WorldContext {
 
-    private final WorldContext self = this
-
-    @Override
-    abstract World getMinecraftWorld()
-
-    @Override
-    ServerContext getServerContext() {
-        return new AbstractServerContext() {
-            @Override
-            MinecraftServer getMinecraftServer() {
-                return minecraftWorld.minecraftServer
-            }
-        }
+    WorldAPI getAPI() {
+        return new WorldAPIImpl(this)
     }
 
     @Override
-    EntityCollectionContext getLoadedEntitiesContext() {
-        return new AbstractEntityCollectionContext() {
-            @Override
-            Collection getAllMinecraftEntity() {
-                return minecraftWorld.loadedEntityList
-            }
-        }
+    PositionContext getPositionContextByCoordinate(double x, double y, double z) {
+        return new CoordinatePositionContext(x, y, z, this)
     }
 
-    @Override
-    PositionContext getPositionContextByXYZ(double x, double y, double z) {
-        Objects.requireNonNull(x)
-        Objects.requireNonNull(y)
-        Objects.requireNonNull(z)
-
-        return new PositionContext() {
-            @Override
-            double getX() {
-                return x
-            }
-
-            @Override
-            double getY() {
-                return y
-            }
-
-            @Override
-            double getZ() {
-                return z
-            }
-
-            @Override
-            WorldContext getWorldContext() {
-                return self
-            }
-        }
-    }
 }

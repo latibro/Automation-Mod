@@ -7,6 +7,4 @@ import net.minecraft.tileentity.TileEntity
 
 interface TileEntityContext<T extends TileEntity> extends Context, WorldContextProvider, PositionContextProvider {
 
-    T getMinecraftTileEntity()
-
 }

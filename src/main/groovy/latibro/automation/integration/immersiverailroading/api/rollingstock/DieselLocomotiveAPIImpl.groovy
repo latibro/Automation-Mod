@@ -1,11 +1,11 @@
 package latibro.automation.integration.immersiverailroading.api.rollingstock
 
 import cam72cam.immersiverailroading.entity.LocomotiveDiesel
-import latibro.automation.integration.immersiverailroading.context.RollingStockContext
+import latibro.automation.core.context.entity.EntityContext
 
 class DieselLocomotiveAPIImpl extends LocomotiveAPIImpl<LocomotiveDiesel> implements DieselLocomotiveAPI {
 
-    DieselLocomotiveAPIImpl(RollingStockContext<LocomotiveDiesel> context) {
+    DieselLocomotiveAPIImpl(EntityContext context) {
         super(context)
     }
 
