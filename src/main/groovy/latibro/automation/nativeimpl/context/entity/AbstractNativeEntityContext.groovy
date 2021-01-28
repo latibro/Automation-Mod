@@ -1,16 +1,15 @@
 package latibro.automation.nativeimpl.context.entity
 
 import groovy.transform.CompileStatic
-import latibro.automation.core.context.entity.AbstractEntityContext
-import latibro.automation.nativeimpl.context.position.NativeEntityPositionContext
 import latibro.automation.core.context.position.PositionContext
-import latibro.automation.nativeimpl.context.server.NativeEntityServerContext
 import latibro.automation.core.context.server.ServerContext
-import latibro.automation.nativeimpl.context.world.NativeEntityWorldContext
 import latibro.automation.core.context.world.WorldContext
+import latibro.automation.nativeimpl.context.position.NativeEntityPositionContext
+import latibro.automation.nativeimpl.context.server.NativeEntityServerContext
+import latibro.automation.nativeimpl.context.world.NativeEntityWorldContext
 
 @CompileStatic
-abstract class AbstractNativeEntityContext extends AbstractEntityContext implements NativeEntityContext {
+abstract class AbstractNativeEntityContext implements NativeEntityContext {
 
     @Override
     WorldContext getWorldContext() {
@@ -28,12 +27,12 @@ abstract class AbstractNativeEntityContext extends AbstractEntityContext impleme
     }
 
     @Override
-    UUID getEntityUUID() {
+    UUID getUUID() {
         return nativeEntity.uniqueID
     }
 
     @Override
-    boolean isEntityLoaded() {
+    boolean isLoaded() {
         return nativeEntity.isAddedToWorld()
     }
 

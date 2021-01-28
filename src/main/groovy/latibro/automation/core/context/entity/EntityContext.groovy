@@ -8,8 +8,8 @@ import latibro.automation.core.context.world.WorldContextProvider
 
 interface EntityContext extends Context<EntityAPI>, ServerContextProvider, WorldContextProvider, PositionContextProvider {
 
-    UUID getEntityUUID()
+    UUID getUUID()
 
-    boolean isEntityLoaded()
+    boolean isLoaded()
 
 }

@@ -1,11 +1,12 @@
 package latibro.automation.core.api.world
 
+import latibro.automation.core.api.APIRegistry
 import latibro.automation.core.api.entity.EntityCollectionAPI
 import latibro.automation.core.api.position.PositionAPI
 import latibro.automation.core.api.server.ServerAPI
 import latibro.automation.core.context.world.WorldContext
 
-class WorldAPIImpl implements WorldAPI {
+final class WorldAPIImpl implements WorldAPI {
 
     private final WorldContext context
 
@@ -15,17 +16,17 @@ class WorldAPIImpl implements WorldAPI {
 
     @Override
     ServerAPI getServer() {
-        return context.serverContext.getAPI()
+        return (ServerAPI) APIRegistry.getContextAPI(context.serverContext)
     }
 
     @Override
     EntityCollectionAPI getLoadedEntityCollection() {
-        return context.loadedEntityCollectionContext.getAPI()
+        return (EntityCollectionAPI) APIRegistry.getContextAPI(context.loadedEntityCollectionContext)
     }
 
     @Override
     PositionAPI getPositionByCoordinate(double x, double y, double z) {
-        return context.getPositionContextByCoordinate(x, y, z).getAPI()
+        return (PositionAPI) APIRegistry.getContextAPI(context.getPositionContextByCoordinate(x, y, z))
     }
 
 }

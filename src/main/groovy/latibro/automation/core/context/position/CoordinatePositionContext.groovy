@@ -3,7 +3,7 @@ package latibro.automation.core.context.position
 import latibro.automation.core.context.CoreContext
 import latibro.automation.core.context.world.WorldContext
 
-final class CoordinatePositionContext extends AbstractPositionContext implements CoreContext {
+final class CoordinatePositionContext implements CoreContext, PositionContext {
 
     private final double x
     private final double y

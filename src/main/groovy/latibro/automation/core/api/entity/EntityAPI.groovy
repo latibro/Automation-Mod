@@ -1,10 +1,11 @@
 package latibro.automation.core.api.entity
 
 import latibro.automation.api.core.lua.LuaMethod
-import latibro.automation.core.api.API
+import latibro.automation.core.api.ContextAPI
+import latibro.automation.core.api.FeatureAPI
 import latibro.automation.core.api.position.PositionAPI
 
-interface EntityAPI extends API {
+interface EntityAPI extends ContextAPI {
 
     @LuaMethod(
             name = "isLoaded",
@@ -28,6 +29,6 @@ interface EntityAPI extends API {
     EntityAPI asType(String name)
 
     @LuaMethod
-    API getAPI(String name)
+    FeatureAPI getAPI(String name)
 
 }

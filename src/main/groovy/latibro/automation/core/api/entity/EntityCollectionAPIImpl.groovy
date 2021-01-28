@@ -1,9 +1,9 @@
 package latibro.automation.core.api.entity
 
-
+import latibro.automation.core.api.APIRegistry
 import latibro.automation.core.context.entity.collection.EntityCollectionContext
 
-class EntityCollectionAPIImpl implements EntityCollectionAPI {
+final class EntityCollectionAPIImpl implements EntityCollectionAPI {
 
     private final EntityCollectionContext context
 
@@ -13,7 +13,7 @@ class EntityCollectionAPIImpl implements EntityCollectionAPI {
 
     @Override
     Collection<EntityAPI> getAll() {
-        return context.getAll().collect { it.getAPI() }
+        return context.getAll().collect { (EntityAPI) APIRegistry.getContextAPI(it) }
     }
 
     @Override
@@ -23,7 +23,7 @@ class EntityCollectionAPIImpl implements EntityCollectionAPI {
 
     @Override
     EntityAPI getAt(double index) {
-        return context.getAt(index as int).getAPI()
+        return (EntityAPI) APIRegistry.getContextAPI(context.getAt(index as int))
     }
 
     @Override

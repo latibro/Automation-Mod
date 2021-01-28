@@ -1,20 +1,33 @@
 package latibro.automation.interfacebox
 
 import latibro.automation.api.core.lua.LuaMethod
-import latibro.automation.core.api.API
+import latibro.automation.core.api.FeatureAPI
+import latibro.automation.core.api.PeripheralAPI
+import latibro.automation.core.api.position.PositionAPI
+import latibro.automation.core.api.server.ServerAPI
+import latibro.automation.core.api.world.WorldAPI
 
-interface InterfaceBoxAPI extends API {
+interface InterfaceBoxAPI extends PeripheralAPI {
+
+    @LuaMethod
+    PositionAPI getPosition()
+
+    @LuaMethod
+    WorldAPI getWorld()
+
+    @LuaMethod
+    ServerAPI getServer()
 
     @LuaMethod(
             name = "listAPI",
             doc = "function() : array<name : string>"
     )
-    Set<String> getAllAPIAsNameString();
+    String[] getAPINames();
 
     @LuaMethod(
             name = "getAPI",
             doc = "function(name : string) : userdata<API>"
     )
-    API getAPIByName(String name);
+    FeatureAPI getAPI(String name);
 
 }

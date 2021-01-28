@@ -2,7 +2,11 @@ package latibro.automation.proxy
 
 import dan200.computercraft.api.ComputerCraftAPI
 import latibro.automation.ModBlocks
+import latibro.automation.core.api.APIRegistry
+import latibro.automation.core.context.ContextRegistry
 import latibro.automation.integration.computercraft.TileEntityPeripheralProvider
+import latibro.automation.integration.immersiverailroading.ImmersiveRailroadingAPIProvider
+import latibro.automation.integration.immersiverailroading.ImmersiveRailroadingContextProvider
 import latibro.automation.interfacebox.InterfaceBoxBlock
 import latibro.automation.interfacebox.InterfaceBoxTileEntity
 import latibro.devoplment.DebugToolItem
@@ -29,7 +33,11 @@ class CommonProxy {
     void init(FMLInitializationEvent e) {
         if (Loader.isModLoaded("computercraft")) {
             ComputerCraftAPI.registerPeripheralProvider(new TileEntityPeripheralProvider())
-            ComputerCraftAPI.registerAPIFactory()
+        }
+
+        if (Loader.isModLoaded("immersiverailroading")) {
+            ContextRegistry.add(new ImmersiveRailroadingContextProvider())
+            APIRegistry.add(new ImmersiveRailroadingAPIProvider())
         }
     }
 

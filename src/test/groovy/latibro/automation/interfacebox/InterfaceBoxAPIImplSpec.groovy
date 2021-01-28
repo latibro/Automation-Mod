@@ -34,7 +34,7 @@ class InterfaceBoxAPIImplSpec extends Specification {
         when:
         def methodNames = proxy.getMethodNames()
         then:
-        methodNames.sort() == ["getAPI", "listAPI"].sort()
+        methodNames.sort() == ["findContextAPI", "listAPI"].sort()
     }
 
     // ***** constructor
@@ -54,7 +54,7 @@ class InterfaceBoxAPIImplSpec extends Specification {
         interfaceBox instanceof InterfaceBoxAPI
     }
 
-    // ***** getAllAPIAsNameString
+    // ***** getAPINames
 
 
     // ***** initiateAPI
@@ -64,7 +64,7 @@ class InterfaceBoxAPIImplSpec extends Specification {
         given:
         def interfaceBox = new InterfaceBoxAPIImpl(Mock(TileEntityContext))
         when:
-        interfaceBox.getAPIByName("unknown")
+        interfaceBox.getAPI("unknown")
         then:
         thrown(IllegalArgumentException)
     }

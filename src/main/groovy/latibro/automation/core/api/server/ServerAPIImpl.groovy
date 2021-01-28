@@ -1,9 +1,10 @@
 package latibro.automation.core.api.server
 
+import latibro.automation.core.api.APIRegistry
 import latibro.automation.core.api.entity.EntityCollectionAPI
 import latibro.automation.core.context.server.ServerContext
 
-class ServerAPIImpl implements ServerAPI {
+final class ServerAPIImpl implements ServerAPI {
 
     private final ServerContext context
 
@@ -13,7 +14,7 @@ class ServerAPIImpl implements ServerAPI {
 
     @Override
     EntityCollectionAPI getLoadedEntityCollection() {
-        return context.loadedEntityCollectionContext.getAPI()
+        return (EntityCollectionAPI) APIRegistry.getContextAPI(context.loadedEntityCollectionContext)
     }
 
 }

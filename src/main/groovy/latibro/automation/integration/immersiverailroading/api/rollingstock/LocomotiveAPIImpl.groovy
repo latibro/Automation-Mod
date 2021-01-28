@@ -1,12 +1,17 @@
 package latibro.automation.integration.immersiverailroading.api.rollingstock
 
+
 import cam72cam.immersiverailroading.entity.Locomotive
-import latibro.automation.core.context.entity.EntityContext
+import latibro.automation.integration.immersiverailroading.context.RollingStockContext
 
-class LocomotiveAPIImpl<E extends Locomotive> extends RollingStockAPIImpl<E> implements LocomotiveAPI {
+class LocomotiveAPIImpl extends RollingStockAPIImpl implements LocomotiveAPI {
 
-    LocomotiveAPIImpl(EntityContext context) {
+    LocomotiveAPIImpl(RollingStockContext context) {
         super(context)
+    }
+
+    protected RollingStockContext<Locomotive> getContext() {
+        return super.context as RollingStockContext<Locomotive>
     }
 
     @Override

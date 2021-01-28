@@ -1,7 +1,7 @@
 package latibro.automation.integration.immersiverailroading.api.rollingstock
 
-import latibro.automation.core.api.entity.EntityAPI
+import latibro.automation.core.api.ContextAPI
 
-interface RollingStockAPI extends EntityAPI {
+interface RollingStockAPI extends ContextAPI {
 
 }

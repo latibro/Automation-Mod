@@ -1,10 +1,9 @@
 package latibro.automation.nativeimpl.context.position
 
 import groovy.transform.CompileStatic
-import latibro.automation.core.context.position.AbstractPositionContext
 
 @CompileStatic
-abstract class AbstractNativePositionContext extends AbstractPositionContext implements NativePositionContext {
+abstract class AbstractNativePositionContext implements NativePositionContext {
 
     @Override
     double getX() {

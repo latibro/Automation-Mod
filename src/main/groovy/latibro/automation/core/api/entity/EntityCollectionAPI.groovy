@@ -1,9 +1,9 @@
 package latibro.automation.core.api.entity
 
 import latibro.automation.api.core.lua.LuaMethod
-import latibro.automation.core.api.API
+import latibro.automation.core.api.ContextAPI
 
-interface EntityCollectionAPI extends API {
+interface EntityCollectionAPI extends ContextAPI {
 
     @LuaMethod(
             name = "getByUUID"

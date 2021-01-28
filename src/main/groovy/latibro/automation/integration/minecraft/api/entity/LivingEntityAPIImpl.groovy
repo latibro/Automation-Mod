@@ -1,32 +1,29 @@
 package latibro.automation.integration.minecraft.api.entity
 
-import latibro.automation.core.api.entity.EntityAPIImpl
-import latibro.automation.core.context.entity.EntityContext
 import latibro.automation.integration.minecraft.context.entity.LivingEntityContext
-import latibro.automation.integration.minecraft.context.entity.LivingEntityContextTrait
 
 class LivingEntityAPIImpl extends EntityAPIImpl implements LivingEntityAPI {
 
-    LivingEntityAPIImpl(EntityContext context) {
+    LivingEntityAPIImpl(LivingEntityContext context) {
         super(context)
     }
 
-    protected LivingEntityContext getContext() {
-        return Object.context as LivingEntityContextTrait
+    LivingEntityContext getContext() {
+        return super.context as LivingEntityContext
     }
 
     boolean navigateTo(double x, double y, double z) {
-        return context.navigateTo(x, y, z)
+        return getContext().navigateTo(x, y, z)
     }
 
     @Override
     boolean isAIEnabled() {
-        return context.isAIEnabled()
+        return getContext().isAIEnabled()
     }
 
     @Override
     void setAIEnabled(boolean enabled) {
-        context.setAIEnabled(enabled)
+        getContext().setAIEnabled(enabled)
     }
 
     @Override

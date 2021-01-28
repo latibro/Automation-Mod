@@ -1,9 +1,10 @@
 package latibro.automation.core.api.position
 
+import latibro.automation.core.api.APIRegistry
 import latibro.automation.core.api.world.WorldAPI
 import latibro.automation.core.context.position.PositionContext
 
-class PositionAPIImpl implements PositionAPI {
+final class PositionAPIImpl implements PositionAPI {
 
     private final PositionContext context
 
@@ -28,7 +29,7 @@ class PositionAPIImpl implements PositionAPI {
 
     @Override
     WorldAPI getWorld() {
-        return context.worldContext.getAPI()
+        return (WorldAPI) APIRegistry.getContextAPI(context.worldContext)
     }
 
 }
