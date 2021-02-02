@@ -4,7 +4,7 @@ import latibro.automation.core.context.CoreContext
 import net.minecraft.server.MinecraftServer
 import net.minecraftforge.fml.common.FMLCommonHandler
 
-class DefaultNativeServerContext extends AbstractNativeServerContext implements CoreContext {
+final class DefaultNativeServerContext extends AbstractNativeServerContext implements CoreContext {
 
     @Override
     MinecraftServer getNativeServer() {

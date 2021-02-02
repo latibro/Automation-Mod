@@ -3,13 +3,14 @@ package latibro.automation.nativeimpl.context.position
 import groovy.transform.CompileStatic
 import latibro.automation.core.context.CoreContext
 import latibro.automation.nativeimpl.context.tileentity.AbstractNativeTileEntityContext
-import latibro.automation.core.context.world.WorldContext
+import latibro.automation.nativeimpl.context.tileentity.NativeTileEntityContext
+import latibro.automation.nativeimpl.context.world.NativeWorldContext
 import net.minecraft.util.math.BlockPos
 
 @CompileStatic
 final class NativeTileEntityPositionContext extends AbstractNativePositionContext implements CoreContext {
 
-    private final AbstractNativeTileEntityContext tileEntityContext
+    private final NativeTileEntityContext tileEntityContext
 
     NativeTileEntityPositionContext(AbstractNativeTileEntityContext tileEntityContext) {
         this.tileEntityContext = Objects.requireNonNull(tileEntityContext)
@@ -21,7 +22,7 @@ final class NativeTileEntityPositionContext extends AbstractNativePositionContex
     }
 
     @Override
-    WorldContext getWorldContext() {
+    NativeWorldContext getWorldContext() {
         return tileEntityContext.worldContext
     }
 

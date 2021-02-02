@@ -1,17 +1,24 @@
 package latibro.automation.nativeimpl.context.world
 
-import latibro.automation.core.context.entity.collection.EntityCollectionContext
+
+import latibro.automation.nativeimpl.context.entity.collection.NativeEntityCollectionContext
 import latibro.automation.nativeimpl.context.entity.collection.NativeWorldLoadedEntityCollectionContext
-import latibro.automation.core.context.world.AbstractWorldContext
+import latibro.automation.nativeimpl.context.position.NativePositionContext
+import latibro.automation.nativeimpl.context.position.NativeStaticPositionContext
 import net.minecraft.world.World
 
-abstract class AbstractNativeWorldContext extends AbstractWorldContext implements NativeWorldContext {
+abstract class AbstractNativeWorldContext implements NativeWorldContext {
 
     abstract World getNativeWorld()
 
     @Override
-    EntityCollectionContext getLoadedEntityCollectionContext() {
+    NativeEntityCollectionContext getLoadedEntityCollectionContext() {
         return new NativeWorldLoadedEntityCollectionContext(this)
+    }
+
+    @Override
+    NativePositionContext getPositionContextByCoordinate(int x, int y, int z) {
+        return new NativeStaticPositionContext(x, y, z, this)
     }
 
 }

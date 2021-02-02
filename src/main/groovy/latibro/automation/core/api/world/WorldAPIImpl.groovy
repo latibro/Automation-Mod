@@ -20,13 +20,13 @@ final class WorldAPIImpl implements WorldAPI {
     }
 
     @Override
-    EntityCollectionAPI getLoadedEntityCollection() {
+    EntityCollectionAPI getLoadedEntities() {
         return (EntityCollectionAPI) APIRegistry.getContextAPI(context.loadedEntityCollectionContext)
     }
 
     @Override
     PositionAPI getPositionByCoordinate(double x, double y, double z) {
-        return (PositionAPI) APIRegistry.getContextAPI(context.getPositionContextByCoordinate(x, y, z))
+        return (PositionAPI) APIRegistry.getContextAPI(context.getPositionContextByCoordinate((int) x, (int) y, (int) z))
     }
 
 }

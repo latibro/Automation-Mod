@@ -2,8 +2,8 @@ package latibro.automation.nativeimpl.context.world
 
 import groovy.transform.CompileStatic
 import latibro.automation.core.context.CoreContext
+import latibro.automation.nativeimpl.context.server.NativeServerContext
 import latibro.automation.nativeimpl.context.server.NativeTileEntityServerContext
-import latibro.automation.core.context.server.ServerContext
 import latibro.automation.nativeimpl.context.tileentity.NativeTileEntityContext
 import net.minecraft.world.World
 
@@ -21,7 +21,7 @@ final class NativeTileEntityWorldContext extends AbstractNativeWorldContext impl
     }
 
     @Override
-    ServerContext getServerContext() {
+    NativeServerContext getServerContext() {
         return new NativeTileEntityServerContext(tileEntityContext)
     }
 

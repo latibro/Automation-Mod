@@ -3,7 +3,7 @@ package latibro.automation.nativeimpl.context.position
 import groovy.transform.CompileStatic
 import latibro.automation.core.context.CoreContext
 import latibro.automation.nativeimpl.context.entity.NativeEntityContext
-import latibro.automation.core.context.world.WorldContext
+import latibro.automation.nativeimpl.context.world.NativeWorldContext
 import net.minecraft.util.math.BlockPos
 
 @CompileStatic
@@ -21,7 +21,7 @@ final class NativeEntityPositionContext extends AbstractNativePositionContext im
     }
 
     @Override
-    WorldContext getWorldContext() {
+    NativeWorldContext getWorldContext() {
         return entityContext.worldContext
     }
 

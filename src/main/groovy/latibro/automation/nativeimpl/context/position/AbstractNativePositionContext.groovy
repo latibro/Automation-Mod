@@ -1,23 +1,35 @@
 package latibro.automation.nativeimpl.context.position
 
 import groovy.transform.CompileStatic
+import latibro.automation.nativeimpl.context.entity.collection.NativeEntityCollectionContext
+import latibro.automation.nativeimpl.context.entity.collection.NativePositionEntityCollection
 
 @CompileStatic
 abstract class AbstractNativePositionContext implements NativePositionContext {
 
     @Override
-    double getX() {
+    boolean isLoaded() {
+        return worldContext.nativeWorld.isBlockLoaded(nativePosition)
+    }
+
+    @Override
+    int getX() {
         return nativePosition.x
     }
 
     @Override
-    double getY() {
+    int getY() {
         return nativePosition.x
     }
 
     @Override
-    double getZ() {
+    int getZ() {
         return nativePosition.x
+    }
+
+    @Override
+    NativeEntityCollectionContext getEntityCollectionContext() {
+        return new NativePositionEntityCollection(this)
     }
 
 }

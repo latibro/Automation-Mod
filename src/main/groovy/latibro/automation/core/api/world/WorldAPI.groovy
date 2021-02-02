@@ -11,8 +11,10 @@ interface WorldAPI extends ContextAPI {
     @LuaMethod
     ServerAPI getServer()
 
-    @LuaMethod
-    EntityCollectionAPI getLoadedEntityCollection()
+    @LuaMethod(
+            name = "getLoadedEntities"
+    )
+    EntityCollectionAPI getLoadedEntities()
 
     @LuaMethod
     PositionAPI getPositionByCoordinate(double x, double y, double z)

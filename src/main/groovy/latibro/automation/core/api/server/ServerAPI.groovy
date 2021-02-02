@@ -6,7 +6,9 @@ import latibro.automation.core.api.entity.EntityCollectionAPI
 
 interface ServerAPI extends ContextAPI {
 
-    @LuaMethod
-    EntityCollectionAPI getLoadedEntityCollection()
+    @LuaMethod(
+            name = "getLoadedEntities"
+    )
+    EntityCollectionAPI getLoadedEntities()
 
 }

@@ -1,19 +1,20 @@
 package latibro.automation.nativeimpl.context.tileentity
 
-import latibro.automation.core.context.position.PositionContext
-import latibro.automation.core.context.world.WorldContext
+
+import latibro.automation.nativeimpl.context.position.NativePositionContext
 import latibro.automation.nativeimpl.context.position.NativeTileEntityPositionContext
 import latibro.automation.nativeimpl.context.world.NativeTileEntityWorldContext
+import latibro.automation.nativeimpl.context.world.NativeWorldContext
 
 abstract class AbstractNativeTileEntityContext implements NativeTileEntityContext {
 
     @Override
-    WorldContext getWorldContext() {
+    NativeWorldContext getWorldContext() {
         return new NativeTileEntityWorldContext(this)
     }
 
     @Override
-    PositionContext getPositionContext() {
+    NativePositionContext getPositionContext() {
         return new NativeTileEntityPositionContext(this)
     }
 

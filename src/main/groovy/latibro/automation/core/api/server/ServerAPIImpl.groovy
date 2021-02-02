@@ -13,7 +13,7 @@ final class ServerAPIImpl implements ServerAPI {
     }
 
     @Override
-    EntityCollectionAPI getLoadedEntityCollection() {
+    EntityCollectionAPI getLoadedEntities() {
         return (EntityCollectionAPI) APIRegistry.getContextAPI(context.loadedEntityCollectionContext)
     }
 

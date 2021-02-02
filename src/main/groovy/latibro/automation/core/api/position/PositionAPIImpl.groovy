@@ -1,6 +1,7 @@
 package latibro.automation.core.api.position
 
 import latibro.automation.core.api.APIRegistry
+import latibro.automation.core.api.entity.EntityCollectionAPI
 import latibro.automation.core.api.world.WorldAPI
 import latibro.automation.core.context.position.PositionContext
 
@@ -10,6 +11,11 @@ final class PositionAPIImpl implements PositionAPI {
 
     PositionAPIImpl(PositionContext context) {
         this.context = Objects.requireNonNull(context)
+    }
+
+    @Override
+    boolean isLoaded() {
+        return context.isLoaded()
     }
 
     @Override
@@ -30,6 +36,11 @@ final class PositionAPIImpl implements PositionAPI {
     @Override
     WorldAPI getWorld() {
         return (WorldAPI) APIRegistry.getContextAPI(context.worldContext)
+    }
+
+    @Override
+    EntityCollectionAPI getEntities() {
+        return (EntityCollectionAPI) APIRegistry.getContextAPI(context.entityCollectionContext)
     }
 
 }
