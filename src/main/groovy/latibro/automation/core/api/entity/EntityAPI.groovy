@@ -3,7 +3,7 @@ package latibro.automation.core.api.entity
 import latibro.automation.api.core.lua.LuaMethod
 import latibro.automation.core.api.ContextAPI
 import latibro.automation.core.api.FeatureAPI
-import latibro.automation.core.api.position.PositionAPI
+import latibro.automation.core.api.location.LocationAPI
 
 interface EntityAPI extends ContextAPI {
 
@@ -20,10 +20,10 @@ interface EntityAPI extends ContextAPI {
     String getUUID()
 
     @LuaMethod(
-            name = "getPosition",
-            usage = "function() : PositionAPI"
+            name = "getLocation",
+            usage = "function() : LocationAPI"
     )
-    PositionAPI getPosition()
+    LocationAPI getLocation()
 
     @LuaMethod
     EntityAPI asType(String name)

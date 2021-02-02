@@ -3,7 +3,7 @@ package latibro.automation.interfacebox
 import groovy.transform.CompileStatic
 import latibro.automation.core.api.APIRegistry
 import latibro.automation.core.api.FeatureAPI
-import latibro.automation.core.api.position.PositionAPI
+import latibro.automation.core.api.location.LocationAPI
 import latibro.automation.core.api.server.ServerAPI
 import latibro.automation.core.api.world.WorldAPI
 import latibro.automation.core.context.tileentity.TileEntityContext
@@ -28,8 +28,8 @@ class InterfaceBoxAPIImpl implements InterfaceBoxAPI {
     }
 
     @Override
-    PositionAPI getPosition() {
-        return (PositionAPI) APIRegistry.getContextAPI(context.positionContext)
+    LocationAPI getLocation() {
+        return (LocationAPI) APIRegistry.getContextAPI(context.locationContext)
     }
 
     @Override

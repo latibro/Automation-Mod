@@ -1,8 +1,8 @@
 package latibro.automation.nativeimpl.context.entity
 
 import groovy.transform.CompileStatic
-import latibro.automation.nativeimpl.context.position.NativeEntityPositionContext
-import latibro.automation.nativeimpl.context.position.NativePositionContext
+import latibro.automation.nativeimpl.context.location.NativeEntityLocationContext
+import latibro.automation.nativeimpl.context.location.NativeLocationContext
 import latibro.automation.nativeimpl.context.server.NativeEntityServerContext
 import latibro.automation.nativeimpl.context.server.NativeServerContext
 import latibro.automation.nativeimpl.context.world.NativeEntityWorldContext
@@ -22,8 +22,8 @@ abstract class AbstractNativeEntityContext implements NativeEntityContext {
     }
 
     @Override
-    NativePositionContext getPositionContext() {
-        return new NativeEntityPositionContext(this)
+    NativeLocationContext getLocationContext() {
+        return new NativeEntityLocationContext(this)
     }
 
     @Override

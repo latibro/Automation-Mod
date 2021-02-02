@@ -3,8 +3,8 @@ package latibro.automation.nativeimpl.context.world
 
 import latibro.automation.nativeimpl.context.entity.collection.NativeEntityCollectionContext
 import latibro.automation.nativeimpl.context.entity.collection.NativeWorldLoadedEntityCollectionContext
-import latibro.automation.nativeimpl.context.position.NativePositionContext
-import latibro.automation.nativeimpl.context.position.NativeStaticPositionContext
+import latibro.automation.nativeimpl.context.location.NativeLocationContext
+import latibro.automation.nativeimpl.context.location.NativeStaticLocationContext
 import net.minecraft.world.World
 
 abstract class AbstractNativeWorldContext implements NativeWorldContext {
@@ -17,8 +17,8 @@ abstract class AbstractNativeWorldContext implements NativeWorldContext {
     }
 
     @Override
-    NativePositionContext getPositionContextByCoordinate(int x, int y, int z) {
-        return new NativeStaticPositionContext(x, y, z, this)
+    NativeLocationContext getLocationContextByCoordinate(int x, int y, int z) {
+        return new NativeStaticLocationContext(x, y, z, this)
     }
 
 }

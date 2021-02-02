@@ -1,4 +1,4 @@
-package latibro.automation.nativeimpl.context.position
+package latibro.automation.nativeimpl.context.location
 
 import groovy.transform.CompileStatic
 import latibro.automation.core.context.CoreContext
@@ -8,16 +8,16 @@ import latibro.automation.nativeimpl.context.world.NativeWorldContext
 import net.minecraft.util.math.BlockPos
 
 @CompileStatic
-final class NativeTileEntityPositionContext extends AbstractNativePositionContext implements CoreContext {
+final class NativeTileEntityLocationContext extends AbstractNativeLocationContext implements CoreContext {
 
     private final NativeTileEntityContext tileEntityContext
 
-    NativeTileEntityPositionContext(AbstractNativeTileEntityContext tileEntityContext) {
+    NativeTileEntityLocationContext(AbstractNativeTileEntityContext tileEntityContext) {
         this.tileEntityContext = Objects.requireNonNull(tileEntityContext)
     }
 
     @Override
-    BlockPos getNativePosition() {
+    BlockPos getNativeLocation() {
         return tileEntityContext.nativeTileEntity.pos
     }
 

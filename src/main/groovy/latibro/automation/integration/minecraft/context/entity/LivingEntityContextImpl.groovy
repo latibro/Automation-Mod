@@ -1,7 +1,6 @@
 package latibro.automation.integration.minecraft.context.entity
 
 import groovy.transform.CompileStatic
-import latibro.automation.AutomationMod
 import net.minecraft.entity.EntityLiving
 
 @CompileStatic
@@ -15,7 +14,6 @@ class LivingEntityContextImpl extends EntityContextImpl<EntityLiving> implements
     boolean navigateTo(double x, double y, double z) {
         def navigator = minecraftEntity.getNavigator()
         def path = navigator.getPathToXYZ(x, y, z)
-        AutomationMod.logger.info("found path: " + path?.getFinalPathPoint()?.toString())
         return navigator.setPath(path, 1)
     }
 

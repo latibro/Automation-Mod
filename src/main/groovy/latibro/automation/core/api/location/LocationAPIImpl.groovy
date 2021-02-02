@@ -1,15 +1,15 @@
-package latibro.automation.core.api.position
+package latibro.automation.core.api.location
 
 import latibro.automation.core.api.APIRegistry
 import latibro.automation.core.api.entity.EntityCollectionAPI
 import latibro.automation.core.api.world.WorldAPI
-import latibro.automation.core.context.position.PositionContext
+import latibro.automation.core.context.location.LocationContext
 
-final class PositionAPIImpl implements PositionAPI {
+final class LocationAPIImpl implements LocationAPI {
 
-    private final PositionContext context
+    private final LocationContext context
 
-    PositionAPIImpl(PositionContext context) {
+    LocationAPIImpl(LocationContext context) {
         this.context = Objects.requireNonNull(context)
     }
 

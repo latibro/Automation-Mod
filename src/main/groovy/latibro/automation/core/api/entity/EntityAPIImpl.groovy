@@ -3,8 +3,8 @@ package latibro.automation.core.api.entity
 
 import latibro.automation.core.api.APIRegistry
 import latibro.automation.core.api.FeatureAPI
-import latibro.automation.core.api.position.PositionAPI
-import latibro.automation.core.api.position.PositionAPIImpl
+import latibro.automation.core.api.location.LocationAPI
+import latibro.automation.core.api.location.LocationAPIImpl
 import latibro.automation.core.context.ContextRegistry
 import latibro.automation.core.context.entity.EntityContext
 
@@ -31,8 +31,8 @@ class EntityAPIImpl implements EntityAPI {
     }
 
     @Override
-    PositionAPI getPosition() {
-        return new PositionAPIImpl(context.positionContext)
+    LocationAPI getLocation() {
+        return new LocationAPIImpl(context.locationContext)
     }
 
     @Override

@@ -2,7 +2,7 @@ package latibro.automation.core.api.world
 
 import latibro.automation.core.api.APIRegistry
 import latibro.automation.core.api.entity.EntityCollectionAPI
-import latibro.automation.core.api.position.PositionAPI
+import latibro.automation.core.api.location.LocationAPI
 import latibro.automation.core.api.server.ServerAPI
 import latibro.automation.core.context.world.WorldContext
 
@@ -25,8 +25,8 @@ final class WorldAPIImpl implements WorldAPI {
     }
 
     @Override
-    PositionAPI getPositionByCoordinate(double x, double y, double z) {
-        return (PositionAPI) APIRegistry.getContextAPI(context.getPositionContextByCoordinate((int) x, (int) y, (int) z))
+    LocationAPI getLocationByCoordinate(double x, double y, double z) {
+        return (LocationAPI) APIRegistry.getContextAPI(context.getLocationContextByCoordinate((int) x, (int) y, (int) z))
     }
 
 }

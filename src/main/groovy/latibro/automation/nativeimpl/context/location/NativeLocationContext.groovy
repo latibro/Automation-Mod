@@ -1,14 +1,14 @@
-package latibro.automation.nativeimpl.context.position
+package latibro.automation.nativeimpl.context.location
 
-import latibro.automation.core.context.position.PositionContext
+import latibro.automation.core.context.location.LocationContext
 import latibro.automation.nativeimpl.context.NativeContext
 import latibro.automation.nativeimpl.context.entity.collection.NativeEntityCollectionContext
 import latibro.automation.nativeimpl.context.world.NativeWorldContext
 import net.minecraft.util.math.BlockPos
 
-interface NativePositionContext extends PositionContext, NativeContext {
+interface NativeLocationContext extends LocationContext, NativeContext {
 
-    BlockPos getNativePosition()
+    BlockPos getNativeLocation()
 
     @Override
     NativeEntityCollectionContext getEntityCollectionContext()

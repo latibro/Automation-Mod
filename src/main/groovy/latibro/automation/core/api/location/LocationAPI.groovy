@@ -1,11 +1,11 @@
-package latibro.automation.core.api.position
+package latibro.automation.core.api.location
 
 import latibro.automation.api.core.lua.LuaMethod
 import latibro.automation.core.api.ContextAPI
 import latibro.automation.core.api.entity.EntityCollectionAPI
 import latibro.automation.core.api.world.WorldAPI
 
-interface PositionAPI extends ContextAPI {
+interface LocationAPI extends ContextAPI {
 
     @LuaMethod
     boolean isLoaded()
