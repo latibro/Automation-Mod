@@ -21,4 +21,13 @@ interface LocomotiveAPI extends RollingStockAPI {
     )
     double getCurrentSpeedInKMH()
 
+    @LuaMethod
+    void soundHorn()
+
+    @LuaMethod
+    void startBell()
+
+    @LuaMethod
+    void stopBell()
+
 }

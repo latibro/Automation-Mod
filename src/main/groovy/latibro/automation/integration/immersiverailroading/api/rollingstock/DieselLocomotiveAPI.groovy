@@ -5,15 +5,12 @@ import latibro.automation.api.core.lua.LuaMethod
 interface DieselLocomotiveAPI extends LocomotiveAPI {
 
     @LuaMethod
-    void turnOn()
+    void startEngine()
 
     @LuaMethod
-    void turnOff()
+    void stopEngine()
 
     @LuaMethod
-    void setTurnedOn(boolean state)
-
-    @LuaMethod
-    boolean isTurnedOn()
+    boolean isEngineRunning()
 
 }

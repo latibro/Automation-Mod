@@ -14,4 +14,14 @@ class RollingStockAPIImpl extends EntityAPIImpl implements RollingStockAPI {
         return super.context as RollingStockContext<EntityRollingStock>
     }
 
+    @Override
+    void setTag(String tag) {
+        context.immersiveRailroadingRollingStock.tag = tag
+    }
+
+    @Override
+    String getTag() {
+        return context.immersiveRailroadingRollingStock.tag
+    }
+
 }

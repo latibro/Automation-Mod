@@ -2,6 +2,7 @@ package latibro.automation.integration.immersiverailroading.api.rollingstock
 
 
 import cam72cam.immersiverailroading.entity.Locomotive
+import cam72cam.immersiverailroading.library.KeyTypes
 import latibro.automation.integration.immersiverailroading.context.RollingStockContext
 
 class LocomotiveAPIImpl extends RollingStockAPIImpl implements LocomotiveAPI {
@@ -40,6 +41,21 @@ class LocomotiveAPIImpl extends RollingStockAPIImpl implements LocomotiveAPI {
 
     double getCurrentSpeedInKMH() {
         return context.immersiveRailroadingRollingStock.getCurrentSpeed().metric()
+    }
+
+    @Override
+    void soundHorn() {
+        context.immersiveRailroadingRollingStock.setHorn(10, null)
+    }
+
+    @Override
+    void startBell() {
+        context.immersiveRailroadingRollingStock.handleKeyPress(null, KeyTypes.BELL)
+    }
+
+    @Override
+    void stopBell() {
+        context.immersiveRailroadingRollingStock.setBell(0)
     }
 
 }

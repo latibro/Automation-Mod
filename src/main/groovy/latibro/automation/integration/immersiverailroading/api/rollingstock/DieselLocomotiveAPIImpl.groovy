@@ -15,22 +15,21 @@ class DieselLocomotiveAPIImpl extends LocomotiveAPIImpl implements DieselLocomot
     }
 
     @Override
-    void turnOn() {
-        setTurnedOn(true)
+    void startEngine() {
+        setEngineRunning(true)
     }
 
     @Override
-    void turnOff() {
-        setTurnedOn(false)
+    void stopEngine() {
+        setEngineRunning(false)
+    }
+
+    void setEngineRunning(boolean running) {
+        context.immersiveRailroadingRollingStock.setTurnedOn(running)
     }
 
     @Override
-    void setTurnedOn(boolean state) {
-        context.immersiveRailroadingRollingStock.setTurnedOn(state)
-    }
-
-    @Override
-    boolean isTurnedOn() {
+    boolean isEngineRunning() {
         context.immersiveRailroadingRollingStock.isTurnedOn()
     }
 
