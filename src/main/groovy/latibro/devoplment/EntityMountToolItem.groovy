@@ -28,11 +28,15 @@ class EntityMountToolItem extends Item {
 
     @Override
     boolean onLeftClickEntity(ItemStack itemStack, EntityPlayer player, Entity target) {
-        return itemInteractionForEntity(itemStack, player, (EntityLivingBase) target, EnumHand.MAIN_HAND);
+        return useTool(itemStack, player, target, EnumHand.MAIN_HAND);
     }
 
     @Override
     boolean itemInteractionForEntity(ItemStack itemStack, EntityPlayer player, EntityLivingBase target, EnumHand hand) {
+        return useTool(itemStack, player, target, hand)
+    }
+
+    boolean useTool(ItemStack itemStack, EntityPlayer player, Entity target, EnumHand hand) {
         ItemStack tool = player.getHeldItem(hand)
 
         if (tool.getItem() != this) {
