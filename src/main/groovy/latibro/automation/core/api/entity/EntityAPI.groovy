@@ -26,6 +26,9 @@ interface EntityAPI extends ContextAPI {
     LocationAPI getLocation()
 
     @LuaMethod
+    String getName()
+
+    @LuaMethod
     EntityAPI asType(String name)
 
     @LuaMethod

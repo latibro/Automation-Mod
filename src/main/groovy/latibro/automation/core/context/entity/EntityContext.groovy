@@ -12,4 +12,6 @@ interface EntityContext extends Context<EntityAPI>, ServerContextProvider, World
 
     boolean isLoaded()
 
+    String getName()
+
 }

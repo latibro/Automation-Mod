@@ -36,6 +36,11 @@ class EntityAPIImpl implements EntityAPI {
     }
 
     @Override
+    String getName() {
+        return context.getName()
+    }
+
+    @Override
     EntityAPI asType(String name) {
         def subContext = ContextRegistry.getSubContext(name, context)
         return (EntityAPI) APIRegistry.getContextAPI(subContext)

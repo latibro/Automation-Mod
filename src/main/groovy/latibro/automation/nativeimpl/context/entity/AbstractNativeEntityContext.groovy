@@ -36,4 +36,9 @@ abstract class AbstractNativeEntityContext implements NativeEntityContext {
         return nativeEntity.isAddedToWorld()
     }
 
+    @Override
+    String getName() {
+        return nativeEntity.getName()
+    }
+
 }

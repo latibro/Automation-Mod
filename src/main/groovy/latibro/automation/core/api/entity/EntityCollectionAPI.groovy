@@ -30,4 +30,7 @@ interface EntityCollectionAPI extends ContextAPI {
     )
     EntityAPI getAt(double index)
 
+    @LuaMethod
+    EntityCollectionAPI filterByName(String name)
+
 }

@@ -1,12 +1,13 @@
 package latibro.automation.nativeimpl.context.entity.collection
 
 import latibro.automation.core.context.entity.EntityContext
+import latibro.automation.core.context.entity.collection.AbstractEntityCollectionContext
 import latibro.automation.nativeimpl.context.entity.NativeEntityContext
 import latibro.automation.nativeimpl.context.entity.NativeStaticEntityContext
 import latibro.automation.nativeimpl.context.server.DefaultNativeServerContext
 import latibro.automation.nativeimpl.context.server.NativeServerContext
 
-abstract class AbstractNativeEntityCollectionContext implements NativeEntityCollectionContext {
+abstract class AbstractNativeEntityCollectionContext extends AbstractEntityCollectionContext implements NativeEntityCollectionContext {
 
     @Override
     int size() {

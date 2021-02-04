@@ -42,4 +42,9 @@ final class EntityCollectionAPIImpl implements EntityCollectionAPI {
         return matches.first()
     }
 
+    @Override
+    EntityCollectionAPI filterByName(String name) {
+        return (EntityCollectionAPI) APIRegistry.getContextAPI(context.filterByName(name))
+    }
+
 }

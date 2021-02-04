@@ -13,4 +13,6 @@ interface EntityCollectionContext extends Context<EntityCollectionAPI>, ServerCo
 
     EntityContext getAt(int index)
 
+    EntityCollectionContext filterByName(String name)
+
 }
