@@ -25,4 +25,7 @@ interface LocationAPI extends ContextAPI {
     @LuaMethod
     EntityCollectionAPI getEntities()
 
+    @LuaMethod
+    double getDistanceToCoordinate(double x, double y, double z)
+
 }

@@ -43,4 +43,9 @@ final class LocationAPIImpl implements LocationAPI {
         return (EntityCollectionAPI) APIRegistry.getContextAPI(context.entityCollectionContext)
     }
 
+    @Override
+    double getDistanceToCoordinate(double x, double y, double z) {
+        return context.getDistanceToCoordinate((int) x, (int) y, (int) z)
+    }
+
 }

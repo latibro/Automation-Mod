@@ -32,4 +32,9 @@ abstract class AbstractNativeLocationContext implements NativeLocationContext {
         return new NativeLocationEntityCollection(this)
     }
 
+    @Override
+    double getDistanceToCoordinate(int x, int y, int z) {
+        return nativeLocation.getDistance(x, y, z)
+    }
+
 }
