@@ -14,7 +14,8 @@ final class NativeServerLoadedEntityCollectionContext extends AbstractNativeEnti
     }
 
     Collection<Entity> getNativeEntityCollection() {
-        return (Collection<Entity>) serverContext.nativeServer.worlds.findResults { it }.collect { it.@loadedEntityList }.flatten()
+        //return (Collection<Entity>) serverContext.nativeServer.worlds.findResults { it }.collect { it.@loadedEntityList }.flatten()
+        return (Collection<Entity>) serverContext.nativeServer.worlds.findResults { it }.collect { it.getEntities(Entity, {true}) }.flatten()
     }
 
 }
