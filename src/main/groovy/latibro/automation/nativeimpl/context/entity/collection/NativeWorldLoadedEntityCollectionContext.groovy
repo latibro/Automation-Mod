@@ -13,7 +13,7 @@ final class NativeWorldLoadedEntityCollectionContext extends AbstractNativeEntit
     }
 
     Collection<Entity> getNativeEntityCollection() {
-        return worldContext.nativeWorld.loadedEntityList
+        return worldContext.nativeWorld.@loadedEntityList
     }
 
 }
