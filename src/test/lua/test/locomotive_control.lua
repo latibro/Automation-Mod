@@ -1,14 +1,17 @@
-local interfaceBox
-if peripheral then
-    -- ComputerCraft
-    interfaceBox = peripheral.find("interface_box")
-else
-    -- OpenComputers
-    local component = require("component")
-    interfaceBox = component.interface_box
+function getAutomationLink(name)
+    if peripheral then
+        -- ComputerCraft
+        return peripheral.find(name)
+    else
+        -- OpenComputers
+        local component = require("component")
+        return component.getPrimary(name)
+    end
 end
 
-local world = interfaceBox.getWorld()
+----------
+
+local world = getAutomationLink("world_link")
 
 local loadedEntities = world.getLoadedEntities()
 

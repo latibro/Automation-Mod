@@ -4,6 +4,9 @@ import groovy.transform.CompileStatic
 import latibro.automation.linkbox.entity.EntityLinkBoxContainer
 import latibro.automation.linkbox.entity.EntityLinkBoxScreen
 import latibro.automation.linkbox.entity.EntityLinkBoxTileEntity
+import latibro.automation.linkbox.location.LocationLinkBoxContainer
+import latibro.automation.linkbox.location.LocationLinkBoxScreen
+import latibro.automation.linkbox.location.LocationLinkBoxTileEntity
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.math.BlockPos
@@ -20,6 +23,9 @@ class ScreenProxy implements IGuiHandler {
         if (te instanceof EntityLinkBoxTileEntity) {
             return new EntityLinkBoxContainer(player.inventory, te)
         }
+        if (te instanceof LocationLinkBoxTileEntity) {
+            return new LocationLinkBoxContainer(player.inventory, te)
+        }
         return null
     }
 
@@ -29,6 +35,9 @@ class ScreenProxy implements IGuiHandler {
         TileEntity te = world.getTileEntity(pos)
         if (te instanceof EntityLinkBoxTileEntity) {
             return new EntityLinkBoxScreen((EntityLinkBoxContainer) getServerGuiElement(screenId, player, world, x, y, z), player.inventory)
+        }
+        if (te instanceof LocationLinkBoxTileEntity) {
+            return new LocationLinkBoxScreen((LocationLinkBoxContainer) getServerGuiElement(screenId, player, world, x, y, z), player.inventory)
         }
         return null
     }

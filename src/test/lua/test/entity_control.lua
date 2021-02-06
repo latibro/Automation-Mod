@@ -1,12 +1,15 @@
-local interfaceBox
-if peripheral then
-    -- ComputerCraft
-    interfaceBox = peripheral.find("interface_box")
-else
-    -- OpenComputers
-    local component = require("component")
-    interfaceBox = component.interface_box
+function getAutomationLink(name)
+    if peripheral then
+        -- ComputerCraft
+        return peripheral.find(name)
+    else
+        -- OpenComputers
+        local component = require("component")
+        return component.getPrimary(name)
+    end
 end
+
+----------
 
 --local uuid = "29071f68-1c73-45e8-bf42-144fa0336e3f" -- cow
 --local uuid = "a0842826-17d8-47bb-b6df-2bbf7b1eca9d" -- vilager
@@ -23,7 +26,7 @@ local locations = { red, yellow, green, blue, orange }
 
 ----------
 
-local world = interfaceBox.getWorld()
+local world = getAutomationLink("world_link")
 
 local entities = world.getLoadedEntities()
 

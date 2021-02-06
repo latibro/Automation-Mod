@@ -1,4 +1,4 @@
-package latibro.automation.interfacebox
+package latibro.automation.linkbox.server
 
 import groovy.transform.CompileStatic
 import latibro.automation.ModCreativeTabs
@@ -16,12 +16,12 @@ import net.minecraftforge.fml.relauncher.SideOnly
 import javax.annotation.Nullable
 
 @CompileStatic
-class InterfaceBoxBlock extends Block implements ITileEntityProvider {
+class ServerLinkBoxBlock extends Block implements ITileEntityProvider {
 
-    InterfaceBoxBlock() {
+    ServerLinkBoxBlock() {
         super(Material.IRON)
-        setRegistryName("interface_box")
-        setUnlocalizedName("automation.interface_box")
+        setRegistryName("server_link_box")
+        setUnlocalizedName("automation.server_link_box")
         setCreativeTab(ModCreativeTabs.DEFAULT)
     }
 
@@ -33,7 +33,7 @@ class InterfaceBoxBlock extends Block implements ITileEntityProvider {
     @Nullable
     @Override
     TileEntity createNewTileEntity(World world, int meta) {
-        return new InterfaceBoxTileEntity()
+        return new ServerLinkBoxTileEntity()
     }
 
 }

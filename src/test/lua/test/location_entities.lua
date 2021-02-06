@@ -1,18 +1,21 @@
-local interfaceBox
-if peripheral then
-    -- ComputerCraft
-    interfaceBox = peripheral.find("interface_box")
-else
-    -- OpenComputers
-    local component = require("component")
-    interfaceBox = component.interface_box
+function getAutomationLink(name)
+    if peripheral then
+        -- ComputerCraft
+        return peripheral.find(name)
+    else
+        -- OpenComputers
+        local component = require("component")
+        return component.getPrimary(name)
+    end
 end
+
+----------
 
 local coordinate = { x = 756, y = 4, z = -325 }
 
 ----------
 
-local world = interfaceBox.getWorld()
+local world = getAutomationLink("world_link")
 
 local location = world.getLocationByCoordinate(coordinate.x, coordinate.y, coordinate.z)
 print("Location: " .. location.getX() .. ", " .. location.getY() .. ", " .. location.getZ())
