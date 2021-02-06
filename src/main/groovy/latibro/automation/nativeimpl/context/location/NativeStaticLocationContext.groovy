@@ -11,9 +11,13 @@ final class NativeStaticLocationContext extends AbstractNativeLocationContext im
     private final BlockPos nativeLocation
     private final NativeWorldContext worldContext
 
-    NativeStaticLocationContext(int x, int y, int z, NativeWorldContext world) {
-        nativeLocation = new BlockPos(x, y , z)
+    NativeStaticLocationContext(BlockPos location, NativeWorldContext world) {
+        nativeLocation = Objects.requireNonNull(location)
         this.worldContext = Objects.requireNonNull(world)
+    }
+
+    NativeStaticLocationContext(int x, int y, int z, NativeWorldContext world) {
+        this(new BlockPos(Objects.requireNonNull(x), Objects.requireNonNull(y) , Objects.requireNonNull(z)), world)
     }
 
     @Override

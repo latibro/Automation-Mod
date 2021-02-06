@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "automation:blocks/location_link_box"
+  }
+}

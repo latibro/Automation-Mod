@@ -1,7 +1,7 @@
 package latibro.automation.core.peripheral
 
 import groovy.transform.CompileStatic
-import latibro.automation.core.api.PeripheralAPI
+import latibro.automation.core.api.API
 import latibro.automation.core.lua.LuaObjectProxy
 import latibro.automation.integration.computercraft.CCPeripheralTrait
 import latibro.automation.integration.opencomputers.OCTileEntityEnvironmentTrait
@@ -29,7 +29,7 @@ abstract class PeripheralTileEntity extends TileEntity implements OCTileEntityEn
 
     abstract String getComponentName();
 
-    protected abstract PeripheralAPI getPeripheralAPI();
+    protected abstract API getPeripheralAPI();
 
     LuaObjectProxy getPeripheralAPIProxy() {
         return new LuaObjectProxy(getPeripheralAPI())

@@ -1,7 +1,7 @@
 [
   {
-    "modid": "boilerplate",
-    "name": "Boilerplate",
+    "modid": "automation",
+    "name": "Automation Mod",
     "version": "${version}",
     "mcversion": "${mcversion}",
     "authorList": [

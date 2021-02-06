@@ -1,11 +1,11 @@
 package latibro.automation.interfacebox
 
 import groovy.transform.CompileStatic
+import latibro.automation.ModCreativeTabs
 import net.minecraft.block.Block
 import net.minecraft.block.ITileEntityProvider
 import net.minecraft.block.material.Material
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
-import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.item.Item
 import net.minecraft.tileentity.TileEntity
 import net.minecraft.world.World
@@ -22,7 +22,7 @@ class InterfaceBoxBlock extends Block implements ITileEntityProvider {
         super(Material.IRON)
         setRegistryName("interface_box")
         setUnlocalizedName("automation.interface_box")
-        setCreativeTab(CreativeTabs.MISC)
+        setCreativeTab(ModCreativeTabs.DEFAULT)
     }
 
     @SideOnly(Side.CLIENT)

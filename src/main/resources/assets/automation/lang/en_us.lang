@@ -1,0 +1,10 @@
+itemGroup.automation.default=Automation
+
+item.automation.entity_link_card.name=Entity Link Card
+tile.automation.entity_link_box.name=Entity Link Box
+
+item.automation.location_link_card.name=Location Link Card
+tile.automation.location_link_box.name=Location Link Box
+
+tile.automation.world_link_box.name=World Link Box
+tile.automation.server_link_box.name=Server Link Box

@@ -3,7 +3,7 @@ package latibro.automation.nativeimpl.context.entity.collection
 import latibro.automation.core.context.entity.EntityContext
 import latibro.automation.core.context.entity.collection.AbstractEntityCollectionContext
 import latibro.automation.nativeimpl.context.entity.NativeEntityContext
-import latibro.automation.nativeimpl.context.entity.NativeStaticEntityContext
+import latibro.automation.nativeimpl.context.entity.NativeStaticInstanceEntityContext
 import latibro.automation.nativeimpl.context.server.DefaultNativeServerContext
 import latibro.automation.nativeimpl.context.server.NativeServerContext
 
@@ -17,14 +17,14 @@ abstract class AbstractNativeEntityCollectionContext extends AbstractEntityColle
     @Override
     Collection<EntityContext> getAll() {
         return nativeEntityCollection.collect {
-            new NativeStaticEntityContext(it)
+            new NativeStaticInstanceEntityContext(it)
         }
     }
 
     @Override
     NativeEntityContext getAt(int index) {
         def nativeObject = nativeEntityCollection.getAt(index)
-        return new NativeStaticEntityContext(nativeObject)
+        return new NativeStaticInstanceEntityContext(nativeObject)
     }
 
     @Override

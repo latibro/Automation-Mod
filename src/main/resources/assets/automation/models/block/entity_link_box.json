@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "automation:blocks/entity_link_box"
+  }
+}
