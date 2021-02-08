@@ -19,16 +19,16 @@ import net.minecraft.world.World
 class EntityMountToolItem extends Item {
 
     EntityMountToolItem() {
-        super();
-        setRegistryName("entity_mount_tool");
-        setUnlocalizedName("development.entity_mount_tool");
-        setCreativeTab(CreativeTabs.MISC);
-        setMaxStackSize(1);
+        super()
+        setRegistryName("entity_mount_tool")
+        setUnlocalizedName("development.entity_mount_tool")
+        setCreativeTab(CreativeTabs.MISC)
+        setMaxStackSize(1)
     }
 
     @Override
     boolean onLeftClickEntity(ItemStack itemStack, EntityPlayer player, Entity target) {
-        return useTool(itemStack, player, target, EnumHand.MAIN_HAND);
+        return useTool(itemStack, player, target, EnumHand.MAIN_HAND)
     }
 
     @Override
@@ -57,7 +57,7 @@ class EntityMountToolItem extends Item {
         if (!tool.getTagCompound().hasKey("rider")) {
             // add rider to tool
             tool.getTagCompound().setString("rider", target.uniqueID.toString())
-            player.setHeldItem(hand, tool);
+            player.setHeldItem(hand, tool)
 
             player.sendMessage(new TextComponentString("Stored rider: " + target.getUniqueID()))
         } else {
@@ -76,7 +76,7 @@ class EntityMountToolItem extends Item {
             if (riding) {
                 // clear tool
                 tool.getTagCompound().removeTag("rider")
-                player.setHeldItem(hand, tool);
+                player.setHeldItem(hand, tool)
 
                 player.sendMessage(new TextComponentString("Mounted rider"))
             } else {
@@ -91,19 +91,19 @@ class EntityMountToolItem extends Item {
         ItemStack tool = player.getHeldItem(hand)
 
         if (tool.getItem() != this) {
-            player.sendMessage(new TextComponentString("Not the tool"));
+            player.sendMessage(new TextComponentString("Not the tool"))
             return EnumActionResult.SUCCESS
         }
 
         if (!tool.hasTagCompound()) {
-            tool.setTagCompound(new NBTTagCompound());
+            tool.setTagCompound(new NBTTagCompound())
         }
 
         // clear tool
         tool.getTagCompound().removeTag("rider")
-        player.setHeldItem(hand, tool);
+        player.setHeldItem(hand, tool)
 
-        player.sendMessage(new TextComponentString("Cleared rider"));
+        player.sendMessage(new TextComponentString("Cleared rider"))
         return EnumActionResult.SUCCESS
     }
 

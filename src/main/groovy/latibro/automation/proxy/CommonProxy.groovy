@@ -41,7 +41,7 @@ class CommonProxy {
         NetworkRegistry.INSTANCE.registerGuiHandler(AutomationMod.instance, new ScreenProxy())
     }
 
-    void init(FMLInitializationEvent e) {
+    static void init(FMLInitializationEvent e) {
         if (Loader.isModLoaded("computercraft")) {
             ComputerCraftAPI.registerPeripheralProvider(new TileEntityPeripheralProvider())
         }

@@ -1,8 +1,6 @@
 package latibro.automation.linkbox
 
-import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.inventory.Slot
-import net.minecraft.item.ItemStack
+
 import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.EnumFacing
 import net.minecraftforge.items.CapabilityItemHandler
@@ -24,14 +22,6 @@ abstract class TileEntityContainer extends PlayerContainer {
             tileEntity.markDirty()
         }
 
-    }
-
-    @Override
-    ItemStack transferStackInSlot(EntityPlayer player, int slotIndex) {
-        Slot slot = getSlot(slotIndex)
-        ItemStack slotItemStack = slot.getStack()
-        //TODO enable shift click move
-        return slotItemStack
     }
 
 }

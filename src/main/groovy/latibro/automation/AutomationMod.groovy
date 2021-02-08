@@ -30,18 +30,18 @@ class AutomationMod {
     static Logger logger
 
     @EventHandler
-    void preInit(FMLPreInitializationEvent event) {
+    static void preInit(FMLPreInitializationEvent event) {
         logger = event.getModLog()
         proxy.preInit(event)
     }
 
     @EventHandler
-    void init(FMLInitializationEvent event) {
+    static void init(FMLInitializationEvent event) {
         proxy.init(event)
     }
 
     @EventHandler
-    void postInit(FMLPostInitializationEvent event) {
+    static void postInit(FMLPostInitializationEvent event) {
         proxy.postInit(event)
     }
 

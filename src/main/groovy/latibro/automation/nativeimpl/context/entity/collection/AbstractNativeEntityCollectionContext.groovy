@@ -23,7 +23,7 @@ abstract class AbstractNativeEntityCollectionContext extends AbstractEntityColle
 
     @Override
     NativeEntityContext getAt(int index) {
-        def nativeObject = nativeEntityCollection.getAt(index)
+        def nativeObject = nativeEntityCollection[index]
         return new NativeStaticInstanceEntityContext(nativeObject)
     }
 

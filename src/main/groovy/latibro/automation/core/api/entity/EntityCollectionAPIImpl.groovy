@@ -23,7 +23,7 @@ final class EntityCollectionAPIImpl implements EntityCollectionAPI {
 
     @Override
     EntityAPI getAt(double index) {
-        return (EntityAPI) APIRegistry.getContextAPI(context.getAt(index-1 as int))
+        return (EntityAPI) APIRegistry.getContextAPI(context[index - 1 as int])
     }
 
     @Override

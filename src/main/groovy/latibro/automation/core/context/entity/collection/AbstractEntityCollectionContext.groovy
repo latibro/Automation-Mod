@@ -11,7 +11,7 @@ abstract class AbstractEntityCollectionContext implements EntityCollectionContex
 
     @Override
     EntityContext getAt(int index) {
-        return all.getAt(index)
+        return all[index]
     }
 
     @Override

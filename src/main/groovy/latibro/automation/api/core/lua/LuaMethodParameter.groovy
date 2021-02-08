@@ -1,10 +1,10 @@
-package latibro.automation.api.core.lua;
+package latibro.automation.api.core.lua
 
-import java.lang.annotation.*;
+import java.lang.annotation.*
 
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
 @Target([ElementType.PARAMETER])
-public @interface LuaMethodParameter {
+@interface LuaMethodParameter {
     //TODO Object transformer() default ""
 }

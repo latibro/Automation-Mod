@@ -43,21 +43,21 @@ abstract class PeripheralTileEntity extends TileEntity implements OCTileEntityEn
     }
 
     void onChunkUnload() {
-        super.onChunkUnload();
+        super.onChunkUnload()
         if (Loader.isModLoaded("opencomputers")) {
             OCTileEntityEnvironmentTrait.super.onChunkUnload()
         }
     }
 
     void invalidate() {
-        super.invalidate();
+        super.invalidate()
         if (Loader.isModLoaded("opencomputers")) {
             OCTileEntityEnvironmentTrait.super.invalidate()
         }
     }
 
     void readFromNBT(NBTTagCompound nbt) {
-        super.readFromNBT(nbt);
+        super.readFromNBT(nbt)
         if (Loader.isModLoaded("opencomputers")) {
             OCTileEntityEnvironmentTrait.super.readFromNBT(nbt)
         }
@@ -68,7 +68,7 @@ abstract class PeripheralTileEntity extends TileEntity implements OCTileEntityEn
         if (Loader.isModLoaded("opencomputers")) {
             OCTileEntityEnvironmentTrait.super.writeToNBT(nbt)
         }
-        return nbt;
+        return nbt
     }
 
 }

@@ -37,7 +37,8 @@ class LocationLinkCardItem extends Item {
         if (hand != EnumHand.MAIN_HAND) {
             return EnumActionResult.PASS
         }
-        storeBlockPos(player.getHeldItem(hand), player, blockPos)
+        def pickedBlockPos = blockPos.offset(facing)
+        storeBlockPos(player.getHeldItem(hand), player, pickedBlockPos)
         return EnumActionResult.SUCCESS
     }
 

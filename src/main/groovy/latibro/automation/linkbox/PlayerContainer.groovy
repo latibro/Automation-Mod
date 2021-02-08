@@ -45,10 +45,8 @@ abstract class PlayerContainer extends Container {
 
     @Override
     ItemStack transferStackInSlot(EntityPlayer player, int slotIndex) {
-        Slot slot = getSlot(slotIndex)
-        ItemStack slotItemStack = slot.getStack()
         //TODO enable shift click move
-        return slotItemStack
+        return ItemStack.EMPTY
     }
 
     static class PlayerSlot extends Slot {

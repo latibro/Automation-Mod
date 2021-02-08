@@ -42,7 +42,7 @@ class LocationLinkBoxScreen extends GuiContainer {
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
         String name = I18n.format(ModBlocks.locationLinkBox.getUnlocalizedName() + ".name")
-        fontRenderer.drawString(name, xSize / 2 - fontRenderer.getStringWidth(name) / 2 as int, 6, 0x404040)
+        fontRenderer.drawString(name, 8, 6, 0x404040)
         fontRenderer.drawString(playerInventory.getDisplayName().getUnformattedText(), 8, ySize - 94, 0x404040)
     }
 

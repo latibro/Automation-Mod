@@ -12,8 +12,8 @@ import net.minecraft.tileentity.TileEntity
 @CompileStatic
 trait OCTileEntityEnvironmentTrait implements ManagedPeripheral, Environment {
 
-    private static final String TAG_NODE = "oc:node";
-    private Node node;
+    private static final String TAG_NODE = "oc:node"
+    private Node node
 
     void init() {
         node = Network.newNode(this, Visibility.Network).withComponent(getComponentName(), Visibility.Network).create()
@@ -41,7 +41,7 @@ trait OCTileEntityEnvironmentTrait implements ManagedPeripheral, Environment {
     }
 
     Node node() {
-        return this.node;
+        return this.node
     }
 
     void onConnect(Node node) {
@@ -54,35 +54,35 @@ trait OCTileEntityEnvironmentTrait implements ManagedPeripheral, Environment {
     }
 
     void onLoad() {
-        Network.joinOrCreateNetwork(getSelf());
+        Network.joinOrCreateNetwork(getSelf())
     }
 
     void onChunkUnload() {
         if (this.node != null) {
-            this.node.remove();
+            this.node.remove()
         }
 
     }
 
     void invalidate() {
         if (this.node != null) {
-            this.node.remove();
+            this.node.remove()
         }
     }
 
     void readFromNBT(NBTTagCompound nbt) {
         if (this.node != null && this.node.host() == this) {
-            this.node.load(nbt.getCompoundTag(TAG_NODE));
+            this.node.load(nbt.getCompoundTag(TAG_NODE))
         }
     }
 
     NBTTagCompound writeToNBT(NBTTagCompound nbt) {
         if (this.node != null && this.node.host() == this) {
-            NBTTagCompound nodeNbt = new NBTTagCompound();
-            this.node.save(nodeNbt);
-            nbt.setTag(TAG_NODE, nodeNbt);
+            NBTTagCompound nodeNbt = new NBTTagCompound()
+            this.node.save(nodeNbt)
+            nbt.setTag(TAG_NODE, nodeNbt)
         }
-        return nbt;
+        return nbt
     }
 
 }

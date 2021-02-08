@@ -98,7 +98,7 @@ class OpenComputersObjects {
         if (object.getClass().getName().startsWith("li.cil.repack.com.naef.jnlua.")) {
             return true
         }
-        return false;
+        return false
     }
 
     /*

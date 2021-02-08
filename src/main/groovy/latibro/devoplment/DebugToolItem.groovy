@@ -18,23 +18,23 @@ import net.minecraft.world.World
 class DebugToolItem extends Item {
 
     DebugToolItem() {
-        super();
-        setRegistryName("debug_tool");
-        setUnlocalizedName("development.debug_tool");
-        setCreativeTab(CreativeTabs.MISC);
-        setMaxStackSize(1);
+        super()
+        setRegistryName("debug_tool")
+        setUnlocalizedName("development.debug_tool")
+        setCreativeTab(CreativeTabs.MISC)
+        setMaxStackSize(1)
     }
 
     @Override
     boolean onLeftClickEntity(ItemStack itemStack, EntityPlayer player, Entity target) {
         printEntityDetails(player, target)
-        return true;
+        return true
     }
 
     @Override
     boolean itemInteractionForEntity(ItemStack itemStack, EntityPlayer player, EntityLivingBase target, EnumHand hand) {
         printEntityDetails(player, target)
-        return true;
+        return true
     }
 
     @Override
@@ -44,11 +44,11 @@ class DebugToolItem extends Item {
     }
 
     static void printEntityDetails(EntityPlayer player, Entity target) {
-        player.sendMessage(new TextComponentString("Entity.UUID: " + target.getUniqueID()));
+        player.sendMessage(new TextComponentString("Entity.UUID: " + target.getUniqueID()))
     }
 
     static void printBlockDetails(EntityPlayer player, World world, BlockPos blockPos) {
-        player.sendMessage(new TextComponentString("BlockPos: " + blockPos.toString()));
+        player.sendMessage(new TextComponentString("BlockPos: " + blockPos.toString()))
     }
 
 }
