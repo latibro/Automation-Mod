@@ -19,12 +19,12 @@ class ScreenProxy implements IGuiHandler {
     @Override
     Object getServerGuiElement(int screenId, EntityPlayer player, World world, int x, int y, int z) {
         BlockPos pos = new BlockPos(x, y, z)
-        TileEntity te = world.getTileEntity(pos)
-        if (te instanceof EntityLinkBoxTileEntity) {
-            return new EntityLinkBoxContainer(player.inventory, te)
+        TileEntity tileEntity = world.getTileEntity(pos)
+        if (tileEntity instanceof EntityLinkBoxTileEntity) {
+            return new EntityLinkBoxContainer(player, tileEntity)
         }
-        if (te instanceof LocationLinkBoxTileEntity) {
-            return new LocationLinkBoxContainer(player.inventory, te)
+        if (tileEntity instanceof LocationLinkBoxTileEntity) {
+            return new LocationLinkBoxContainer(player, tileEntity)
         }
         return null
     }
@@ -32,11 +32,11 @@ class ScreenProxy implements IGuiHandler {
     @Override
     Object getClientGuiElement(int screenId, EntityPlayer player, World world, int x, int y, int z) {
         BlockPos pos = new BlockPos(x, y, z)
-        TileEntity te = world.getTileEntity(pos)
-        if (te instanceof EntityLinkBoxTileEntity) {
+        TileEntity tileEntity = world.getTileEntity(pos)
+        if (tileEntity instanceof EntityLinkBoxTileEntity) {
             return new EntityLinkBoxScreen((EntityLinkBoxContainer) getServerGuiElement(screenId, player, world, x, y, z), player.inventory)
         }
-        if (te instanceof LocationLinkBoxTileEntity) {
+        if (tileEntity instanceof LocationLinkBoxTileEntity) {
             return new LocationLinkBoxScreen((LocationLinkBoxContainer) getServerGuiElement(screenId, player, world, x, y, z), player.inventory)
         }
         return null

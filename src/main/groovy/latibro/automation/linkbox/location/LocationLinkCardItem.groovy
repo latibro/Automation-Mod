@@ -35,7 +35,7 @@ class LocationLinkCardItem extends Item {
     @Override
     EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos blockPos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (hand != EnumHand.MAIN_HAND) {
-            return EnumActionResult.PASS;
+            return EnumActionResult.PASS
         }
         storeBlockPos(player.getHeldItem(hand), player, blockPos)
         return EnumActionResult.SUCCESS
@@ -43,11 +43,11 @@ class LocationLinkCardItem extends Item {
 
     private static void storeBlockPos(ItemStack itemStack, EntityPlayer player, BlockPos blockPos) {
         if (!itemStack.hasTagCompound()) {
-            itemStack.setTagCompound(new NBTTagCompound());
+            itemStack.setTagCompound(new NBTTagCompound())
         }
-        itemStack.getTagCompound().setLong("location", blockPos.toLong());
-        player.setHeldItem(EnumHand.MAIN_HAND, itemStack);
-        player.sendMessage(new TextComponentString("Location stored: " + blockPos));
+        itemStack.getTagCompound().setLong("location", blockPos.toLong())
+        player.setHeldItem(EnumHand.MAIN_HAND, itemStack)
+        player.sendMessage(new TextComponentString("Location stored: " + blockPos))
     }
 
 }

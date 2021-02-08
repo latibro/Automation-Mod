@@ -44,11 +44,11 @@ class EntityLinkCardItem extends Item {
 
     private static void storeEntityUUID(ItemStack itemStack, EntityPlayer player, Entity target) {
         if (!itemStack.hasTagCompound()) {
-            itemStack.setTagCompound(new NBTTagCompound());
+            itemStack.setTagCompound(new NBTTagCompound())
         }
-        itemStack.getTagCompound().setString("entityUUID", String.valueOf(target.getUniqueID()));
-        player.setHeldItem(EnumHand.MAIN_HAND, itemStack);
-        player.sendMessage(new TextComponentString("Entity ID stored: " + target.getUniqueID()));
+        itemStack.getTagCompound().setString("entityUUID", String.valueOf(target.getUniqueID()))
+        player.setHeldItem(EnumHand.MAIN_HAND, itemStack)
+        player.sendMessage(new TextComponentString("Entity ID stored: " + target.getUniqueID()))
     }
 
 }

@@ -13,7 +13,7 @@ end
 
 local coordinate_A = { x = 756, y = 4, z = -325 }
 local coordinate_B = { x = coordinate_A.x+3, y = coordinate_A.y+4, z = coordinate_A.z+0 }
--- Using the 3-4-5 triangle to validate
+-- Using the 3-4-5 triangle to validate (distance should be 5)
 
 ----------
 

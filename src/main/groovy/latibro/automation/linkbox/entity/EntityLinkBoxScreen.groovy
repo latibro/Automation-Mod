@@ -24,6 +24,7 @@ class EntityLinkBoxScreen extends GuiContainer {
     /**
      * Draws the screen and all the components in it.
      */
+    @Override
     void drawScreen(int mouseX, int mouseY, float partialTicks) {
         this.drawDefaultBackground()
         super.drawScreen(mouseX, mouseY, partialTicks)
@@ -32,18 +33,18 @@ class EntityLinkBoxScreen extends GuiContainer {
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-        GlStateManager.color(1, 1, 1, 1);
-        mc.getTextureManager().bindTexture(BACKGROUD_TEXTURE);
-        int x = (width - xSize) / 2 as int;
-        int y = (height - ySize) / 2 as int;
-        drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
+        GlStateManager.color(1, 1, 1, 1)
+        mc.getTextureManager().bindTexture(BACKGROUD_TEXTURE)
+        int x = (width - xSize) / 2 as int
+        int y = (height - ySize) / 2 as int
+        drawTexturedModalRect(x, y, 0, 0, xSize, ySize)
     }
 
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-        String name = I18n.format(ModBlocks.entityLinkBox.getUnlocalizedName() + ".name");
-        fontRenderer.drawString(name, xSize / 2 - fontRenderer.getStringWidth(name) / 2 as int, 6, 0x404040);
-        fontRenderer.drawString(playerInventory.getDisplayName().getUnformattedText(), 8, ySize - 94, 0x404040);
+        String name = I18n.format(ModBlocks.entityLinkBox.getUnlocalizedName() + ".name")
+        fontRenderer.drawString(name, xSize / 2 - fontRenderer.getStringWidth(name) / 2 as int, 6, 0x404040)
+        fontRenderer.drawString(playerInventory.getDisplayName().getUnformattedText(), 8, ySize - 94, 0x404040)
     }
 
 }
