@@ -40,7 +40,6 @@ repositories {
     maven { url = "https://cc.crzd.me/maven/" } // ComputerCraft
     maven { url 'https://squiddev.cc/maven/' } // ComputerCraft:Tweaked
     maven { url = 'https://teamopenindustry.cc/maven/' } // ImmersiveRailroading
-    maven { url = "https://dl.bintray.com/thesledgehammer/development/" } // GroovyForge
     maven { url = "https://minecraft.curseforge.com/api/maven/" } // CurseForge
 }
 
@@ -88,11 +87,8 @@ dependencies {
     //runtime group: 'org.squiddev', name: 'cc-tweaked-1.12.2', version: '1.89.+'
     compile group: 'org.squiddev', name: 'cc-tweaked-1.12.2', version: '1.89.+'
 
-    // GroovyForge
-    compile group: 'com.thesledgehammer.GroovyForge', name: 'GroovyForge_1.12.2', version: '+', classifier: 'universal'
-
     // Groovy
-    compile group: 'org.codehaus.groovy', name: 'groovy-all', version: '3.0.7', ext: 'pom'
+    compile group: 'org.codehaus.groovy', name: 'groovy-all', version: '3.0.7'
 
     testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.7.0-M1'
     testCompile group: 'org.spockframework', name: 'spock-core', version: '2.0-M3-groovy-3.0'
