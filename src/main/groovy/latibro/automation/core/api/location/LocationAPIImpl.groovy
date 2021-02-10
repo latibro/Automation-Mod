@@ -19,17 +19,17 @@ final class LocationAPIImpl implements LocationAPI {
     }
 
     @Override
-    double getX() {
+    Number getX() {
         return context.x
     }
 
     @Override
-    double getY() {
+    Number getY() {
         return context.y
     }
 
     @Override
-    double getZ() {
+    Number getZ() {
         return context.z
     }
 
@@ -44,7 +44,7 @@ final class LocationAPIImpl implements LocationAPI {
     }
 
     @Override
-    double getDistanceToCoordinate(double x, double y, double z) {
+    Number getDistanceToCoordinate(Number x, Number y, Number z) {
         return context.getDistanceToCoordinate((int) x, (int) y, (int) z)
     }
 

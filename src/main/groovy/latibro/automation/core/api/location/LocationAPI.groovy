@@ -11,13 +11,13 @@ interface LocationAPI extends ContextAPI {
     boolean isLoaded()
 
     @LuaMethod
-    double getX()
+    Number getX()
 
     @LuaMethod
-    double getY()
+    Number getY()
 
     @LuaMethod
-    double getZ()
+    Number getZ()
 
     @LuaMethod
     WorldAPI getWorld()
@@ -26,6 +26,6 @@ interface LocationAPI extends ContextAPI {
     EntityGroupAPI getEntities()
 
     @LuaMethod
-    double getDistanceToCoordinate(double x, double y, double z)
+    Number getDistanceToCoordinate(Number x, Number y, Number z)
 
 }

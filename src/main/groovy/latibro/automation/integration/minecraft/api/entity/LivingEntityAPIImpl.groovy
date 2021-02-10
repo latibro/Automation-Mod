@@ -12,8 +12,8 @@ class LivingEntityAPIImpl extends EntityAPIImpl implements LivingEntityAPI {
         return super.context as LivingEntityContext
     }
 
-    boolean navigateTo(double x, double y, double z) {
-        return getContext().navigateTo(x, y, z)
+    boolean navigateTo(Number x, Number y, Number z) {
+        return getContext().navigateTo(x as double, y as double, z as double)
     }
 
     @Override

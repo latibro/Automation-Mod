@@ -25,7 +25,7 @@ final class WorldAPIImpl implements WorldAPI {
     }
 
     @Override
-    LocationAPI getLocationByCoordinate(double x, double y, double z) {
+    LocationAPI getLocationByCoordinate(Number x, Number y, Number z) {
         return (LocationAPI) APIRegistry.getContextAPI(context.getLocationContextByCoordinate((int) x, (int) y, (int) z))
     }
 

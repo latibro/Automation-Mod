@@ -5,21 +5,19 @@ import latibro.automation.api.core.lua.LuaMethod
 interface LocomotiveAPI extends RollingStockAPI {
 
     @LuaMethod
-    void setAirBrakeLevel(double level)
+    void setAirBrakeLevel(Number level)
 
     @LuaMethod
-    double getAirBrakeLevel()
+    Number getAirBrakeLevel()
 
     @LuaMethod
-    void setThrottleLevel(double level)
+    void setThrottleLevel(Number level)
 
     @LuaMethod
-    double getThrottleLevel()
+    Number getThrottleLevel()
 
-    @LuaMethod(
-            name = "getCurrentSpeed"
-    )
-    double getCurrentSpeedInKMH()
+    @LuaMethod
+    double getCurrentSpeed()
 
     @LuaMethod
     void soundHorn()

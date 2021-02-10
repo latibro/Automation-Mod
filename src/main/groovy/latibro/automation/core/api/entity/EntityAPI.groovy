@@ -7,22 +7,13 @@ import latibro.automation.core.api.location.LocationAPI
 
 interface EntityAPI extends ContextAPI {
 
-    @LuaMethod(
-            name = "isLoaded",
-            usage = "function() : boolean"
-    )
+    @LuaMethod
     boolean isLoaded()
 
-    @LuaMethod(
-            name = "getUUID",
-            usage = "function() : string"
-    )
+    @LuaMethod
     String getUUID()
 
-    @LuaMethod(
-            name = "getLocation",
-            usage = "function() : LocationAPI"
-    )
+    @LuaMethod
     LocationAPI getLocation()
 
     @LuaMethod
@@ -34,7 +25,7 @@ interface EntityAPI extends ContextAPI {
     @LuaMethod
     EntityAPI asType(String name)
 
-    @LuaMethod
+    //@LuaMethod TODO re-enable lua method again when it has a use case
     FeatureAPI getAPI(String name)
 
 }

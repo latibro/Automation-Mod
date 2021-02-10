@@ -5,7 +5,7 @@ import latibro.automation.api.core.lua.LuaMethod
 interface LivingEntityAPI extends EntityAPI {
 
     @LuaMethod
-    boolean navigateTo(double x, double y, double z)
+    boolean navigateTo(Number x, Number y, Number z)
 
     @LuaMethod
     boolean isAIEnabled()

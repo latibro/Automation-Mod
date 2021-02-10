@@ -15,6 +15,6 @@ interface WorldAPI extends ContextAPI {
     EntityGroupAPI getLoadedEntities()
 
     @LuaMethod
-    LocationAPI getLocationByCoordinate(double x, double y, double z)
+    LocationAPI getLocationByCoordinate(Number x, Number y, Number z)
 
 }

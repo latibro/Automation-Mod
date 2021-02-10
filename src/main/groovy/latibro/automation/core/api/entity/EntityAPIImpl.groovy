@@ -26,12 +26,13 @@ class EntityAPIImpl implements EntityAPI {
 
     @Override
     String getUUID() {
-        return context.UUID?.toString()
+        AutomationMod.logger.debug("uuid {}", context.getUUID())
+        return context.getUUID()?.toString()
     }
 
     @Override
     LocationAPI getLocation() {
-        return new LocationAPIImpl(context.locationContext)
+        return (LocationAPI) APIRegistry.getContextAPI(context.locationContext)
     }
 
     @Override
