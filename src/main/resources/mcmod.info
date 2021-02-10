@@ -2,10 +2,12 @@
   {
     "modid": "automation",
     "name": "Automation Mod",
+    "description": "Let's you automate anything from OC and CC",
     "version": "${version}",
     "mcversion": "${mcversion}",
     "authorList": [
       "Latibro"
-    ]
+    ],
+    "url": "https://github.com/latibro/automation-mod"
   }
 ]
