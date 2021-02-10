@@ -31,7 +31,7 @@ local world = getAutomationLink("world_link")
 
 local loadedEntities = world.getLoadedEntities()
 
-local entity = loadedEntities.getByUUID("6924eb11-49d8-40e0-8006-6f8dfc930e78")
+local entity = loadedEntities.findBy("UUID", "6924eb11-49d8-40e0-8006-6f8dfc930e78")
 
 local rollingStock = entity.asType("immersiverailroading.rollingstock.locomotive.diesel")
 local rollingStockLocation = rollingStock.getLocation()

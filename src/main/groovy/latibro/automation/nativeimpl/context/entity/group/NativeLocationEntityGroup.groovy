@@ -1,4 +1,4 @@
-package latibro.automation.nativeimpl.context.entity.collection
+package latibro.automation.nativeimpl.context.entity.group
 
 import groovy.transform.CompileStatic
 import latibro.automation.core.context.CoreContext
@@ -6,11 +6,11 @@ import latibro.automation.nativeimpl.context.location.NativeLocationContext
 import net.minecraft.entity.Entity
 
 @CompileStatic
-final class NativeLocationEntityCollection extends AbstractNativeEntityCollectionContext implements CoreContext {
+final class NativeLocationEntityGroup extends AbstractNativeEntityGroupContext implements CoreContext {
 
     private final NativeLocationContext locationContext
 
-    NativeLocationEntityCollection(NativeLocationContext locationContext) {
+    NativeLocationEntityGroup(NativeLocationContext locationContext) {
         this.locationContext = Objects.requireNonNull(locationContext)
     }
 

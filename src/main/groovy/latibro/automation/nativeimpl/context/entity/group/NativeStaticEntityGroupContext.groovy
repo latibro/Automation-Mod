@@ -1,13 +1,13 @@
-package latibro.automation.nativeimpl.context.entity.collection
+package latibro.automation.nativeimpl.context.entity.group
 
 import latibro.automation.core.context.CoreContext
 import net.minecraft.entity.Entity
 
-final class NativeStaticEntityCollectionContext extends AbstractNativeEntityCollectionContext implements CoreContext {
+final class NativeStaticEntityGroupContext extends AbstractNativeEntityGroupContext implements CoreContext {
 
     private final Collection<Entity> nativeEntityCollection
 
-    NativeStaticEntityCollectionContext(Collection<Entity> nativeEntityCollection) {
+    NativeStaticEntityGroupContext(Collection<Entity> nativeEntityCollection) {
         this.nativeEntityCollection = Objects.requireNonNull(nativeEntityCollection)
     }
 

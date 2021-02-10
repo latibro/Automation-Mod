@@ -1,22 +1,22 @@
-package latibro.automation.core.context.entity.collection
+package latibro.automation.core.context.entity.group
 
 import latibro.automation.core.context.CoreContext
 import latibro.automation.core.context.entity.EntityContext
 import latibro.automation.core.context.server.ServerContext
 
-final class FilteredEntityCollectionContext extends AbstractEntityCollectionContext implements CoreContext {
+final class FilteredEntityGroupContext extends AbstractEntityGroupContext implements CoreContext {
 
-    private final EntityCollectionContext parentContext
+    private final EntityGroupContext parentContext
     private final Closure filter
 
-    FilteredEntityCollectionContext(EntityCollectionContext parentContext, Closure filter) {
+    FilteredEntityGroupContext(EntityGroupContext parentContext, Closure filter) {
         this.parentContext = Objects.requireNonNull(parentContext)
         this.filter = filter
     }
 
     @Override
-    Collection<EntityContext> getAll() {
-        return parentContext.all.findAll(filter)
+    List<EntityContext> getAll() {
+        return parentContext.getAll().findAll(filter)
     }
 
     @Override

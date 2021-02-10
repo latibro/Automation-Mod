@@ -19,7 +19,7 @@ print("Number of loaded entities in world: " .. entities.size())
 for i=1, 10 do
     print("--- Entity #" .. i .. " ---")
 
-    local entity = entities.getAt(i)
+    local entity = entities.get(i)
     print("UUID of entity: " .. entity.getUUID())
     print("Name of entity: " .. entity.getName())
 

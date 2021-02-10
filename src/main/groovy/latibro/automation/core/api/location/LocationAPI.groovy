@@ -2,7 +2,7 @@ package latibro.automation.core.api.location
 
 import latibro.automation.api.core.lua.LuaMethod
 import latibro.automation.core.api.ContextAPI
-import latibro.automation.core.api.entity.EntityCollectionAPI
+import latibro.automation.core.api.entity.EntityGroupAPI
 import latibro.automation.core.api.world.WorldAPI
 
 interface LocationAPI extends ContextAPI {
@@ -23,7 +23,7 @@ interface LocationAPI extends ContextAPI {
     WorldAPI getWorld()
 
     @LuaMethod
-    EntityCollectionAPI getEntities()
+    EntityGroupAPI getEntities()
 
     @LuaMethod
     double getDistanceToCoordinate(double x, double y, double z)

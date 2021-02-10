@@ -1,11 +1,11 @@
 package latibro.automation.core.context.location
 
-import latibro.automation.core.api.location.LocationAPI
+
 import latibro.automation.core.context.Context
-import latibro.automation.core.context.entity.collection.EntityCollectionContext
+import latibro.automation.core.context.entity.group.EntityGroupContext
 import latibro.automation.core.context.world.WorldContextProvider
 
-interface LocationContext extends Context<LocationAPI>, WorldContextProvider {
+interface LocationContext extends Context, WorldContextProvider {
 
     boolean isLoaded()
 
@@ -15,7 +15,7 @@ interface LocationContext extends Context<LocationAPI>, WorldContextProvider {
 
     int getZ()
 
-    EntityCollectionContext getEntityCollectionContext()
+    EntityGroupContext getEntityGroupContext()
 
     double getDistanceToCoordinate(int x, int y, int z)
 

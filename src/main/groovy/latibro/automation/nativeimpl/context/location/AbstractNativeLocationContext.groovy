@@ -1,8 +1,8 @@
 package latibro.automation.nativeimpl.context.location
 
 import groovy.transform.CompileStatic
-import latibro.automation.nativeimpl.context.entity.collection.NativeEntityCollectionContext
-import latibro.automation.nativeimpl.context.entity.collection.NativeLocationEntityCollection
+import latibro.automation.nativeimpl.context.entity.group.NativeEntityGroupContext
+import latibro.automation.nativeimpl.context.entity.group.NativeLocationEntityGroup
 
 @CompileStatic
 abstract class AbstractNativeLocationContext implements NativeLocationContext {
@@ -28,8 +28,8 @@ abstract class AbstractNativeLocationContext implements NativeLocationContext {
     }
 
     @Override
-    NativeEntityCollectionContext getEntityCollectionContext() {
-        return new NativeLocationEntityCollection(this)
+    NativeEntityGroupContext getEntityGroupContext() {
+        return new NativeLocationEntityGroup(this)
     }
 
     @Override

@@ -1,14 +1,14 @@
 package latibro.automation.core.api
 
 import latibro.automation.core.api.entity.EntityAPIImpl
-import latibro.automation.core.api.entity.EntityCollectionAPIImpl
+import latibro.automation.core.api.entity.EntityGroupAPIImpl
 import latibro.automation.core.api.location.LocationAPIImpl
 import latibro.automation.core.api.server.ServerAPIImpl
 import latibro.automation.core.api.world.WorldAPIImpl
 import latibro.automation.core.context.Context
 import latibro.automation.core.context.CoreContext
 import latibro.automation.core.context.entity.EntityContext
-import latibro.automation.core.context.entity.collection.EntityCollectionContext
+import latibro.automation.core.context.entity.group.EntityGroupContext
 import latibro.automation.core.context.location.LocationContext
 import latibro.automation.core.context.server.ServerContext
 import latibro.automation.core.context.world.WorldContext
@@ -30,8 +30,8 @@ final class CoreAPIProvider implements APIProvider {
             if (context instanceof EntityContext) {
                 return new EntityAPIImpl(context)
             }
-            if (context instanceof EntityCollectionContext) {
-                return new EntityCollectionAPIImpl(context)
+            if (context instanceof EntityGroupContext) {
+                return new EntityGroupAPIImpl(context)
             }
         }
         return null

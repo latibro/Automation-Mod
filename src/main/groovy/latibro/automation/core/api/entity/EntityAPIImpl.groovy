@@ -1,10 +1,9 @@
 package latibro.automation.core.api.entity
 
-
+import latibro.automation.AutomationMod
 import latibro.automation.core.api.APIRegistry
 import latibro.automation.core.api.FeatureAPI
 import latibro.automation.core.api.location.LocationAPI
-import latibro.automation.core.api.location.LocationAPIImpl
 import latibro.automation.core.context.ContextRegistry
 import latibro.automation.core.context.entity.EntityContext
 

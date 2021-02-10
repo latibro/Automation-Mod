@@ -1,7 +1,7 @@
 package latibro.automation.core.api.location
 
 import latibro.automation.core.api.APIRegistry
-import latibro.automation.core.api.entity.EntityCollectionAPI
+import latibro.automation.core.api.entity.EntityGroupAPI
 import latibro.automation.core.api.world.WorldAPI
 import latibro.automation.core.context.location.LocationContext
 
@@ -39,8 +39,8 @@ final class LocationAPIImpl implements LocationAPI {
     }
 
     @Override
-    EntityCollectionAPI getEntities() {
-        return (EntityCollectionAPI) APIRegistry.getContextAPI(context.entityCollectionContext)
+    EntityGroupAPI getEntities() {
+        return (EntityGroupAPI) APIRegistry.getContextAPI(context.entityGroupContext)
     }
 
     @Override

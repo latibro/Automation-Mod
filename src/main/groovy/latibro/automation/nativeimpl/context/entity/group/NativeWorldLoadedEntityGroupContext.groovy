@@ -1,4 +1,4 @@
-package latibro.automation.nativeimpl.context.entity.collection
+package latibro.automation.nativeimpl.context.entity.group
 
 import com.google.common.base.Predicate
 import groovy.transform.CompileStatic
@@ -9,11 +9,11 @@ import net.minecraft.entity.Entity
 import javax.annotation.Nullable
 
 @CompileStatic
-final class NativeWorldLoadedEntityCollectionContext extends AbstractNativeEntityCollectionContext implements CoreContext {
+final class NativeWorldLoadedEntityGroupContext extends AbstractNativeEntityGroupContext implements CoreContext {
 
     private final NativeWorldContext worldContext
 
-    NativeWorldLoadedEntityCollectionContext(NativeWorldContext worldContext) {
+    NativeWorldLoadedEntityGroupContext(NativeWorldContext worldContext) {
         this.worldContext = Objects.requireNonNull(worldContext)
     }
 

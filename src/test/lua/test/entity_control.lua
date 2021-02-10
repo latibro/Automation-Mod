@@ -30,7 +30,7 @@ local world = getAutomationLink("world_link")
 
 local entities = world.getLoadedEntities()
 
-local entity = entities.getByUUID(uuid)
+local entity = entities.findBy("UUID", uuid)
 
 local livingEntity = entity.asType("minecraft.entity.living")
 

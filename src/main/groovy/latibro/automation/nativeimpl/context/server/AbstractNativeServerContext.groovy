@@ -1,14 +1,14 @@
 package latibro.automation.nativeimpl.context.server
 
 
-import latibro.automation.nativeimpl.context.entity.collection.NativeEntityCollectionContext
-import latibro.automation.nativeimpl.context.entity.collection.NativeServerLoadedEntityCollectionContext
+import latibro.automation.nativeimpl.context.entity.group.NativeEntityGroupContext
+import latibro.automation.nativeimpl.context.entity.group.NativeServerLoadedEntityGroupContext
 
 abstract class AbstractNativeServerContext implements NativeServerContext {
 
     @Override
-    NativeEntityCollectionContext getLoadedEntityCollectionContext() {
-        return new NativeServerLoadedEntityCollectionContext(this)
+    NativeEntityGroupContext getLoadedEntitiesContext() {
+        return new NativeServerLoadedEntityGroupContext(this)
     }
 
 }

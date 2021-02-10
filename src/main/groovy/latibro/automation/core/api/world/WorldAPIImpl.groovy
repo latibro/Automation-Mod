@@ -1,7 +1,7 @@
 package latibro.automation.core.api.world
 
 import latibro.automation.core.api.APIRegistry
-import latibro.automation.core.api.entity.EntityCollectionAPI
+import latibro.automation.core.api.entity.EntityGroupAPI
 import latibro.automation.core.api.location.LocationAPI
 import latibro.automation.core.api.server.ServerAPI
 import latibro.automation.core.context.world.WorldContext
@@ -20,8 +20,8 @@ final class WorldAPIImpl implements WorldAPI {
     }
 
     @Override
-    EntityCollectionAPI getLoadedEntities() {
-        return (EntityCollectionAPI) APIRegistry.getContextAPI(context.loadedEntityCollectionContext)
+    EntityGroupAPI getLoadedEntities() {
+        return (EntityGroupAPI) APIRegistry.getContextAPI(context.loadedEntitiesContext)
     }
 
     @Override

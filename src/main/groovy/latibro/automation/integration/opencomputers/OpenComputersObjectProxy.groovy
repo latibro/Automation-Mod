@@ -1,5 +1,6 @@
 package latibro.automation.integration.opencomputers
 
+
 import latibro.automation.AutomationMod
 import latibro.automation.core.lua.LuaObjectProxy
 import li.cil.oc.api.machine.Arguments
@@ -40,8 +41,8 @@ class OpenComputersObjectProxy extends AbstractValue implements ManagedPeriphera
             //TODO maybe return null or empty array if result is null?
             return ocResult ? new Object[]{ocResult} : ocResult
         } catch (Throwable e) {
-            AutomationMod.logger.warn(e.getMessage() as String, e)
-            throw e
+            AutomationMod.logger.warn(e.message as String, e)
+            throw new RuntimeException(e.class.name + ": " + e.message, e)
         }
     }
 

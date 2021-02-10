@@ -51,8 +51,8 @@ class ComputerCraftObjectProxy implements ILuaObject {
             //TODO maybe return null or empty array if result is null?
             return new Object[]{ccResult}
         } catch (Exception e) {
-            AutomationMod.logger.warn(e.getMessage() as String, e)
-            throw new LuaException(e.getClass().getName() + ": " + e.getMessage())
+            AutomationMod.logger.warn(e.message as String, e)
+            throw new LuaException(e.class.name + ": " + e.message)
         }
     }
 

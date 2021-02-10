@@ -1,20 +1,20 @@
-package latibro.automation.nativeimpl.context.entity.collection
+package latibro.automation.nativeimpl.context.entity.group
 
-import latibro.automation.core.context.entity.collection.EntityCollectionContext
+import latibro.automation.core.context.entity.group.EntityGroupContext
 import latibro.automation.nativeimpl.context.NativeContext
 import latibro.automation.nativeimpl.context.entity.NativeEntityContext
 import latibro.automation.nativeimpl.context.server.NativeServerContext
 import net.minecraft.entity.Entity
 
-interface NativeEntityCollectionContext extends EntityCollectionContext, NativeContext {
+interface NativeEntityGroupContext extends EntityGroupContext, NativeContext {
 
     Collection<Entity> getNativeEntityCollection()
 
     @Override
-    Collection<NativeEntityContext> getAll()
+    List<NativeEntityContext> getAll()
 
     @Override
-    NativeEntityContext getAt(int index)
+    NativeEntityContext getAtIndex(int index)
 
     @Override
     NativeServerContext getServerContext()
