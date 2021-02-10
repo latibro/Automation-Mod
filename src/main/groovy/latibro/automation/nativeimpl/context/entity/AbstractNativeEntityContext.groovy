@@ -7,6 +7,7 @@ import latibro.automation.nativeimpl.context.server.NativeEntityServerContext
 import latibro.automation.nativeimpl.context.server.NativeServerContext
 import latibro.automation.nativeimpl.context.world.NativeEntityWorldContext
 import latibro.automation.nativeimpl.context.world.NativeWorldContext
+import net.minecraft.entity.EntityList
 
 @CompileStatic
 abstract class AbstractNativeEntityContext implements NativeEntityContext {
@@ -39,6 +40,12 @@ abstract class AbstractNativeEntityContext implements NativeEntityContext {
     @Override
     String getName() {
         return nativeEntity.getName()
+    }
+
+    @Override
+    String getType() {
+        //return EntityList.getClass(EntityList.getKey(nativeEntity))
+        return EntityList.getKey(nativeEntity)
     }
 
 }

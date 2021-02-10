@@ -14,4 +14,6 @@ interface EntityContext extends Context, ServerContextProvider, WorldContextProv
 
     String getName()
 
+    String getType()
+
 }
