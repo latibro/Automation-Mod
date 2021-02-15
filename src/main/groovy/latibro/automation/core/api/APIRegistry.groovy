@@ -7,34 +7,38 @@ final class APIRegistry {
 
     private static final List<APIProvider> providers = (List<APIProvider>) [new CoreAPIProvider(), new MinecraftAPIProvider()]
 
-    static void add(APIProvider provider) {
+    static void register(APIProvider provider) {
         providers.add(provider)
     }
 
-    static ContextAPI getContextAPI(Context context) {
-        //TODO add some caching
-        def api = providers.findResult {
-            return it.findContextAPI(context)
+    static ContextAPI getAPI(Context context) {
+        def result = providers.findResult {
+            it.getAPI(context)
         }
-        if (api) {
-            return api
+        if (result) {
+            return result
         }
         throw new NullPointerException()
     }
 
-    static List<String> getFeatureAPINames(Context context) {
-        return (List<String>) providers.findResult {
-            return it.getFeatureAPINames(context)
-        }?.flatten()
+    static List<String> getAPINames(API api) {
+        return providers.findResult {
+            return it.getAPINames(api)
+        }?.flatten()?: [] as List<String>
     }
 
-    static FeatureAPI getFeatureAPI(String name, Context context) {
-        //TODO add some caching
-        def api = providers.findResult {
-            return it.findFeatureAPI(name, context)
+    static boolean hasAPI(String name, API api) {
+        return providers.any {
+            return it.hasAPI(name, api)
         }
-        if (api) {
-            return api
+    }
+
+    static API getAPI(String name, API api) {
+        def result = providers.findResult {
+            return it.getAPI(name, api)
+        }
+        if (result) {
+            return result
         }
         throw new NullPointerException()
     }

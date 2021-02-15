@@ -53,7 +53,7 @@ class EntityLinkBoxTileEntity extends PeripheralTileEntity {
 
     UUID getEntityUUID() {
         def itemStack = inventory.getStackInSlot(0)
-        //TODO add some check if there is items in the stack, and it has a uuid
+        //TODO register some check if there is items in the stack, and it hasAPIFor a uuid
         return UUID.fromString(itemStack.getTagCompound().getString("entityUUID"))
     }
 
@@ -62,7 +62,7 @@ class EntityLinkBoxTileEntity extends PeripheralTileEntity {
         def tileEntityContext = new NativeStaticTileEntityContext(this)
         //TODO make the link to UUID dynamic
         def entityContext = new NativeStaticUUIDEntityContext(getEntityUUID(), tileEntityContext.worldContext.serverContext)
-        return (EntityAPI) APIRegistry.getContextAPI(entityContext)
+        return APIRegistry.getAPI(entityContext) as EntityAPI
     }
 
 }

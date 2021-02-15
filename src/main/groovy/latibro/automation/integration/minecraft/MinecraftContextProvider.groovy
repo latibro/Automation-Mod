@@ -1,39 +1,28 @@
 package latibro.automation.integration.minecraft
 
+import latibro.automation.core.context.AbstractContextProvider
 import latibro.automation.core.context.Context
-import latibro.automation.core.context.ContextProvider
 import latibro.automation.core.context.CoreContext
-import latibro.automation.core.context.entity.EntityContext
+import latibro.automation.integration.minecraft.context.entity.EntityContext
 import latibro.automation.integration.minecraft.context.entity.EntityContextImpl
+import latibro.automation.integration.minecraft.context.entity.LivingEntityContext
 import latibro.automation.integration.minecraft.context.entity.LivingEntityContextImpl
 
-final class MinecraftContextProvider implements ContextProvider {
+final class MinecraftContextProvider extends AbstractContextProvider {
 
     @Override
-    List<String> getSubContextNames(Context context) {
-        def names = []
+    Context getContext(Class<? extends Context> cls, Context context) {
         if (context instanceof CoreContext) {
-            if (context instanceof EntityContext) {
-                names.add("minecraft.entity")
-                names.add("minecraft.entity.living")
-            }
-        }
-        return names
-    }
-
-    @Override
-    Context findSubContext(String name, Context context) {
-        if (context instanceof CoreContext) {
-            if (context instanceof EntityContext) {
-                if (name == "minecraft.entity") {
+            if (context instanceof latibro.automation.core.context.entity.EntityContext) {
+                if (cls == EntityContext) {
                     return new EntityContextImpl(context)
                 }
-                if (name == "minecraft.entity.living") {
+                if (cls == LivingEntityContext) {
                     return new LivingEntityContextImpl(context)
                 }
             }
         }
-        return null
+        return super.getContext(cls, context)
     }
 
 }

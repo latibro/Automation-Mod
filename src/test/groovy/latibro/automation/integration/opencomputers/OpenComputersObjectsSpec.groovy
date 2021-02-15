@@ -245,7 +245,7 @@ class OpenComputersObjectsSpec extends Specification {
         output instanceof Map
         output == [1d: "first", 2d: "second"]
         !input.is(output)
-        //1 * spy.toListLikeMap(_) //TODO check that toListLikeMap has been called
+        //1 * spy.toListLikeMap(_) //TODO check that toListLikeMap hasAPIFor been called
     }
 
     def "fromOpenComputersObject - array-like map (with n entry) - transforms to safe array map (without n entry)"() {
@@ -260,7 +260,7 @@ class OpenComputersObjectsSpec extends Specification {
         output instanceof Map
         output == [1d: "first", 2d: "second"]
         !input.is(output)
-        //1 * spy.toListLikeMap(_) //TODO check that toListLikeMap has been called
+        //1 * spy.toListLikeMap(_) //TODO check that toListLikeMap hasAPIFor been called
     }
 
     def "fromOpenComputersObject - array-like map (with n entry wrong number) - normal map (keeps n entry)"() {

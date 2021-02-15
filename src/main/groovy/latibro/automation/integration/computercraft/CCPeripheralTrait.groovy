@@ -36,7 +36,7 @@ trait CCPeripheralTrait implements IPeripheral {
     Object[] callMethod(@Nonnull IComputerAccess computerAccess, @Nonnull ILuaContext context, int methodIndex, @Nonnull Object[] arguments) throws LuaException, InterruptedException {
         try {
             if (computerAccess.getClass().getPackage().getName().startsWith("li.cil.oc")) {
-                //TODO for some reason methods, found on both CC and OC, it seems the CC version has priority over OC methods when called from OC. Maybe because of use of OC ManagedPeripheral
+                //TODO for some reason methods, found on both CC and OC, it seems the CC version hasAPIFor priority over OC methods when called from OC. Maybe because of use of OC ManagedPeripheral
                 throw new RuntimeException("CC called from OC")
             }
 

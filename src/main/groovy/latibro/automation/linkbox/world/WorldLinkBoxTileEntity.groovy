@@ -17,7 +17,7 @@ class WorldLinkBoxTileEntity extends PeripheralTileEntity {
     @Override
     protected WorldAPI getPeripheralAPI() {
         def tileEntityContext = new NativeStaticTileEntityContext(this)
-        return (WorldAPI) APIRegistry.getContextAPI(tileEntityContext.worldContext)
+        return APIRegistry.getAPI(tileEntityContext.worldContext) as WorldAPI
     }
 
 }

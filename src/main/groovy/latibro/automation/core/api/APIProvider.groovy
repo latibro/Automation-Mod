@@ -4,10 +4,16 @@ import latibro.automation.core.context.Context
 
 interface APIProvider {
 
-    ContextAPI findContextAPI(Context context)
+    boolean hasAPI(Context context)
 
-    List<String> getFeatureAPINames(Context context)
+    ContextAPI getAPI(Context context)
 
-    FeatureAPI findFeatureAPI(String name, Context context)
+    List<String> getAPINames(API api)
+
+    boolean hasAPI(String name, API api)
+
+    API getAPI(String name, API api)
+
+    API getAPI(Class<? extends API> cls, API api)
 
 }

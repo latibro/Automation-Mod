@@ -6,23 +6,16 @@ final class ContextRegistry {
 
     private static final List<ContextProvider> providers = (List<ContextProvider>) [new CoreContextProvider(), new MinecraftContextProvider()]
 
-    static void add(ContextProvider provider) {
+    static void register(ContextProvider provider) {
         providers.add(provider)
     }
 
-    static List<String> getSubContextNames(Context context) {
-        return (List<String>) providers.findResult {
-            return it.getSubContextNames(context)
-        }?.flatten()
-    }
-
-    static Context getSubContext(String name, Context context) {
-        //TODO add some caching
-        def api = providers.findResult {
-            return it.findSubContext(name, context)
+    static Context getContext(Class<? extends Context> cls, Context context) {
+        def result = providers.findResult {
+            return it.getContext(cls, context)
         }
-        if (api) {
-            return api
+        if (result) {
+            return result
         }
         throw new NullPointerException()
     }

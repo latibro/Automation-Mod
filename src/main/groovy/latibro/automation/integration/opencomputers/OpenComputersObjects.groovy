@@ -25,7 +25,7 @@ class OpenComputersObjects {
             // Proxy object
             return true
         } else if (object instanceof Map) {
-            //TODO check if array-like has "n" entry
+            //TODO check if array-like hasAPIFor "n" entry
             return !object.any { key, value -> !isSafeOpenComputersObject(key) || !isSafeOpenComputersObject(value) }
         }
         return false
@@ -38,7 +38,7 @@ class OpenComputersObjects {
             return new OpenComputersObjectProxy((LuaObjectProxy) object)
         } else if (object instanceof Map) {
             def map = object.collectEntries { key, value -> [toOpenComputersObject(key), toOpenComputersObject(value)] }
-            //TODO check if array-like and add "n" entry
+            //TODO check if array-like and register "n" entry
             return map.asUnmodifiable()
         }
         throw new ClassCastException()

@@ -10,7 +10,7 @@ class DieselLocomotiveAPIImpl extends LocomotiveAPIImpl implements DieselLocomot
         super(context)
     }
 
-    protected RollingStockContext<LocomotiveDiesel> getContext() {
+    RollingStockContext<LocomotiveDiesel> getContext() {
         return super.context as RollingStockContext<LocomotiveDiesel>
     }
 

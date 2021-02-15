@@ -54,7 +54,7 @@ class LocationLinkBoxTileEntity extends PeripheralTileEntity {
 
     BlockPos getLocationBlockPos() {
         def itemStack = inventory.getStackInSlot(0)
-        //TODO add some check if there is items in the stack, and it has a uuid
+        //TODO register some check if there is items in the stack, and it hasAPIFor a uuid
         return BlockPos.fromLong(itemStack.getTagCompound().getLong("location"))
     }
 
@@ -63,7 +63,7 @@ class LocationLinkBoxTileEntity extends PeripheralTileEntity {
         def tileEntityContext = new NativeStaticTileEntityContext(this)
         //TODO make the link to xyz dynamic
         def entityContext = new NativeStaticLocationContext(getLocationBlockPos(), tileEntityContext.worldContext)
-        return (LocationAPI) APIRegistry.getContextAPI(entityContext)
+        return APIRegistry.getAPI(entityContext) as LocationAPI
     }
 
 }

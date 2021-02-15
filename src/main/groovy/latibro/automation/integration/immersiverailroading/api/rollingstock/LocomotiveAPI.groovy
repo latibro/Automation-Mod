@@ -17,7 +17,7 @@ interface LocomotiveAPI extends RollingStockAPI {
     Number getThrottleLevel()
 
     @LuaMethod
-    double getCurrentSpeed()
+    Number getCurrentSpeed()
 
     @LuaMethod
     void soundHorn()

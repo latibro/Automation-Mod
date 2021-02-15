@@ -47,8 +47,8 @@ class CommonProxy {
         }
 
         if (Loader.isModLoaded("immersiverailroading")) {
-            ContextRegistry.add(new ImmersiveRailroadingContextProvider())
-            APIRegistry.add(new ImmersiveRailroadingAPIProvider())
+            ContextRegistry.register(new ImmersiveRailroadingContextProvider())
+            APIRegistry.register(new ImmersiveRailroadingAPIProvider())
         }
     }
 

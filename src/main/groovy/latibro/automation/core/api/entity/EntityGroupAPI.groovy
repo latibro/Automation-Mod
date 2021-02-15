@@ -1,9 +1,9 @@
 package latibro.automation.core.api.entity
 
 import latibro.automation.api.core.lua.LuaMethod
-import latibro.automation.core.api.ContextAPI
+import latibro.automation.core.api.API
 
-interface EntityGroupAPI extends ContextAPI {
+interface EntityGroupAPI extends API {
 
     @LuaMethod
     Number size()
@@ -28,14 +28,6 @@ interface EntityGroupAPI extends ContextAPI {
 
     @LuaMethod
     EntityGroupAPI where(String property, Object expected)
-
-    // "and" conditions
-    //@LuaMethod //TODO enable this lua method when implemented
-    EntityGroupAPI where(Map conditions)
-
-    // "or" conditions
-    //@LuaMethod //TODO enable this lua methods when implemented
-    EntityGroupAPI whereAny(Map conditions)
 
     @LuaMethod
     List<Object> getAllAsProperty(String property)

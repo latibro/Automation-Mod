@@ -1,6 +1,7 @@
 package latibro.automation.core.api
 
-import latibro.automation.core.api.entity.EntityAPIImpl
+
+import latibro.automation.core.api.entity.CoreEntityAPI
 import latibro.automation.core.api.entity.EntityGroupAPIImpl
 import latibro.automation.core.api.location.LocationAPIImpl
 import latibro.automation.core.api.server.ServerAPIImpl
@@ -13,11 +14,33 @@ import latibro.automation.core.context.location.LocationContext
 import latibro.automation.core.context.server.ServerContext
 import latibro.automation.core.context.world.WorldContext
 
-final class CoreAPIProvider implements APIProvider {
+final class CoreAPIProvider extends AbstractAPIProvider {
 
     @Override
-    ContextAPI findContextAPI(Context context) {
+    boolean hasAPI(Context context) {
         if (context instanceof CoreContext) {
+            if (context instanceof ServerContext) {
+                return true
+            }
+            if (context instanceof WorldContext) {
+                return true
+            }
+            if (context instanceof LocationContext) {
+                return true
+            }
+            if (context instanceof EntityContext) {
+                return true
+            }
+            if (context instanceof EntityGroupContext) {
+                return true
+            }
+        }
+        return super.hasAPI(context)
+    }
+
+    @Override
+    ContextAPI getAPI(Context context) {
+        if (hasAPI(context)) {
             if (context instanceof ServerContext) {
                 return new ServerAPIImpl(context)
             }
@@ -28,21 +51,13 @@ final class CoreAPIProvider implements APIProvider {
                 return new LocationAPIImpl(context)
             }
             if (context instanceof EntityContext) {
-                return new EntityAPIImpl(context)
+                return new CoreEntityAPI(context)
             }
             if (context instanceof EntityGroupContext) {
                 return new EntityGroupAPIImpl(context)
             }
         }
-        return null
-    }
-
-    List<String> getFeatureAPINames(Context context) {
-        return null
-    }
-
-    FeatureAPI findFeatureAPI(String name, Context context) {
-        return null
+        return super.getAPI(context)
     }
 
 }

@@ -1,21 +1,22 @@
 package latibro.automation.core.api.entity
 
 import latibro.automation.AutomationMod
+import latibro.automation.core.api.API
 import latibro.automation.core.api.APIRegistry
-import latibro.automation.core.api.FeatureAPI
+import latibro.automation.core.api.ContextAPI
 import latibro.automation.core.api.location.LocationAPI
-import latibro.automation.core.context.ContextRegistry
 import latibro.automation.core.context.entity.EntityContext
 
-class EntityAPIImpl implements EntityAPI {
+class BaseEntityAPI<E extends EntityContext> implements EntityAPI, ContextAPI {
 
-    private final EntityContext context
+    private final E context
 
-    EntityAPIImpl(EntityContext context) {
+    BaseEntityAPI(E context) {
         this.context = Objects.requireNonNull(context)
     }
 
-    protected EntityContext getContext() {
+    @Override
+    E getContext() {
         return context
     }
 
@@ -32,7 +33,7 @@ class EntityAPIImpl implements EntityAPI {
 
     @Override
     LocationAPI getLocation() {
-        return (LocationAPI) APIRegistry.getContextAPI(context.locationContext)
+        return APIRegistry.getAPI(context.locationContext) as LocationAPI
     }
 
     @Override
@@ -46,14 +47,18 @@ class EntityAPIImpl implements EntityAPI {
     }
 
     @Override
-    EntityAPI asType(String name) {
-        def subContext = ContextRegistry.getSubContext(name, context)
-        return (EntityAPI) APIRegistry.getContextAPI(subContext)
+    List<String> getAPINames() {
+        return APIRegistry.getAPINames(this)
     }
 
     @Override
-    FeatureAPI getAPI(String name) {
-        return (FeatureAPI) APIRegistry.getFeatureAPI(name, context)
+    boolean hasAPI(String name) {
+        return APIRegistry.hasAPI(name, this)
+    }
+
+    @Override
+    API getAPI(String name) {
+        return APIRegistry.getAPI(name, this)
     }
 
 }

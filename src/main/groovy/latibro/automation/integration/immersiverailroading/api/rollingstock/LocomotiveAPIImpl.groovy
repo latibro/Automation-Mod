@@ -11,7 +11,7 @@ class LocomotiveAPIImpl extends RollingStockAPIImpl implements LocomotiveAPI {
         super(context)
     }
 
-    protected RollingStockContext<Locomotive> getContext() {
+    RollingStockContext<Locomotive> getContext() {
         return super.context as RollingStockContext<Locomotive>
     }
 
@@ -39,7 +39,7 @@ class LocomotiveAPIImpl extends RollingStockAPIImpl implements LocomotiveAPI {
         return context.immersiveRailroadingRollingStock.getThrottle()
     }
 
-    double getCurrentSpeed() {
+    Number getCurrentSpeed() {
         return context.immersiveRailroadingRollingStock.getCurrentSpeed().metric()
     }
 

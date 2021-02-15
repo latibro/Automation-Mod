@@ -1,16 +1,22 @@
 package latibro.automation.core.api.entity
 
 import latibro.automation.core.api.APIRegistry
+import latibro.automation.core.api.ContextAPI
 import latibro.automation.core.context.Context
 import latibro.automation.core.context.entity.EntityContext
 import latibro.automation.core.context.entity.group.EntityGroupContext
 
-final class EntityGroupAPIImpl implements EntityGroupAPI {
+final class EntityGroupAPIImpl implements EntityGroupAPI, ContextAPI {
 
     private final EntityGroupContext context
 
     EntityGroupAPIImpl(EntityGroupContext context) {
         this.context = Objects.requireNonNull(context)
+    }
+
+    @Override
+    EntityGroupContext getContext() {
+        return context
     }
 
     @Override
@@ -55,31 +61,21 @@ final class EntityGroupAPIImpl implements EntityGroupAPI {
     }
 
     @Override
-    EntityGroupAPI where(Map conditions) {
-        return apiWrap(context.whereConditionsAre(conditions))
-    }
-
-    @Override
-    EntityGroupAPI whereAny(Map conditions) {
-        return apiWrap(context.whereAnyConditionsAre(conditions))
-    }
-
-    @Override
     List<Object> getAllAsProperty(String property) {
         return context.getAllAsProperty(property).collect {
             if (it instanceof Context) {
-                return APIRegistry.getContextAPI(it)
+                return APIRegistry.getAPI(it)
             }
             return it
         }
     }
 
     private static EntityGroupAPI apiWrap(EntityGroupContext context) {
-        return (EntityGroupAPI) APIRegistry.getContextAPI(context)
+        return APIRegistry.getAPI(context) as EntityGroupAPI
     }
 
     private static EntityAPI apiWrap(EntityContext context) {
-        return (EntityAPI) APIRegistry.getContextAPI(context)
+        return APIRegistry.getAPI(context) as EntityAPI
     }
 
     private static List<EntityAPI> apiWrap(List<EntityContext> list) {

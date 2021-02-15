@@ -40,7 +40,7 @@ abstract class AbstractEntityGroupContext implements EntityGroupContext {
     @Override
     EntityGroupContext wherePropertyIs(String property, Object expected) {
         return getFilteredEntityContext({
-            def api = APIRegistry.getContextAPI(it as Context)
+            def api = APIRegistry.getAPI(it as Context)
             return api[property] == expected
         })
     }
@@ -64,7 +64,7 @@ abstract class AbstractEntityGroupContext implements EntityGroupContext {
     @Override
     List<Object> getAllAsProperty(String property) {
         return getAll().collect {
-            def api = APIRegistry.getContextAPI(it)
+            def api = APIRegistry.getAPI(it)
             return api[property]
         }
     }

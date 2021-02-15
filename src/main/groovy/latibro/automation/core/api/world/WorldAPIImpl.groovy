@@ -1,12 +1,13 @@
 package latibro.automation.core.api.world
 
 import latibro.automation.core.api.APIRegistry
+import latibro.automation.core.api.ContextAPI
 import latibro.automation.core.api.entity.EntityGroupAPI
 import latibro.automation.core.api.location.LocationAPI
 import latibro.automation.core.api.server.ServerAPI
 import latibro.automation.core.context.world.WorldContext
 
-final class WorldAPIImpl implements WorldAPI {
+final class WorldAPIImpl implements WorldAPI, ContextAPI {
 
     private final WorldContext context
 
@@ -15,18 +16,23 @@ final class WorldAPIImpl implements WorldAPI {
     }
 
     @Override
+    WorldContext getContext() {
+        return context
+    }
+
+    @Override
     ServerAPI getServer() {
-        return (ServerAPI) APIRegistry.getContextAPI(context.serverContext)
+        return APIRegistry.getAPI(context.serverContext) as ServerAPI
     }
 
     @Override
     EntityGroupAPI getLoadedEntities() {
-        return (EntityGroupAPI) APIRegistry.getContextAPI(context.loadedEntitiesContext)
+        return APIRegistry.getAPI(context.loadedEntitiesContext) as EntityGroupAPI
     }
 
     @Override
     LocationAPI getLocationByCoordinate(Number x, Number y, Number z) {
-        return (LocationAPI) APIRegistry.getContextAPI(context.getLocationContextByCoordinate((int) x, (int) y, (int) z))
+        return APIRegistry.getAPI(context.getLocationContextByCoordinate(x as int, y as int, z as int)) as LocationAPI
     }
 
 }

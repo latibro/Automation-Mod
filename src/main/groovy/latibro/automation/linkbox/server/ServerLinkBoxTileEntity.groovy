@@ -17,7 +17,7 @@ class ServerLinkBoxTileEntity extends PeripheralTileEntity {
     @Override
     protected ServerAPI getPeripheralAPI() {
         def tileEntityContext = new NativeStaticTileEntityContext(this)
-        return (ServerAPI) APIRegistry.getContextAPI(tileEntityContext.worldContext.serverContext)
+        return APIRegistry.getAPI(tileEntityContext.worldContext.serverContext) as ServerAPI
     }
 
 }

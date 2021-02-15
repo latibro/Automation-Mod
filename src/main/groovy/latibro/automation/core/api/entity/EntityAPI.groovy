@@ -1,11 +1,10 @@
 package latibro.automation.core.api.entity
 
 import latibro.automation.api.core.lua.LuaMethod
-import latibro.automation.core.api.ContextAPI
-import latibro.automation.core.api.FeatureAPI
+import latibro.automation.core.api.API
 import latibro.automation.core.api.location.LocationAPI
 
-interface EntityAPI extends ContextAPI {
+interface EntityAPI extends API {
 
     @LuaMethod
     boolean isLoaded()
@@ -23,9 +22,12 @@ interface EntityAPI extends ContextAPI {
     String getType()
 
     @LuaMethod
-    EntityAPI asType(String name)
+    List<String> getAPINames()
 
-    //@LuaMethod TODO re-enable lua method again when it has a use case
-    FeatureAPI getAPI(String name)
+    @LuaMethod
+    boolean hasAPI(String name)
+
+    @LuaMethod
+    API getAPI(String name)
 
 }
