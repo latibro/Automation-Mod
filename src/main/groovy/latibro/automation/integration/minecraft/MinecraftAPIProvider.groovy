@@ -1,7 +1,6 @@
 package latibro.automation.integration.minecraft
 
 import latibro.automation.core.api.API
-import latibro.automation.core.api.APIRegistry
 import latibro.automation.core.api.AbstractAPIProvider
 import latibro.automation.core.api.ContextAPI
 import latibro.automation.core.api.entity.CoreEntityAPI
@@ -12,38 +11,59 @@ import latibro.automation.integration.minecraft.api.entity.EntityAPIImpl
 import latibro.automation.integration.minecraft.api.entity.LivingEntityAPI
 import latibro.automation.integration.minecraft.api.entity.LivingEntityAPIImpl
 import latibro.automation.integration.minecraft.context.entity.EntityContext
-import latibro.automation.integration.minecraft.context.entity.LivingEntityContext
+import latibro.automation.integration.minecraft.context.entity.LivingEntityContext 
 
 class MinecraftAPIProvider extends AbstractAPIProvider {
 
-    @Override
-    boolean hasAPI(Context context) {
-        if (context instanceof LivingEntityContext) {
-            return true
-        }
-        if (context instanceof EntityContext) {
-            return true
-        }
-        return super.hasAPI(context)
-    }
+    private static final def API_NAME_MAP = [
+            "minecraft:entity" : EntityAPI,
+            "minecraft:entityliving" : LivingEntityAPI
+    ]
 
     @Override
-    ContextAPI getAPI(Context context) {
-        if (hasAPI(context)) {
-            if (context instanceof LivingEntityContext) {
-                return new LivingEntityAPIImpl(context)
-            }
-            if (context instanceof EntityContext) {
-                return new EntityAPIImpl(context)
-            }
+    API getAPI(Context context) {
+        if (context instanceof LivingEntityContext) {
+            return getAPI(LivingEntityAPI, context)
+        }
+        if (context instanceof EntityContext) {
+            return getAPI(EntityAPI, context)
         }
         return super.getAPI(context)
     }
 
     @Override
-    List<String> getAPINames(API api) {
-        def names = super.getAPINames(api)
-        if (api instanceof CoreEntityAPI) {
+    API getAPI(Class<? extends API> cls, Context context) {
+        if (cls == LivingEntityAPI) {
+            if (context instanceof LivingEntityContext) {
+                return new LivingEntityAPIImpl(context)
+            }
+            if (ContextRegistry.hasContext(EntityContext, context)) {
+                return getAPI(cls, ContextRegistry.getContext(LivingEntityContext, context))
+            }
+        }
+        if (cls == EntityAPI) {
+            if (context instanceof EntityContext) {
+                return new EntityAPIImpl(context)
+            }
+            if (ContextRegistry.hasContext(EntityContext, context)) {
+                return getAPI(cls, ContextRegistry.getContext(EntityContext, context))
+            }
+        }
+        return super.getAPI(cls, context)
+    }
+
+    @Override
+    API getAPI(Class<? extends API> cls, API contextApi) {
+        if (contextApi instanceof ContextAPI) {
+            return getAPI(cls, contextApi.context)
+        }
+        return super.getAPI(cls, contextApi)
+    }
+
+    @Override
+    List<String> getAPINames(API contextApi) {
+        def names = super.getAPINames(contextApi)
+        if (contextApi instanceof CoreEntityAPI) {
             names.add("minecraft:entity")
             names.add("minecraft:entityliving")
         }
@@ -51,8 +71,8 @@ class MinecraftAPIProvider extends AbstractAPIProvider {
     }
 
     @Override
-    boolean hasAPI(String name, API api) {
-        if (api instanceof CoreEntityAPI) {
+    boolean hasAPI(String name, API contextApi) {
+        if (contextApi instanceof CoreEntityAPI) {
             if (name == "minecraft:entity") {
                 return true
             }
@@ -60,37 +80,22 @@ class MinecraftAPIProvider extends AbstractAPIProvider {
                 return true
             }
         }
-        return super.hasAPI(name, api)
+        return super.hasAPI(name, contextApi)
     }
 
     @Override
-    API getAPI(String name, API api) {
-        if (hasAPI(name, api)) {
-            if (api instanceof CoreEntityAPI) {
+    API getAPI(String name, API contextApi) {
+        if (hasAPI(name, contextApi)) {
+            if (contextApi instanceof CoreEntityAPI) {
                 if (name == "minecraft:entity") {
-                    return getAPI(EntityAPI, api)
+                    return getAPI(EntityAPI, contextApi)
                 }
                 if (name == "minecraft:entityliving") {
-                    return getAPI(LivingEntityAPI, api)
+                    return getAPI(LivingEntityAPI, contextApi)
                 }
             }
         }
-        return super.getAPI(name, api)
-    }
-
-    @Override
-    API getAPI(Class<? extends API> cls, API api) {
-        if (api instanceof ContextAPI) {
-            if (cls == EntityAPI) {
-                def context = ContextRegistry.getContext(EntityContext, api.context)
-                return APIRegistry.getAPI(context)
-            }
-            if (cls == LivingEntityAPI) {
-                def context = ContextRegistry.getContext(LivingEntityContext, api.context)
-                return APIRegistry.getAPI(context)
-            }
-        }
-        return super.getAPI(cls, api)
+        return super.getAPI(name, contextApi)
     }
 
 }

@@ -94,14 +94,9 @@ end
 
 ----------
 
-local world = getAutomationLink("world_link")
+local entity = getAutomationLink("entity_link")
 
-local loadedEntities = world.getLoadedEntities()
-
-local entity = loadedEntities.findBy("UUID", "6924eb11-49d8-40e0-8006-6f8dfc930e78") -- Default track
---local entity = loadedEntities.findBy("UUID", "2de5fb8f-a3a5-4341-bdf2-bc86ed29568e") -- Slope track
-
-local rollingStock = entity.asType("immersiverailroading.rollingstock.locomotive.diesel")
+local rollingStock = entity.getAPI("immersiverailroading:locomotivediesel")
 local rollingStockLocation = rollingStock.getLocation()
 
 rollingStock.startEngine()
@@ -113,7 +108,7 @@ rollingStock.setAirBrakeLevel(0)
 os.sleep(1)
 print("**** new speed: 40")
 
-for i = 1, 30 do
+for i = 1, 60 do
     adjustSpeed(rollingStock, 40)
     print("---")
     os.sleep(0.1)
@@ -122,7 +117,7 @@ end
 rollingStock.soundHorn()
 print("**** new speed: 80")
 
-for i = 1, 30 do
+for i = 1, 60 do
     adjustSpeed(rollingStock, 80)
     print("---")
     os.sleep(0.1)
@@ -131,7 +126,7 @@ end
 rollingStock.soundHorn()
 print("**** new speed: 40")
 
-for i = 1, 30 do
+for i = 1, 60 do
     adjustSpeed(rollingStock, 40)
     print("---")
     os.sleep(0.1)

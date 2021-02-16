@@ -17,30 +17,8 @@ import latibro.automation.core.context.world.WorldContext
 final class CoreAPIProvider extends AbstractAPIProvider {
 
     @Override
-    boolean hasAPI(Context context) {
+    API getAPI(Context context) {
         if (context instanceof CoreContext) {
-            if (context instanceof ServerContext) {
-                return true
-            }
-            if (context instanceof WorldContext) {
-                return true
-            }
-            if (context instanceof LocationContext) {
-                return true
-            }
-            if (context instanceof EntityContext) {
-                return true
-            }
-            if (context instanceof EntityGroupContext) {
-                return true
-            }
-        }
-        return super.hasAPI(context)
-    }
-
-    @Override
-    ContextAPI getAPI(Context context) {
-        if (hasAPI(context)) {
             if (context instanceof ServerContext) {
                 return new ServerAPIImpl(context)
             }

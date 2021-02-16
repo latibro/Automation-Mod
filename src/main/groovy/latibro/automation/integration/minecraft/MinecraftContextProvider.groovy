@@ -11,15 +11,28 @@ import latibro.automation.integration.minecraft.context.entity.LivingEntityConte
 final class MinecraftContextProvider extends AbstractContextProvider {
 
     @Override
-    Context getContext(Class<? extends Context> cls, Context context) {
+    boolean hasContext(Class<? extends Context> cls, Context context) {
         if (context instanceof CoreContext) {
             if (context instanceof latibro.automation.core.context.entity.EntityContext) {
                 if (cls == EntityContext) {
-                    return new EntityContextImpl(context)
+                    return true
                 }
                 if (cls == LivingEntityContext) {
-                    return new LivingEntityContextImpl(context)
+                    return true
                 }
+            }
+        }
+        return super.getContext(cls, context)
+    }
+
+    @Override
+    Context getContext(Class<? extends Context> cls, Context context) {
+        if (hasContext(cls, context)) {
+            if (cls == EntityContext) {
+                return new EntityContextImpl(context as latibro.automation.core.context.entity.EntityContext)
+            }
+            if (cls == LivingEntityContext) {
+                return new LivingEntityContextImpl(context as latibro.automation.core.context.entity.EntityContext)
             }
         }
         return super.getContext(cls, context)

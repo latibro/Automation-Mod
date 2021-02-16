@@ -10,6 +10,12 @@ final class ContextRegistry {
         providers.add(provider)
     }
 
+    static boolean hasContext(Class<? extends Context> cls, Context context) {
+        return providers.any {
+            return it.hasContext(cls, context)
+        }
+    }
+
     static Context getContext(Class<? extends Context> cls, Context context) {
         def result = providers.findResult {
             return it.getContext(cls, context)

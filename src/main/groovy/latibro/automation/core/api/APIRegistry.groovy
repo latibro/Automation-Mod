@@ -11,7 +11,7 @@ final class APIRegistry {
         providers.add(provider)
     }
 
-    static ContextAPI getAPI(Context context) {
+    static API getAPI(Context context) {
         def result = providers.findResult {
             it.getAPI(context)
         }
@@ -22,7 +22,7 @@ final class APIRegistry {
     }
 
     static List<String> getAPINames(API api) {
-        return providers.findResult {
+        return providers.findResults {
             return it.getAPINames(api)
         }?.flatten()?: [] as List<String>
     }

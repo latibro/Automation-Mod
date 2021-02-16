@@ -9,32 +9,32 @@ abstract class AbstractAPIProvider implements APIProvider {
     //TODO static map "context class"->"api constructor"
 
     @Override
-    boolean hasAPI(Context context) {
-        return false
-    }
-
-    @Override
-    ContextAPI getAPI(Context context) {
+    API getAPI(Context context) {
         return null
     }
 
     @Override
-    List<String> getAPINames(API api) {
+    List<String> getAPINames(API contextApi) {
         return []
     }
 
     @Override
-    boolean hasAPI(String name, API api) {
+    boolean hasAPI(String name, API contextApi) {
         return false
     }
 
     @Override
-    API getAPI(String name, API api) {
+    API getAPI(String name, API contextApi) {
         return null
     }
 
     @Override
-    API getAPI(Class<? extends API> cls, API api) {
+    API getAPI(Class<? extends API> apiClass, API contextApi) {
+        return null
+    }
+
+    @Override
+    API getAPI(Class<? extends API> apiClass, Context context) {
         return null
     }
 

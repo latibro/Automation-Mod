@@ -7,7 +7,6 @@ import latibro.automation.core.api.APIRegistry
 import latibro.automation.core.api.AbstractAPIProvider
 import latibro.automation.core.api.ContextAPI
 import latibro.automation.core.api.entity.CoreEntityAPI
-import latibro.automation.core.api.location.LocationAPI
 import latibro.automation.core.context.Context
 import latibro.automation.core.context.ContextRegistry
 import latibro.automation.integration.immersiverailroading.api.rollingstock.*
@@ -16,25 +15,15 @@ import latibro.automation.integration.immersiverailroading.context.RollingStockC
 final class ImmersiveRailroadingAPIProvider extends AbstractAPIProvider {
 
     @Override
-    boolean hasAPI(Context context) {
-        if (context instanceof RollingStockContext) {
-            return true
+    API getAPI(Context context) {
+        if (context instanceof RollingStockContext<LocomotiveDiesel>) {
+            return new DieselLocomotiveAPIImpl(context)
         }
-        return super.hasAPI(context)
-    }
-
-    @Override
-    ContextAPI getAPI(Context context) {
-        if (hasAPI(context)) {
-            if (context instanceof RollingStockContext<LocomotiveDiesel>) {
-                return new DieselLocomotiveAPIImpl(context)
-            }
-            if (context instanceof RollingStockContext<Locomotive>) {
-                return new LocomotiveAPIImpl(context)
-            }
-            if (context instanceof RollingStockContext) {
-                return new RollingStockAPIImpl(context)
-            }
+        if (context instanceof RollingStockContext<Locomotive>) {
+            return new LocomotiveAPIImpl(context)
+        }
+        if (context instanceof RollingStockContext) {
+            return new RollingStockAPIImpl(context)
         }
         return super.getAPI(context)
     }
@@ -74,7 +63,7 @@ final class ImmersiveRailroadingAPIProvider extends AbstractAPIProvider {
                     return getAPI(RollingStockAPI, api)
                 }
                 if (name == "immersiverailroading:locomotive") {
-                    return getAPI(LocationAPI, api)
+                    return getAPI(LocomotiveAPI, api)
                 }
                 if (name == "immersiverailroading:locomotivediesel") {
                     return getAPI(DieselLocomotiveAPI, api)

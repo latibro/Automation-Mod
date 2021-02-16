@@ -4,9 +4,7 @@ import latibro.automation.core.context.Context
 
 interface APIProvider {
 
-    boolean hasAPI(Context context)
-
-    ContextAPI getAPI(Context context)
+    API getAPI(Context context)
 
     List<String> getAPINames(API api)
 
@@ -15,5 +13,7 @@ interface APIProvider {
     API getAPI(String name, API api)
 
     API getAPI(Class<? extends API> cls, API api)
+
+    API getAPI(Class<? extends API> cls, Context context)
 
 }
