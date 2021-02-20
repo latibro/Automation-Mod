@@ -1,11 +1,12 @@
 package latibro.automation.linkbox
 
-
+import groovy.transform.CompileStatic
 import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.EnumFacing
 import net.minecraftforge.items.CapabilityItemHandler
 import net.minecraftforge.items.SlotItemHandler
 
+@CompileStatic
 abstract class TileEntityContainer extends PlayerContainer {
 
     static class TileEntitySlot extends SlotItemHandler {
