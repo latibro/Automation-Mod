@@ -15,9 +15,9 @@ local world = getAutomationLink("world_link")
 
 local loadedEntities = world.getLoadedEntities()
 
-local entity = loadedEntities.findBy("UUID", "6924eb11-49d8-40e0-8006-6f8dfc930e78")
+local entity = loadedEntities.whereProperty("UUID", "6924eb11-49d8-40e0-8006-6f8dfc930e78").asList()[1]
 
-local rollingStock = entity.asType("immersiverailroading.rollingstock.locomotive.diesel")
+local rollingStock = entity.getAPI("immersiverailroading:locomotivediesel")
 
 if rollingStock.getTag() then
     print("tag: " .. tostring(rollingStock.getTag()))

@@ -13,8 +13,8 @@ end
 
 local world = getAutomationLink("world_link")
 
-local entities = world.getLoadedEntities()
-print("Number of loaded entities in world: " .. entities.size())
+local loadedEntities = world.getLoadedEntities()
+print("Number of loaded entities in world: " .. loadedEntities.size())
 
-local cows = entities.where("name", "Cow")
+local cows = loadedEntities.whereProperty("name", "Cow")
 print("Number of loaded cows in world: " .. cows.size())

@@ -17,7 +17,7 @@ local coordinate = { x = 756, y = 4, z = -325 }
 
 local world = getAutomationLink("world_link")
 
-local location = world.getLocationByCoordinate(coordinate.x, coordinate.y, coordinate.z)
+local location = world.getLocationByCoordinates(coordinate.x, coordinate.y, coordinate.z)
 print("Location: " .. location.getX() .. ", " .. location.getY() .. ", " .. location.getZ())
 
 local entities = location.getEntities()

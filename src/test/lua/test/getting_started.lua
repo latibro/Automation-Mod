@@ -13,13 +13,14 @@ end
 
 local world = getAutomationLink("world_link")
 
-local entities = world.getLoadedEntities()
-print("Number of loaded entities in world: " .. entities.size())
+local loadedEntities = world.getLoadedEntities()
+print("Number of loaded entities in world: " .. loadedEntities.size())
 
+local entities = loadedEntities.asList()
 for i=1, 10 do
     print("--- Entity #" .. i .. " ---")
 
-    local entity = entities.get(i)
+    local entity = entities[i]
     print("UUID of entity: " .. entity.getUUID())
     print("Name of entity: " .. entity.getName())
 

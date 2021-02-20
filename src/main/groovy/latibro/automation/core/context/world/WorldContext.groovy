@@ -7,6 +7,6 @@ import latibro.automation.core.context.server.ServerContextProvider
 
 interface WorldContext extends Context, ServerContextProvider, LoadedEntitiesContextProvider {
 
-    LocationContext getLocationContextByCoordinate(int x, int y, int z)
+    LocationContext getLocationContextByCoordinates(int x, int y, int z)
 
 }

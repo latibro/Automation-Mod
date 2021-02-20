@@ -2,10 +2,10 @@ package latibro.automation.core.api
 
 
 import latibro.automation.core.api.entity.CoreEntityAPI
-import latibro.automation.core.api.entity.EntityGroupAPIImpl
-import latibro.automation.core.api.location.LocationAPIImpl
-import latibro.automation.core.api.server.ServerAPIImpl
-import latibro.automation.core.api.world.WorldAPIImpl
+import latibro.automation.core.api.entity.CoreEntityGroupAPI
+import latibro.automation.core.api.location.CoreLocationAPI
+import latibro.automation.core.api.server.CoreServerAPI
+import latibro.automation.core.api.world.CoreWorldAPI
 import latibro.automation.core.context.Context
 import latibro.automation.core.context.CoreContext
 import latibro.automation.core.context.entity.EntityContext
@@ -20,19 +20,19 @@ final class CoreAPIProvider extends AbstractAPIProvider {
     API getAPI(Context context) {
         if (context instanceof CoreContext) {
             if (context instanceof ServerContext) {
-                return new ServerAPIImpl(context)
+                return new CoreServerAPI(context)
             }
             if (context instanceof WorldContext) {
-                return new WorldAPIImpl(context)
+                return new CoreWorldAPI(context)
             }
             if (context instanceof LocationContext) {
-                return new LocationAPIImpl(context)
+                return new CoreLocationAPI(context)
             }
             if (context instanceof EntityContext) {
                 return new CoreEntityAPI(context)
             }
             if (context instanceof EntityGroupContext) {
-                return new EntityGroupAPIImpl(context)
+                return new CoreEntityGroupAPI(context)
             }
         }
         return super.getAPI(context)

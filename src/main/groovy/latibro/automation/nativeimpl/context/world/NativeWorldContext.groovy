@@ -13,7 +13,7 @@ interface NativeWorldContext extends WorldContext, NativeContext {
     World getNativeWorld()
 
     @Override
-    NativeLocationContext getLocationContextByCoordinate(int x, int y, int z)
+    NativeLocationContext getLocationContextByCoordinates(int x, int y, int z)
 
     @Override
     NativeEntityGroupContext getLoadedEntitiesContext()

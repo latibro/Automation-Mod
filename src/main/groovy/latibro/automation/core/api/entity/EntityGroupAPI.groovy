@@ -9,27 +9,9 @@ interface EntityGroupAPI extends API {
     Number size()
 
     @LuaMethod
-    EntityAPI get(Number index)
+    EntityGroupAPI whereProperty(String property, Object value)
 
     @LuaMethod
-    EntityAPI first()
-
-    @LuaMethod
-    EntityAPI last()
-
-    @LuaMethod
-    List<EntityAPI> getAll()
-
-    @LuaMethod
-    EntityAPI findBy(String property, Object expected)
-
-    @LuaMethod
-    List<EntityAPI> findAllBy(String property, Object expected)
-
-    @LuaMethod
-    EntityGroupAPI where(String property, Object expected)
-
-    @LuaMethod
-    List<Object> getAllAsProperty(String property)
+    List<EntityAPI> asList()
 
 }

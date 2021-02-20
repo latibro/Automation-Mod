@@ -6,11 +6,11 @@ import latibro.automation.core.api.entity.EntityGroupAPI
 import latibro.automation.core.api.world.WorldAPI
 import latibro.automation.core.context.location.LocationContext
 
-final class LocationAPIImpl implements LocationAPI, ContextAPI {
+class BaseLocationAPI implements LocationAPI, ContextAPI {
 
     private final LocationContext context
 
-    LocationAPIImpl(LocationContext context) {
+    BaseLocationAPI(LocationContext context) {
         this.context = Objects.requireNonNull(context)
     }
 
@@ -50,8 +50,8 @@ final class LocationAPIImpl implements LocationAPI, ContextAPI {
     }
 
     @Override
-    Number getDistanceToCoordinate(Number x, Number y, Number z) {
-        return context.getDistanceToCoordinate(x as int, y as int, z as int)
+    Number getDistanceToCoordinates(Number x, Number y, Number z) {
+        return context.getDistanceToCoordinates(x as int, y as int, z as int)
     }
 
 }

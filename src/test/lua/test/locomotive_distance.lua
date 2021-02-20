@@ -13,14 +13,14 @@ end
 
 function waitForDistance(location, x, y, z, distance)
     print("----")
-    local currentDistance = location.getDistanceToCoordinate(x, y, z)
+    local currentDistance = location.getDistanceToCoordinates(x, y, z)
     print("Distance to location: " .. tostring(currentDistance))
     repeat
         os.sleep(0.1)
-        currentDistance = location.getDistanceToCoordinate(x, y, z)
+        currentDistance = location.getDistanceToCoordinates(x, y, z)
         --print("Distance to location: " .. tostring(currentDistance))
     until (currentDistance <= distance)
-    currentDistance = location.getDistanceToCoordinate(x, y, z)
+    currentDistance = location.getDistanceToCoordinates(x, y, z)
     print("Distance to location: " .. tostring(currentDistance))
     print("----")
 end
@@ -31,9 +31,9 @@ local world = getAutomationLink("world_link")
 
 local loadedEntities = world.getLoadedEntities()
 
-local entity = loadedEntities.findBy("UUID", "6924eb11-49d8-40e0-8006-6f8dfc930e78")
+local entity = loadedEntities.whereProperty("UUID", "6924eb11-49d8-40e0-8006-6f8dfc930e78").asList()[1]
 
-local rollingStock = entity.asType("immersiverailroading.rollingstock.locomotive.diesel")
+local rollingStock = entity.getAPI("immersiverailroading:locomotivediesel")
 local rollingStockLocation = rollingStock.getLocation()
 
 rollingStock.startEngine()

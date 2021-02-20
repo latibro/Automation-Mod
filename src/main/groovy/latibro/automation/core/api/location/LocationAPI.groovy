@@ -26,6 +26,6 @@ interface LocationAPI extends API {
     EntityGroupAPI getEntities()
 
     @LuaMethod
-    Number getDistanceToCoordinate(Number x, Number y, Number z)
+    Number getDistanceToCoordinates(Number x, Number y, Number z)
 
 }

@@ -5,11 +5,11 @@ import latibro.automation.core.api.ContextAPI
 import latibro.automation.core.api.entity.EntityGroupAPI
 import latibro.automation.core.context.server.ServerContext
 
-final class ServerAPIImpl implements ServerAPI, ContextAPI {
+class BaseServerAPI implements ServerAPI, ContextAPI {
 
     private final ServerContext context
 
-    ServerAPIImpl(ServerContext context) {
+    BaseServerAPI(ServerContext context) {
         this.context = Objects.requireNonNull(context)
     }
 

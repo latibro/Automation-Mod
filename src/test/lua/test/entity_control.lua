@@ -28,11 +28,11 @@ local locations = { red, yellow, green, blue, orange }
 
 local world = getAutomationLink("world_link")
 
-local entities = world.getLoadedEntities()
+local loadedEntities = world.getLoadedEntities()
 
-local entity = entities.findBy("UUID", uuid)
+local entity = loadedEntities.whereProperty("UUID", uuid).asList()[1]
 
-local livingEntity = entity.asType("minecraft.entity.living")
+local livingEntity = entity.getAPI("minecraft:entityliving")
 
 local route = { red, yellow, green, blue, green, red }
 

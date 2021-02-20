@@ -33,7 +33,7 @@ abstract class AbstractNativeLocationContext implements NativeLocationContext {
     }
 
     @Override
-    double getDistanceToCoordinate(int x, int y, int z) {
+    double getDistanceToCoordinates(int x, int y, int z) {
         return nativeLocation.getDistance(x, y, z)
     }
 

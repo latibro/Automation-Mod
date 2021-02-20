@@ -7,11 +7,11 @@ import latibro.automation.core.api.location.LocationAPI
 import latibro.automation.core.api.server.ServerAPI
 import latibro.automation.core.context.world.WorldContext
 
-final class WorldAPIImpl implements WorldAPI, ContextAPI {
+class BaseWorldAPI implements WorldAPI, ContextAPI {
 
     private final WorldContext context
 
-    WorldAPIImpl(WorldContext context) {
+    BaseWorldAPI(WorldContext context) {
         this.context = Objects.requireNonNull(context)
     }
 
@@ -31,8 +31,8 @@ final class WorldAPIImpl implements WorldAPI, ContextAPI {
     }
 
     @Override
-    LocationAPI getLocationByCoordinate(Number x, Number y, Number z) {
-        return APIRegistry.getAPI(context.getLocationContextByCoordinate(x as int, y as int, z as int)) as LocationAPI
+    LocationAPI getLocationByCoordinates(Number x, Number y, Number z) {
+        return APIRegistry.getAPI(context.getLocationContextByCoordinates(x as int, y as int, z as int)) as LocationAPI
     }
 
 }

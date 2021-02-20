@@ -90,10 +90,12 @@ dependencies {
     compile group: 'org.squiddev', name: 'cc-tweaked-1.12.2', version: '1.89.+'
 
     // Groovy
-    compile group: 'org.codehaus.groovy', name: 'groovy-all', version: '3.0.7'
+    compile group: 'org.codehaus.groovy', name: 'groovy', version: '3.0.7'
 
-    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.7.0-M1'
-    testCompile group: 'org.spockframework', name: 'spock-core', version: '2.0-M3-groovy-3.0'
+    // Unit test
+    testCompile(group: 'org.spockframework', name: 'spock-core', version: '2.0-M4-groovy-3.0') {
+        exclude group: 'org.codehaus.groovy'
+    }
     testCompile group: 'net.bytebuddy', name: 'byte-buddy', version: '1.10.19'
     testCompile group: 'org.objenesis', name: 'objenesis', version: '3.1'
 }
@@ -114,5 +116,12 @@ processResources {
     // copy everything else except the mcmod.info
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
+    }
+}
+
+test {
+    useJUnit()
+    testLogging {
+        events "passed", "skipped", "failed"
     }
 }

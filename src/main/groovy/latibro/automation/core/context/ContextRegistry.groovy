@@ -1,10 +1,8 @@
 package latibro.automation.core.context
 
-import latibro.automation.integration.minecraft.MinecraftContextProvider
-
 final class ContextRegistry {
 
-    private static final List<ContextProvider> providers = (List<ContextProvider>) [new CoreContextProvider(), new MinecraftContextProvider()]
+    private static final List<ContextProvider> providers = (List<ContextProvider>) [new CoreContextProvider()]
 
     static void register(ContextProvider provider) {
         providers.add(provider)

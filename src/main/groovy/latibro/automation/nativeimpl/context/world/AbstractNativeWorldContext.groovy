@@ -17,7 +17,7 @@ abstract class AbstractNativeWorldContext implements NativeWorldContext {
     }
 
     @Override
-    NativeLocationContext getLocationContextByCoordinate(int x, int y, int z) {
+    NativeLocationContext getLocationContextByCoordinates(int x, int y, int z) {
         return new NativeStaticLocationContext(x, y, z, this)
     }
 
