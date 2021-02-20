@@ -23,7 +23,7 @@ print("Location: " .. location.getX() .. ", " .. location.getY() .. ", " .. loca
 local entities = location.getEntities()
 print("Number of entities at location: " .. entities.size())
 
-local entity = entities.get(1)
+local entity = entities.asList()[1]
 print("UUID of first entity: " .. entity.getUUID())
 
 local entityLocation = entity.getLocation()

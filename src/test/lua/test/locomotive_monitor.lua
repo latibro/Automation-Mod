@@ -18,6 +18,7 @@ local rollingStockLocation = rollingStock.getLocation()
 
 local component = require("component")
 local gpu = component.gpu -- get primary gpu component
+local w, h = gpu.getResolution()
 
 ----------
 
