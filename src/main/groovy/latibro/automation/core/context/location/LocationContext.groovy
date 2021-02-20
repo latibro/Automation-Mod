@@ -15,7 +15,9 @@ interface LocationContext extends Context, WorldContextProvider {
 
     int getZ()
 
-    EntityGroupContext getEntityGroupContext()
+    EntityGroupContext getEntities()
+
+    EntityGroupContext getEntities(boolean includeBoudingBoxes)
 
     double getDistanceToCoordinates(int x, int y, int z)
 

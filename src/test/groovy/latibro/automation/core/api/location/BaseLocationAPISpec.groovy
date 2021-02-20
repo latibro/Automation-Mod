@@ -136,7 +136,7 @@ class BaseLocationAPISpec extends Specification {
     def "Get entities"() {
         given:
         def context = Mock(LocationContext, {
-            getEntityGroupContext() >> returnedFromContext
+            getEntities() >> returnedFromContext
         })
         def api = new BaseLocationAPI(context)
         when:

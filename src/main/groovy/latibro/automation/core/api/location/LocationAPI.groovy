@@ -8,7 +8,7 @@ import latibro.automation.core.api.world.WorldAPI
 interface LocationAPI extends API {
 
     @LuaMethod
-    boolean isLoaded()
+    Boolean isLoaded()
 
     @LuaMethod
     Number getX()
@@ -24,6 +24,9 @@ interface LocationAPI extends API {
 
     @LuaMethod
     EntityGroupAPI getEntities()
+
+    @LuaMethod
+    EntityGroupAPI getEntities(Boolean includeBoundingBoxes)
 
     @LuaMethod
     Number getDistanceToCoordinates(Number x, Number y, Number z)

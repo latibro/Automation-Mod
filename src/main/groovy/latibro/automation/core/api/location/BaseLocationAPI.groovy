@@ -1,5 +1,6 @@
 package latibro.automation.core.api.location
 
+
 import latibro.automation.core.api.APIRegistry
 import latibro.automation.core.api.ContextAPI
 import latibro.automation.core.api.entity.EntityGroupAPI
@@ -20,7 +21,7 @@ class BaseLocationAPI implements LocationAPI, ContextAPI {
     }
 
     @Override
-    boolean isLoaded() {
+    Boolean isLoaded() {
         return context.isLoaded()
     }
 
@@ -46,7 +47,12 @@ class BaseLocationAPI implements LocationAPI, ContextAPI {
 
     @Override
     EntityGroupAPI getEntities() {
-        return APIRegistry.getAPI(context.entityGroupContext) as EntityGroupAPI
+        return APIRegistry.getAPI(context.getEntities()) as EntityGroupAPI
+    }
+
+    @Override
+    EntityGroupAPI getEntities(Boolean includeBoundingBoxes) {
+        return APIRegistry.getAPI(context.getEntities(includeBoundingBoxes)) as EntityGroupAPI
     }
 
     @Override

@@ -11,7 +11,10 @@ interface NativeLocationContext extends LocationContext, NativeContext {
     BlockPos getNativeLocation()
 
     @Override
-    NativeEntityGroupContext getEntityGroupContext()
+    NativeEntityGroupContext getEntities()
+
+    @Override
+    NativeEntityGroupContext getEntities(boolean includeBoundingBoxes)
 
     @Override
     NativeWorldContext getWorldContext()

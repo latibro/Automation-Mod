@@ -28,8 +28,13 @@ abstract class AbstractNativeLocationContext implements NativeLocationContext {
     }
 
     @Override
-    NativeEntityGroupContext getEntityGroupContext() {
+    NativeEntityGroupContext getEntities() {
         return new NativeLocationEntityGroup(this)
+    }
+
+    @Override
+    NativeEntityGroupContext getEntities(boolean includeBoundingBoxes) {
+        return new NativeLocationEntityGroup(this, includeBoundingBoxes)
     }
 
     @Override

@@ -11,19 +11,17 @@ end
 
 ----------
 
-local coordinate = { x = 756, y = 4, z = -325 }
+local location = getAutomationLink("location_link")
 
-----------
-
-local world = getAutomationLink("world_link")
-
-local location = world.getLocationByCoordinates(coordinate.x, coordinate.y, coordinate.z)
 print("Location: " .. location.getX() .. ", " .. location.getY() .. ", " .. location.getZ())
 
-local entities = location.getEntities()
+local entities = location.getEntities(false)
 print("Number of entities at location: " .. entities.size())
 
-local entity = entities.asList()[1]
+local entitiesBoundingBox = location.getEntities(true)
+print("Number of entities at location (bounding box): " .. entitiesBoundingBox.size())
+
+local entity = entitiesBoundingBox.asList()[1]
 print("UUID of first entity: " .. entity.getUUID())
 
 local entityLocation = entity.getLocation()
