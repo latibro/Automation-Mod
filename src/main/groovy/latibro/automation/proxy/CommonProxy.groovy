@@ -8,8 +8,6 @@ import latibro.automation.core.context.ContextRegistry
 import latibro.automation.integration.computercraft.TileEntityPeripheralProvider
 import latibro.automation.integration.immersiverailroading.ImmersiveRailroadingAPIProvider
 import latibro.automation.integration.immersiverailroading.ImmersiveRailroadingContextProvider
-import latibro.automation.integration.minecraft.MinecraftAPIProvider
-import latibro.automation.integration.minecraft.MinecraftContextProvider
 import latibro.automation.linkbox.entity.EntityLinkBoxBlock
 import latibro.automation.linkbox.entity.EntityLinkBoxTileEntity
 import latibro.automation.linkbox.entity.EntityLinkCardItem
@@ -47,9 +45,6 @@ class CommonProxy {
         if (Loader.isModLoaded("computercraft")) {
             ComputerCraftAPI.registerPeripheralProvider(new TileEntityPeripheralProvider())
         }
-
-        ContextRegistry.register(new MinecraftContextProvider())
-        APIRegistry.register(new MinecraftAPIProvider())
 
         if (Loader.isModLoaded("immersiverailroading")) {
             ContextRegistry.register(new ImmersiveRailroadingContextProvider())

@@ -7,11 +7,11 @@ import latibro.automation.core.api.server.CoreServerAPI
 import latibro.automation.core.api.world.CoreWorldAPI
 import latibro.automation.core.context.Context
 import latibro.automation.core.context.CoreContext
+import latibro.automation.core.context.entity.EntityContext
 import latibro.automation.core.context.entity.group.EntityGroupContext
 import latibro.automation.core.context.location.LocationContext
 import latibro.automation.core.context.server.ServerContext
 import latibro.automation.core.context.world.WorldContext
-import latibro.automation.integration.minecraft.context.entity.EntityContext
 import spock.lang.Specification
 import spock.lang.Unroll
 
