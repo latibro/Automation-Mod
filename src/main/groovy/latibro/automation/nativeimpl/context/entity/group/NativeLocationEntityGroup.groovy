@@ -1,10 +1,13 @@
 package latibro.automation.nativeimpl.context.entity.group
 
+import com.google.common.base.Predicate
 import groovy.transform.CompileStatic
 import latibro.automation.core.context.CoreContext
 import latibro.automation.nativeimpl.context.location.NativeLocationContext
 import net.minecraft.entity.Entity
 import net.minecraft.util.math.AxisAlignedBB
+
+import javax.annotation.Nullable
 
 @CompileStatic
 final class NativeLocationEntityGroup extends AbstractNativeEntityGroupContext implements CoreContext {
@@ -22,12 +25,15 @@ final class NativeLocationEntityGroup extends AbstractNativeEntityGroupContext i
     }
 
     Collection<Entity> getNativeEntityCollection() {
-        locationContext.worldContext.nativeWorld.loadedEntityList.findAll {
-            if (includeBoundingBoxes) {
-                return it.getEntityBoundingBox().intersects(new AxisAlignedBB(locationContext.nativeLocation))
+        return (Collection<Entity>) locationContext.worldContext.nativeWorld.getEntities(Entity.class, new Predicate<Entity>() {
+            @Override
+            boolean apply(@Nullable Entity input) {
+                if (includeBoundingBoxes) {
+                    return input.getEntityBoundingBox().intersects(new AxisAlignedBB(locationContext.nativeLocation))
+                }
+                return input.position == locationContext.nativeLocation
             }
-            return it.position == locationContext.nativeLocation
-        }
+        })
     }
 
 }

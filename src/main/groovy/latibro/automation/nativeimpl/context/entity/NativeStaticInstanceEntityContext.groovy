@@ -9,7 +9,7 @@ final class NativeStaticInstanceEntityContext extends AbstractNativeEntityContex
     private final Entity nativeEntity
 
     NativeStaticInstanceEntityContext(Entity nativeEntity) {
-        this.nativeEntity = nativeEntity
+        this.nativeEntity = Objects.requireNonNull(nativeEntity)
     }
 
     Entity getNativeEntity() {

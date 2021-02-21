@@ -17,9 +17,10 @@ abstract class AbstractNativeEntityGroupContext extends AbstractEntityGroupConte
 
     @Override
     List<NativeEntityContext> getAll() {
-        return nativeEntityCollection.collect {
+        def result = nativeEntityCollection.collect {
             wrapNativeEntity(it)
         }
+        return result
     }
 
     @Override
