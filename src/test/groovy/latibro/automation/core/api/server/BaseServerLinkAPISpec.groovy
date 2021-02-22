@@ -2,7 +2,7 @@ package latibro.automation.core.api.server
 
 import latibro.automation.AutomationMod
 import latibro.automation.core.api.ContextAPI
-import latibro.automation.core.api.entity.EntityGroupAPI
+import latibro.automation.api.link.entity.EntityMultiLinkAPI
 import latibro.automation.core.context.CoreContext
 import latibro.automation.core.context.entity.group.EntityGroupContext
 import latibro.automation.core.context.server.ServerContext
@@ -10,7 +10,7 @@ import org.apache.logging.log4j.Logger
 import spock.lang.Specification
 import spock.lang.Unroll
 
-class BaseServerAPISpec extends Specification {
+class BaseServerLinkAPISpec extends Specification {
 
     def setupSpec() {
         AutomationMod.logger = Mock(Logger.class)
@@ -19,7 +19,7 @@ class BaseServerAPISpec extends Specification {
     @Unroll("#test")
     def "Constructor - success"() {
         when:
-        def api = new BaseServerAPI(context as ServerContext)
+        def api = new BaseServerLinkAPI(context as ServerContext)
         then:
         api != null
         where:
@@ -31,7 +31,7 @@ class BaseServerAPISpec extends Specification {
     @Unroll("#test")
     def "Constructor - fails"() {
         when:
-        new BaseServerAPI(context as ServerContext)
+        new BaseServerLinkAPI(context as ServerContext)
         then:
         thrown(Exception)
         where:
@@ -45,7 +45,7 @@ class BaseServerAPISpec extends Specification {
         def context = Mock(ServerContext, {
             getLoadedEntitiesContext() >> returnedFromContext
         })
-        def api = new BaseServerAPI(context)
+        def api = new BaseServerLinkAPI(context)
         when:
         def result = api.getLoadedEntities()
         then:
@@ -54,7 +54,7 @@ class BaseServerAPISpec extends Specification {
         test             | returnedFromContext      | expected
         "null"           | null                     | { it == null }
         "generic server" | Mock(EntityGroupContext) | {
-            it instanceof EntityGroupAPI &&
+            it instanceof EntityMultiLinkAPI &&
                     ((ContextAPI) it).context == returnedFromContext
         }
     }

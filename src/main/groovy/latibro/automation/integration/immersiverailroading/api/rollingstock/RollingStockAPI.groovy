@@ -1,9 +1,9 @@
 package latibro.automation.integration.immersiverailroading.api.rollingstock
 
 import latibro.automation.api.core.lua.LuaMethod
-import latibro.automation.core.api.entity.EntityAPI
+import latibro.automation.api.link.entity.EntityLinkAPI
 
-interface RollingStockAPI extends EntityAPI {
+interface RollingStockAPI extends EntityLinkAPI {
 
     @LuaMethod
     void setTag(String tag)

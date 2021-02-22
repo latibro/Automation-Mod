@@ -7,13 +7,13 @@ import spock.lang.Specification
 import spock.lang.Title
 import spock.lang.Unroll
 
-@Title("EntityAPI - Core impl")
-class CoreEntityAPISpec extends Specification {
+@Title("EntityLinkAPI - Core impl")
+class CoreEntityLinkAPISpec extends Specification {
 
     @Unroll("#test")
     def "Constructor - success"() {
         when:
-        def api = new CoreEntityAPI(context as EntityContext)
+        def api = new CoreEntityLinkAPI(context as EntityContext)
         then:
         api != null
         where:
@@ -27,7 +27,7 @@ class CoreEntityAPISpec extends Specification {
     @Unroll("#test")
     def "Constructor - fails"() {
         when:
-        new CoreEntityAPI(context as EntityContext)
+        new CoreEntityLinkAPI(context as EntityContext)
         then:
         thrown(Exception)
         where:

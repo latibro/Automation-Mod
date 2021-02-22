@@ -1,10 +1,10 @@
 package latibro.automation.integration.immersiverailroading.api.rollingstock
 
 import cam72cam.immersiverailroading.entity.EntityRollingStock
-import latibro.automation.core.api.entity.BaseEntityAPI
+import latibro.automation.core.api.entity.BaseEntityLinkAPI
 import latibro.automation.integration.immersiverailroading.context.RollingStockContext
 
-class RollingStockAPIImpl extends BaseEntityAPI implements RollingStockAPI {
+class RollingStockAPIImpl extends BaseEntityLinkAPI implements RollingStockAPI {
 
     RollingStockAPIImpl(RollingStockContext context) {
         super(context)

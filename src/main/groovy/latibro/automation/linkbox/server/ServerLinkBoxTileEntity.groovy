@@ -2,7 +2,7 @@ package latibro.automation.linkbox.server
 
 import groovy.transform.CompileStatic
 import latibro.automation.core.api.APIRegistry
-import latibro.automation.core.api.server.ServerAPI
+import latibro.automation.api.link.server.ServerLinkAPI
 import latibro.automation.core.peripheral.PeripheralTileEntity
 import latibro.automation.nativeimpl.context.tileentity.NativeStaticTileEntityContext
 
@@ -15,9 +15,9 @@ class ServerLinkBoxTileEntity extends PeripheralTileEntity {
     }
 
     @Override
-    protected ServerAPI getPeripheralAPI() {
+    protected ServerLinkAPI getPeripheralAPI() {
         def tileEntityContext = new NativeStaticTileEntityContext(this)
-        return APIRegistry.getAPI(tileEntityContext.worldContext.serverContext) as ServerAPI
+        return APIRegistry.getAPI(tileEntityContext.worldContext.serverContext) as ServerLinkAPI
     }
 
 }

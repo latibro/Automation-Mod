@@ -2,11 +2,11 @@ package latibro.automation.integration.immersiverailroading
 
 import cam72cam.immersiverailroading.entity.Locomotive
 import cam72cam.immersiverailroading.entity.LocomotiveDiesel
-import latibro.automation.core.api.API
+import latibro.automation.api.API
 import latibro.automation.core.api.APIRegistry
 import latibro.automation.core.api.AbstractAPIProvider
 import latibro.automation.core.api.ContextAPI
-import latibro.automation.core.api.entity.CoreEntityAPI
+import latibro.automation.core.api.entity.CoreEntityLinkAPI
 import latibro.automation.core.context.Context
 import latibro.automation.core.context.ContextRegistry
 import latibro.automation.integration.immersiverailroading.api.rollingstock.*
@@ -31,7 +31,7 @@ final class ImmersiveRailroadingAPIProvider extends AbstractAPIProvider {
     @Override
     List<String> getAPINames(API api) {
         def names = super.getAPINames(api)
-        if (api instanceof CoreEntityAPI) {
+        if (api instanceof CoreEntityLinkAPI) {
             names.add("immersiverailroading:rollingstock")
             names.add("immersiverailroading:locomotive")
             names.add("immersiverailroading:locomotivediesel")
@@ -41,7 +41,7 @@ final class ImmersiveRailroadingAPIProvider extends AbstractAPIProvider {
 
     @Override
     boolean hasAPI(String name, API api) {
-        if (api instanceof CoreEntityAPI) {
+        if (api instanceof CoreEntityLinkAPI) {
             if (name == "immersiverailroading:rollingstock") {
                 return true
             }
@@ -58,7 +58,7 @@ final class ImmersiveRailroadingAPIProvider extends AbstractAPIProvider {
     @Override
     API getAPI(String name, API api) {
         if (hasAPI(name, api)) {
-            if (api instanceof CoreEntityAPI) {
+            if (api instanceof CoreEntityLinkAPI) {
                 if (name == "immersiverailroading:rollingstock") {
                     return getAPI(RollingStockAPI, api)
                 }

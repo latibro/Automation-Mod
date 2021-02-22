@@ -2,8 +2,8 @@ package latibro.automation.core.api.location
 
 import latibro.automation.AutomationMod
 import latibro.automation.core.api.ContextAPI
-import latibro.automation.core.api.entity.EntityGroupAPI
-import latibro.automation.core.api.world.WorldAPI
+import latibro.automation.api.link.entity.EntityMultiLinkAPI
+import latibro.automation.api.link.world.WorldLinkAPI
 import latibro.automation.core.context.CoreContext
 import latibro.automation.core.context.entity.group.EntityGroupContext
 import latibro.automation.core.context.location.LocationContext
@@ -14,8 +14,8 @@ import spock.lang.Specification
 import spock.lang.Title
 import spock.lang.Unroll
 
-@Title("LocationAPI - Base impl")
-class BaseLocationAPISpec extends Specification {
+@Title("LocationLinkAPI - Base impl")
+class BaseLocationLinkAPISpec extends Specification {
 
     def setupSpec() {
         AutomationMod.logger = Mock(Logger.class)
@@ -24,7 +24,7 @@ class BaseLocationAPISpec extends Specification {
     @Unroll("#test")
     def "Constructor - success"() {
         when:
-        def api = new BaseLocationAPI(context as LocationContext)
+        def api = new BaseLocationLinkAPI(context as LocationContext)
         then:
         api != null
         where:
@@ -36,7 +36,7 @@ class BaseLocationAPISpec extends Specification {
     @Unroll("#test")
     def "Constructor - fails"() {
         when:
-        new BaseLocationAPI(context as LocationContext)
+        new BaseLocationLinkAPI(context as LocationContext)
         then:
         thrown(Exception)
         where:
@@ -50,7 +50,7 @@ class BaseLocationAPISpec extends Specification {
         def context = Mock(LocationContext, {
             isLoaded() >> returnedFromContext
         })
-        def api = new BaseLocationAPI(context)
+        def api = new BaseLocationLinkAPI(context)
         when:
         def result = api.isLoaded()
         then:
@@ -67,7 +67,7 @@ class BaseLocationAPISpec extends Specification {
         def context = Mock(LocationContext, {
             getX() >> returnedFromContext
         })
-        def api = new BaseLocationAPI(context)
+        def api = new BaseLocationLinkAPI(context)
         when:
         def result = api.getX()
         then:
@@ -84,7 +84,7 @@ class BaseLocationAPISpec extends Specification {
         def context = Mock(LocationContext, {
             getY() >> returnedFromContext
         })
-        def api = new BaseLocationAPI(context)
+        def api = new BaseLocationLinkAPI(context)
         when:
         def result = api.getY()
         then:
@@ -101,7 +101,7 @@ class BaseLocationAPISpec extends Specification {
         def context = Mock(LocationContext, {
             getZ() >> returnedFromContext
         })
-        def api = new BaseLocationAPI(context)
+        def api = new BaseLocationLinkAPI(context)
         when:
         def result = api.getZ()
         then:
@@ -118,7 +118,7 @@ class BaseLocationAPISpec extends Specification {
         def context = Mock(LocationContext, {
             getWorldContext() >> returnedFromContext
         })
-        def api = new BaseLocationAPI(context)
+        def api = new BaseLocationLinkAPI(context)
         when:
         def result = api.getWorld()
         then:
@@ -127,7 +127,7 @@ class BaseLocationAPISpec extends Specification {
         test             | returnedFromContext | expected
         "null"           | null                | { it == null }
         "generic server" | Mock(WorldContext)  | {
-            it instanceof WorldAPI &&
+            it instanceof WorldLinkAPI &&
                     ((ContextAPI) it).context == returnedFromContext
         }
     }
@@ -138,7 +138,7 @@ class BaseLocationAPISpec extends Specification {
         def context = Mock(LocationContext, {
             getEntities() >> returnedFromContext
         })
-        def api = new BaseLocationAPI(context)
+        def api = new BaseLocationLinkAPI(context)
         when:
         def result = api.getEntities()
         then:
@@ -147,7 +147,7 @@ class BaseLocationAPISpec extends Specification {
         test             | returnedFromContext      | expected
         "null"           | null                     | { it == null }
         "generic server" | Mock(EntityGroupContext) | {
-            it instanceof EntityGroupAPI &&
+            it instanceof EntityMultiLinkAPI &&
                     ((ContextAPI) it).context == returnedFromContext
         }
     }
@@ -158,7 +158,7 @@ class BaseLocationAPISpec extends Specification {
         def context = Mock(LocationContext, {
             getDistanceToCoordinates(*_) >> returnedFromContext
         })
-        def api = new BaseLocationAPI(context)
+        def api = new BaseLocationLinkAPI(context)
         when:
         def result = api.getDistanceToCoordinates(1, 1, 1)
         then:
@@ -177,7 +177,7 @@ class BaseLocationAPISpec extends Specification {
     def "Get distance to coordinate - handling parameters"() {
         given:
         def context = Mock(LocationContext)
-        def api = new BaseLocationAPI(context)
+        def api = new BaseLocationLinkAPI(context)
         when:
         api.getDistanceToCoordinates(inputX as Number, inputY as Number, inputZ as Number)
         then:

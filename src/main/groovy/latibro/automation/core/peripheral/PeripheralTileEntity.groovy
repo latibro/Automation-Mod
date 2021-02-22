@@ -5,7 +5,7 @@ import dan200.computercraft.api.lua.LuaException
 import dan200.computercraft.api.peripheral.IComputerAccess
 import dan200.computercraft.api.peripheral.IPeripheral
 import groovy.transform.CompileStatic
-import latibro.automation.core.api.API
+import latibro.automation.api.API
 import latibro.automation.core.lua.LuaObjectProxy
 import latibro.automation.integration.computercraft.ComputerCraftObjectProxy
 import latibro.automation.integration.opencomputers.OpenComputersObjectProxy

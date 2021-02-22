@@ -1,10 +1,10 @@
 package latibro.automation.core.api
 
-import latibro.automation.core.api.entity.BaseEntityAPI
-import latibro.automation.core.api.entity.BaseEntityGroupAPI
-import latibro.automation.core.api.location.BaseLocationAPI
-import latibro.automation.core.api.server.BaseServerAPI
-import latibro.automation.core.api.world.BaseWorldAPI
+import latibro.automation.core.api.entity.BaseEntityLinkAPI
+import latibro.automation.core.api.entity.BaseEntityMultiLinkAPI
+import latibro.automation.core.api.location.BaseLocationLinkAPI
+import latibro.automation.core.api.server.BaseServerLinkAPI
+import latibro.automation.core.api.world.BaseWorldLinkAPI
 import latibro.automation.core.context.Context
 import latibro.automation.core.context.entity.EntityContext
 import latibro.automation.core.context.entity.group.EntityGroupContext
@@ -26,11 +26,11 @@ class BaseAPIProviderSpec extends Specification {
         apiClass.isInstance(api)
         where:
         test           | context                  | apiClass
-        "server"       | Mock(ServerContext)      | BaseServerAPI
-        "world"        | Mock(WorldContext)       | BaseWorldAPI
-        "location"     | Mock(LocationContext)    | BaseLocationAPI
-        "entity"       | Mock(EntityContext)      | BaseEntityAPI
-        "entity group" | Mock(EntityGroupContext) | BaseEntityGroupAPI
+        "server"       | Mock(ServerContext)      | BaseServerLinkAPI
+        "world"        | Mock(WorldContext)       | BaseWorldLinkAPI
+        "location"     | Mock(LocationContext)    | BaseLocationLinkAPI
+        "entity"       | Mock(EntityContext)      | BaseEntityLinkAPI
+        "entity group" | Mock(EntityGroupContext) | BaseEntityMultiLinkAPI
     }
 
     @Unroll("#test")

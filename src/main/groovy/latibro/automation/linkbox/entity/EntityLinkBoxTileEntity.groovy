@@ -2,7 +2,7 @@ package latibro.automation.linkbox.entity
 
 import groovy.transform.CompileStatic
 import latibro.automation.core.api.APIRegistry
-import latibro.automation.core.api.entity.EntityAPI
+import latibro.automation.api.link.entity.EntityLinkAPI
 import latibro.automation.core.peripheral.PeripheralTileEntity
 import latibro.automation.nativeimpl.context.entity.NativeStaticUUIDEntityContext
 import latibro.automation.nativeimpl.context.tileentity.NativeStaticTileEntityContext
@@ -58,11 +58,11 @@ class EntityLinkBoxTileEntity extends PeripheralTileEntity {
     }
 
     @Override
-    protected EntityAPI getPeripheralAPI() {
+    protected EntityLinkAPI getPeripheralAPI() {
         def tileEntityContext = new NativeStaticTileEntityContext(this)
         //TODO make the link to UUID dynamic
         def entityContext = new NativeStaticUUIDEntityContext(getEntityUUID(), tileEntityContext.worldContext.serverContext)
-        return APIRegistry.getAPI(entityContext) as EntityAPI
+        return APIRegistry.getAPI(entityContext) as EntityLinkAPI
     }
 
 }

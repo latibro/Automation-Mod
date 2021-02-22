@@ -3,9 +3,9 @@ package latibro.automation.core.api.location
 import latibro.automation.core.api.CoreAPI
 import latibro.automation.core.context.location.LocationContext
 
-final class CoreLocationAPI extends BaseLocationAPI implements CoreAPI {
+final class CoreLocationLinkAPI extends BaseLocationLinkAPI implements CoreAPI {
 
-    CoreLocationAPI(LocationContext context) {
+    CoreLocationLinkAPI(LocationContext context) {
         super(context)
     }
 

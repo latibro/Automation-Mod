@@ -2,7 +2,7 @@ package latibro.automation.linkbox.location
 
 import groovy.transform.CompileStatic
 import latibro.automation.core.api.APIRegistry
-import latibro.automation.core.api.location.LocationAPI
+import latibro.automation.api.link.location.LocationLinkAPI
 import latibro.automation.core.peripheral.PeripheralTileEntity
 import latibro.automation.nativeimpl.context.location.NativeStaticLocationContext
 import latibro.automation.nativeimpl.context.tileentity.NativeStaticTileEntityContext
@@ -59,11 +59,11 @@ class LocationLinkBoxTileEntity extends PeripheralTileEntity {
     }
 
     @Override
-    protected LocationAPI getPeripheralAPI() {
+    protected LocationLinkAPI getPeripheralAPI() {
         def tileEntityContext = new NativeStaticTileEntityContext(this)
         //TODO make the link to xyz dynamic
         def entityContext = new NativeStaticLocationContext(getLocationBlockPos(), tileEntityContext.worldContext)
-        return APIRegistry.getAPI(entityContext) as LocationAPI
+        return APIRegistry.getAPI(entityContext) as LocationLinkAPI
     }
 
 }
