@@ -10,7 +10,6 @@ function getAutomationLink(name)
 end
 
 ----------
-
 function adjustSpeed(rollingStock, speed)
     local firstCurrentSpeed = rollingStock.getCurrentSpeed()
     os.sleep(0.1)

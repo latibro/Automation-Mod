@@ -10,7 +10,6 @@ function getAutomationLink(name)
 end
 
 ----------
-
 function adjustSpeed(rollingStock, speed)
     local firstCurrentSpeed = rollingStock.getCurrentSpeed()
     os.sleep(0.1)
@@ -29,7 +28,7 @@ function adjustSpeed(rollingStock, speed)
 
     local speedTolerance = 1
     local speedFactorToSlow = 5
-    local speedFactorToFast = speedFactorToSlow/2
+    local speedFactorToFast = speedFactorToSlow / 2
 
     local levelChange = 0.1
     --local levelChange = math.abs(math.max(0.1, (speedDiff/100)))

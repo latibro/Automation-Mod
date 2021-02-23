@@ -3,8 +3,8 @@ package latibro.automation.nativeimpl.context.entity
 import groovy.transform.CompileStatic
 import latibro.automation.core.context.CoreContext
 import latibro.automation.core.context.entity.EntityLinkContext
-import latibro.automation.nativeimpl.context.location.CoreLocationContext
-import latibro.automation.nativeimpl.context.location.EntityCoreLocationContext
+import latibro.automation.nativeimpl.context.location.CoreLocationLinkContext
+import latibro.automation.nativeimpl.context.location.EntityCoreLocationLinkContext
 import latibro.automation.nativeimpl.context.server.CoreServerLinkContext
 import latibro.automation.nativeimpl.context.server.EntityCoreServerLinkContext
 import latibro.automation.nativeimpl.context.world.CoreWorldLinkContext
@@ -28,8 +28,8 @@ abstract class CoreEntityLinkContext implements EntityLinkContext, CoreContext {
     }
 
     @Override
-    CoreLocationContext getLocation() {
-        return new EntityCoreLocationContext(this)
+    CoreLocationLinkContext getLocation() {
+        return new EntityCoreLocationLinkContext(this)
     }
 
     @Override

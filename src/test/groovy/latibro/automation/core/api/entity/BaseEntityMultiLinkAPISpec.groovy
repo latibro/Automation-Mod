@@ -25,7 +25,7 @@ class BaseEntityMultiLinkAPISpec extends Specification {
         then:
         api != null
         where:
-        test              | context
+        test                        | context
         "generic entity multi link" | Mock(EntityMultiLinkContext)
         "core entity multi link"    | Mock(CoreEntityMultiLinkContext)
     }

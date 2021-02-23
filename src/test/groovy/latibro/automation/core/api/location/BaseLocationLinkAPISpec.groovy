@@ -7,7 +7,7 @@ import latibro.automation.core.api.ContextAPI
 import latibro.automation.core.context.entity.multi.EntityMultiLinkContext
 import latibro.automation.core.context.location.LocationContext
 import latibro.automation.core.context.world.WorldLinkContext
-import latibro.automation.nativeimpl.context.location.CoreLocationContext
+import latibro.automation.nativeimpl.context.location.CoreLocationLinkContext
 import org.apache.logging.log4j.Logger
 import spock.lang.PendingFeature
 import spock.lang.Specification
@@ -30,7 +30,7 @@ class BaseLocationLinkAPISpec extends Specification {
         where:
         test                    | context
         "generic location link" | Mock(LocationContext)
-        "core location link"    | Mock(CoreLocationContext)
+        "core location link"    | Mock(CoreLocationLinkContext)
     }
 
     @Unroll("#test")

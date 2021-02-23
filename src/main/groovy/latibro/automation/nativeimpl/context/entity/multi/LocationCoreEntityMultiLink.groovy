@@ -3,7 +3,7 @@ package latibro.automation.nativeimpl.context.entity.multi
 import com.google.common.base.Predicate
 import groovy.transform.CompileStatic
 import latibro.automation.core.LinkType
-import latibro.automation.nativeimpl.context.location.CoreLocationContext
+import latibro.automation.nativeimpl.context.location.CoreLocationLinkContext
 import net.minecraft.entity.Entity
 import net.minecraft.util.math.AxisAlignedBB
 
@@ -12,14 +12,14 @@ import javax.annotation.Nullable
 @CompileStatic
 final class LocationCoreEntityMultiLink extends CoreEntityMultiLinkContext {
 
-    private final CoreLocationContext location
+    private final CoreLocationLinkContext location
     private final boolean includeBoundingBoxes
 
-    LocationCoreEntityMultiLink(CoreLocationContext location) {
+    LocationCoreEntityMultiLink(CoreLocationLinkContext location) {
         this(location, true)
     }
 
-    LocationCoreEntityMultiLink(CoreLocationContext location, boolean includeBoundingBoxes) {
+    LocationCoreEntityMultiLink(CoreLocationLinkContext location, boolean includeBoundingBoxes) {
         this.location = Objects.requireNonNull(location)
         this.includeBoundingBoxes = includeBoundingBoxes
     }

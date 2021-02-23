@@ -9,7 +9,7 @@ import latibro.automation.nativeimpl.context.world.CoreWorldLinkContext
 import net.minecraft.util.math.BlockPos
 
 @CompileStatic
-abstract class CoreLocationContext implements LocationContext, CoreContext {
+abstract class CoreLocationLinkContext implements LocationContext, CoreContext {
 
     abstract BlockPos getNativeLocation()
 

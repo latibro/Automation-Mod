@@ -13,7 +13,7 @@ import latibro.automation.core.context.server.ServerLinkContext
 import latibro.automation.core.context.world.WorldLinkContext
 import latibro.automation.nativeimpl.context.entity.CoreEntityLinkContext
 import latibro.automation.nativeimpl.context.entity.multi.CoreEntityMultiLinkContext
-import latibro.automation.nativeimpl.context.location.CoreLocationContext
+import latibro.automation.nativeimpl.context.location.CoreLocationLinkContext
 import latibro.automation.nativeimpl.context.server.CoreServerLinkContext
 import latibro.automation.nativeimpl.context.world.CoreWorldLinkContext
 import spock.lang.Specification
@@ -33,7 +33,7 @@ class CoreAPIProviderSpec extends Specification {
         test                     | context                          | apiClass
         "core server link"       | Mock(CoreServerLinkContext)      | CoreServerLinkAPI
         "core world link "       | Mock(CoreWorldLinkContext)       | CoreWorldLinkAPI
-        "core location link"     | Mock(CoreLocationContext)        | CoreLocationLinkAPI
+        "core location link"     | Mock(CoreLocationLinkContext)    | CoreLocationLinkAPI
         "core entity link"       | Mock(CoreEntityLinkContext)      | CoreEntityLinkAPI
         "core entity multi link" | Mock(CoreEntityMultiLinkContext) | CoreEntityMultiLinkAPI
     }

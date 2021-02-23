@@ -16,5 +16,5 @@ local world = getAutomationLink("world_link")
 local loadedEntities = world.getLoadedEntities()
 print("Number of loaded entities in world: " .. loadedEntities.count())
 
-local cows = loadedEntities.filterByProperty("name", "Cow")
+local cows = loadedEntities.whereProperty("name", "Cow")
 print("Number of loaded cows in world: " .. cows.count())

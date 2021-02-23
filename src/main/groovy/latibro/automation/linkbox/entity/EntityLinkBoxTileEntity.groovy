@@ -2,11 +2,11 @@ package latibro.automation.linkbox.entity
 
 import groovy.transform.CompileStatic
 import latibro.automation.api.link.entity.EntityLinkAPI
+import latibro.automation.core.LinkType
 import latibro.automation.core.api.APIRegistry
 import latibro.automation.core.peripheral.PeripheralTileEntity
-import latibro.automation.nativeimpl.context.entity.UUIDCoreEntityLinkContext
-import latibro.automation.nativeimpl.context.server.CoreServerLinkContext
-import latibro.automation.nativeimpl.context.tileentity.InstanceCoreTileEntityLinkContext
+import latibro.automation.nativeimpl.context.entity.CoreEntityLinkContext
+import net.minecraft.entity.Entity
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.EnumFacing
 import net.minecraftforge.common.capabilities.Capability
@@ -54,16 +54,39 @@ class EntityLinkBoxTileEntity extends PeripheralTileEntity {
 
     UUID getEntityUUID() {
         def itemStack = inventory.getStackInSlot(0)
+        if (!itemStack || itemStack.isEmpty()) {
+            return null
+        }
+        def uuidString = itemStack.getTagCompound()?.getString("entityUUID")
+        if (!uuidString) {
+            return null
+        }
         //TODO register some check if there is items in the stack, and it hasAPIFor a uuid
-        return UUID.fromString(itemStack.getTagCompound().getString("entityUUID"))
+        return UUID.fromString(uuidString)
     }
 
     @Override
     protected EntityLinkAPI getPeripheralAPI() {
-        def tileEntityLink = new InstanceCoreTileEntityLinkContext(this)
-        //TODO make the link to UUID dynamic
-        def entityContext = new UUIDCoreEntityLinkContext(getEntityUUID(), tileEntityLink.world.server as CoreServerLinkContext)
-        return APIRegistry.getAPI(entityContext) as EntityLinkAPI
+        def linkBox = this
+        def linkContext = new CoreEntityLinkContext() {
+
+            @Override
+            LinkType getLinkType() {
+                return LinkType.DYNAMIC
+            }
+
+            Entity getNativeEntity() {
+                return linkBox.world.minecraftServer.getEntityFromUuid(linkBox.getEntityUUID())
+            }
+
+            @Override
+            UUID getUUID() {
+                return linkBox.getEntityUUID()
+            }
+
+        }
+        def linkAPI = APIRegistry.getAPI(linkContext) as EntityLinkAPI
+        return linkAPI
     }
 
 }

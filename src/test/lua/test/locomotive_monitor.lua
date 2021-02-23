@@ -21,7 +21,6 @@ local gpu = component.gpu -- get primary gpu component
 local w, h = gpu.getResolution()
 
 ----------
-
 function updateScreen()
     gpu.set(15, 1, string.format("% 10s", string.format("%.2f", rollingStock.getCurrentSpeed())))
 

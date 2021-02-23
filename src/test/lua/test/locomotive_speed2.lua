@@ -10,7 +10,6 @@ function getAutomationLink(name)
 end
 
 ----------
-
 function adjustSpeed(rollingStock, speed)
     local firstCurrentSpeed = rollingStock.getCurrentSpeed()
     os.sleep(0.1)
@@ -32,11 +31,11 @@ function adjustSpeed(rollingStock, speed)
     if (currentSpeed < (speed - speedTolerance)) then
         -- Going too slow
         print("Going too slow")
-        local level = math.max(-1, math.min(1, (1-(currentSpeed/speed))))
+        local level = math.max(-1, math.min(1, (1 - (currentSpeed / speed))))
         rollingStock.setThrottleLevel(level)
     elseif (currentSpeed > (speed + speedTolerance)) then
         print("Going too fast")
-        local level = math.max(-1, math.min(1, (1-(currentSpeed/speed))))
+        local level = math.max(-1, math.min(1, (1 - (currentSpeed / speed))))
         rollingStock.setThrottleLevel(level)
     else
         print("Cruising")

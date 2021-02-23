@@ -10,7 +10,6 @@ function getAutomationLink(name)
 end
 
 ----------
-
 function waitForDistance(location, x, y, z, distance)
     print("----")
     local currentDistance = location.getDistanceToCoordinates(x, y, z)
@@ -18,7 +17,7 @@ function waitForDistance(location, x, y, z, distance)
     repeat
         os.sleep(0.1)
         currentDistance = location.getDistanceToCoordinates(x, y, z)
-        --print("Distance to location: " .. tostring(currentDistance))
+    --print("Distance to location: " .. tostring(currentDistance))
     until (currentDistance <= distance)
     currentDistance = location.getDistanceToCoordinates(x, y, z)
     print("Distance to location: " .. tostring(currentDistance))

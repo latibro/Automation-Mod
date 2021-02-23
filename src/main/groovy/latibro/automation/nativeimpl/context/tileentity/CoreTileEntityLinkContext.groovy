@@ -2,8 +2,8 @@ package latibro.automation.nativeimpl.context.tileentity
 
 import latibro.automation.core.context.CoreContext
 import latibro.automation.core.context.tileentity.TileEntityLinkContext
-import latibro.automation.nativeimpl.context.location.CoreLocationContext
-import latibro.automation.nativeimpl.context.location.TileEntityCoreLocationContext
+import latibro.automation.nativeimpl.context.location.CoreLocationLinkContext
+import latibro.automation.nativeimpl.context.location.TileEntityCoreLocationLinkContext
 import latibro.automation.nativeimpl.context.world.CoreWorldLinkContext
 import latibro.automation.nativeimpl.context.world.TileEntityCoreWorldLinkContext
 import net.minecraft.tileentity.TileEntity
@@ -23,8 +23,8 @@ abstract class CoreTileEntityLinkContext implements TileEntityLinkContext, CoreC
     }
 
     @Override
-    CoreLocationContext getLocation() {
-        return new TileEntityCoreLocationContext(this)
+    CoreLocationLinkContext getLocation() {
+        return new TileEntityCoreLocationLinkContext(this)
     }
 
 }

@@ -17,7 +17,7 @@ local loadedEntities = world.getLoadedEntities()
 print("Number of loaded entities in world: " .. loadedEntities.count())
 
 local entities = loadedEntities.asList()
-for i=1, 10 do
+for i = 1, 10 do
     print("--- Entity #" .. i .. " ---")
 
     local entity = entities[i]

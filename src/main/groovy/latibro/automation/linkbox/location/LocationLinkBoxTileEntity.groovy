@@ -2,10 +2,12 @@ package latibro.automation.linkbox.location
 
 import groovy.transform.CompileStatic
 import latibro.automation.api.link.location.LocationLinkAPI
+import latibro.automation.core.LinkType
 import latibro.automation.core.api.APIRegistry
 import latibro.automation.core.peripheral.PeripheralTileEntity
-import latibro.automation.nativeimpl.context.location.InstanceCoreLocationContext
+import latibro.automation.nativeimpl.context.location.CoreLocationLinkContext
 import latibro.automation.nativeimpl.context.tileentity.InstanceCoreTileEntityLinkContext
+import latibro.automation.nativeimpl.context.world.CoreWorldLinkContext
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.math.BlockPos
@@ -54,16 +56,40 @@ class LocationLinkBoxTileEntity extends PeripheralTileEntity {
 
     BlockPos getLocationBlockPos() {
         def itemStack = inventory.getStackInSlot(0)
-        //TODO register some check if there is items in the stack, and it hasAPIFor a uuid
-        return BlockPos.fromLong(itemStack.getTagCompound().getLong("location"))
+        if (!itemStack || itemStack.isEmpty()) {
+            return null
+        }
+        def locationLong = itemStack.getTagCompound()?.getLong("location")
+        if (!locationLong) {
+            return null
+        }
+        return BlockPos.fromLong(locationLong)
     }
 
     @Override
     protected LocationLinkAPI getPeripheralAPI() {
         def tileEntityContext = new InstanceCoreTileEntityLinkContext(this)
-        //TODO make the link to xyz dynamic
-        def locationContext = new InstanceCoreLocationContext(getLocationBlockPos(), tileEntityContext.world)
-        return APIRegistry.getAPI(locationContext) as LocationLinkAPI
+        def linkBox = this
+        def linkContext = new CoreLocationLinkContext() {
+
+            @Override
+            LinkType getLinkType() {
+                return LinkType.DYNAMIC
+            }
+
+            @Override
+            BlockPos getNativeLocation() {
+                return linkBox.getLocationBlockPos()
+            }
+
+            @Override
+            CoreWorldLinkContext getWorld() {
+                return tileEntityContext.getWorld()
+            }
+
+        }
+        def linkAPI = APIRegistry.getAPI(linkContext) as LocationLinkAPI
+        return linkAPI
     }
 
 }

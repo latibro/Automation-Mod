@@ -39,7 +39,7 @@ local route = { red, yellow, green, blue, green, red }
 local entityLocation = livingEntity.getLocation()
 print("    Location of entity: " .. entityLocation.getX() .. ", " .. entityLocation.getY() .. ", " .. entityLocation.getZ())
 
-for i=1, #route do
+for i = 1, #route do
     local location = route[i]
     print("Navigating to : " .. location.x .. ", " .. location.y .. ", " .. location.z)
     while entityLocation.getX() ~= location.x or entityLocation.getY() ~= location.y or entityLocation.getZ() ~= location.z do

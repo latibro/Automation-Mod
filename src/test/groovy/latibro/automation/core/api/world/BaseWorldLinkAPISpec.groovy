@@ -28,7 +28,7 @@ class BaseWorldLinkAPISpec extends Specification {
         then:
         api != null
         where:
-        test      | context
+        test                 | context
         "generic world link" | Mock(WorldLinkContext)
         "core world link"    | Mock(CoreWorldLinkContext)
     }

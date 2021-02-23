@@ -6,17 +6,17 @@ import latibro.automation.nativeimpl.context.world.CoreWorldLinkContext
 import net.minecraft.util.math.BlockPos
 
 @CompileStatic
-final class InstanceCoreLocationContext extends CoreLocationContext {
+final class InstanceCoreLocationLinkContext extends CoreLocationLinkContext {
 
     private final BlockPos nativeLocation
     private final CoreWorldLinkContext world
 
-    InstanceCoreLocationContext(BlockPos location, CoreWorldLinkContext world) {
+    InstanceCoreLocationLinkContext(BlockPos location, CoreWorldLinkContext world) {
         nativeLocation = Objects.requireNonNull(location)
         this.world = Objects.requireNonNull(world)
     }
 
-    InstanceCoreLocationContext(int x, int y, int z, CoreWorldLinkContext world) {
+    InstanceCoreLocationLinkContext(int x, int y, int z, CoreWorldLinkContext world) {
         this(new BlockPos(Objects.requireNonNull(x), Objects.requireNonNull(y), Objects.requireNonNull(z)), world)
     }
 

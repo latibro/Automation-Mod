@@ -2,27 +2,27 @@ package latibro.automation.nativeimpl.context.location
 
 import groovy.transform.CompileStatic
 import latibro.automation.core.LinkType
-import latibro.automation.nativeimpl.context.entity.CoreEntityLinkContext
+import latibro.automation.nativeimpl.context.tileentity.CoreTileEntityLinkContext
 import latibro.automation.nativeimpl.context.world.CoreWorldLinkContext
 import net.minecraft.util.math.BlockPos
 
 @CompileStatic
-final class EntityCoreLocationContext extends CoreLocationContext {
+final class TileEntityCoreLocationLinkContext extends CoreLocationLinkContext {
 
-    private final CoreEntityLinkContext entity
+    private final CoreTileEntityLinkContext tileEntity
 
-    EntityCoreLocationContext(CoreEntityLinkContext entity) {
-        this.entity = Objects.requireNonNull(entity)
+    TileEntityCoreLocationLinkContext(CoreTileEntityLinkContext tileEntity) {
+        this.tileEntity = Objects.requireNonNull(tileEntity)
     }
 
     @Override
     BlockPos getNativeLocation() {
-        return entity.nativeEntity.position
+        return tileEntity.nativeTileEntity.pos
     }
 
     @Override
     CoreWorldLinkContext getWorld() {
-        return entity.world
+        return tileEntity.world
     }
 
     @Override
