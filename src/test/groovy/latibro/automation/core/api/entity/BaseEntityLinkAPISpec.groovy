@@ -1,11 +1,11 @@
 package latibro.automation.core.api.entity
 
 import latibro.automation.AutomationMod
-import latibro.automation.core.api.ContextAPI
 import latibro.automation.api.link.location.LocationLinkAPI
-import latibro.automation.core.context.CoreContext
-import latibro.automation.core.context.entity.EntityContext
+import latibro.automation.core.api.ContextAPI
+import latibro.automation.core.context.entity.EntityLinkContext
 import latibro.automation.core.context.location.LocationContext
+import latibro.automation.nativeimpl.context.entity.CoreEntityLinkContext
 import org.apache.logging.log4j.Logger
 import spock.lang.Specification
 import spock.lang.Title
@@ -21,19 +21,19 @@ class BaseEntityLinkAPISpec extends Specification {
     @Unroll("#test")
     def "Constructor - success"() {
         when:
-        def api = new BaseEntityLinkAPI(context as EntityContext)
+        def api = new BaseEntityLinkAPI(context as EntityLinkContext)
         then:
         api != null
         where:
-        test      | context
-        "generic" | Mock(EntityContext)
-        "core"    | Mock(EntityContext, additionalInterfaces: [CoreContext])
+        test                  | context
+        "generic entity link" | Mock(EntityLinkContext)
+        "core entity link"    | Mock(CoreEntityLinkContext)
     }
 
     @Unroll("#test")
     def "Constructor - fails"() {
         when:
-        new BaseEntityLinkAPI(context as EntityContext)
+        new BaseEntityLinkAPI(context as EntityLinkContext)
         then:
         thrown(Exception)
         where:
@@ -44,7 +44,7 @@ class BaseEntityLinkAPISpec extends Specification {
     @Unroll("#test")
     def "Is loaded"() {
         given:
-        def context = Mock(EntityContext, {
+        def context = Mock(EntityLinkContext, {
             isLoaded() >> returnedFromContext
         })
         def api = new BaseEntityLinkAPI(context)
@@ -61,7 +61,7 @@ class BaseEntityLinkAPISpec extends Specification {
     @Unroll("#test")
     def "Get UUID"() {
         given:
-        def context = Mock(EntityContext, {
+        def context = Mock(EntityLinkContext, {
             getUUID() >> returnedFromContext
         })
         def api = new BaseEntityLinkAPI(context)
@@ -79,8 +79,8 @@ class BaseEntityLinkAPISpec extends Specification {
     @Unroll("#test")
     def "Get location"() {
         given:
-        def context = Mock(EntityContext, {
-            getLocationContext() >> returnedFromContext
+        def context = Mock(EntityLinkContext, {
+            getLocation() >> returnedFromContext
         })
         def api = new BaseEntityLinkAPI(context)
         when:
@@ -88,18 +88,16 @@ class BaseEntityLinkAPISpec extends Specification {
         then:
         expected.call(result)
         where:
-        test      | returnedFromContext   | expected
-        "null"    | null                  | { it == null }
-        "generic" | Mock(LocationContext) | {
-            it instanceof LocationLinkAPI &&
-                    ((ContextAPI) it).context == returnedFromContext
-        }
+        test                          | returnedFromContext   | expected
+        "null"                        | null                  | { it == null }
+        "generic location link"       | Mock(LocationContext) | { it instanceof LocationLinkAPI }
+        "expected context inside API" | Mock(LocationContext) | { ((ContextAPI) it).context == returnedFromContext }
     }
 
     @Unroll("#test")
     def "Get name"() {
         given:
-        def context = Mock(EntityContext, {
+        def context = Mock(EntityLinkContext, {
             getName() >> returnedFromContext
         })
         def api = new BaseEntityLinkAPI(context)
@@ -116,7 +114,7 @@ class BaseEntityLinkAPISpec extends Specification {
     @Unroll("#test")
     def "Get type"() {
         given:
-        def context = Mock(EntityContext, {
+        def context = Mock(EntityLinkContext, {
             getType() >> returnedFromContext
         })
         def api = new BaseEntityLinkAPI(context)

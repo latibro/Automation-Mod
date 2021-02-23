@@ -3,8 +3,8 @@ package latibro.automation.core.api
 import latibro.automation.api.API
 import latibro.automation.core.context.Context
 
-interface ContextAPI extends API {
+interface ContextAPI<T extends Context> extends API {
 
-    Context getContext()
+    T getContext()
 
 }

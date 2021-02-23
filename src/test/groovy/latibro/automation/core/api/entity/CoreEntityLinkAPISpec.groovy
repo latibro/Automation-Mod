@@ -1,7 +1,8 @@
 package latibro.automation.core.api.entity
 
-import latibro.automation.core.context.CoreContext
-import latibro.automation.core.context.entity.EntityContext
+
+import latibro.automation.core.context.entity.EntityLinkContext
+import latibro.automation.nativeimpl.context.entity.CoreEntityLinkContext
 import spock.lang.PendingFeature
 import spock.lang.Specification
 import spock.lang.Title
@@ -13,12 +14,12 @@ class CoreEntityLinkAPISpec extends Specification {
     @Unroll("#test")
     def "Constructor - success"() {
         when:
-        def api = new CoreEntityLinkAPI(context as EntityContext)
+        def api = new CoreEntityLinkAPI(context as EntityLinkContext)
         then:
         api != null
         where:
-        test   | context
-        "core" | Mock(EntityContext, additionalInterfaces: [CoreContext])
+        test               | context
+        "core entity link" | Mock(CoreEntityLinkContext)
     }
 
     @PendingFeature(
@@ -27,13 +28,13 @@ class CoreEntityLinkAPISpec extends Specification {
     @Unroll("#test")
     def "Constructor - fails"() {
         when:
-        new CoreEntityLinkAPI(context as EntityContext)
+        new CoreEntityLinkAPI(context as EntityLinkContext)
         then:
         thrown(Exception)
         where:
-        test      | context
-        "null"    | null
-        "generic" | Mock(EntityContext)
+        test                  | context
+        "null"                | null
+        "generic entity link" | Mock(EntityLinkContext)
     }
 
 }

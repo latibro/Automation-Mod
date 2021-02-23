@@ -1,13 +1,13 @@
 package latibro.automation.core.api.location
 
 import latibro.automation.AutomationMod
-import latibro.automation.core.api.ContextAPI
 import latibro.automation.api.link.entity.EntityMultiLinkAPI
 import latibro.automation.api.link.world.WorldLinkAPI
-import latibro.automation.core.context.CoreContext
-import latibro.automation.core.context.entity.group.EntityGroupContext
+import latibro.automation.core.api.ContextAPI
+import latibro.automation.core.context.entity.multi.EntityMultiLinkContext
 import latibro.automation.core.context.location.LocationContext
-import latibro.automation.core.context.world.WorldContext
+import latibro.automation.core.context.world.WorldLinkContext
+import latibro.automation.nativeimpl.context.location.CoreLocationContext
 import org.apache.logging.log4j.Logger
 import spock.lang.PendingFeature
 import spock.lang.Specification
@@ -28,9 +28,9 @@ class BaseLocationLinkAPISpec extends Specification {
         then:
         api != null
         where:
-        test      | context
-        "generic" | Mock(LocationContext)
-        "core"    | Mock(LocationContext, additionalInterfaces: [CoreContext])
+        test                    | context
+        "generic location link" | Mock(LocationContext)
+        "core location link"    | Mock(CoreLocationContext)
     }
 
     @Unroll("#test")
@@ -116,7 +116,7 @@ class BaseLocationLinkAPISpec extends Specification {
     def "Get world"() {
         given:
         def context = Mock(LocationContext, {
-            getWorldContext() >> returnedFromContext
+            getWorld() >> returnedFromContext
         })
         def api = new BaseLocationLinkAPI(context)
         when:
@@ -124,12 +124,10 @@ class BaseLocationLinkAPISpec extends Specification {
         then:
         expected.call(result)
         where:
-        test             | returnedFromContext | expected
-        "null"           | null                | { it == null }
-        "generic server" | Mock(WorldContext)  | {
-            it instanceof WorldLinkAPI &&
-                    ((ContextAPI) it).context == returnedFromContext
-        }
+        test                          | returnedFromContext    | expected
+        "null"                        | null                   | { it == null }
+        "generic world link"          | Mock(WorldLinkContext) | { it instanceof WorldLinkAPI }
+        "expected context inside API" | Mock(WorldLinkContext) | { ((ContextAPI) it).context == returnedFromContext }
     }
 
     @Unroll("#test")
@@ -144,12 +142,10 @@ class BaseLocationLinkAPISpec extends Specification {
         then:
         expected.call(result)
         where:
-        test             | returnedFromContext      | expected
-        "null"           | null                     | { it == null }
-        "generic server" | Mock(EntityGroupContext) | {
-            it instanceof EntityMultiLinkAPI &&
-                    ((ContextAPI) it).context == returnedFromContext
-        }
+        test                          | returnedFromContext          | expected
+        "null"                        | null                         | { it == null }
+        "generic entity multi link"   | Mock(EntityMultiLinkContext) | { it instanceof EntityMultiLinkAPI }
+        "expected context inside API" | Mock(EntityMultiLinkContext) | { ((ContextAPI) it).context == returnedFromContext }
     }
 
     @Unroll("#test")

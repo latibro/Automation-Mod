@@ -4,12 +4,12 @@ import latibro.automation.AutomationMod
 import latibro.automation.api.API
 import latibro.automation.api.APIProviderAPI
 import latibro.automation.api.link.entity.EntityLinkAPI
+import latibro.automation.api.link.location.LocationLinkAPI
 import latibro.automation.core.api.APIRegistry
 import latibro.automation.core.api.ContextAPI
-import latibro.automation.api.link.location.LocationLinkAPI
-import latibro.automation.core.context.entity.EntityContext
+import latibro.automation.core.context.entity.EntityLinkContext
 
-class BaseEntityLinkAPI<E extends EntityContext> implements EntityLinkAPI, APIProviderAPI, ContextAPI {
+class BaseEntityLinkAPI<E extends EntityLinkContext> implements EntityLinkAPI, APIProviderAPI, ContextAPI {
 
     private final E context
 
@@ -19,14 +19,12 @@ class BaseEntityLinkAPI<E extends EntityContext> implements EntityLinkAPI, APIPr
 
     @Override
     Boolean isLinked() {
-        //TODO implement
-        throw new RuntimeException("Not yet implemented")
+        return context.isLinked()
     }
 
     @Override
     String getLinkType() {
-        //TODO implement
-        throw new RuntimeException("Not yet implemented")
+        return context.getLinkType()
     }
 
     @Override
@@ -47,7 +45,7 @@ class BaseEntityLinkAPI<E extends EntityContext> implements EntityLinkAPI, APIPr
 
     @Override
     LocationLinkAPI getLocation() {
-        return APIRegistry.getAPI(context.locationContext) as LocationLinkAPI
+        return APIRegistry.getAPI(context.location) as LocationLinkAPI
     }
 
     @Override

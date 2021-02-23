@@ -19,7 +19,7 @@ class ComputerCraftObjectProxySpec extends Specification {
 
     def "constructor - LuaObjectProxy - success"() {
         when:
-        new ComputerCraftObjectProxy(new LuaObjectProxy({ }))
+        new ComputerCraftObjectProxy(new LuaObjectProxy({}))
         then:
         noExceptionThrown()
     }
@@ -65,7 +65,7 @@ class ComputerCraftObjectProxySpec extends Specification {
         }
         def proxy = new ComputerCraftObjectProxy(source)
         when:
-        proxy.callMethod(null,100, null)
+        proxy.callMethod(null, 100, null)
         then:
         thrown(LuaException)
     }
@@ -77,7 +77,7 @@ class ComputerCraftObjectProxySpec extends Specification {
         }
         def proxy = new ComputerCraftObjectProxy(source)
         when:
-        proxy.callMethod(null,0, null)
+        proxy.callMethod(null, 0, null)
         then:
         1 * source.callMethod("testMethod", _)
     }
@@ -90,7 +90,7 @@ class ComputerCraftObjectProxySpec extends Specification {
         def proxy = new ComputerCraftObjectProxy(source)
         def arguments = null
         when:
-        proxy.callMethod(null,0, arguments)
+        proxy.callMethod(null, 0, arguments)
         then:
         1 * source.callMethod(_, null)
     }
@@ -103,7 +103,7 @@ class ComputerCraftObjectProxySpec extends Specification {
         def proxy = new ComputerCraftObjectProxy(source)
         def arguments = (Object[]) []
         when:
-        proxy.callMethod(null,0, arguments)
+        proxy.callMethod(null, 0, arguments)
         then:
         1 * source.callMethod(_, (Object[]) [])
     }
@@ -116,7 +116,7 @@ class ComputerCraftObjectProxySpec extends Specification {
         def proxy = new ComputerCraftObjectProxy(source)
         def arguments = (Object[]) ["first", "second"]
         when:
-        proxy.callMethod(null,0, arguments)
+        proxy.callMethod(null, 0, arguments)
         then:
         1 * source.callMethod(_, (Object[]) ["first", "second"])
     }
@@ -129,7 +129,7 @@ class ComputerCraftObjectProxySpec extends Specification {
         def proxy = new ComputerCraftObjectProxy(source)
         def arguments = (Object[]) [new ComputerCraftObjectProxy(DUMMY_LUA_OBJECT_PROXY), "second"]
         when:
-        proxy.callMethod(null,0, arguments)
+        proxy.callMethod(null, 0, arguments)
         then:
         1 * source.callMethod(_, (Object[]) [DUMMY_LUA_OBJECT_PROXY, "second"])
     }
@@ -142,7 +142,7 @@ class ComputerCraftObjectProxySpec extends Specification {
         }
         def proxy = new ComputerCraftObjectProxy(source)
         when:
-        def result = proxy.callMethod(null,0, null)
+        def result = proxy.callMethod(null, 0, null)
         then:
         result instanceof Object[]
         def array = (Object[]) result
@@ -158,7 +158,7 @@ class ComputerCraftObjectProxySpec extends Specification {
         }
         def proxy = new ComputerCraftObjectProxy(source)
         when:
-        def result = proxy.callMethod(null,0, null)
+        def result = proxy.callMethod(null, 0, null)
         then:
         result instanceof Object[]
         def array = (Object[]) result
@@ -175,7 +175,7 @@ class ComputerCraftObjectProxySpec extends Specification {
         }
         def proxy = new ComputerCraftObjectProxy(source)
         when:
-        proxy.callMethod(null,0, null)
+        proxy.callMethod(null, 0, null)
         then:
         thrown(LuaException)
     }

@@ -1,11 +1,10 @@
 package latibro.automation.core.api.location
 
-
+import latibro.automation.api.link.entity.EntityMultiLinkAPI
 import latibro.automation.api.link.location.LocationLinkAPI
+import latibro.automation.api.link.world.WorldLinkAPI
 import latibro.automation.core.api.APIRegistry
 import latibro.automation.core.api.ContextAPI
-import latibro.automation.api.link.entity.EntityMultiLinkAPI
-import latibro.automation.api.link.world.WorldLinkAPI
 import latibro.automation.core.context.location.LocationContext
 
 class BaseLocationLinkAPI implements LocationLinkAPI, ContextAPI {
@@ -23,14 +22,12 @@ class BaseLocationLinkAPI implements LocationLinkAPI, ContextAPI {
 
     @Override
     Boolean isLinked() {
-        //TODO implement
-        throw new RuntimeException("Not yet implemented")
+        return context.isLinked()
     }
 
     @Override
     String getLinkType() {
-        //TODO implement
-        throw new RuntimeException("Not yet implemented")
+        return context.getLinkType()
     }
 
     @Override
@@ -55,7 +52,7 @@ class BaseLocationLinkAPI implements LocationLinkAPI, ContextAPI {
 
     @Override
     WorldLinkAPI getWorld() {
-        return APIRegistry.getAPI(context.worldContext) as WorldLinkAPI
+        return APIRegistry.getAPI(context.world) as WorldLinkAPI
     }
 
     @Override

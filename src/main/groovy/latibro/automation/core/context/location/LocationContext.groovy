@@ -1,11 +1,10 @@
 package latibro.automation.core.context.location
 
+import latibro.automation.core.context.entity.multi.EntityMultiLinkContext
+import latibro.automation.core.context.link.SingleLinkContext
+import latibro.automation.core.context.world.WorldLinkContext
 
-import latibro.automation.core.context.Context
-import latibro.automation.core.context.entity.group.EntityGroupContext
-import latibro.automation.core.context.world.WorldContextProvider
-
-interface LocationContext extends Context, WorldContextProvider {
+interface LocationContext extends SingleLinkContext {
 
     boolean isLoaded()
 
@@ -15,9 +14,11 @@ interface LocationContext extends Context, WorldContextProvider {
 
     int getZ()
 
-    EntityGroupContext getEntities()
+    WorldLinkContext getWorld()
 
-    EntityGroupContext getEntities(boolean includeBoudingBoxes)
+    EntityMultiLinkContext getEntities()
+
+    EntityMultiLinkContext getEntities(boolean includeBoundingBoxes)
 
     double getDistanceToCoordinates(int x, int y, int z)
 

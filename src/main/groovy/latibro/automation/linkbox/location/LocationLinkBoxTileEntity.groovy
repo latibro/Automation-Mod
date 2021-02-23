@@ -1,11 +1,11 @@
 package latibro.automation.linkbox.location
 
 import groovy.transform.CompileStatic
-import latibro.automation.core.api.APIRegistry
 import latibro.automation.api.link.location.LocationLinkAPI
+import latibro.automation.core.api.APIRegistry
 import latibro.automation.core.peripheral.PeripheralTileEntity
-import latibro.automation.nativeimpl.context.location.NativeStaticLocationContext
-import latibro.automation.nativeimpl.context.tileentity.NativeStaticTileEntityContext
+import latibro.automation.nativeimpl.context.location.InstanceCoreLocationContext
+import latibro.automation.nativeimpl.context.tileentity.InstanceCoreTileEntityLinkContext
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.math.BlockPos
@@ -44,7 +44,7 @@ class LocationLinkBoxTileEntity extends PeripheralTileEntity {
     @Nullable
     @Override
     <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
-        return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ? (T)inventory : super.getCapability(capability, facing)
+        return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ? (T) inventory : super.getCapability(capability, facing)
     }
 
     @Override
@@ -60,10 +60,10 @@ class LocationLinkBoxTileEntity extends PeripheralTileEntity {
 
     @Override
     protected LocationLinkAPI getPeripheralAPI() {
-        def tileEntityContext = new NativeStaticTileEntityContext(this)
+        def tileEntityContext = new InstanceCoreTileEntityLinkContext(this)
         //TODO make the link to xyz dynamic
-        def entityContext = new NativeStaticLocationContext(getLocationBlockPos(), tileEntityContext.worldContext)
-        return APIRegistry.getAPI(entityContext) as LocationLinkAPI
+        def locationContext = new InstanceCoreLocationContext(getLocationBlockPos(), tileEntityContext.world)
+        return APIRegistry.getAPI(locationContext) as LocationLinkAPI
     }
 
 }

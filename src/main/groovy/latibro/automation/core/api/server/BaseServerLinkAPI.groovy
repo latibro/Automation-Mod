@@ -1,39 +1,30 @@
 package latibro.automation.core.api.server
 
+import latibro.automation.api.link.entity.EntityMultiLinkAPI
 import latibro.automation.api.link.server.ServerLinkAPI
 import latibro.automation.core.api.APIRegistry
-import latibro.automation.core.api.ContextAPI
-import latibro.automation.api.link.entity.EntityMultiLinkAPI
-import latibro.automation.core.context.server.ServerContext
+import latibro.automation.core.api.BaseContextAPI
+import latibro.automation.core.context.server.ServerLinkContext
 
-class BaseServerLinkAPI implements ServerLinkAPI, ContextAPI {
+class BaseServerLinkAPI extends BaseContextAPI<ServerLinkContext> implements ServerLinkAPI {
 
-    private final ServerContext context
-
-    BaseServerLinkAPI(ServerContext context) {
-        this.context = Objects.requireNonNull(context)
-    }
-
-    @Override
-    ServerContext getContext() {
-        return context
+    BaseServerLinkAPI(ServerLinkContext context) {
+        super(context)
     }
 
     @Override
     Boolean isLinked() {
-        //TODO implement
-        throw new RuntimeException("Not yet implemented")
+        return context.isLinked()
     }
 
     @Override
     String getLinkType() {
-        //TODO implement
-        throw new RuntimeException("Not yet implemented")
+        return context.getLinkType()
     }
 
     @Override
     EntityMultiLinkAPI getLoadedEntities() {
-        return APIRegistry.getAPI(context.loadedEntitiesContext) as EntityMultiLinkAPI
+        return APIRegistry.getAPI(context.loadedEntities) as EntityMultiLinkAPI
     }
 
 }

@@ -14,7 +14,7 @@ end
 local world = getAutomationLink("world_link")
 
 local loadedEntities = world.getLoadedEntities()
-print("Number of loaded entities in world: " .. loadedEntities.size())
+print("Number of loaded entities in world: " .. loadedEntities.count())
 
 local entities = loadedEntities.asList()
 for i=1, 10 do

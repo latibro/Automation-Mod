@@ -16,10 +16,10 @@ local location = getAutomationLink("location_link")
 print("Location: " .. location.getX() .. ", " .. location.getY() .. ", " .. location.getZ())
 
 local entities = location.getEntities(false)
-print("Number of entities at location: " .. entities.size())
+print("Number of entities at location: " .. entities.count())
 
 local entitiesBoundingBox = location.getEntities(true)
-print("Number of entities at location (bounding box): " .. entitiesBoundingBox.size())
+print("Number of entities at location (bounding box): " .. entitiesBoundingBox.count())
 
 local entity = entitiesBoundingBox.asList()[1]
 print("UUID of first entity: " .. entity.getUUID())

@@ -256,10 +256,10 @@ class LuaTablesSpec extends Specification {
         then:
         output == expected
         where:
-        name                         | input                                           || expected
-        "empty Map"                  | (Map) [:]                                       || (List) []
-        "keys in sequence"           | (Map) [1d: "first", 2d: "second", 3d: "third"]  || (List) ["first", "second", "third"]
-        "keys out of sequence"       | (Map) [2d: "second", 1d: "first", 3d: "third"]  || (List) ["first", "second", "third"]
+        name                   | input                                          || expected
+        "empty Map"            | (Map) [:]                                      || (List) []
+        "keys in sequence"     | (Map) [1d: "first", 2d: "second", 3d: "third"] || (List) ["first", "second", "third"]
+        "keys out of sequence" | (Map) [2d: "second", 1d: "first", 3d: "third"] || (List) ["first", "second", "third"]
     }
 
 }

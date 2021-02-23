@@ -1,6 +1,6 @@
 {
-    "parent": "item/generated",
-    "textures": {
-        "layer0": "automation:items/entity_link_card"
-    }
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "automation:items/entity_link_card"
+  }
 }

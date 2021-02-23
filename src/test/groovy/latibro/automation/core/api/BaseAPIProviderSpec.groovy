@@ -6,11 +6,11 @@ import latibro.automation.core.api.location.BaseLocationLinkAPI
 import latibro.automation.core.api.server.BaseServerLinkAPI
 import latibro.automation.core.api.world.BaseWorldLinkAPI
 import latibro.automation.core.context.Context
-import latibro.automation.core.context.entity.EntityContext
-import latibro.automation.core.context.entity.group.EntityGroupContext
+import latibro.automation.core.context.entity.EntityLinkContext
+import latibro.automation.core.context.entity.multi.EntityMultiLinkContext
 import latibro.automation.core.context.location.LocationContext
-import latibro.automation.core.context.server.ServerContext
-import latibro.automation.core.context.world.WorldContext
+import latibro.automation.core.context.server.ServerLinkContext
+import latibro.automation.core.context.world.WorldLinkContext
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -25,12 +25,12 @@ class BaseAPIProviderSpec extends Specification {
         then:
         apiClass.isInstance(api)
         where:
-        test           | context                  | apiClass
-        "server"       | Mock(ServerContext)      | BaseServerLinkAPI
-        "world"        | Mock(WorldContext)       | BaseWorldLinkAPI
-        "location"     | Mock(LocationContext)    | BaseLocationLinkAPI
-        "entity"       | Mock(EntityContext)      | BaseEntityLinkAPI
-        "entity group" | Mock(EntityGroupContext) | BaseEntityMultiLinkAPI
+        test                | context                      | apiClass
+        "server link"       | Mock(ServerLinkContext)      | BaseServerLinkAPI
+        "world link"        | Mock(WorldLinkContext)       | BaseWorldLinkAPI
+        "location link"     | Mock(LocationContext)        | BaseLocationLinkAPI
+        "entity link"       | Mock(EntityLinkContext)      | BaseEntityLinkAPI
+        "entity multi link" | Mock(EntityMultiLinkContext) | BaseEntityMultiLinkAPI
     }
 
     @Unroll("#test")
@@ -42,9 +42,9 @@ class BaseAPIProviderSpec extends Specification {
         then:
         api == null
         where:
-        test     | context
-        "null"   | null
-        "random" | Mock(Context)
+        test             | context
+        "null"           | null
+        "random context" | Mock(Context)
     }
 
 }

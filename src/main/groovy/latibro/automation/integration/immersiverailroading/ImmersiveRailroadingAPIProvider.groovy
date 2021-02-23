@@ -10,19 +10,19 @@ import latibro.automation.core.api.entity.CoreEntityLinkAPI
 import latibro.automation.core.context.Context
 import latibro.automation.core.context.ContextRegistry
 import latibro.automation.integration.immersiverailroading.api.rollingstock.*
-import latibro.automation.integration.immersiverailroading.context.RollingStockContext
+import latibro.automation.integration.immersiverailroading.context.RollingStockLinkContext
 
 final class ImmersiveRailroadingAPIProvider extends AbstractAPIProvider {
 
     @Override
     API getAPI(Context context) {
-        if (context instanceof RollingStockContext<LocomotiveDiesel>) {
+        if (context instanceof RollingStockLinkContext<LocomotiveDiesel>) {
             return new DieselLocomotiveAPIImpl(context)
         }
-        if (context instanceof RollingStockContext<Locomotive>) {
+        if (context instanceof RollingStockLinkContext<Locomotive>) {
             return new LocomotiveAPIImpl(context)
         }
-        if (context instanceof RollingStockContext) {
+        if (context instanceof RollingStockLinkContext) {
             return new RollingStockAPIImpl(context)
         }
         return super.getAPI(context)
@@ -77,15 +77,15 @@ final class ImmersiveRailroadingAPIProvider extends AbstractAPIProvider {
     API getAPI(Class<? extends API> cls, API api) {
         if (api instanceof ContextAPI) {
             if (cls == RollingStockAPI) {
-                def context = ContextRegistry.getContext(RollingStockContext, api.context)
+                def context = ContextRegistry.getContext(RollingStockLinkContext, api.context)
                 return APIRegistry.getAPI(context)
             }
             if (cls == LocomotiveAPI) {
-                def context = ContextRegistry.getContext(RollingStockContext<Locomotive>, api.context)
+                def context = ContextRegistry.getContext(RollingStockLinkContext<Locomotive>, api.context)
                 return APIRegistry.getAPI(context)
             }
             if (cls == DieselLocomotiveAPI) {
-                def context = ContextRegistry.getContext(RollingStockContext<LocomotiveDiesel>, api.context)
+                def context = ContextRegistry.getContext(RollingStockLinkContext<LocomotiveDiesel>, api.context)
                 return APIRegistry.getAPI(context)
             }
         }

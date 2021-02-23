@@ -7,29 +7,29 @@ import latibro.automation.core.api.location.BaseLocationLinkAPI
 import latibro.automation.core.api.server.BaseServerLinkAPI
 import latibro.automation.core.api.world.BaseWorldLinkAPI
 import latibro.automation.core.context.Context
-import latibro.automation.core.context.entity.EntityContext
-import latibro.automation.core.context.entity.group.EntityGroupContext
+import latibro.automation.core.context.entity.EntityLinkContext
+import latibro.automation.core.context.entity.multi.EntityMultiLinkContext
 import latibro.automation.core.context.location.LocationContext
-import latibro.automation.core.context.server.ServerContext
-import latibro.automation.core.context.world.WorldContext
+import latibro.automation.core.context.server.ServerLinkContext
+import latibro.automation.core.context.world.WorldLinkContext
 
 class BaseAPIProvider extends AbstractAPIProvider {
 
     @Override
     API getAPI(Context context) {
-        if (context instanceof ServerContext) {
+        if (context instanceof ServerLinkContext) {
             return new BaseServerLinkAPI(context)
         }
-        if (context instanceof WorldContext) {
+        if (context instanceof WorldLinkContext) {
             return new BaseWorldLinkAPI(context)
         }
         if (context instanceof LocationContext) {
             return new BaseLocationLinkAPI(context)
         }
-        if (context instanceof EntityContext) {
+        if (context instanceof EntityLinkContext) {
             return new BaseEntityLinkAPI(context)
         }
-        if (context instanceof EntityGroupContext) {
+        if (context instanceof EntityMultiLinkContext) {
             return new BaseEntityMultiLinkAPI(context)
         }
         return super.getAPI(context)

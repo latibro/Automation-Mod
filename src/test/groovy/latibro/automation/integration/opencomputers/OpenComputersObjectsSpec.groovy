@@ -25,8 +25,8 @@ class OpenComputersObjectsSpec extends Specification {
         output == expected
         where:
         name                                    | input                                                    || expected
-        "SAFE_OC_OBJECT"                        | SAFE_OC_OBJECT || true
-        "UNSAFE_OC_OBJECT"                      | UNSAFE_OC_OBJECT                                   || false
+        "SAFE_OC_OBJECT"                        | SAFE_OC_OBJECT                                           || true
+        "UNSAFE_OC_OBJECT"                      | UNSAFE_OC_OBJECT                                         || false
         "null"                                  | null                                                     || true
         "Boolean"                               | new Boolean(true)                                        || true
         "String"                                | "Hello world"                                            || true
@@ -40,8 +40,8 @@ class OpenComputersObjectsSpec extends Specification {
         "array"                                 | (Object[]) ["test"]                                      || false
         "Collection"                            | (Collection) new HashSet(["test"])                       || false
         "Map with safe nested map"              | (Map) [first: (Map) [test: "hello"]]                     || true
-        "Map with nested map with unsafe value" | (Map) [first: (Map) [test: UNSAFE_OC_OBJECT]]      || false
-        "Map with nested map with unsafe key"   | (Map) [first: (Map) [(UNSAFE_OC_OBJECT): "hello"]] || false
+        "Map with nested map with unsafe value" | (Map) [first: (Map) [test: UNSAFE_OC_OBJECT]]            || false
+        "Map with nested map with unsafe key"   | (Map) [first: (Map) [(UNSAFE_OC_OBJECT): "hello"]]       || false
     }
 
     // ***** toOpenComputersObject
@@ -238,7 +238,7 @@ class OpenComputersObjectsSpec extends Specification {
         def input = (Map) [1d: "first", 2d: "second"]
         def spy = GroovySpy(OpenComputersObjects, global: true)
         // Faking that input is an instance of OC build-in object
-        OpenComputersObjects.isInstanceOfOCBuildInObject({input.is(it)}) >> true
+        OpenComputersObjects.isInstanceOfOCBuildInObject({ input.is(it) }) >> true
         when:
         def output = OpenComputersObjects.fromOpenComputersObject(input)
         then:
@@ -253,7 +253,7 @@ class OpenComputersObjectsSpec extends Specification {
         def input = (Map) [1d: "first", 2d: "second", "n": 2d]
         def spy = GroovySpy(OpenComputersObjects, global: true)
         // Faking that input is an instance of OC build-in object
-        OpenComputersObjects.isInstanceOfOCBuildInObject({input.is(it)}) >> true
+        OpenComputersObjects.isInstanceOfOCBuildInObject({ input.is(it) }) >> true
         when:
         def output = OpenComputersObjects.fromOpenComputersObject(input)
         then:
@@ -268,7 +268,7 @@ class OpenComputersObjectsSpec extends Specification {
         def input = (Map) [1d: "first", 2d: "second", "n": 10d]
         def spy = GroovySpy(OpenComputersObjects, global: true)
         // Faking that input is an instance of OC build-in object
-        OpenComputersObjects.isInstanceOfOCBuildInObject({input.is(it)}) >> true
+        OpenComputersObjects.isInstanceOfOCBuildInObject({ input.is(it) }) >> true
         when:
         def output = OpenComputersObjects.fromOpenComputersObject(input)
         then:

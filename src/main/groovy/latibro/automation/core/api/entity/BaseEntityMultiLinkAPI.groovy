@@ -1,44 +1,42 @@
 package latibro.automation.core.api.entity
 
-import latibro.automation.api.link.entity.EntityMultiLinkAPI
 import latibro.automation.api.link.entity.EntityLinkAPI
+import latibro.automation.api.link.entity.EntityMultiLinkAPI
 import latibro.automation.core.api.APIRegistry
 import latibro.automation.core.api.ContextAPI
-import latibro.automation.core.context.entity.group.EntityGroupContext
+import latibro.automation.core.context.entity.multi.EntityMultiLinkContext
 
 class BaseEntityMultiLinkAPI implements EntityMultiLinkAPI, ContextAPI {
 
-    private final EntityGroupContext context
+    private final EntityMultiLinkContext context
 
-    BaseEntityMultiLinkAPI(EntityGroupContext context) {
+    BaseEntityMultiLinkAPI(EntityMultiLinkContext context) {
         this.context = Objects.requireNonNull(context)
     }
 
     @Override
-    EntityGroupContext getContext() {
+    EntityMultiLinkContext getContext() {
         return context
     }
 
     @Override
     Boolean isLinked() {
-        //TODO implement
-        throw new RuntimeException("Not yet implemented")
+        return context.isLinked()
     }
 
     @Override
     String getLinkType() {
-        //TODO implement
-        throw new RuntimeException("Not yet implemented")
+        return context.getLinkType()
     }
 
     @Override
     Number count() {
-        return context.size()
+        return context.count()
     }
 
     @Override
     List<EntityLinkAPI> asList() {
-        def contextList = context.getAll()
+        def contextList = context.asList()
         def apiList = contextList.collect {
             APIRegistry.getAPI(it)
         } as List<EntityLinkAPI>
@@ -46,9 +44,9 @@ class BaseEntityMultiLinkAPI implements EntityMultiLinkAPI, ContextAPI {
     }
 
     @Override
-    EntityMultiLinkAPI filterByProperty(String property, Object expected) {
+    EntityMultiLinkAPI whereProperty(String property, Object expected) {
         //TODO this will need to be filtered on API properties and not on context properties - in some way
-        def filteredContext = context.wherePropertyIs(property, expected)
+        def filteredContext = context.whereProperty(property, expected)
         def api = APIRegistry.getAPI(filteredContext) as EntityMultiLinkAPI
         return api
     }

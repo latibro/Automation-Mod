@@ -1,11 +1,12 @@
 package latibro.automation.linkbox.entity
 
 import groovy.transform.CompileStatic
-import latibro.automation.core.api.APIRegistry
 import latibro.automation.api.link.entity.EntityLinkAPI
+import latibro.automation.core.api.APIRegistry
 import latibro.automation.core.peripheral.PeripheralTileEntity
-import latibro.automation.nativeimpl.context.entity.NativeStaticUUIDEntityContext
-import latibro.automation.nativeimpl.context.tileentity.NativeStaticTileEntityContext
+import latibro.automation.nativeimpl.context.entity.UUIDCoreEntityLinkContext
+import latibro.automation.nativeimpl.context.server.CoreServerLinkContext
+import latibro.automation.nativeimpl.context.tileentity.InstanceCoreTileEntityLinkContext
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.EnumFacing
 import net.minecraftforge.common.capabilities.Capability
@@ -43,7 +44,7 @@ class EntityLinkBoxTileEntity extends PeripheralTileEntity {
     @Nullable
     @Override
     <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
-        return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ? (T)inventory : super.getCapability(capability, facing)
+        return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ? (T) inventory : super.getCapability(capability, facing)
     }
 
     @Override
@@ -59,9 +60,9 @@ class EntityLinkBoxTileEntity extends PeripheralTileEntity {
 
     @Override
     protected EntityLinkAPI getPeripheralAPI() {
-        def tileEntityContext = new NativeStaticTileEntityContext(this)
+        def tileEntityLink = new InstanceCoreTileEntityLinkContext(this)
         //TODO make the link to UUID dynamic
-        def entityContext = new NativeStaticUUIDEntityContext(getEntityUUID(), tileEntityContext.worldContext.serverContext)
+        def entityContext = new UUIDCoreEntityLinkContext(getEntityUUID(), tileEntityLink.world.server as CoreServerLinkContext)
         return APIRegistry.getAPI(entityContext) as EntityLinkAPI
     }
 

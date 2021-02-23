@@ -15,7 +15,7 @@ class LuaObjectProxySpec extends Specification {
 
     def "constructor - random object - success"() {
         when:
-        new LuaObjectProxy({ })
+        new LuaObjectProxy({})
         then:
         noExceptionThrown()
     }
@@ -31,7 +31,7 @@ class LuaObjectProxySpec extends Specification {
 
     def "getSource - return original object"() {
         given:
-        def source = { }
+        def source = {}
         when:
         def proxy = new LuaObjectProxy(source)
         then:
@@ -42,7 +42,7 @@ class LuaObjectProxySpec extends Specification {
 
     def "getMethodNames - returns string array"() {
         given:
-        def proxy = new LuaObjectProxy({ })
+        def proxy = new LuaObjectProxy({})
         when:
         def methods = proxy.getMethodNames()
         then:
@@ -85,7 +85,7 @@ class LuaObjectProxySpec extends Specification {
             @LuaMethod
             void luaMethod() {}
 
-            @LuaMethod(name="aliasMethod")
+            @LuaMethod(name = "aliasMethod")
             void anotherMethod() {}
         }
         def proxy = new LuaObjectProxy(source)
@@ -159,7 +159,7 @@ class LuaObjectProxySpec extends Specification {
     def "callMethod - alias method - call method"() {
         given:
         def source = Spy(new Object() {
-            @LuaMethod(name="aliasMethod")
+            @LuaMethod(name = "aliasMethod")
             void testMethod() {}
         })
         def proxy = new LuaObjectProxy(source)
@@ -173,10 +173,10 @@ class LuaObjectProxySpec extends Specification {
     def "callMethod - two methods with same alias - call method with matching parameters"() {
         given:
         def source = Spy(new Object() {
-            @LuaMethod(name="aliasMethod")
+            @LuaMethod(name = "aliasMethod")
             void testMethod() {}
 
-            @LuaMethod(name="aliasMethod")
+            @LuaMethod(name = "aliasMethod")
             void anotherMethod(String param) {}
         })
         def proxy = new LuaObjectProxy(source)
@@ -191,10 +191,10 @@ class LuaObjectProxySpec extends Specification {
     def "callMethod - two methods with same alias and same args - fails"() {
         given:
         def source = Spy(new Object() {
-            @LuaMethod(name="aliasMethod")
+            @LuaMethod(name = "aliasMethod")
             void testMethod(String param) {}
 
-            @LuaMethod(name="aliasMethod")
+            @LuaMethod(name = "aliasMethod")
             void anotherMethod(String param) {}
         })
         def proxy = new LuaObjectProxy(source)

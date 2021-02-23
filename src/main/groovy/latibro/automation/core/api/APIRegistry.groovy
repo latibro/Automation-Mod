@@ -25,7 +25,7 @@ final class APIRegistry {
     static List<String> getAPINames(API api) {
         return (providers.findResults {
             return it.getAPINames(api)
-        }?.flatten()?: []) as List<String>
+        }?.flatten() ?: []) as List<String>
     }
 
     static boolean hasAPI(String name, API api) {
