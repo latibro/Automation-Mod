@@ -89,6 +89,10 @@ dependencies {
     //runtime group: 'org.squiddev', name: 'cc-tweaked-1.12.2', version: '1.89.+'
     compile group: 'org.squiddev', name: 'cc-tweaked-1.12.2', version: '1.89.+'
 
+    // Mods local libs folder
+    compile files('libs/LandOfSignals-1.12.2-forge-0.0.2.jar')
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
     // Groovy
     compile group: 'org.codehaus.groovy', name: 'groovy', version: '3.0.7'
 
