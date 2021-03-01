@@ -7,6 +7,10 @@ interface ChunkLinkContext extends SingleLinkContext {
 
     boolean isLoaded()
 
+    int getX()
+
+    int getZ()
+
     WorldLinkContext getWorld()
 
     boolean isForceLoaded()

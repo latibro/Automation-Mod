@@ -35,6 +35,16 @@ class BaseChunkLinkAPI implements ChunkLinkAPI, ContextAPI {
     }
 
     @Override
+    Number getX() {
+        return context.getX()
+    }
+
+    @Override
+    Number getZ() {
+        return context.getZ()
+    }
+
+    @Override
     WorldLinkAPI getWorld() {
         return APIRegistry.getAPI(context.world) as WorldLinkAPI
     }

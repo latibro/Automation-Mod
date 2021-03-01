@@ -10,6 +10,12 @@ interface ChunkLinkAPI extends SingleLinkAPI {
     Boolean isLoaded()
 
     @LuaMethod
+    Number getX()
+
+    @LuaMethod
+    Number getZ()
+
+    @LuaMethod
     WorldLinkAPI getWorld()
 
     @LuaMethod

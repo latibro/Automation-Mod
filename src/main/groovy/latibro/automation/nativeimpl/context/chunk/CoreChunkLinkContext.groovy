@@ -21,6 +21,16 @@ abstract class CoreChunkLinkContext implements ChunkLinkContext, CoreContext {
     @Override
     abstract CoreWorldLinkContext getWorld()
 
+    @Override
+    int getX() {
+        nativeChunk.x
+    }
+
+    @Override
+    int getZ() {
+        nativeChunk.z
+    }
+
     private ForgeChunkManager.Ticket findExistingTicket() {
         def tickets = ForgeChunkManager.getPersistentChunksFor(world.nativeWorld).get(nativeChunk).findAll { ticket ->
             ticket.modId == AutomationMod.MODID
