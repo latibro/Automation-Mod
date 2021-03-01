@@ -24,6 +24,8 @@ import net.minecraft.block.Block
 import net.minecraft.item.Item
 import net.minecraft.item.ItemBlock
 import net.minecraft.util.ResourceLocation
+import net.minecraft.world.World
+import net.minecraftforge.common.ForgeChunkManager
 import net.minecraftforge.event.RegistryEvent
 import net.minecraftforge.fml.common.Loader
 import net.minecraftforge.fml.common.Mod
@@ -42,6 +44,13 @@ class CommonProxy {
     }
 
     static void init(FMLInitializationEvent e) {
+        ForgeChunkManager.setForcedChunkLoadingCallback(AutomationMod.instance, new ForgeChunkManager.LoadingCallback() {
+            @Override
+            void ticketsLoaded(List<ForgeChunkManager.Ticket> tickets, World world) {
+                AutomationMod.logger.info("Chunk force load tickets loaded")
+            }
+        });
+
         if (Loader.isModLoaded("computercraft")) {
             ComputerCraftAPI.registerPeripheralProvider(new TileEntityPeripheralProvider())
         }

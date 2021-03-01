@@ -10,16 +10,16 @@ import net.minecraft.util.math.AxisAlignedBB
 import javax.annotation.Nullable
 
 @CompileStatic
-final class LocationCoreEntityMultiLink extends CoreEntityMultiLinkContext {
+final class LocationCoreEntityMultiLinkContext extends CoreEntityMultiLinkContext {
 
     private final CoreLocationLinkContext location
     private final boolean includeBoundingBoxes
 
-    LocationCoreEntityMultiLink(CoreLocationLinkContext location) {
+    LocationCoreEntityMultiLinkContext(CoreLocationLinkContext location) {
         this(location, true)
     }
 
-    LocationCoreEntityMultiLink(CoreLocationLinkContext location, boolean includeBoundingBoxes) {
+    LocationCoreEntityMultiLinkContext(CoreLocationLinkContext location, boolean includeBoundingBoxes) {
         this.location = Objects.requireNonNull(location)
         this.includeBoundingBoxes = includeBoundingBoxes
     }

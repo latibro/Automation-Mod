@@ -8,7 +8,7 @@ import latibro.automation.core.api.world.BaseWorldLinkAPI
 import latibro.automation.core.context.Context
 import latibro.automation.core.context.entity.EntityLinkContext
 import latibro.automation.core.context.entity.multi.EntityMultiLinkContext
-import latibro.automation.core.context.location.LocationContext
+import latibro.automation.core.context.location.LocationLinkContext
 import latibro.automation.core.context.server.ServerLinkContext
 import latibro.automation.core.context.world.WorldLinkContext
 import spock.lang.Specification
@@ -28,7 +28,7 @@ class BaseAPIProviderSpec extends Specification {
         test                | context                      | apiClass
         "server link"       | Mock(ServerLinkContext)      | BaseServerLinkAPI
         "world link"        | Mock(WorldLinkContext)       | BaseWorldLinkAPI
-        "location link"     | Mock(LocationContext)        | BaseLocationLinkAPI
+        "location link"     | Mock(LocationLinkContext) | BaseLocationLinkAPI
         "entity link"       | Mock(EntityLinkContext)      | BaseEntityLinkAPI
         "entity multi link" | Mock(EntityMultiLinkContext) | BaseEntityMultiLinkAPI
     }

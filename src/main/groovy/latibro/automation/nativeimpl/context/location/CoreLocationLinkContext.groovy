@@ -2,14 +2,16 @@ package latibro.automation.nativeimpl.context.location
 
 import groovy.transform.CompileStatic
 import latibro.automation.core.context.CoreContext
-import latibro.automation.core.context.location.LocationContext
+import latibro.automation.core.context.location.LocationLinkContext
+import latibro.automation.nativeimpl.context.chunk.CoreChunkLinkContext
+import latibro.automation.nativeimpl.context.chunk.LocationCoreChunkLinkContext
 import latibro.automation.nativeimpl.context.entity.multi.CoreEntityMultiLinkContext
-import latibro.automation.nativeimpl.context.entity.multi.LocationCoreEntityMultiLink
+import latibro.automation.nativeimpl.context.entity.multi.LocationCoreEntityMultiLinkContext
 import latibro.automation.nativeimpl.context.world.CoreWorldLinkContext
 import net.minecraft.util.math.BlockPos
 
 @CompileStatic
-abstract class CoreLocationLinkContext implements LocationContext, CoreContext {
+abstract class CoreLocationLinkContext implements LocationLinkContext, CoreContext {
 
     abstract BlockPos getNativeLocation()
 
@@ -42,13 +44,18 @@ abstract class CoreLocationLinkContext implements LocationContext, CoreContext {
     abstract CoreWorldLinkContext getWorld()
 
     @Override
+    CoreChunkLinkContext getChunk() {
+        return new LocationCoreChunkLinkContext(this)
+    }
+
+    @Override
     CoreEntityMultiLinkContext getEntities() {
-        return new LocationCoreEntityMultiLink(this)
+        return new LocationCoreEntityMultiLinkContext(this)
     }
 
     @Override
     CoreEntityMultiLinkContext getEntities(boolean includeBoundingBoxes) {
-        return new LocationCoreEntityMultiLink(this, includeBoundingBoxes)
+        return new LocationCoreEntityMultiLinkContext(this, includeBoundingBoxes)
     }
 
     @Override

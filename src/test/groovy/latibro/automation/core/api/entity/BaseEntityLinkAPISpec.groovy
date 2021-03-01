@@ -4,7 +4,7 @@ import latibro.automation.AutomationMod
 import latibro.automation.api.link.location.LocationLinkAPI
 import latibro.automation.core.api.ContextAPI
 import latibro.automation.core.context.entity.EntityLinkContext
-import latibro.automation.core.context.location.LocationContext
+import latibro.automation.core.context.location.LocationLinkContext
 import latibro.automation.nativeimpl.context.entity.CoreEntityLinkContext
 import org.apache.logging.log4j.Logger
 import spock.lang.Specification
@@ -90,8 +90,8 @@ class BaseEntityLinkAPISpec extends Specification {
         where:
         test                          | returnedFromContext   | expected
         "null"                        | null                  | { it == null }
-        "generic location link"       | Mock(LocationContext) | { it instanceof LocationLinkAPI }
-        "expected context inside API" | Mock(LocationContext) | { ((ContextAPI) it).context == returnedFromContext }
+        "generic location link"       | Mock(LocationLinkContext) | { it instanceof LocationLinkAPI }
+        "expected context inside API" | Mock(LocationLinkContext) | { ((ContextAPI) it).context == returnedFromContext }
     }
 
     @Unroll("#test")

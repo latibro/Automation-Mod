@@ -9,7 +9,7 @@ import latibro.automation.core.api.world.BaseWorldLinkAPI
 import latibro.automation.core.context.Context
 import latibro.automation.core.context.entity.EntityLinkContext
 import latibro.automation.core.context.entity.multi.EntityMultiLinkContext
-import latibro.automation.core.context.location.LocationContext
+import latibro.automation.core.context.location.LocationLinkContext
 import latibro.automation.core.context.server.ServerLinkContext
 import latibro.automation.core.context.world.WorldLinkContext
 
@@ -23,7 +23,7 @@ class BaseAPIProvider extends AbstractAPIProvider {
         if (context instanceof WorldLinkContext) {
             return new BaseWorldLinkAPI(context)
         }
-        if (context instanceof LocationContext) {
+        if (context instanceof LocationLinkContext) {
             return new BaseLocationLinkAPI(context)
         }
         if (context instanceof EntityLinkContext) {

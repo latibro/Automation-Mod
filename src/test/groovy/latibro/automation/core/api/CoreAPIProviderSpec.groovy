@@ -8,7 +8,7 @@ import latibro.automation.core.api.world.CoreWorldLinkAPI
 import latibro.automation.core.context.Context
 import latibro.automation.core.context.entity.EntityLinkContext
 import latibro.automation.core.context.entity.multi.EntityMultiLinkContext
-import latibro.automation.core.context.location.LocationContext
+import latibro.automation.core.context.location.LocationLinkContext
 import latibro.automation.core.context.server.ServerLinkContext
 import latibro.automation.core.context.world.WorldLinkContext
 import latibro.automation.nativeimpl.context.entity.CoreEntityLinkContext
@@ -33,7 +33,7 @@ class CoreAPIProviderSpec extends Specification {
         test                     | context                          | apiClass
         "core server link"       | Mock(CoreServerLinkContext)      | CoreServerLinkAPI
         "core world link "       | Mock(CoreWorldLinkContext)       | CoreWorldLinkAPI
-        "core location link"     | Mock(CoreLocationLinkContext)    | CoreLocationLinkAPI
+        "core location link"     | Mock(CoreLocationLinkContext) | CoreLocationLinkAPI
         "core entity link"       | Mock(CoreEntityLinkContext)      | CoreEntityLinkAPI
         "core entity multi link" | Mock(CoreEntityMultiLinkContext) | CoreEntityMultiLinkAPI
     }
@@ -52,7 +52,7 @@ class CoreAPIProviderSpec extends Specification {
         "random context"            | Mock(Context)
         "generic server link"       | Mock(ServerLinkContext)
         "generic world link"        | Mock(WorldLinkContext)
-        "generic location link"     | Mock(LocationContext)
+        "generic location link"     | Mock(LocationLinkContext)
         "generic entity link"       | Mock(EntityLinkContext)
         "generic entity multi link" | Mock(EntityMultiLinkContext)
     }

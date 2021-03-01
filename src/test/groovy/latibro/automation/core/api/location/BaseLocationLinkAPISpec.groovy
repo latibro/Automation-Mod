@@ -5,7 +5,7 @@ import latibro.automation.api.link.entity.EntityMultiLinkAPI
 import latibro.automation.api.link.world.WorldLinkAPI
 import latibro.automation.core.api.ContextAPI
 import latibro.automation.core.context.entity.multi.EntityMultiLinkContext
-import latibro.automation.core.context.location.LocationContext
+import latibro.automation.core.context.location.LocationLinkContext
 import latibro.automation.core.context.world.WorldLinkContext
 import latibro.automation.nativeimpl.context.location.CoreLocationLinkContext
 import org.apache.logging.log4j.Logger
@@ -24,19 +24,19 @@ class BaseLocationLinkAPISpec extends Specification {
     @Unroll("#test")
     def "Constructor - success"() {
         when:
-        def api = new BaseLocationLinkAPI(context as LocationContext)
+        def api = new BaseLocationLinkAPI(context as LocationLinkContext)
         then:
         api != null
         where:
         test                    | context
-        "generic location link" | Mock(LocationContext)
+        "generic location link" | Mock(LocationLinkContext)
         "core location link"    | Mock(CoreLocationLinkContext)
     }
 
     @Unroll("#test")
     def "Constructor - fails"() {
         when:
-        new BaseLocationLinkAPI(context as LocationContext)
+        new BaseLocationLinkAPI(context as LocationLinkContext)
         then:
         thrown(Exception)
         where:
@@ -47,7 +47,7 @@ class BaseLocationLinkAPISpec extends Specification {
     @Unroll("#test")
     def "Is loaded"() {
         given:
-        def context = Mock(LocationContext, {
+        def context = Mock(LocationLinkContext, {
             isLoaded() >> returnedFromContext
         })
         def api = new BaseLocationLinkAPI(context)
@@ -64,7 +64,7 @@ class BaseLocationLinkAPISpec extends Specification {
     @Unroll("#test")
     def "Get coordinate X"() {
         given:
-        def context = Mock(LocationContext, {
+        def context = Mock(LocationLinkContext, {
             getX() >> returnedFromContext
         })
         def api = new BaseLocationLinkAPI(context)
@@ -81,7 +81,7 @@ class BaseLocationLinkAPISpec extends Specification {
     @Unroll("#test")
     def "Get coordinate Y"() {
         given:
-        def context = Mock(LocationContext, {
+        def context = Mock(LocationLinkContext, {
             getY() >> returnedFromContext
         })
         def api = new BaseLocationLinkAPI(context)
@@ -98,7 +98,7 @@ class BaseLocationLinkAPISpec extends Specification {
     @Unroll("#test")
     def "Get coordinate Z"() {
         given:
-        def context = Mock(LocationContext, {
+        def context = Mock(LocationLinkContext, {
             getZ() >> returnedFromContext
         })
         def api = new BaseLocationLinkAPI(context)
@@ -115,7 +115,7 @@ class BaseLocationLinkAPISpec extends Specification {
     @Unroll("#test")
     def "Get world"() {
         given:
-        def context = Mock(LocationContext, {
+        def context = Mock(LocationLinkContext, {
             getWorld() >> returnedFromContext
         })
         def api = new BaseLocationLinkAPI(context)
@@ -133,7 +133,7 @@ class BaseLocationLinkAPISpec extends Specification {
     @Unroll("#test")
     def "Get entities"() {
         given:
-        def context = Mock(LocationContext, {
+        def context = Mock(LocationLinkContext, {
             getEntities() >> returnedFromContext
         })
         def api = new BaseLocationLinkAPI(context)
@@ -151,7 +151,7 @@ class BaseLocationLinkAPISpec extends Specification {
     @Unroll("#test")
     def "Get distance to coordinate - expected return"() {
         given:
-        def context = Mock(LocationContext, {
+        def context = Mock(LocationLinkContext, {
             getDistanceToCoordinates(*_) >> returnedFromContext
         })
         def api = new BaseLocationLinkAPI(context)
@@ -172,7 +172,7 @@ class BaseLocationLinkAPISpec extends Specification {
     @Unroll("#test")
     def "Get distance to coordinate - handling parameters"() {
         given:
-        def context = Mock(LocationContext)
+        def context = Mock(LocationLinkContext)
         def api = new BaseLocationLinkAPI(context)
         when:
         api.getDistanceToCoordinates(inputX as Number, inputY as Number, inputZ as Number)

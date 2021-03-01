@@ -1,22 +1,23 @@
 package latibro.automation.core.api.location
 
+import latibro.automation.api.link.chunk.ChunkLinkAPI
 import latibro.automation.api.link.entity.EntityMultiLinkAPI
 import latibro.automation.api.link.location.LocationLinkAPI
 import latibro.automation.api.link.world.WorldLinkAPI
 import latibro.automation.core.api.APIRegistry
 import latibro.automation.core.api.ContextAPI
-import latibro.automation.core.context.location.LocationContext
+import latibro.automation.core.context.location.LocationLinkContext
 
 class BaseLocationLinkAPI implements LocationLinkAPI, ContextAPI {
 
-    private final LocationContext context
+    private final LocationLinkContext context
 
-    BaseLocationLinkAPI(LocationContext context) {
+    BaseLocationLinkAPI(LocationLinkContext context) {
         this.context = Objects.requireNonNull(context)
     }
 
     @Override
-    LocationContext getContext() {
+    LocationLinkContext getContext() {
         return context
     }
 
@@ -68,6 +69,11 @@ class BaseLocationLinkAPI implements LocationLinkAPI, ContextAPI {
     @Override
     Number getDistanceToCoordinates(Number x, Number y, Number z) {
         return context.getDistanceToCoordinates(x as int, y as int, z as int)
+    }
+
+    @Override
+    ChunkLinkAPI getChunk() {
+        return APIRegistry.getAPI(context.getChunk()) as ChunkLinkAPI
     }
 
 }

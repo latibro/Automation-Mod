@@ -1,12 +1,14 @@
 package latibro.automation.core.api
 
 import latibro.automation.api.API
+import latibro.automation.core.api.chunk.CoreChunkLinkAPI
 import latibro.automation.core.api.entity.CoreEntityLinkAPI
 import latibro.automation.core.api.entity.CoreEntityMultiLinkAPI
 import latibro.automation.core.api.location.CoreLocationLinkAPI
 import latibro.automation.core.api.server.CoreServerLinkAPI
 import latibro.automation.core.api.world.CoreWorldLinkAPI
 import latibro.automation.core.context.Context
+import latibro.automation.nativeimpl.context.chunk.CoreChunkLinkContext
 import latibro.automation.nativeimpl.context.entity.CoreEntityLinkContext
 import latibro.automation.nativeimpl.context.entity.multi.CoreEntityMultiLinkContext
 import latibro.automation.nativeimpl.context.location.CoreLocationLinkContext
@@ -31,6 +33,9 @@ final class CoreAPIProvider extends AbstractAPIProvider {
         }
         if (context instanceof CoreEntityMultiLinkContext) {
             return new CoreEntityMultiLinkAPI(context)
+        }
+        if (context instanceof CoreChunkLinkContext) {
+            return new CoreChunkLinkAPI(context)
         }
         return super.getAPI(context)
     }
