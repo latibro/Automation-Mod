@@ -18,6 +18,7 @@ import latibro.automation.linkbox.server.ServerLinkBoxBlock
 import latibro.automation.linkbox.server.ServerLinkBoxTileEntity
 import latibro.automation.linkbox.world.WorldLinkBoxBlock
 import latibro.automation.linkbox.world.WorldLinkBoxTileEntity
+import latibro.automation.nativeimpl.context.chunk.EntityCoreChunkLinkContext
 import latibro.devoplment.DebugToolItem
 import latibro.devoplment.EntityMountToolItem
 import net.minecraft.block.Block
@@ -26,6 +27,7 @@ import net.minecraft.item.ItemBlock
 import net.minecraft.util.ResourceLocation
 import net.minecraft.world.World
 import net.minecraftforge.common.ForgeChunkManager
+import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.event.RegistryEvent
 import net.minecraftforge.fml.common.Loader
 import net.minecraftforge.fml.common.Mod
@@ -43,13 +45,14 @@ class CommonProxy {
         NetworkRegistry.INSTANCE.registerGuiHandler(AutomationMod.instance, new ScreenProxy())
     }
 
-    static void init(FMLInitializationEvent e) {
+    void init(FMLInitializationEvent e) {
         ForgeChunkManager.setForcedChunkLoadingCallback(AutomationMod.instance, new ForgeChunkManager.LoadingCallback() {
             @Override
             void ticketsLoaded(List<ForgeChunkManager.Ticket> tickets, World world) {
                 AutomationMod.logger.info("Chunk force load tickets loaded")
             }
         });
+        MinecraftForge.EVENT_BUS.register(EntityCoreChunkLinkContext)
 
         if (Loader.isModLoaded("computercraft")) {
             ComputerCraftAPI.registerPeripheralProvider(new TileEntityPeripheralProvider())

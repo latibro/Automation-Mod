@@ -7,11 +7,18 @@ import latibro.automation.core.context.chunk.ChunkLinkContext
 import latibro.automation.nativeimpl.context.world.CoreWorldLinkContext
 import net.minecraft.util.math.ChunkPos
 import net.minecraftforge.common.ForgeChunkManager
+import net.minecraftforge.event.entity.player.EntityItemPickupEvent
 
 @CompileStatic
 abstract class CoreChunkLinkContext implements ChunkLinkContext, CoreContext {
 
     abstract ChunkPos getNativeChunk()
+
+    @Override
+    boolean isLinked() {
+        return nativeChunk
+        EntityItemPickupEvent
+    }
 
     @Override
     boolean isLoaded() {
@@ -31,10 +38,21 @@ abstract class CoreChunkLinkContext implements ChunkLinkContext, CoreContext {
         nativeChunk.z
     }
 
-    private ForgeChunkManager.Ticket findExistingTicket() {
+    protected ForgeChunkManager.Ticket createTicket() {
+        def ticket = ForgeChunkManager.requestTicket(AutomationMod.instance, world.nativeWorld, ForgeChunkManager.Type.NORMAL)
+        return ticket
+    }
+
+    protected Set<ForgeChunkManager.Ticket> findExistingTickets() {
         def tickets = ForgeChunkManager.getPersistentChunksFor(world.nativeWorld).get(nativeChunk).findAll { ticket ->
-            ticket.modId == AutomationMod.MODID
+            ticket.modId == AutomationMod.MODID &&
+                    !ticket.isPlayerTicket()
         }
+        return tickets
+    }
+
+    protected ForgeChunkManager.Ticket findExistingTicket() {
+        def tickets = findExistingTickets()
         if (tickets.size() > 1) {
             throw new RuntimeException("Multiple chunk tickets found")
         }
@@ -55,7 +73,7 @@ abstract class CoreChunkLinkContext implements ChunkLinkContext, CoreContext {
             AutomationMod.logger.info("Chunk already force loaded")
             return
         }
-        ticket = ForgeChunkManager.requestTicket(AutomationMod.instance, world.nativeWorld, ForgeChunkManager.Type.NORMAL)
+        ticket = createTicket()
         ForgeChunkManager.forceChunk(ticket, nativeChunk)
     }
 
