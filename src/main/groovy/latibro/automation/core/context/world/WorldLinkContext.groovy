@@ -7,6 +7,8 @@ import latibro.automation.core.context.server.ServerLinkContext
 
 interface WorldLinkContext extends SingleLinkContext {
 
+    String getName()
+
     ServerLinkContext getServer()
 
     EntityMultiLinkContext getLoadedEntities()

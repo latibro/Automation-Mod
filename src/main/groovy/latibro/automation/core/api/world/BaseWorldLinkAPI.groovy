@@ -32,6 +32,11 @@ class BaseWorldLinkAPI implements WorldLinkAPI, ContextAPI {
     }
 
     @Override
+    String getName() {
+        return context.getName()
+    }
+
+    @Override
     ServerLinkAPI getServer() {
         return APIRegistry.getAPI(context.server) as ServerLinkAPI
     }

@@ -20,6 +20,11 @@ abstract class CoreWorldLinkContext implements WorldLinkContext, CoreContext {
     }
 
     @Override
+    String getName() {
+        nativeWorld.worldInfo.getWorldName()
+    }
+
+    @Override
     ServerLinkContext getServer() {
         return new DefaultCoreServerLinkContext()
     }

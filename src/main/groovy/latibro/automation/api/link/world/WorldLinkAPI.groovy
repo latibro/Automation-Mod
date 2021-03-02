@@ -9,6 +9,9 @@ import latibro.automation.api.link.server.ServerLinkAPI
 interface WorldLinkAPI extends SingleLinkAPI {
 
     @LuaMethod
+    String getName()
+
+    @LuaMethod
     ServerLinkAPI getServer()
 
     @LuaMethod
