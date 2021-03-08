@@ -1,12 +1,11 @@
 package latibro.automation.nativeimpl.context.entity.multi
 
-import com.google.common.base.Predicate
+
 import groovy.transform.CompileStatic
+import latibro.automation.AutomationMod
 import latibro.automation.core.LinkType
 import latibro.automation.nativeimpl.context.world.CoreWorldLinkContext
 import net.minecraft.entity.Entity
-
-import javax.annotation.Nullable
 
 @CompileStatic
 final class WorldLoadedCoreEntityMultiLinkContext extends CoreEntityMultiLinkContext {
@@ -18,12 +17,35 @@ final class WorldLoadedCoreEntityMultiLinkContext extends CoreEntityMultiLinkCon
     }
 
     List<Entity> getNativeEntityList() {
-        return world.nativeWorld.getEntities(Entity.class, new Predicate<Entity>() {
-            @Override
-            boolean apply(@Nullable Entity input) {
-                return true
-            }
-        })
+        def fields = world.nativeWorld.class.getFields()
+        AutomationMod.logger.info("### fields count {}", fields.length)
+        for (def field : fields) {
+            AutomationMod.logger.info("### ------")
+            AutomationMod.logger.info("### Field {}", field)
+            AutomationMod.logger.info("### Field.name {}", field.name)
+            AutomationMod.logger.info("### Field.type {}", field.type)
+        }
+
+        def methods = world.nativeWorld.class.getMethods()
+        AutomationMod.logger.info("### methods count {}", methods.length)
+        for (def method : methods) {
+            AutomationMod.logger.info("### ------")
+            AutomationMod.logger.info("### Method {}", method)
+            AutomationMod.logger.info("### Method.name {}", method.name)
+            AutomationMod.logger.info("### Method.returnType {}", method.returnType)
+        }
+
+        def fieldX = world.nativeWorld.@loadedEntityList
+        AutomationMod.logger.info("### fieldX {}", fieldX)
+
+        def methodX = world.nativeWorld.loadedEntityList
+        AutomationMod.logger.info("### methodX {}", methodX)
+
+        def methodY = world.nativeWorld.getLoadedEntityList()
+        AutomationMod.logger.info("### methodY {}", methodY)
+
+        def loadedEntityList = world.nativeWorld.@loadedEntityList
+        return loadedEntityList
     }
 
     @Override

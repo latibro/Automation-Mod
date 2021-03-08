@@ -24,7 +24,7 @@ final class EntityCoreLocationLinkContext extends CoreLocationLinkContext {
 
     @Override
     CoreWorldLinkContext getWorld() {
-        return entity.world
+        return entity.location.world
     }
 
     @Override

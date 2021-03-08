@@ -21,7 +21,7 @@ print("Number of entities at location: " .. entities.count())
 local entitiesBoundingBox = location.getEntities(true)
 print("Number of entities at location (bounding box): " .. entitiesBoundingBox.count())
 
-local entity = entitiesBoundingBox.asList()[1]
+local entity = entitiesBoundingBox.asList(1)[1]
 print("UUID of first entity: " .. entity.getUUID())
 
 local entityLocation = entity.getLocation()

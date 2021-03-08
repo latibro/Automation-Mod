@@ -1,22 +1,23 @@
-package latibro.automation.core.api.entity
+package latibro.automation.core.api.tileentity
 
-import latibro.automation.api.link.entity.EntityLinkAPI
-import latibro.automation.api.link.entity.EntityMultiLinkAPI
+
+import latibro.automation.api.link.tileentity.TileEntityLinkAPI
+import latibro.automation.api.link.tileentity.TileEntityMultiLinkAPI
 import latibro.automation.core.api.APIRegistry
 import latibro.automation.core.api.ContextAPI
-import latibro.automation.core.context.entity.EntityLinkContext
-import latibro.automation.core.context.entity.multi.EntityMultiLinkContext
+import latibro.automation.core.context.tileentity.TileEntityLinkContext
+import latibro.automation.core.context.tileentity.multi.TileEntityMultiLinkContext
 
-class BaseEntityMultiLinkAPI implements EntityMultiLinkAPI, ContextAPI {
+class BaseTileEntityMultiLinkAPI implements TileEntityMultiLinkAPI, ContextAPI {
 
-    private final EntityMultiLinkContext context
+    private final TileEntityMultiLinkContext context
 
-    BaseEntityMultiLinkAPI(EntityMultiLinkContext context) {
+    BaseTileEntityMultiLinkAPI(TileEntityMultiLinkContext context) {
         this.context = Objects.requireNonNull(context)
     }
 
     @Override
-    EntityMultiLinkContext getContext() {
+    TileEntityMultiLinkContext getContext() {
         return context
     }
 
@@ -36,31 +37,31 @@ class BaseEntityMultiLinkAPI implements EntityMultiLinkAPI, ContextAPI {
     }
 
     @Override
-    List<EntityLinkAPI> asList() {
+    List<TileEntityLinkAPI> asList() {
         def contextList = context.asList()
         def apiList = wrapContextList(contextList)
         return apiList
     }
 
     @Override
-    List<EntityLinkAPI> asList(Number maxCount) {
+    List<TileEntityLinkAPI> asList(Number maxCount) {
         def contextList = context.asList(maxCount as int)
         def apiList = wrapContextList(contextList)
         return apiList
     }
 
     @Override
-    EntityMultiLinkAPI whereProperty(String property, Object expected) {
+    TileEntityMultiLinkAPI whereProperty(String property, Object expected) {
         //TODO this will need to be filtered on API properties and not on context properties - in some way
         def filteredContext = context.whereProperty(property, expected)
-        def api = APIRegistry.getAPI(filteredContext) as EntityMultiLinkAPI
+        def api = APIRegistry.getAPI(filteredContext) as TileEntityMultiLinkAPI
         return api
     }
 
-    protected static List<EntityLinkAPI> wrapContextList(List<EntityLinkContext> contextList) {
+    protected static List<TileEntityLinkAPI> wrapContextList(List<TileEntityLinkContext> contextList) {
         def apiList = contextList.collect {
             APIRegistry.getAPI(it)
-        } as List<EntityLinkAPI>
+        } as List<TileEntityLinkAPI>
         return apiList
     }
 

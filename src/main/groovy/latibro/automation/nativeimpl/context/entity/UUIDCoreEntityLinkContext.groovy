@@ -9,11 +9,9 @@ import net.minecraft.entity.Entity
 final class UUIDCoreEntityLinkContext extends CoreEntityLinkContext {
 
     private final UUID uuid
-    private final CoreServerLinkContext server
 
-    UUIDCoreEntityLinkContext(UUID uuid, CoreServerLinkContext server) {
+    UUIDCoreEntityLinkContext(UUID uuid) {
         this.uuid = Objects.requireNonNull(uuid)
-        this.server = Objects.requireNonNull(server)
     }
 
     Entity getNativeEntity() {

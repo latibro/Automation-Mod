@@ -6,4 +6,8 @@ interface MultiLinkContext<T extends LinkContext> extends LinkContext {
 
     List<T> asList()
 
+    List<T> asList(int maxCount)
+
+    MultiLinkContext whereProperty(String property, Object expected)
+
 }

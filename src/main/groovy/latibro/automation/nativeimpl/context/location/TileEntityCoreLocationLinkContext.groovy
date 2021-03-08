@@ -22,7 +22,7 @@ final class TileEntityCoreLocationLinkContext extends CoreLocationLinkContext {
 
     @Override
     CoreWorldLinkContext getWorld() {
-        return tileEntity.world
+        return tileEntity.location.world
     }
 
     @Override

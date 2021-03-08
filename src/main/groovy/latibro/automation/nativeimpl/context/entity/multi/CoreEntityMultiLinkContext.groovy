@@ -23,8 +23,9 @@ abstract class CoreEntityMultiLinkContext extends AbstractEntityMultiLinkContext
     }
 
     @Override
-    List<CoreEntityLinkContext> asList() {
-        def result = nativeEntityList.collect {
+    List<CoreEntityLinkContext> asList(int maxCount) {
+        int toIndex = Math.min(maxCount, nativeEntityList.size())
+        def result = nativeEntityList.subList(0, toIndex).collect {
             wrapNativeEntity(it)
         }
         return result

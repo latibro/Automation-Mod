@@ -7,6 +7,8 @@ import latibro.automation.nativeimpl.context.chunk.CoreChunkLinkContext
 import latibro.automation.nativeimpl.context.chunk.LocationCoreChunkLinkContext
 import latibro.automation.nativeimpl.context.entity.multi.CoreEntityMultiLinkContext
 import latibro.automation.nativeimpl.context.entity.multi.LocationCoreEntityMultiLinkContext
+import latibro.automation.nativeimpl.context.tileentity.multi.CoreTileEntityMultiLinkContext
+import latibro.automation.nativeimpl.context.tileentity.multi.LocationCoreTileEntityMultiLinkContext
 import latibro.automation.nativeimpl.context.world.CoreWorldLinkContext
 import net.minecraft.util.math.BlockPos
 
@@ -56,6 +58,11 @@ abstract class CoreLocationLinkContext implements LocationLinkContext, CoreConte
     @Override
     CoreEntityMultiLinkContext getEntities(boolean includeBoundingBoxes) {
         return new LocationCoreEntityMultiLinkContext(this, includeBoundingBoxes)
+    }
+
+    @Override
+    CoreTileEntityMultiLinkContext getTileEntities() {
+        return new LocationCoreTileEntityMultiLinkContext(this)
     }
 
     @Override

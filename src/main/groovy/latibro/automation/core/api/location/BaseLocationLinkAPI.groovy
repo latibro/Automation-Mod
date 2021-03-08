@@ -3,6 +3,7 @@ package latibro.automation.core.api.location
 import latibro.automation.api.link.chunk.ChunkLinkAPI
 import latibro.automation.api.link.entity.EntityMultiLinkAPI
 import latibro.automation.api.link.location.LocationLinkAPI
+import latibro.automation.api.link.tileentity.TileEntityMultiLinkAPI
 import latibro.automation.api.link.world.WorldLinkAPI
 import latibro.automation.core.api.APIRegistry
 import latibro.automation.core.api.ContextAPI
@@ -64,6 +65,11 @@ class BaseLocationLinkAPI implements LocationLinkAPI, ContextAPI {
     @Override
     EntityMultiLinkAPI getEntities(Boolean includeBoundingBoxes) {
         return APIRegistry.getAPI(context.getEntities(includeBoundingBoxes)) as EntityMultiLinkAPI
+    }
+
+    @Override
+    TileEntityMultiLinkAPI getTileEntities() {
+        return APIRegistry.getAPI(context.getTileEntities()) as TileEntityMultiLinkAPI
     }
 
     @Override

@@ -84,7 +84,7 @@ class LocationLinkBoxTileEntity extends PeripheralTileEntity {
 
             @Override
             CoreWorldLinkContext getWorld() {
-                return tileEntityContext.getWorld()
+                return tileEntityContext.getLocation().getWorld()
             }
 
         }

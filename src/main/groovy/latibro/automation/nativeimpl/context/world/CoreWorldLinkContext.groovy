@@ -8,6 +8,8 @@ import latibro.automation.nativeimpl.context.entity.multi.WorldLoadedCoreEntityM
 import latibro.automation.nativeimpl.context.location.CoreLocationLinkContext
 import latibro.automation.nativeimpl.context.location.InstanceCoreLocationLinkContext
 import latibro.automation.nativeimpl.context.server.DefaultCoreServerLinkContext
+import latibro.automation.nativeimpl.context.tileentity.multi.CoreTileEntityMultiLinkContext
+import latibro.automation.nativeimpl.context.tileentity.multi.WorldLoadedCoreTileEntityMultiLinkContext
 import net.minecraft.world.World
 
 abstract class CoreWorldLinkContext implements WorldLinkContext, CoreContext {
@@ -32,6 +34,11 @@ abstract class CoreWorldLinkContext implements WorldLinkContext, CoreContext {
     @Override
     CoreEntityMultiLinkContext getLoadedEntities() {
         return new WorldLoadedCoreEntityMultiLinkContext(this)
+    }
+
+    @Override
+    CoreTileEntityMultiLinkContext getLoadedTileEntities() {
+        return new WorldLoadedCoreTileEntityMultiLinkContext(this)
     }
 
     @Override

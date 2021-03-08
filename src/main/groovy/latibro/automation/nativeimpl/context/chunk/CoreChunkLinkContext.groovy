@@ -7,7 +7,6 @@ import latibro.automation.core.context.chunk.ChunkLinkContext
 import latibro.automation.nativeimpl.context.world.CoreWorldLinkContext
 import net.minecraft.util.math.ChunkPos
 import net.minecraftforge.common.ForgeChunkManager
-import net.minecraftforge.event.entity.player.EntityItemPickupEvent
 
 @CompileStatic
 abstract class CoreChunkLinkContext implements ChunkLinkContext, CoreContext {
@@ -17,7 +16,6 @@ abstract class CoreChunkLinkContext implements ChunkLinkContext, CoreContext {
     @Override
     boolean isLinked() {
         return nativeChunk
-        EntityItemPickupEvent
     }
 
     @Override

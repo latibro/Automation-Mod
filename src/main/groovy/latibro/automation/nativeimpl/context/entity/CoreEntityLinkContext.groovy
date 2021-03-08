@@ -6,9 +6,7 @@ import latibro.automation.core.context.entity.EntityLinkContext
 import latibro.automation.nativeimpl.context.location.CoreLocationLinkContext
 import latibro.automation.nativeimpl.context.location.EntityCoreLocationLinkContext
 import latibro.automation.nativeimpl.context.server.CoreServerLinkContext
-import latibro.automation.nativeimpl.context.server.EntityCoreServerLinkContext
-import latibro.automation.nativeimpl.context.world.CoreWorldLinkContext
-import latibro.automation.nativeimpl.context.world.EntityCoreWorldLinkContext
+import latibro.automation.nativeimpl.context.server.DefaultCoreServerLinkContext
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityList
 
@@ -18,13 +16,8 @@ abstract class CoreEntityLinkContext implements EntityLinkContext, CoreContext {
     abstract Entity getNativeEntity()
 
     @Override
-    CoreWorldLinkContext getWorld() {
-        return new EntityCoreWorldLinkContext(this)
-    }
-
-    @Override
     CoreServerLinkContext getServer() {
-        return new EntityCoreServerLinkContext(this)
+        return new DefaultCoreServerLinkContext()
     }
 
     @Override

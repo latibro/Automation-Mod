@@ -10,4 +10,7 @@ interface MultiLinkAPI<T extends LinkAPI> extends LinkAPI {
     @LuaMethod
     List<T> asList()
 
+    @LuaMethod
+    List<T> asList(Number maxCount)
+
 }

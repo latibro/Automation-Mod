@@ -8,6 +8,8 @@ import latibro.automation.core.context.ContextRegistry
 import latibro.automation.integration.computercraft.TileEntityPeripheralProvider
 import latibro.automation.integration.immersiverailroading.ImmersiveRailroadingAPIProvider
 import latibro.automation.integration.immersiverailroading.ImmersiveRailroadingContextProvider
+import latibro.automation.linkbox.data.DataBoxBlock
+import latibro.automation.linkbox.data.DataBoxTileEntity
 import latibro.automation.linkbox.entity.EntityLinkBoxBlock
 import latibro.automation.linkbox.entity.EntityLinkBoxTileEntity
 import latibro.automation.linkbox.entity.EntityLinkCardItem
@@ -49,9 +51,9 @@ class CommonProxy {
         ForgeChunkManager.setForcedChunkLoadingCallback(AutomationMod.instance, new ForgeChunkManager.LoadingCallback() {
             @Override
             void ticketsLoaded(List<ForgeChunkManager.Ticket> tickets, World world) {
-                AutomationMod.logger.info("Chunk force load tickets loaded")
+                AutomationMod.logger.info("Chunk force load tickets loaded {}", tickets)
             }
-        });
+        })
         MinecraftForge.EVENT_BUS.register(EntityCoreChunkLinkContext)
 
         if (Loader.isModLoaded("computercraft")) {
@@ -80,6 +82,9 @@ class CommonProxy {
 
         event.getRegistry().register(new LocationLinkBoxBlock())
         GameRegistry.registerTileEntity(LocationLinkBoxTileEntity.class, new ResourceLocation("location_link_box"))
+
+        event.getRegistry().register(new DataBoxBlock())
+        GameRegistry.registerTileEntity(DataBoxTileEntity.class, new ResourceLocation("data_box"))
     }
 
     @SubscribeEvent
@@ -88,6 +93,7 @@ class CommonProxy {
         event.getRegistry().register(new ItemBlock(ModBlocks.worldLinkBox).setRegistryName(ModBlocks.worldLinkBox.getRegistryName()))
         event.getRegistry().register(new ItemBlock(ModBlocks.entityLinkBox).setRegistryName(ModBlocks.entityLinkBox.getRegistryName()))
         event.getRegistry().register(new ItemBlock(ModBlocks.locationLinkBox).setRegistryName(ModBlocks.locationLinkBox.getRegistryName()))
+        event.getRegistry().register(new ItemBlock(ModBlocks.dataBox).setRegistryName(ModBlocks.dataBox.getRegistryName()))
 
         event.getRegistry().register(new EntityLinkCardItem())
         event.getRegistry().register(new LocationLinkCardItem())

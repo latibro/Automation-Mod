@@ -3,6 +3,7 @@ package latibro.automation.core.context.location
 import latibro.automation.core.context.chunk.ChunkLinkContext
 import latibro.automation.core.context.entity.multi.EntityMultiLinkContext
 import latibro.automation.core.context.link.SingleLinkContext
+import latibro.automation.core.context.tileentity.multi.TileEntityMultiLinkContext
 import latibro.automation.core.context.world.WorldLinkContext
 
 interface LocationLinkContext extends SingleLinkContext {
@@ -22,6 +23,8 @@ interface LocationLinkContext extends SingleLinkContext {
     EntityMultiLinkContext getEntities()
 
     EntityMultiLinkContext getEntities(boolean includeBoundingBoxes)
+
+    TileEntityMultiLinkContext getTileEntities()
 
     double getDistanceToCoordinates(int x, int y, int z)
 

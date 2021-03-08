@@ -26,7 +26,7 @@ final class EntityCoreChunkLinkContext extends CoreChunkLinkContext {
 
     @Override
     CoreWorldLinkContext getWorld() {
-        return entity.getWorld()
+        return entity.location.world
     }
 
     @Override

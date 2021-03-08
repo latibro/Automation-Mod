@@ -3,6 +3,7 @@ package latibro.automation.core.api.world
 import latibro.automation.api.link.entity.EntityMultiLinkAPI
 import latibro.automation.api.link.location.LocationLinkAPI
 import latibro.automation.api.link.server.ServerLinkAPI
+import latibro.automation.api.link.tileentity.TileEntityMultiLinkAPI
 import latibro.automation.api.link.world.WorldLinkAPI
 import latibro.automation.core.api.APIRegistry
 import latibro.automation.core.api.ContextAPI
@@ -44,6 +45,11 @@ class BaseWorldLinkAPI implements WorldLinkAPI, ContextAPI {
     @Override
     EntityMultiLinkAPI getLoadedEntities() {
         return APIRegistry.getAPI(context.loadedEntities) as EntityMultiLinkAPI
+    }
+
+    @Override
+    TileEntityMultiLinkAPI getLoadedTileEntities() {
+        return APIRegistry.getAPI(context.loadedTileEntities) as TileEntityMultiLinkAPI
     }
 
     @Override

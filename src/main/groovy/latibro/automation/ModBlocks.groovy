@@ -1,6 +1,6 @@
 package latibro.automation
 
-
+import latibro.automation.linkbox.data.DataBoxBlock
 import latibro.automation.linkbox.entity.EntityLinkBoxBlock
 import latibro.automation.linkbox.location.LocationLinkBoxBlock
 import latibro.automation.linkbox.server.ServerLinkBoxBlock
@@ -23,12 +23,16 @@ class ModBlocks {
     @GameRegistry.ObjectHolder("automation:location_link_box")
     static LocationLinkBoxBlock locationLinkBox
 
+    @GameRegistry.ObjectHolder("automation:data_box")
+    static DataBoxBlock dataBox
+
     @SideOnly(Side.CLIENT)
     static void initModels() {
         serverLinkBox.initModel()
         worldLinkBox.initModel()
         entityLinkBox.initModel()
         locationLinkBox.initModel()
+        dataBox.initModel()
     }
 
 }

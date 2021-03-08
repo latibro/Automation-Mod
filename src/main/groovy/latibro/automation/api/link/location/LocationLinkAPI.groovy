@@ -4,6 +4,7 @@ import latibro.automation.api.core.lua.LuaMethod
 import latibro.automation.api.link.SingleLinkAPI
 import latibro.automation.api.link.chunk.ChunkLinkAPI
 import latibro.automation.api.link.entity.EntityMultiLinkAPI
+import latibro.automation.api.link.tileentity.TileEntityMultiLinkAPI
 import latibro.automation.api.link.world.WorldLinkAPI
 
 interface LocationLinkAPI extends SingleLinkAPI {
@@ -28,6 +29,9 @@ interface LocationLinkAPI extends SingleLinkAPI {
 
     @LuaMethod
     EntityMultiLinkAPI getEntities(Boolean includeBoundingBoxes)
+
+    @LuaMethod
+    TileEntityMultiLinkAPI getTileEntities()
 
     @LuaMethod
     Number getDistanceToCoordinates(Number x, Number y, Number z)
