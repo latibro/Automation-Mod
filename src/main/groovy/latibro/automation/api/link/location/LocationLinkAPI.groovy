@@ -31,7 +31,16 @@ interface LocationLinkAPI extends SingleLinkAPI {
     EntityMultiLinkAPI getEntities(Boolean includeBoundingBoxes)
 
     @LuaMethod
+    EntityMultiLinkAPI getNearbyEntities(Number range)
+
+    @LuaMethod
+    EntityMultiLinkAPI getNearbyEntities(Number range, Boolean includeBoundingBoxes)
+
+    @LuaMethod
     TileEntityMultiLinkAPI getTileEntities()
+
+    @LuaMethod
+    TileEntityMultiLinkAPI getNearbyTileEntities(Number range)
 
     @LuaMethod
     Number getDistanceToCoordinates(Number x, Number y, Number z)

@@ -24,7 +24,13 @@ interface LocationLinkContext extends SingleLinkContext {
 
     EntityMultiLinkContext getEntities(boolean includeBoundingBoxes)
 
+    EntityMultiLinkContext getNearbyEntities(double range)
+
+    EntityMultiLinkContext getNearbyEntities(double range, boolean includeBoundingBoxes)
+
     TileEntityMultiLinkContext getTileEntities()
+
+    TileEntityMultiLinkContext getNearbyTileEntities(double range)
 
     double getDistanceToCoordinates(int x, int y, int z)
 

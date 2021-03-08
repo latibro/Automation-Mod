@@ -6,6 +6,7 @@ import latibro.automation.nativeimpl.context.chunk.CoreChunkLinkContext
 import latibro.automation.nativeimpl.context.chunk.EntityCoreChunkLinkContext
 import latibro.automation.nativeimpl.context.entity.CoreEntityLinkContext
 import latibro.automation.nativeimpl.context.world.CoreWorldLinkContext
+import latibro.automation.nativeimpl.context.world.EntityCoreWorldLinkContext
 import net.minecraft.util.math.BlockPos
 
 @CompileStatic
@@ -24,7 +25,7 @@ final class EntityCoreLocationLinkContext extends CoreLocationLinkContext {
 
     @Override
     CoreWorldLinkContext getWorld() {
-        return entity.location.world
+        return new EntityCoreWorldLinkContext(entity)
     }
 
     @Override

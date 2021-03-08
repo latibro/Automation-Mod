@@ -4,6 +4,7 @@ import groovy.transform.CompileStatic
 import latibro.automation.core.LinkType
 import latibro.automation.nativeimpl.context.tileentity.CoreTileEntityLinkContext
 import latibro.automation.nativeimpl.context.world.CoreWorldLinkContext
+import latibro.automation.nativeimpl.context.world.TileEntityCoreWorldLinkContext
 import net.minecraft.util.math.BlockPos
 
 @CompileStatic
@@ -22,7 +23,7 @@ final class TileEntityCoreLocationLinkContext extends CoreLocationLinkContext {
 
     @Override
     CoreWorldLinkContext getWorld() {
-        return tileEntity.location.world
+        return new TileEntityCoreWorldLinkContext(tileEntity)
     }
 
     @Override

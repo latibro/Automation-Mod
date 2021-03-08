@@ -31,8 +31,10 @@ class FilteredTileEntityMultiLinkContext extends AbstractTileEntityMultiLinkCont
 
     @Override
     List<TileEntityLinkContext> asList(int maxCount) {
-        int toIndex = Math.min(maxCount, count())
-        return parentContext.asList().findAll(filter).subList(0, toIndex)
+        def list = asList()
+        int toIndex = Math.min(maxCount, list.size())
+        def result = list.subList(0, toIndex)
+        return result
     }
 
     @Override

@@ -24,8 +24,9 @@ abstract class CoreTileEntityMultiLinkContext extends AbstractTileEntityMultiLin
 
     @Override
     List<CoreTileEntityLinkContext> asList(int maxCount) {
-        int toIndex = Math.min(maxCount, nativeTileEntityList.size())
-        def result = nativeTileEntityList.subList(0, toIndex).collect {
+        def list = nativeTileEntityList.collect()
+        int toIndex = Math.min(maxCount, list.size())
+        def result = list.subList(0, toIndex).collect {
             wrapNativeTileEntity(it)
         }
         return result

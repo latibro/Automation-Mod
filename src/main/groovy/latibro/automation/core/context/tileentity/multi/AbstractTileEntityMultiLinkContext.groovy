@@ -1,9 +1,7 @@
 package latibro.automation.core.context.tileentity.multi
 
-
 import latibro.automation.core.context.link.AbstractMultiLinkContext
 import latibro.automation.core.context.tileentity.TileEntityLinkContext
-import latibro.automation.nativeimpl.context.tileentity.multi.CoreTileEntityMultiLinkContext
 
 abstract class AbstractTileEntityMultiLinkContext extends AbstractMultiLinkContext<TileEntityLinkContext> implements TileEntityMultiLinkContext {
 
@@ -14,7 +12,7 @@ abstract class AbstractTileEntityMultiLinkContext extends AbstractMultiLinkConte
 
     @Override
     TileEntityMultiLinkContext whereProperty(String property, Object expected) {
-        return super.whereProperty(property, expected) as CoreTileEntityMultiLinkContext
+        return super.whereProperty(property, expected) as TileEntityMultiLinkContext
     }
 
 }

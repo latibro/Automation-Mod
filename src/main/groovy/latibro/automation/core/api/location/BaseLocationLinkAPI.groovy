@@ -68,8 +68,23 @@ class BaseLocationLinkAPI implements LocationLinkAPI, ContextAPI {
     }
 
     @Override
+    EntityMultiLinkAPI getNearbyEntities(Number range) {
+        return APIRegistry.getAPI(context.getNearbyEntities(range as double)) as EntityMultiLinkAPI
+    }
+
+    @Override
+    EntityMultiLinkAPI getNearbyEntities(Number range, Boolean includeBoundingBoxes) {
+        return APIRegistry.getAPI(context.getNearbyEntities(range as double, includeBoundingBoxes)) as EntityMultiLinkAPI
+    }
+
+    @Override
     TileEntityMultiLinkAPI getTileEntities() {
         return APIRegistry.getAPI(context.getTileEntities()) as TileEntityMultiLinkAPI
+    }
+
+    @Override
+    TileEntityMultiLinkAPI getNearbyTileEntities(Number range) {
+        return APIRegistry.getAPI(context.getNearbyTileEntities(range as double)) as TileEntityMultiLinkAPI
     }
 
     @Override

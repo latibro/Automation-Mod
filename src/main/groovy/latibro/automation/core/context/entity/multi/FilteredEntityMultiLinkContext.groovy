@@ -31,8 +31,10 @@ class FilteredEntityMultiLinkContext extends AbstractEntityMultiLinkContext {
 
     @Override
     List<EntityLinkContext> asList(int maxCount) {
-        int toIndex = Math.min(maxCount, count())
-        return asList().subList(0, toIndex)
+        def list = asList()
+        int toIndex = Math.min(maxCount, list.size())
+        def result = list.subList(0, toIndex)
+        return result
     }
 
     @Override
