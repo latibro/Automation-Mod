@@ -7,14 +7,14 @@ interface APIProvider {
 
     API getAPI(Context context)
 
-    List<String> getAPINames(API api)
+    List<String> getAPINames(API providingApi)
 
-    boolean hasAPI(String name, API api)
+    boolean hasAPI(String apiName, API providingApi)
 
-    API getAPI(String name, API api)
+    API getAPI(String apiName, API providingApi)
 
-    API getAPI(Class<? extends API> cls, API api)
+    API getAPI(Class<? extends API> apiClass, API providingApi)
 
-    API getAPI(Class<? extends API> cls, Context context)
+    API getAPI(Class<? extends API> apiClass, Context context)
 
 }

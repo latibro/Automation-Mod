@@ -9,7 +9,9 @@ import latibro.automation.core.api.ContextAPI
 import latibro.automation.core.api.entity.CoreEntityLinkAPI
 import latibro.automation.core.context.Context
 import latibro.automation.core.context.ContextRegistry
-import latibro.automation.integration.immersiverailroading.api.rollingstock.*
+import latibro.automation.integration.immersiverailroading.api.rollingstock.DieselLocomotiveAPIImpl
+import latibro.automation.integration.immersiverailroading.api.rollingstock.LocomotiveAPIImpl
+import latibro.automation.integration.immersiverailroading.api.rollingstock.RollingStockAPIImpl
 import latibro.automation.integration.immersiverailroading.context.RollingStockLinkContext
 
 final class ImmersiveRailroadingAPIProvider extends AbstractAPIProvider {
@@ -29,67 +31,33 @@ final class ImmersiveRailroadingAPIProvider extends AbstractAPIProvider {
     }
 
     @Override
-    List<String> getAPINames(API api) {
-        def names = super.getAPINames(api)
-        if (api instanceof CoreEntityLinkAPI) {
-            names.add("immersiverailroading:rollingstock")
-            names.add("immersiverailroading:locomotive")
-            names.add("immersiverailroading:locomotivediesel")
+    List<String> getAPINames(API providingApi) {
+        if (providingApi instanceof CoreEntityLinkAPI) {
+            return ["immersiverailroading:rollingstock",
+                    "immersiverailroading:locomotive",
+                    "immersiverailroading:locomotivediesel"]
         }
-        return names
+        return []
     }
 
     @Override
-    boolean hasAPI(String name, API api) {
-        if (api instanceof CoreEntityLinkAPI) {
+    API getAPI(String name, API providingApi) {
+        if (hasAPI(name, providingApi)) {
+            def providingContext = ((ContextAPI) providingApi).context
             if (name == "immersiverailroading:rollingstock") {
-                return true
+                def context = ContextRegistry.getContext(RollingStockLinkContext, providingContext)
+                return APIRegistry.getAPI(context)
             }
             if (name == "immersiverailroading:locomotive") {
-                return true
+                def context = ContextRegistry.getContext(RollingStockLinkContext<Locomotive>, providingContext)
+                return APIRegistry.getAPI(context)
             }
             if (name == "immersiverailroading:locomotivediesel") {
-                return true
-            }
-        }
-        return super.hasAPI(name, api)
-    }
-
-    @Override
-    API getAPI(String name, API api) {
-        if (hasAPI(name, api)) {
-            if (api instanceof CoreEntityLinkAPI) {
-                if (name == "immersiverailroading:rollingstock") {
-                    return getAPI(RollingStockAPI, api)
-                }
-                if (name == "immersiverailroading:locomotive") {
-                    return getAPI(LocomotiveAPI, api)
-                }
-                if (name == "immersiverailroading:locomotivediesel") {
-                    return getAPI(DieselLocomotiveAPI, api)
-                }
-            }
-        }
-        return super.getAPI(name, api)
-    }
-
-    @Override
-    API getAPI(Class<? extends API> cls, API api) {
-        if (api instanceof ContextAPI) {
-            if (cls == RollingStockAPI) {
-                def context = ContextRegistry.getContext(RollingStockLinkContext, api.context)
-                return APIRegistry.getAPI(context)
-            }
-            if (cls == LocomotiveAPI) {
-                def context = ContextRegistry.getContext(RollingStockLinkContext<Locomotive>, api.context)
-                return APIRegistry.getAPI(context)
-            }
-            if (cls == DieselLocomotiveAPI) {
-                def context = ContextRegistry.getContext(RollingStockLinkContext<LocomotiveDiesel>, api.context)
+                def context = ContextRegistry.getContext(RollingStockLinkContext<LocomotiveDiesel>, providingContext)
                 return APIRegistry.getAPI(context)
             }
         }
-        return super.getAPI(cls, api)
+        return null
     }
 
 }

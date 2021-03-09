@@ -21,7 +21,7 @@ abstract class AbstractAPIProvider implements APIProvider {
 
     @Override
     boolean hasAPI(String name, API contextApi) {
-        return false
+        return getAPINames(contextApi).contains(name)
     }
 
     @Override

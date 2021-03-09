@@ -19,7 +19,7 @@ import latibro.automation.core.context.tileentity.TileEntityLinkContext
 import latibro.automation.core.context.tileentity.multi.TileEntityMultiLinkContext
 import latibro.automation.core.context.world.WorldLinkContext
 
-class BaseAPIProvider extends AbstractAPIProvider {
+final class BaseAPIProvider extends AbstractAPIProvider {
 
     @Override
     API getAPI(Context context) {

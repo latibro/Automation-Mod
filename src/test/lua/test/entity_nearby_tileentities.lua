@@ -39,6 +39,10 @@ for i = 1, 600 do
 
             local location = tileEntity.getLocation()
             print("Location of tile entity: " .. location.getX() .. ", " .. location.getY() .. ", " .. location.getZ())
+
+            local dataBox = tileEntity.getAPI("automation:data_box")
+            --dataBox.setData("Hello world")
+            print(dataBox.getData())
         end
 
         print("---------")

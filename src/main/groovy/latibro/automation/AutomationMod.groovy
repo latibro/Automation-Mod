@@ -1,5 +1,6 @@
 package latibro.automation
 
+import groovy.transform.CompileStatic
 import latibro.automation.proxy.CommonProxy
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.common.Mod.EventHandler
@@ -9,6 +10,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent
 import org.apache.logging.log4j.Logger
 
+@CompileStatic
 @Mod(modid = MODID,
         name = NAME,
         version = VERSION,
@@ -17,8 +19,8 @@ import org.apache.logging.log4j.Logger
 class AutomationMod {
 
     static final String MODID = "automation"
-    static final String NAME = "Automation"
-    static final String VERSION = "0.2.0"
+    static final String NAME = "Automation Mod"
+    static final String VERSION = "0.3.0"
 
     @SidedProxy(clientSide = "latibro.automation.proxy.ClientProxy", serverSide = "latibro.automation.proxy.ServerProxy")
     static CommonProxy proxy
@@ -31,16 +33,23 @@ class AutomationMod {
     @EventHandler
     static void preInit(FMLPreInitializationEvent event) {
         logger = event.getModLog()
+
+        AutomationMod.logger.debug("AutomationMod.preInit")
+
         proxy.preInit(event)
     }
 
     @EventHandler
     static void init(FMLInitializationEvent event) {
+        AutomationMod.logger.debug("AutomationMod.init")
+
         proxy.init(event)
     }
 
     @EventHandler
     static void postInit(FMLPostInitializationEvent event) {
+        AutomationMod.logger.debug("AutomationMod.postInit")
+
         proxy.postInit(event)
     }
 
