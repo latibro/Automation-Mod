@@ -25,9 +25,10 @@ final class LocationNearbyCoreEntityMultiLinkContext extends CoreEntityMultiLink
     }
 
     List<Entity> getNativeEntityList() {
+        def rangeBB = new AxisAlignedBB(location.nativeLocation).grow(range)
         def loadedEntityList = location.world.nativeWorld.@loadedEntityList.findAll {
             if (includeBoundingBoxes) {
-                return it.getEntityBoundingBox().intersects(new AxisAlignedBB(location.nativeLocation).grow(range))
+                return rangeBB.intersects(it.getEntityBoundingBox())
             }
             return location.nativeLocation.getDistance(it.position.x, it.position.y, it.position.z) <= range
         }

@@ -36,6 +36,11 @@ class BaseEntityMultiLinkAPI implements EntityMultiLinkAPI, ContextAPI {
     }
 
     @Override
+    EntityLinkAPI first() {
+        return APIRegistry.getAPI(context.asList().first()) as EntityLinkAPI
+    }
+
+    @Override
     List<EntityLinkAPI> asList() {
         def contextList = context.asList()
         def apiList = wrapContextList(contextList)

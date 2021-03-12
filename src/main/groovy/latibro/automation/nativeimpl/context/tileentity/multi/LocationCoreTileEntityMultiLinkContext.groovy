@@ -17,7 +17,7 @@ final class LocationCoreTileEntityMultiLinkContext extends CoreTileEntityMultiLi
     List<TileEntity> getNativeTileEntityList() {
         def loadedTileEntityList = location.world.nativeWorld.@loadedTileEntityList.findAll {
             //TODO find a way to use bounding box like entity
-            return it.getPos() == location.nativeLocation
+            return it.pos == location.nativeLocation
         }
         return loadedTileEntityList
     }

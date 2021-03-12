@@ -1,8 +1,8 @@
 package latibro.automation.linkbox.data
 
 import groovy.transform.CompileStatic
-import latibro.automation.api.API
 import latibro.automation.core.peripheral.PeripheralTileEntity
+import latibro.automation.nativeimpl.context.tileentity.InstanceCoreTileEntityLinkContext
 
 @CompileStatic
 class DataBoxTileEntity extends PeripheralTileEntity {
@@ -13,8 +13,10 @@ class DataBoxTileEntity extends PeripheralTileEntity {
     }
 
     @Override
-    protected API getPeripheralAPI() {
-        return null
+    protected DataBoxAPI getPeripheralAPI() {
+        def tileEntityContext = new InstanceCoreTileEntityLinkContext(this)
+        def dataBoxAPI = new DataBoxAPIImpl(tileEntityContext)
+        return dataBoxAPI
     }
 
 }

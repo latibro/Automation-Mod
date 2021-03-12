@@ -1,6 +1,7 @@
 package latibro.automation.nativeimpl.context.tileentity.multi
 
 import latibro.automation.core.context.CoreContext
+import latibro.automation.core.context.tileentity.TileEntityLinkContext
 import latibro.automation.core.context.tileentity.multi.AbstractTileEntityMultiLinkContext
 import latibro.automation.nativeimpl.context.server.CoreServerLinkContext
 import latibro.automation.nativeimpl.context.server.DefaultCoreServerLinkContext
@@ -23,13 +24,13 @@ abstract class CoreTileEntityMultiLinkContext extends AbstractTileEntityMultiLin
     }
 
     @Override
+    List<TileEntityLinkContext> asList() {
+        return wrapNativeTileEntityList(nativeTileEntityList)
+    }
+
+    @Override
     List<CoreTileEntityLinkContext> asList(int maxCount) {
-        def list = nativeTileEntityList.collect()
-        int toIndex = Math.min(maxCount, list.size())
-        def result = list.subList(0, toIndex).collect {
-            wrapNativeTileEntity(it)
-        }
-        return result
+        return wrapNativeTileEntityList(nativeTileEntityList.take(maxCount))
     }
 
     @Override
@@ -39,6 +40,12 @@ abstract class CoreTileEntityMultiLinkContext extends AbstractTileEntityMultiLin
 
     protected static CoreTileEntityLinkContext wrapNativeTileEntity(TileEntity nativeTileEntity) {
         return new InstanceCoreTileEntityLinkContext(nativeTileEntity)
+    }
+
+    protected static List<CoreTileEntityLinkContext> wrapNativeTileEntityList(List<TileEntity> nativeTileEntityList) {
+        return nativeTileEntityList.collect {
+            wrapNativeTileEntity(it)
+        }
     }
 
 }

@@ -3,10 +3,14 @@ package latibro.automation.nativeimpl.context.entity
 import groovy.transform.CompileStatic
 import latibro.automation.core.context.CoreContext
 import latibro.automation.core.context.entity.EntityLinkContext
+import latibro.automation.nativeimpl.context.entity.multi.CoreEntityMultiLinkContext
+import latibro.automation.nativeimpl.context.entity.multi.EntityNearbyCoreEntityMultiLinkContext
 import latibro.automation.nativeimpl.context.location.CoreLocationLinkContext
 import latibro.automation.nativeimpl.context.location.EntityCoreLocationLinkContext
 import latibro.automation.nativeimpl.context.server.CoreServerLinkContext
 import latibro.automation.nativeimpl.context.server.DefaultCoreServerLinkContext
+import latibro.automation.nativeimpl.context.tileentity.multi.CoreTileEntityMultiLinkContext
+import latibro.automation.nativeimpl.context.tileentity.multi.EntityNearbyCoreTileEntityMultiLinkContext
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityList
 
@@ -48,6 +52,26 @@ abstract class CoreEntityLinkContext implements EntityLinkContext, CoreContext {
     @Override
     String getType() {
         return EntityList.getKey(nativeEntity)
+    }
+
+    @Override
+    CoreEntityMultiLinkContext getNearbyEntities(double range) {
+        return new EntityNearbyCoreEntityMultiLinkContext(this, range)
+    }
+
+    @Override
+    CoreEntityMultiLinkContext getNearbyEntities(double range, boolean includeBoundingBoxes) {
+        return new EntityNearbyCoreEntityMultiLinkContext(this, range, includeBoundingBoxes)
+    }
+
+    @Override
+    CoreTileEntityMultiLinkContext getNearbyTileEntities(double range) {
+        return new EntityNearbyCoreTileEntityMultiLinkContext(this, range)
+    }
+
+    @Override
+    CoreTileEntityMultiLinkContext getNearbyTileEntities(double range, boolean includeBoundingBoxes) {
+        return new EntityNearbyCoreTileEntityMultiLinkContext(this, range, includeBoundingBoxes)
     }
 
 }

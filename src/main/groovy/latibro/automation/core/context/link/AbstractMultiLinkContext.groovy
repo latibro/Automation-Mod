@@ -11,11 +11,6 @@ abstract class AbstractMultiLinkContext<T extends LinkContext> implements MultiL
     }
 
     @Override
-    List<T> asList() {
-        return asList(count())
-    }
-
-    @Override
     MultiLinkContext whereProperty(String property, Object expected) {
         return getFilteredMultiLinkContext({
             def api = APIRegistry.getAPI(it as Context)

@@ -13,7 +13,7 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 
 apply plugin: 'groovy'
 
-version = "0.2.0-snapshot"
+version = "0.3.0-snapshot"
 group = "latibro.automation" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "automation"
 

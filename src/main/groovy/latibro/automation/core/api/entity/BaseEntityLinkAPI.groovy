@@ -4,7 +4,9 @@ import latibro.automation.AutomationMod
 import latibro.automation.api.API
 import latibro.automation.api.APIProviderAPI
 import latibro.automation.api.link.entity.EntityLinkAPI
+import latibro.automation.api.link.entity.EntityMultiLinkAPI
 import latibro.automation.api.link.location.LocationLinkAPI
+import latibro.automation.api.link.tileentity.TileEntityMultiLinkAPI
 import latibro.automation.core.api.APIRegistry
 import latibro.automation.core.api.ContextAPI
 import latibro.automation.core.context.entity.EntityLinkContext
@@ -71,6 +73,26 @@ class BaseEntityLinkAPI<E extends EntityLinkContext> implements EntityLinkAPI, A
     @Override
     API getAPI(String name) {
         return APIRegistry.getAPI(name, this)
+    }
+
+    @Override
+    EntityMultiLinkAPI getNearbyEntities(Number range) {
+        return APIRegistry.getAPI(context.getNearbyEntities(range as double)) as EntityMultiLinkAPI
+    }
+
+    @Override
+    EntityMultiLinkAPI getNearbyEntities(Number range, Boolean includeBoundingBoxes) {
+        return APIRegistry.getAPI(context.getNearbyEntities(range as double, includeBoundingBoxes)) as EntityMultiLinkAPI
+    }
+
+    @Override
+    TileEntityMultiLinkAPI getNearbyTileEntities(Number range) {
+        return APIRegistry.getAPI(context.getNearbyTileEntities(range as double)) as TileEntityMultiLinkAPI
+    }
+
+    @Override
+    TileEntityMultiLinkAPI getNearbyTileEntities(Number range, Boolean includeBoundingBoxes) {
+        return APIRegistry.getAPI(context.getNearbyTileEntities(range as double, includeBoundingBoxes)) as TileEntityMultiLinkAPI
     }
 
 }

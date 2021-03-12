@@ -37,6 +37,11 @@ class BaseTileEntityMultiLinkAPI implements TileEntityMultiLinkAPI, ContextAPI {
     }
 
     @Override
+    TileEntityLinkAPI first() {
+        return APIRegistry.getAPI(context.asList().first()) as TileEntityLinkAPI
+    }
+
+    @Override
     List<TileEntityLinkAPI> asList() {
         def contextList = context.asList()
         def apiList = wrapContextList(contextList)

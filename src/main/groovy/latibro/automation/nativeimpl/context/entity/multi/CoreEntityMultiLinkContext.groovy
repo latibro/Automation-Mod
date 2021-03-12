@@ -1,6 +1,7 @@
 package latibro.automation.nativeimpl.context.entity.multi
 
 import latibro.automation.core.context.CoreContext
+import latibro.automation.core.context.entity.EntityLinkContext
 import latibro.automation.core.context.entity.multi.AbstractEntityMultiLinkContext
 import latibro.automation.nativeimpl.context.entity.CoreEntityLinkContext
 import latibro.automation.nativeimpl.context.entity.InstanceCoreEntityLinkContext
@@ -23,13 +24,13 @@ abstract class CoreEntityMultiLinkContext extends AbstractEntityMultiLinkContext
     }
 
     @Override
+    List<EntityLinkContext> asList() {
+        return wrapNativeEntityList(nativeEntityList)
+    }
+
+    @Override
     List<CoreEntityLinkContext> asList(int maxCount) {
-        def list = nativeEntityList.collect()
-        int toIndex = Math.min(maxCount, list.size())
-        def result = list.subList(0, toIndex).collect {
-            wrapNativeEntity(it)
-        }
-        return result
+        return wrapNativeEntityList(nativeEntityList.take(maxCount))
     }
 
     @Override
@@ -39,6 +40,12 @@ abstract class CoreEntityMultiLinkContext extends AbstractEntityMultiLinkContext
 
     protected static CoreEntityLinkContext wrapNativeEntity(Entity nativeEntity) {
         return new InstanceCoreEntityLinkContext(nativeEntity)
+    }
+
+    protected static List<CoreEntityLinkContext> wrapNativeEntityList(List<Entity> nativeEntityList) {
+        return nativeEntityList.collect {
+            wrapNativeEntity(it)
+        }
     }
 
 }

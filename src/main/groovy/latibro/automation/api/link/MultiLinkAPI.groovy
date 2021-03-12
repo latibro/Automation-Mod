@@ -8,6 +8,9 @@ interface MultiLinkAPI<T extends LinkAPI> extends LinkAPI {
     Number count()
 
     @LuaMethod
+    T first()
+
+    @LuaMethod
     List<T> asList()
 
     @LuaMethod
