@@ -1,5 +1,6 @@
 package latibro.automation.integration.computercraft
 
+import dan200.computercraft.api.ComputerCraftAPI
 import dan200.computercraft.api.peripheral.IPeripheral
 import dan200.computercraft.api.peripheral.IPeripheralProvider
 import groovy.transform.CompileStatic
@@ -12,6 +13,10 @@ import javax.annotation.Nullable
 
 @CompileStatic
 class TileEntityPeripheralProvider implements IPeripheralProvider {
+
+    static void init() {
+        ComputerCraftAPI.registerPeripheralProvider(new TileEntityPeripheralProvider())
+    }
 
     @Nullable
     @Override

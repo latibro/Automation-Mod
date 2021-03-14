@@ -68,7 +68,6 @@ class ModBlocks {
     static registerItem(IForgeRegistry<Item> registry, Block block) {
         def item = new ItemBlock(block)
         item.setRegistryName(block.getRegistryName())
-        registry.register(item)
         ModItems.registerItem(registry, item)
     }
 

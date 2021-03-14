@@ -1,6 +1,6 @@
 package latibro.automation.proxy
 
-import dan200.computercraft.api.ComputerCraftAPI
+
 import groovy.transform.CompileStatic
 import latibro.automation.AutomationMod
 import latibro.automation.ModBlocks
@@ -50,10 +50,12 @@ class CommonProxy {
         APIRegistry.register(new DataBoxAPIProvider())
 
         if (Loader.isModLoaded("computercraft")) {
-            ComputerCraftAPI.registerPeripheralProvider(new TileEntityPeripheralProvider())
+            AutomationMod.logger.debug("Found ComputerCraft")
+            TileEntityPeripheralProvider.init()
         }
 
         if (Loader.isModLoaded("immersiverailroading")) {
+            AutomationMod.logger.debug("Found Immersive Railroading")
             ContextRegistry.register(new ImmersiveRailroadingContextProvider())
             APIRegistry.register(new ImmersiveRailroadingAPIProvider())
         }
