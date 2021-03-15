@@ -11,3 +11,4 @@ item.automation.location_link_card.name=Location Link Card
 tile.automation.location_link_box.name=Location Link Box
 
 tile.automation.data_box.name=Data Box
+tile.automation.data_box.data.name=Data

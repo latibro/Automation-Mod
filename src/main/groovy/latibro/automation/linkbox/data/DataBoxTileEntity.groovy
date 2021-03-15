@@ -19,4 +19,12 @@ class DataBoxTileEntity extends PeripheralTileEntity {
         return dataBoxAPI
     }
 
+    String getData() {
+        return getTileData().getString("data")
+    }
+
+    void setData(String data) {
+        getTileData().setString("data", data)
+    }
+
 }

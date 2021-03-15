@@ -15,12 +15,12 @@ class DataBoxAPIImpl extends BaseTileEntityLinkAPI<CoreTileEntityLinkContext> im
 
     @Override
     String getData() {
-        return dataBoxTileEntity.getTileData().getString("data")
+        return dataBoxTileEntity.getData()
 }
 
     @Override
     void setData(String data) {
-        dataBoxTileEntity.getTileData().setString("data", data)
+        dataBoxTileEntity.setData(data)
     }
 
 }

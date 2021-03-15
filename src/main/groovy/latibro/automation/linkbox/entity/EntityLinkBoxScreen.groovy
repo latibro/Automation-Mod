@@ -21,14 +21,11 @@ class EntityLinkBoxScreen extends GuiContainer {
         this.playerInventory = playerInventory
     }
 
-    /**
-     * Draws the screen and all the components in it.
-     */
     @Override
     void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        this.drawDefaultBackground()
+        drawDefaultBackground()
         super.drawScreen(mouseX, mouseY, partialTicks)
-        this.renderHoveredToolTip(mouseX, mouseY)
+        renderHoveredToolTip(mouseX, mouseY)
     }
 
     @Override
