@@ -2,11 +2,11 @@ package latibro.automation.linkbox.data
 
 import groovy.transform.CompileStatic
 import latibro.automation.ModCreativeTabs
+import latibro.automation.proxy.ScreenProxy
 import net.minecraft.block.Block
 import net.minecraft.block.ITileEntityProvider
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
-import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
@@ -44,13 +44,13 @@ class DataBoxBlock extends Block implements ITileEntityProvider {
 
     @Override
     boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        // Only execute on the server
         if (world.isRemote) {
             return true
         }
 
-        def te = (DataBoxTileEntity) world.getTileEntity(pos)
-        Minecraft.getMinecraft().displayGuiScreen(new DataBoxScreen(te))
+        TileEntity tileEntity = world.getTileEntity(pos)
+        //TODO validate type of tile entity
+        ScreenProxy.openTileEntityScreen(player, tileEntity)
         return true
     }
 

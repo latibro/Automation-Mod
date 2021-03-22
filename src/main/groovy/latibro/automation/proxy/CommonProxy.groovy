@@ -34,6 +34,8 @@ class CommonProxy {
         AutomationMod.logger.debug("CommonProxy.preInit")
 
         NetworkRegistry.INSTANCE.registerGuiHandler(AutomationMod.instance, new ScreenProxy())
+
+        NetworkProxy.registerPackets()
     }
 
     void init(FMLInitializationEvent e) {

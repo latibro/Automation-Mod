@@ -6,7 +6,6 @@ import latibro.automation.ModBlocks
 import net.minecraft.client.gui.inventory.GuiContainer
 import net.minecraft.client.renderer.GlStateManager
 import net.minecraft.client.resources.I18n
-import net.minecraft.entity.player.InventoryPlayer
 import net.minecraft.util.ResourceLocation
 
 @CompileStatic
@@ -14,11 +13,8 @@ class EntityLinkBoxScreen extends GuiContainer {
 
     private static final ResourceLocation BACKGROUD_TEXTURE = new ResourceLocation(AutomationMod.MODID, "textures/gui/entity_link_box.png")
 
-    private final InventoryPlayer playerInventory
-
-    EntityLinkBoxScreen(EntityLinkBoxContainer container, InventoryPlayer playerInventory) {
+    EntityLinkBoxScreen(EntityLinkBoxContainer container) {
         super(container)
-        this.playerInventory = playerInventory
     }
 
     @Override
@@ -41,7 +37,7 @@ class EntityLinkBoxScreen extends GuiContainer {
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
         String name = I18n.format(ModBlocks.entityLinkBox.getUnlocalizedName() + ".name")
         fontRenderer.drawString(name, 8, 6, 0x404040)
-        fontRenderer.drawString(playerInventory.getDisplayName().getUnformattedText(), 8, ySize - 94, 0x404040)
+        fontRenderer.drawString(I18n.format(ModBlocks.entityLinkBox.getUnlocalizedName() + ".player_inventory.name"), 8, ySize - 94, 0x404040)
     }
 
 }

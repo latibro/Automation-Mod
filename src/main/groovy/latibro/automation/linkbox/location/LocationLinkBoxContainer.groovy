@@ -7,14 +7,14 @@ import net.minecraft.entity.player.EntityPlayer
 @CompileStatic
 class LocationLinkBoxContainer extends TileEntityContainer {
 
-    LocationLinkBoxContainer(EntityPlayer player, LocationLinkBoxTileEntity tileEntity) {
+    LocationLinkBoxContainer(LocationLinkBoxTileEntity tileEntity, EntityPlayer player) {
         addSlotToContainer(new TileEntitySlot(tileEntity, 0, 80, 35))
 
         addPlayerSlotsToContainer(player, 8, 84)
     }
 
     @Override
-    boolean canInteractWith(EntityPlayer playerIn) {
+    boolean canInteractWith(EntityPlayer player) {
         return true
     }
 

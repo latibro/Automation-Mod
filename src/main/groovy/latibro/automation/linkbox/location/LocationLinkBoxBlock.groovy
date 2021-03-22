@@ -1,8 +1,8 @@
 package latibro.automation.linkbox.location
 
 import groovy.transform.CompileStatic
-import latibro.automation.AutomationMod
 import latibro.automation.ModCreativeTabs
+import latibro.automation.proxy.ScreenProxy
 import net.minecraft.block.Block
 import net.minecraft.block.ITileEntityProvider
 import net.minecraft.block.material.Material
@@ -48,12 +48,13 @@ class LocationLinkBoxBlock extends Block implements ITileEntityProvider {
 
     @Override
     boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        // Only execute on the server
         if (world.isRemote) {
             return true
         }
 
-        player.openGui(AutomationMod.instance, 1, world, pos.getX(), pos.getY(), pos.getZ())
+        TileEntity tileEntity = world.getTileEntity(pos)
+        //TODO validate type of tile entity
+        ScreenProxy.openTileEntityScreen(player, tileEntity)
         return true
     }
 

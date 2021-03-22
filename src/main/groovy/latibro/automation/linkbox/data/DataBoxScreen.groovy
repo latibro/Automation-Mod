@@ -12,13 +12,14 @@ import org.lwjgl.input.Keyboard
 @CompileStatic
 class DataBoxScreen extends GuiScreen {
 
-    private final DataBoxTileEntity tileEntity
+    private final DataBoxContainer container
+
     private GuiButton doneButton
     private GuiButton cancelButton
     private GuiTextField dataField
 
-    DataBoxScreen(DataBoxTileEntity tileEntity) {
-        this.tileEntity = tileEntity
+    DataBoxScreen(DataBoxContainer container) {
+        this.container = Objects.requireNonNull(container)
     }
 
     @Override
@@ -33,7 +34,7 @@ class DataBoxScreen extends GuiScreen {
         dataField = new GuiTextField(2, fontRenderer, this.width / 2 - 150 as int, 50, 300, 20)
         dataField.setMaxStringLength(32500)
         dataField.setFocused(true)
-        dataField.setText(tileEntity.getData())
+        dataField.setText(container.getData())
     }
 
     @Override
@@ -60,7 +61,7 @@ class DataBoxScreen extends GuiScreen {
     protected void actionPerformed(GuiButton button) throws IOException {
         if (button.enabled) {
             if (button == doneButton) {
-                tileEntity.setData(dataField.getText())
+                container.setData(dataField.getText())
                 mc.displayGuiScreen((GuiScreen) null);
                 return
             }
