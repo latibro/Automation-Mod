@@ -41,8 +41,8 @@ class DataBoxScreen extends GuiScreen {
     void drawScreen(int mouseX, int mouseY, float partialTicks) {
         drawDefaultBackground()
         String name = I18n.format(ModBlocks.dataBox.getUnlocalizedName() + ".name")
-        drawCenteredString(fontRenderer, name, width / 2 as int, 20, 16777215);
-        drawString(fontRenderer, I18n.format(ModBlocks.dataBox.getUnlocalizedName() + ".data.name"), width / 2 - 150 as int, 40, 10526880);
+        drawCenteredString(fontRenderer, name, width / 2 as int, 20, 16777215)
+        drawString(fontRenderer, I18n.format(ModBlocks.dataBox.getUnlocalizedName() + ".data.name"), width / 2 - 150 as int, 40, 10526880)
         dataField?.drawTextBox()
         super.drawScreen(mouseX, mouseY, partialTicks)
     }
@@ -54,7 +54,7 @@ class DataBoxScreen extends GuiScreen {
 
     @Override
     void onGuiClosed() {
-        Keyboard.enableRepeatEvents(false);
+        Keyboard.enableRepeatEvents(false)
     }
 
     @Override
@@ -62,11 +62,11 @@ class DataBoxScreen extends GuiScreen {
         if (button.enabled) {
             if (button == doneButton) {
                 container.setData(dataField.getText())
-                mc.displayGuiScreen((GuiScreen) null);
+                mc.displayGuiScreen((GuiScreen) null)
                 return
             }
             if (button == cancelButton) {
-                mc.displayGuiScreen((GuiScreen) null);
+                mc.displayGuiScreen((GuiScreen) null)
                 return
             }
             AutomationMod.logger.debug("Unknown button {}", button)
@@ -75,18 +75,17 @@ class DataBoxScreen extends GuiScreen {
 
     @Override
     protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
-        super.mouseClicked(mouseX, mouseY, mouseButton);
+        super.mouseClicked(mouseX, mouseY, mouseButton)
 
-        dataField.mouseClicked(mouseX, mouseY, mouseButton);
+        dataField.mouseClicked(mouseX, mouseY, mouseButton)
     }
 
     @Override
     protected void keyTyped(char typedChar, int keyCode) throws IOException {
-        AutomationMod.logger.debug("keyTyped {} {}", typedChar, keyCode)
         super.keyTyped(typedChar, keyCode)
 
         if (dataField.isFocused()) {
-            dataField.textboxKeyTyped(typedChar, keyCode);
+            dataField.textboxKeyTyped(typedChar, keyCode)
         }
     }
 

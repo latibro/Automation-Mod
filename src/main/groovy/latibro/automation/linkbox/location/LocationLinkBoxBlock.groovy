@@ -52,8 +52,7 @@ class LocationLinkBoxBlock extends Block implements ITileEntityProvider {
             return true
         }
 
-        TileEntity tileEntity = world.getTileEntity(pos)
-        //TODO validate type of tile entity
+        def tileEntity = world.getTileEntity(pos)
         ScreenProxy.openTileEntityScreen(player, tileEntity)
         return true
     }

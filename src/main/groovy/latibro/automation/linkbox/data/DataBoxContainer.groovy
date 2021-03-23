@@ -1,7 +1,6 @@
 package latibro.automation.linkbox.data
 
 import groovy.transform.CompileStatic
-import latibro.automation.AutomationMod
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.inventory.Container
 
@@ -20,12 +19,10 @@ class DataBoxContainer extends Container {
     }
 
     String getData() {
-        AutomationMod.logger.info("getData")
         return tileEntity.getData()
     }
 
     void setData(String data) {
-        AutomationMod.logger.info("setData")
         tileEntity.setData(data)
     }
 

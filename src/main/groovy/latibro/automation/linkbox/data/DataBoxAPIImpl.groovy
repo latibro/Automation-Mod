@@ -16,7 +16,7 @@ class DataBoxAPIImpl extends BaseTileEntityLinkAPI<CoreTileEntityLinkContext> im
     @Override
     String getData() {
         return dataBoxTileEntity.getData()
-}
+    }
 
     @Override
     void setData(String data) {

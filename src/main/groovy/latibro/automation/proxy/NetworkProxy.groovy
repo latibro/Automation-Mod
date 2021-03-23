@@ -11,15 +11,15 @@ import net.minecraftforge.fml.relauncher.Side
 @CompileStatic
 class NetworkProxy {
 
-    private static final SimpleNetworkWrapper simpleNetworkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel(AutomationMod.MODID);
+    private static final SimpleNetworkWrapper simpleNetworkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel(AutomationMod.MODID)
 
     static void registerPackets() {
-        AutomationMod.logger.info("registerPackets")
+        AutomationMod.logger.debug("NetworkProxy.registerPackets")
+
         simpleNetworkWrapper.registerMessage(DataBoxMessage.DataBoxMessageHandler, DataBoxMessage, 0, Side.SERVER)
     }
 
     static void sendMessageToServer(IMessage message) {
-        AutomationMod.logger.info("sendMessageToServer {}", message)
         simpleNetworkWrapper.sendToServer(message)
     }
 
