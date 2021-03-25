@@ -11,6 +11,9 @@ import latibro.automation.linkbox.entity.EntityLinkBoxTileEntity
 import latibro.automation.linkbox.location.LocationLinkBoxContainer
 import latibro.automation.linkbox.location.LocationLinkBoxScreen
 import latibro.automation.linkbox.location.LocationLinkBoxTileEntity
+import latibro.automation.linkbox.redstone.RedstoneBoxContainer
+import latibro.automation.linkbox.redstone.RedstoneBoxScreen
+import latibro.automation.linkbox.redstone.RedstoneBoxTileEntity
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
 import net.minecraft.tileentity.TileEntity
@@ -49,6 +52,9 @@ class ScreenProxy implements IGuiHandler {
             if (tileEntity instanceof DataBoxTileEntity) {
                 return new DataBoxContainer(tileEntity)
             }
+            if (tileEntity instanceof RedstoneBoxTileEntity) {
+                return new RedstoneBoxContainer(tileEntity)
+            }
         }
         if (screenId == ITEM_STACK_SCREEN) {
             ItemStack itemStack = player.getActiveItemStack()
@@ -68,6 +74,9 @@ class ScreenProxy implements IGuiHandler {
         }
         if (serverGuiElement instanceof DataBoxContainer) {
             return new DataBoxScreen(serverGuiElement)
+        }
+        if (serverGuiElement instanceof RedstoneBoxContainer) {
+            return new RedstoneBoxScreen(serverGuiElement)
         }
         return null
     }

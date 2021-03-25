@@ -12,3 +12,6 @@ tile.automation.location_link_box.name=Location Link Box
 
 tile.automation.data_box.name=Data Box
 tile.automation.data_box.data.name=Data
+
+tile.automation.redstone_box.name=Redstone Box
+tile.automation.redstone_box.power_level.name=Power level

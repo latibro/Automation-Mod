@@ -3,6 +3,7 @@ package latibro.automation.proxy
 import groovy.transform.CompileStatic
 import latibro.automation.AutomationMod
 import latibro.automation.linkbox.data.DataBoxMessage
+import latibro.automation.linkbox.redstone.RedstoneBoxMessage
 import net.minecraftforge.fml.common.network.NetworkRegistry
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper
@@ -17,6 +18,7 @@ class NetworkProxy {
         AutomationMod.logger.debug("NetworkProxy.registerPackets")
 
         simpleNetworkWrapper.registerMessage(DataBoxMessage.DataBoxMessageHandler, DataBoxMessage, 0, Side.SERVER)
+        simpleNetworkWrapper.registerMessage(RedstoneBoxMessage.RedstoneBoxMessageHandler, RedstoneBoxMessage, 0, Side.SERVER)
     }
 
     static void sendMessageToServer(IMessage message) {

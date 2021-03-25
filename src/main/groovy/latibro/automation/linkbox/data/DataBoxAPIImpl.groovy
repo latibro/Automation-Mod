@@ -9,18 +9,18 @@ class DataBoxAPIImpl extends BaseTileEntityLinkAPI<CoreTileEntityLinkContext> im
         super(context)
     }
 
-    DataBoxTileEntity getDataBoxTileEntity() {
+    DataBoxTileEntity getTileEntity() {
         return (DataBoxTileEntity) context.nativeTileEntity
     }
 
     @Override
     String getData() {
-        return dataBoxTileEntity.getData()
+        return tileEntity.getData()
     }
 
     @Override
     void setData(String data) {
-        dataBoxTileEntity.setData(data)
+        tileEntity.setData(data)
     }
 
 }

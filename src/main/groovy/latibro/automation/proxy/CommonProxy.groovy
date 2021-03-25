@@ -11,6 +11,7 @@ import latibro.automation.integration.computercraft.TileEntityPeripheralProvider
 import latibro.automation.integration.immersiverailroading.ImmersiveRailroadingAPIProvider
 import latibro.automation.integration.immersiverailroading.ImmersiveRailroadingContextProvider
 import latibro.automation.linkbox.data.DataBoxAPIProvider
+import latibro.automation.linkbox.redstone.RedstoneBoxAPIProvider
 import latibro.automation.nativeimpl.context.chunk.EntityCoreChunkLinkContext
 import net.minecraft.block.Block
 import net.minecraft.item.Item
@@ -50,6 +51,7 @@ class CommonProxy {
         MinecraftForge.EVENT_BUS.register(EntityCoreChunkLinkContext)
 
         APIRegistry.register(new DataBoxAPIProvider())
+        APIRegistry.register(new RedstoneBoxAPIProvider())
 
         if (Loader.isModLoaded("computercraft")) {
             AutomationMod.logger.debug("Found ComputerCraft")

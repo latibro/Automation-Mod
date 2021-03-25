@@ -6,6 +6,8 @@ import latibro.automation.linkbox.entity.EntityLinkBoxBlock
 import latibro.automation.linkbox.entity.EntityLinkBoxTileEntity
 import latibro.automation.linkbox.location.LocationLinkBoxBlock
 import latibro.automation.linkbox.location.LocationLinkBoxTileEntity
+import latibro.automation.linkbox.redstone.RedstoneBoxBlock
+import latibro.automation.linkbox.redstone.RedstoneBoxTileEntity
 import latibro.automation.linkbox.server.ServerLinkBoxBlock
 import latibro.automation.linkbox.server.ServerLinkBoxTileEntity
 import latibro.automation.linkbox.world.WorldLinkBoxBlock
@@ -36,6 +38,9 @@ class ModBlocks {
     @GameRegistry.ObjectHolder("automation:data_box")
     static DataBoxBlock dataBox
 
+    @GameRegistry.ObjectHolder("automation:redstone_box")
+    static RedstoneBoxBlock redstoneBox
+
     static void registerBlocks(IForgeRegistry<Block> registry) {
         AutomationMod.logger.debug("ModBlocks.registerBlocks")
 
@@ -44,6 +49,7 @@ class ModBlocks {
         registerBlock(registry, new EntityLinkBoxBlock(), EntityLinkBoxTileEntity)
         registerBlock(registry, new LocationLinkBoxBlock(), LocationLinkBoxTileEntity)
         registerBlock(registry, new DataBoxBlock(), DataBoxTileEntity)
+        registerBlock(registry, new RedstoneBoxBlock(), RedstoneBoxTileEntity)
     }
 
     static registerBlock(IForgeRegistry<Block> registry, Block block) {
@@ -63,6 +69,7 @@ class ModBlocks {
         registerItem(registry, entityLinkBox)
         registerItem(registry, locationLinkBox)
         registerItem(registry, dataBox)
+        registerItem(registry, redstoneBox)
     }
 
     static registerItem(IForgeRegistry<Item> registry, Block block) {
@@ -80,6 +87,7 @@ class ModBlocks {
         entityLinkBox.initModel()
         locationLinkBox.initModel()
         dataBox.initModel()
+        redstoneBox.initModel()
     }
 
 }
