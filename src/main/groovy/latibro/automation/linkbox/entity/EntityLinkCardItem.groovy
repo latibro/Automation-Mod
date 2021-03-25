@@ -32,12 +32,20 @@ class EntityLinkCardItem extends Item {
 
     @Override
     boolean onLeftClickEntity(ItemStack itemStack, EntityPlayer player, Entity target) {
+        if (player.world.isRemote) {
+            return true
+        }
+
         storeEntityUUID(itemStack, player, target)
         return true
     }
 
     @Override
     boolean itemInteractionForEntity(ItemStack itemStack, EntityPlayer player, EntityLivingBase target, EnumHand hand) {
+        if (player.world.isRemote) {
+            return true
+        }
+
         storeEntityUUID(itemStack, player, target)
         return true
     }

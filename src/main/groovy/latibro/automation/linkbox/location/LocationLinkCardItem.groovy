@@ -34,10 +34,16 @@ class LocationLinkCardItem extends Item {
 
     @Override
     EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos blockPos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if (hand != EnumHand.MAIN_HAND) {
-            return EnumActionResult.PASS
+        if (world.isRemote) {
+            return EnumActionResult.SUCCESS
         }
-        def pickedBlockPos = blockPos.offset(facing)
+
+        def pickedBlockPos
+        if (player.isSneaking()) {
+            pickedBlockPos = blockPos
+        } else {
+            pickedBlockPos = blockPos.offset(facing)
+        }
         storeBlockPos(player.getHeldItem(hand), player, pickedBlockPos)
         return EnumActionResult.SUCCESS
     }
