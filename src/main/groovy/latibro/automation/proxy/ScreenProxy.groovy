@@ -5,18 +5,14 @@ import latibro.automation.AutomationMod
 import latibro.automation.linkbox.data.DataBoxContainer
 import latibro.automation.linkbox.data.DataBoxScreen
 import latibro.automation.linkbox.data.DataBoxTileEntity
-import latibro.automation.linkbox.entity.EntityLinkBoxContainer
-import latibro.automation.linkbox.entity.EntityLinkBoxScreen
-import latibro.automation.linkbox.entity.EntityLinkBoxTileEntity
-import latibro.automation.linkbox.location.LocationLinkBoxContainer
-import latibro.automation.linkbox.location.LocationLinkBoxScreen
-import latibro.automation.linkbox.location.LocationLinkBoxTileEntity
+import latibro.automation.linkbox.entity.*
+import latibro.automation.linkbox.location.*
 import latibro.automation.linkbox.redstone.RedstoneBoxContainer
 import latibro.automation.linkbox.redstone.RedstoneBoxScreen
 import latibro.automation.linkbox.redstone.RedstoneBoxTileEntity
 import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.item.ItemStack
 import net.minecraft.tileentity.TileEntity
+import net.minecraft.util.EnumHand
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import net.minecraftforge.fml.common.network.IGuiHandler
@@ -25,7 +21,7 @@ import net.minecraftforge.fml.common.network.IGuiHandler
 class ScreenProxy implements IGuiHandler {
 
     static final int TILE_ENTITY_SCREEN = 1
-    static final int ITEM_STACK_SCREEN = 2
+    static final int HELD_ITEM_SCREEN = 2
 
     static void openTileEntityScreen(EntityPlayer player, TileEntity tileEntity) {
         def world = tileEntity.world
@@ -33,15 +29,15 @@ class ScreenProxy implements IGuiHandler {
         player.openGui(AutomationMod.instance, ScreenProxy.TILE_ENTITY_SCREEN, world, pos.getX(), pos.getY(), pos.getZ())
     }
 
-    static void openItemScreen(EntityPlayer player, ItemStack itemStack) {
-        player.openGui(AutomationMod.instance, ScreenProxy.ITEM_STACK_SCREEN, null, 0, 0, 0)
+    static void openHeldItemScreen(EntityPlayer player) {
+        player.openGui(AutomationMod.instance, ScreenProxy.HELD_ITEM_SCREEN, null, 0, 0, 0)
     }
 
     @Override
     Object getServerGuiElement(int screenId, EntityPlayer player, World world, int x, int y, int z) {
         if (screenId == TILE_ENTITY_SCREEN) {
-            BlockPos pos = new BlockPos(x, y, z)
-            TileEntity tileEntity = world.getTileEntity(pos)
+            def pos = new BlockPos(x, y, z)
+            def tileEntity = world.getTileEntity(pos)
 
             if (tileEntity instanceof EntityLinkBoxTileEntity) {
                 return new EntityLinkBoxContainer(tileEntity, player)
@@ -56,8 +52,16 @@ class ScreenProxy implements IGuiHandler {
                 return new RedstoneBoxContainer(tileEntity)
             }
         }
-        if (screenId == ITEM_STACK_SCREEN) {
-            ItemStack itemStack = player.getActiveItemStack()
+        if (screenId == HELD_ITEM_SCREEN) {
+            def itemStack = player.getHeldItem(EnumHand.MAIN_HAND)
+            def item = itemStack.item
+
+            if (item instanceof LocationLinkCardItem) {
+                return new LocationLinkCardContainer(player)
+            }
+            if (item instanceof EntityLinkCardItem) {
+                return new EntityLinkCardContainer(player)
+            }
         }
         return null
     }
@@ -69,8 +73,14 @@ class ScreenProxy implements IGuiHandler {
         if (serverGuiElement instanceof EntityLinkBoxContainer) {
             return new EntityLinkBoxScreen(serverGuiElement)
         }
+        if (serverGuiElement instanceof EntityLinkCardContainer) {
+            return new EntityLinkCardScreen(serverGuiElement)
+        }
         if (serverGuiElement instanceof LocationLinkBoxContainer) {
             return new LocationLinkBoxScreen(serverGuiElement)
+        }
+        if (serverGuiElement instanceof LocationLinkCardContainer) {
+            return new LocationLinkCardScreen(serverGuiElement)
         }
         if (serverGuiElement instanceof DataBoxContainer) {
             return new DataBoxScreen(serverGuiElement)

@@ -57,12 +57,7 @@ class EntityLinkBoxTileEntity extends PeripheralTileEntity {
         if (!itemStack || itemStack.isEmpty()) {
             return null
         }
-        def uuidString = itemStack.getTagCompound()?.getString("entityUUID")
-        if (!uuidString) {
-            return null
-        }
-        //TODO register some check if there is items in the stack, and it hasAPIFor a uuid
-        return UUID.fromString(uuidString)
+        return EntityLinkCardItem.getEntityUUID(itemStack)
     }
 
     @Override

@@ -1,12 +1,17 @@
 package latibro.automation.linkbox.location
 
 import groovy.transform.CompileStatic
+import latibro.automation.AutomationMod
 import latibro.automation.ModCreativeTabs
+import latibro.automation.proxy.ScreenProxy
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
+import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
+import net.minecraft.nbt.NBTUtil
+import net.minecraft.util.ActionResult
 import net.minecraft.util.EnumActionResult
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
@@ -16,6 +21,8 @@ import net.minecraft.world.World
 import net.minecraftforge.client.model.ModelLoader
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
+
+import javax.annotation.Nullable
 
 @CompileStatic
 class LocationLinkCardItem extends Item {
@@ -34,6 +41,10 @@ class LocationLinkCardItem extends Item {
 
     @Override
     EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos blockPos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        if (hand != EnumHand.MAIN_HAND) {
+            return EnumActionResult.PASS
+        }
+
         if (world.isRemote) {
             return EnumActionResult.SUCCESS
         }
@@ -44,17 +55,76 @@ class LocationLinkCardItem extends Item {
         } else {
             pickedBlockPos = blockPos.offset(facing)
         }
-        storeBlockPos(player.getHeldItem(hand), player, pickedBlockPos)
+
+        setLocation(player, pickedBlockPos)
+
+        player.sendMessage(new TextComponentString("Location stored: " + blockPos))
         return EnumActionResult.SUCCESS
     }
 
-    private static void storeBlockPos(ItemStack itemStack, EntityPlayer player, BlockPos blockPos) {
+    @Override
+    ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
+        AutomationMod.logger.info("onItemRightClick")
+        def itemStack = player.getHeldItem(hand)
+
+        if (hand != EnumHand.MAIN_HAND) {
+            return new ActionResult<ItemStack>(EnumActionResult.PASS, itemStack);
+        }
+
+        if (world.isRemote) {
+            return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemStack);
+        }
+
+        ScreenProxy.openHeldItemScreen(player)
+
+        return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemStack);
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    void addInformation(ItemStack itemStack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
+        def location = getLocation(itemStack)
+        if (location) {
+            tooltip.add("Location: X: " + location.x + ", Y: " + location.y + ", Z: " + location.z)
+        }
+    }
+
+    static BlockPos getLocation(ItemStack itemStack) {
+        def nbt = itemStack.getTagCompound()
+        def automationNbt = nbt?.getCompoundTag("automation")
+        if (!automationNbt?.hasKey("location")) {
+            return null
+        }
+        def locationNbt = automationNbt?.getCompoundTag("location")
+        def location = NBTUtil.getPosFromTag(locationNbt)
+        return location
+    }
+
+    static BlockPos getLocation(EntityPlayer player) {
+        def itemStack = player.getHeldItem(EnumHand.MAIN_HAND)
+        def location = getLocation(itemStack)
+        return location
+    }
+
+    static ItemStack setLocation(ItemStack itemStack, BlockPos location) {
         if (!itemStack.hasTagCompound()) {
             itemStack.setTagCompound(new NBTTagCompound())
         }
-        itemStack.getTagCompound().setLong("location", blockPos.toLong())
+        def nbt = itemStack.getTagCompound()
+        if (!nbt.hasKey("automation")) {
+            nbt.setTag("automation", new NBTTagCompound())
+        }
+        def automationNbt = nbt.getCompoundTag("automation")
+        def locationNbt = NBTUtil.createPosTag(location)
+        automationNbt.setTag("location", locationNbt)
+        return itemStack
+    }
+
+    static void setLocation(EntityPlayer player, BlockPos location) {
+        def itemStack = player.getHeldItem(EnumHand.MAIN_HAND)
+        itemStack = setLocation(itemStack, location)
         player.setHeldItem(EnumHand.MAIN_HAND, itemStack)
-        player.sendMessage(new TextComponentString("Location stored: " + blockPos))
+        player.inventoryContainer.detectAndSendChanges()
     }
 
 }

@@ -59,11 +59,7 @@ class LocationLinkBoxTileEntity extends PeripheralTileEntity {
         if (!itemStack || itemStack.isEmpty()) {
             return null
         }
-        def locationLong = itemStack.getTagCompound()?.getLong("location")
-        if (!locationLong) {
-            return null
-        }
-        return BlockPos.fromLong(locationLong)
+        return LocationLinkCardItem.getLocation(itemStack)
     }
 
     @Override
