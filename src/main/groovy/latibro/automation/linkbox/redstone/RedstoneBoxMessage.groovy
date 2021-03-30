@@ -1,14 +1,13 @@
 package latibro.automation.linkbox.redstone
 
-import com.google.gson.Gson
+
 import groovy.transform.CompileStatic
 import io.netty.buffer.ByteBuf
+import net.minecraft.network.PacketBuffer
 import net.minecraft.util.math.BlockPos
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext
-
-import java.nio.charset.Charset
 
 @CompileStatic
 class RedstoneBoxMessage implements IMessage {
@@ -26,26 +25,19 @@ class RedstoneBoxMessage implements IMessage {
 
     @Override
     void toBytes(ByteBuf buf) {
-        def message = [
-                blockPos: blockPos.toLong(),
-                powerLevel    : powerLevel
-        ]
-        def gson = new Gson()
-        def json = gson.toJson(message)
-
-        buf.writeCharSequence(json, Charset.forName("UTF-8"))
+        def packet = new PacketBuffer(buf)
+        packet.writeBlockPos(blockPos)
+        packet.writeInt(powerLevel)
     }
 
     @Override
     void fromBytes(ByteBuf buf) {
-        def json = buf.readCharSequence(buf.readableBytes(), Charset.forName("UTF-8"))
-        def gson = new Gson()
-        def message = gson.fromJson(json as String, Map)
-        blockPos = BlockPos.fromLong(message.blockPos as long)
-        powerLevel = message.powerLevel as int
+        def packet = new PacketBuffer(buf)
+        blockPos = packet.readBlockPos()
+        powerLevel = packet.readInt()
     }
 
-    static class RedstoneBoxMessageHandler implements IMessageHandler<RedstoneBoxMessage, IMessage> {
+    static class Handler implements IMessageHandler<RedstoneBoxMessage, IMessage> {
 
         @Override
         IMessage onMessage(RedstoneBoxMessage message, MessageContext ctx) {

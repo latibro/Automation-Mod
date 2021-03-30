@@ -32,7 +32,7 @@ class DataBoxScreen extends GuiScreen {
         cancelButton = addButton(new GuiButton(1, width / 2 + 4 as int, height / 4 + 120 + 12 as int, 150, 20, I18n.format("gui.cancel")))
 
         dataField = new GuiTextField(2, fontRenderer, this.width / 2 - 150 as int, 50, 300, 20)
-        dataField.setMaxStringLength(32500)
+        dataField.setMaxStringLength(4096)
         dataField.setFocused(true)
         dataField.setText(container.getData())
     }

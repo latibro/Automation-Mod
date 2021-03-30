@@ -2,6 +2,7 @@ package latibro.automation.linkbox.entity
 
 import groovy.transform.CompileStatic
 import latibro.automation.ModCreativeTabs
+import latibro.automation.proxy.NetworkProxy
 import latibro.automation.proxy.ScreenProxy
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.client.util.ITooltipFlag
@@ -85,6 +86,9 @@ class EntityLinkCardItem extends Item {
     }
 
     static UUID getEntityUUID(ItemStack itemStack) {
+        if (itemStack.item !instanceof EntityLinkCardItem) {
+            throw new IllegalArgumentException()
+        }
         def nbt = itemStack.getTagCompound()
         def automationNbt = nbt?.getCompoundTag("automation")
         if (!automationNbt?.hasKey("entity")) {
@@ -95,13 +99,10 @@ class EntityLinkCardItem extends Item {
         return entityUuid
     }
 
-    static UUID getEntityUUID(EntityPlayer player) {
-        def itemStack = player.getHeldItem(EnumHand.MAIN_HAND)
-        def uuid = getEntityUUID(itemStack)
-        return uuid
-    }
-
-    static ItemStack setEntityUUID(ItemStack itemStack, UUID entityUuid) {
+    private static ItemStack writeEntityUUIDToNBT(ItemStack itemStack, UUID entityUuid) {
+        if (itemStack.item !instanceof EntityLinkCardItem) {
+            throw new IllegalArgumentException()
+        }
         if (!itemStack.hasTagCompound()) {
             itemStack.setTagCompound(new NBTTagCompound())
         }
@@ -115,11 +116,26 @@ class EntityLinkCardItem extends Item {
         return itemStack
     }
 
+    static UUID getEntityUUID(EntityPlayer player) {
+        def itemStack = player.getHeldItem(EnumHand.MAIN_HAND)
+        if (itemStack?.item instanceof EntityLinkCardItem) {
+            def uuid = getEntityUUID(itemStack)
+            return uuid
+        }
+        return null
+    }
+
     static void setEntityUUID(EntityPlayer player, UUID entityUuid) {
         def itemStack = player.getHeldItem(EnumHand.MAIN_HAND)
-        itemStack = setEntityUUID(itemStack, entityUuid)
-        player.setHeldItem(EnumHand.MAIN_HAND, itemStack)
-        player.inventoryContainer.detectAndSendChanges()
+        if (itemStack?.item instanceof EntityLinkCardItem) {
+            if (player.world.isRemote) {
+                NetworkProxy.sendMessageToServer(new EntityLinkCardMessage(entityUuid))
+            } else {
+                itemStack = writeEntityUUIDToNBT(itemStack, entityUuid)
+                player.setHeldItem(EnumHand.MAIN_HAND, itemStack)
+                player.inventoryContainer.detectAndSendChanges()
+            }
+        }
     }
 
     private static void storeEntityUUID(ItemStack itemStack, EntityPlayer player, Entity target) {

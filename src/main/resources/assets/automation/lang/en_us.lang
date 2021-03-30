@@ -6,8 +6,7 @@ tile.automation.world_link_box.name=World Link Box
 
 tile.automation.entity_link_box.name=Entity Link Box
 item.automation.entity_link_card.name=Entity Link Card
-item.automation.entity_link_card.entity.uuid.name=Entity UUID
-item.automation.entity_link_card.entity.uuid.name=Entity UUID
+item.automation.entity_link_card.entity.uuid.name=Entity ID
 
 tile.automation.location_link_box.name=Location Link Box
 item.automation.location_link_card.name=Location Link Card

@@ -3,6 +3,7 @@ package latibro.automation.linkbox.location
 import groovy.transform.CompileStatic
 import latibro.automation.AutomationMod
 import latibro.automation.ModCreativeTabs
+import latibro.automation.proxy.NetworkProxy
 import latibro.automation.proxy.ScreenProxy
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.client.util.ITooltipFlag
@@ -90,6 +91,9 @@ class LocationLinkCardItem extends Item {
     }
 
     static BlockPos getLocation(ItemStack itemStack) {
+        if (itemStack.item !instanceof LocationLinkCardItem) {
+            throw new IllegalArgumentException()
+        }
         def nbt = itemStack.getTagCompound()
         def automationNbt = nbt?.getCompoundTag("automation")
         if (!automationNbt?.hasKey("location")) {
@@ -100,13 +104,10 @@ class LocationLinkCardItem extends Item {
         return location
     }
 
-    static BlockPos getLocation(EntityPlayer player) {
-        def itemStack = player.getHeldItem(EnumHand.MAIN_HAND)
-        def location = getLocation(itemStack)
-        return location
-    }
-
-    static ItemStack setLocation(ItemStack itemStack, BlockPos location) {
+    private static ItemStack writeLocationToNBT(ItemStack itemStack, BlockPos location) {
+        if (itemStack.item !instanceof LocationLinkCardItem) {
+            throw new IllegalArgumentException()
+        }
         if (!itemStack.hasTagCompound()) {
             itemStack.setTagCompound(new NBTTagCompound())
         }
@@ -120,11 +121,26 @@ class LocationLinkCardItem extends Item {
         return itemStack
     }
 
+    static BlockPos getLocation(EntityPlayer player) {
+        def itemStack = player.getHeldItem(EnumHand.MAIN_HAND)
+        if (itemStack?.item instanceof LocationLinkCardItem) {
+            def location = getLocation(itemStack)
+            return location
+        }
+        return null
+    }
+
     static void setLocation(EntityPlayer player, BlockPos location) {
         def itemStack = player.getHeldItem(EnumHand.MAIN_HAND)
-        itemStack = setLocation(itemStack, location)
-        player.setHeldItem(EnumHand.MAIN_HAND, itemStack)
-        player.inventoryContainer.detectAndSendChanges()
+        if (itemStack?.item instanceof LocationLinkCardItem) {
+            if (player.world.isRemote) {
+                NetworkProxy.sendMessageToServer(new LocationLinkCardMessage(location))
+            } else {
+                itemStack = writeLocationToNBT(itemStack, location)
+                player.setHeldItem(EnumHand.MAIN_HAND, itemStack)
+                player.inventoryContainer.detectAndSendChanges()
+            }
+        }
     }
 
 }
