@@ -26,8 +26,8 @@ class DataBoxBlock extends Block implements ITileEntityProvider {
 
     DataBoxBlock() {
         super(Material.IRON)
-        setRegistryName("data_box")
-        setUnlocalizedName("automation.data_box")
+        setRegistryName("data-box")
+        setUnlocalizedName("automation.data-box")
         setCreativeTab(ModCreativeTabs.DEFAULT)
     }
 
@@ -49,7 +49,7 @@ class DataBoxBlock extends Block implements ITileEntityProvider {
         }
 
         def tileEntity = world.getTileEntity(pos)
-        ScreenProxy.openTileEntityScreen(player, tileEntity)
+        ScreenProxy.openBlockEntityScreen(tileEntity, player)
         return true
     }
 

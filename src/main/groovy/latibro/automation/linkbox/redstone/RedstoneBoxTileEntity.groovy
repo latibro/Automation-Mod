@@ -1,7 +1,7 @@
 package latibro.automation.linkbox.redstone
 
 import groovy.transform.CompileStatic
-import latibro.automation.core.peripheral.PeripheralTileEntity
+import latibro.automation.computer.peripheral.ComputerPeripheralBlockEntity
 import latibro.automation.nativeimpl.context.tileentity.InstanceCoreTileEntityLinkContext
 import latibro.automation.proxy.NetworkProxy
 import net.minecraft.block.state.IBlockState
@@ -10,13 +10,13 @@ import net.minecraft.network.NetworkManager
 import net.minecraft.network.play.server.SPacketUpdateTileEntity
 
 @CompileStatic
-class RedstoneBoxTileEntity extends PeripheralTileEntity {
+class RedstoneBoxTileEntity extends ComputerPeripheralBlockEntity {
 
     private int powerLevel
 
     @Override
-    String getComponentName() {
-        return "redstone_box"
+    String getPeripheralName() {
+        return "redstone-box"
     }
 
     @Override

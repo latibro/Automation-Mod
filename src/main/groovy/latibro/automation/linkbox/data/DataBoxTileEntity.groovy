@@ -1,7 +1,7 @@
 package latibro.automation.linkbox.data
 
 import groovy.transform.CompileStatic
-import latibro.automation.core.peripheral.PeripheralTileEntity
+import latibro.automation.computer.peripheral.ComputerPeripheralBlockEntity
 import latibro.automation.nativeimpl.context.tileentity.InstanceCoreTileEntityLinkContext
 import latibro.automation.proxy.NetworkProxy
 import net.minecraft.block.state.IBlockState
@@ -10,12 +10,12 @@ import net.minecraft.network.NetworkManager
 import net.minecraft.network.play.server.SPacketUpdateTileEntity
 
 @CompileStatic
-class DataBoxTileEntity extends PeripheralTileEntity {
+class DataBoxTileEntity extends ComputerPeripheralBlockEntity {
 
     private String data
 
     @Override
-    String getComponentName() {
+    String getPeripheralName() {
         return "data_box"
     }
 

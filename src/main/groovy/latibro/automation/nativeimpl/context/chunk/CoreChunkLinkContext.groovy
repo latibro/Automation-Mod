@@ -2,14 +2,13 @@ package latibro.automation.nativeimpl.context.chunk
 
 import groovy.transform.CompileStatic
 import latibro.automation.AutomationMod
-import latibro.automation.core.context.CoreContext
 import latibro.automation.core.context.chunk.ChunkLinkContext
 import latibro.automation.nativeimpl.context.world.CoreWorldLinkContext
 import net.minecraft.util.math.ChunkPos
 import net.minecraftforge.common.ForgeChunkManager
 
 @CompileStatic
-abstract class CoreChunkLinkContext implements ChunkLinkContext, CoreContext {
+abstract class CoreChunkLinkContext implements ChunkLinkContext {
 
     abstract ChunkPos getNativeChunk()
 

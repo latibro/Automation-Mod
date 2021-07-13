@@ -1,7 +1,6 @@
 package latibro.automation.nativeimpl.context.location
 
 import groovy.transform.CompileStatic
-import latibro.automation.core.context.CoreContext
 import latibro.automation.core.context.location.LocationLinkContext
 import latibro.automation.nativeimpl.context.chunk.CoreChunkLinkContext
 import latibro.automation.nativeimpl.context.chunk.LocationCoreChunkLinkContext
@@ -15,7 +14,7 @@ import latibro.automation.nativeimpl.context.world.CoreWorldLinkContext
 import net.minecraft.util.math.BlockPos
 
 @CompileStatic
-abstract class CoreLocationLinkContext implements LocationLinkContext, CoreContext {
+abstract class CoreLocationLinkContext implements LocationLinkContext {
 
     abstract BlockPos getNativeLocation()
 

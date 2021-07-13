@@ -1,6 +1,6 @@
 package latibro.automation.nativeimpl.context.entity.multi
 
-import latibro.automation.core.context.CoreContext
+
 import latibro.automation.core.context.entity.EntityLinkContext
 import latibro.automation.core.context.entity.multi.AbstractEntityMultiLinkContext
 import latibro.automation.nativeimpl.context.entity.CoreEntityLinkContext
@@ -9,7 +9,7 @@ import latibro.automation.nativeimpl.context.server.CoreServerLinkContext
 import latibro.automation.nativeimpl.context.server.DefaultCoreServerLinkContext
 import net.minecraft.entity.Entity
 
-abstract class CoreEntityMultiLinkContext extends AbstractEntityMultiLinkContext implements CoreContext {
+abstract class CoreEntityMultiLinkContext extends AbstractEntityMultiLinkContext {
 
     abstract List<Entity> getNativeEntityList()
 

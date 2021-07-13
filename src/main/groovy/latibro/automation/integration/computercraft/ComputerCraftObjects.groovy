@@ -1,5 +1,6 @@
 package latibro.automation.integration.computercraft
 
+
 import latibro.automation.core.lua.LuaObjectProxy
 
 final class ComputerCraftObjects {
@@ -20,7 +21,7 @@ final class ComputerCraftObjects {
         } else if (object instanceof Double) {
             // Only Double is safe
             return true
-        } else if (object instanceof ComputerCraftObjectProxy) {
+        } else if (object instanceof latibro.automation.integration.computercraft.ComputerCraftObjectProxy) {
             // Proxy object
             return true
         } else if (object instanceof Map) {
@@ -33,7 +34,7 @@ final class ComputerCraftObjects {
         if (isSafeComputerCraftObject(object)) {
             return object
         } else if (object instanceof LuaObjectProxy) {
-            return new ComputerCraftObjectProxy((LuaObjectProxy) object)
+            return new latibro.automation.integration.computercraft.ComputerCraftObjectProxy((LuaObjectProxy) object)
         } else if (object instanceof Map) {
             def map = object.collectEntries { key, value -> [toComputerCraftObject(key), toComputerCraftObject(value)] }
             return map.asUnmodifiable()
@@ -50,8 +51,8 @@ final class ComputerCraftObjects {
             return object
         } else if (object instanceof Boolean) {
             return object
-        } else if (object instanceof ComputerCraftObjectProxy) {
-            return ((ComputerCraftObjectProxy) object).getSource()
+        } else if (object instanceof latibro.automation.integration.computercraft.ComputerCraftObjectProxy) {
+            return ((latibro.automation.integration.computercraft.ComputerCraftObjectProxy) object).getSource()
         } else if (object instanceof Map) {
             def map = object.collectEntries { key, value -> [fromComputerCraftObject(key), fromComputerCraftObject(value)] }
             return map

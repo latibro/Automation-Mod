@@ -1,6 +1,6 @@
 package latibro.automation.nativeimpl.context.tileentity.multi
 
-import latibro.automation.core.context.CoreContext
+
 import latibro.automation.core.context.tileentity.TileEntityLinkContext
 import latibro.automation.core.context.tileentity.multi.AbstractTileEntityMultiLinkContext
 import latibro.automation.nativeimpl.context.server.CoreServerLinkContext
@@ -9,7 +9,7 @@ import latibro.automation.nativeimpl.context.tileentity.CoreTileEntityLinkContex
 import latibro.automation.nativeimpl.context.tileentity.InstanceCoreTileEntityLinkContext
 import net.minecraft.tileentity.TileEntity
 
-abstract class CoreTileEntityMultiLinkContext extends AbstractTileEntityMultiLinkContext implements CoreContext {
+abstract class CoreTileEntityMultiLinkContext extends AbstractTileEntityMultiLinkContext {
 
     abstract List<TileEntity> getNativeTileEntityList()
 

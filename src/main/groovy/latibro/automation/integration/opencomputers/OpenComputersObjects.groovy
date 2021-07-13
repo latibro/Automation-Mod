@@ -21,7 +21,7 @@ class OpenComputersObjects {
         } else if (object instanceof Double) {
             // Only Double is safe
             return true
-        } else if (object instanceof OpenComputersObjectProxy) {
+        } else if (object instanceof latibro.automation.integration.opencomputers.OpenComputersObjectProxy) {
             // Proxy object
             return true
         } else if (object instanceof Map) {
@@ -35,7 +35,7 @@ class OpenComputersObjects {
         if (isSafeOpenComputersObject(object)) {
             return object
         } else if (object instanceof LuaObjectProxy) {
-            return new OpenComputersObjectProxy((LuaObjectProxy) object)
+            return new latibro.automation.integration.opencomputers.OpenComputersObjectProxy((LuaObjectProxy) object)
         } else if (object instanceof Map) {
             def map = object.collectEntries { key, value -> [toOpenComputersObject(key), toOpenComputersObject(value)] }
             //TODO check if array-like and register "n" entry
@@ -55,8 +55,8 @@ class OpenComputersObjects {
             return object
         } else if (object instanceof byte[]) {
             return new String(object)
-        } else if (object instanceof OpenComputersObjectProxy) {
-            return ((OpenComputersObjectProxy) object).getSource()
+        } else if (object instanceof latibro.automation.integration.opencomputers.OpenComputersObjectProxy) {
+            return ((latibro.automation.integration.opencomputers.OpenComputersObjectProxy) object).getSource()
         } else if (isListLikeOCTable(object)) {
             // See comments on toListLikeMap() why this check is here
             return fromOpenComputersObject(fromListLikeOCTable(object as Map))

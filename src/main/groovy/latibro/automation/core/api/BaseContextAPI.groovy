@@ -1,8 +1,9 @@
 package latibro.automation.core.api
 
-import latibro.automation.core.context.Context
 
-class BaseContextAPI<T extends Context> implements ContextAPI {
+import latibro.automation.core.context.OldContext
+
+class BaseContextAPI<T extends OldContext> implements ContextAPI {
 
     private final T context
 

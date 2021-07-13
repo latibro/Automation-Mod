@@ -40,9 +40,8 @@ class DataBoxScreen extends GuiScreen {
     @Override
     void drawScreen(int mouseX, int mouseY, float partialTicks) {
         drawDefaultBackground()
-        String name = I18n.format(ModBlocks.dataBox.getUnlocalizedName() + ".name")
-        drawCenteredString(fontRenderer, name, width / 2 as int, 20, 16777215)
-        drawString(fontRenderer, I18n.format(ModBlocks.dataBox.getUnlocalizedName() + ".data.name"), width / 2 - 150 as int, 40, 10526880)
+        drawCenteredString(fontRenderer, ModBlocks.dataBox.getLocalizedName(), width / 2 as int, 20, 16777215)
+        drawString(fontRenderer, I18n.format(ModBlocks.dataBox.getUnlocalizedName() + ".data"), width / 2 - 150 as int, 40, 10526880)
         dataField?.drawTextBox()
         super.drawScreen(mouseX, mouseY, partialTicks)
     }

@@ -1,6 +1,6 @@
 package latibro.automation.nativeimpl.context.world
 
-import latibro.automation.core.context.CoreContext
+
 import latibro.automation.core.context.server.ServerLinkContext
 import latibro.automation.core.context.world.WorldLinkContext
 import latibro.automation.nativeimpl.context.entity.multi.CoreEntityMultiLinkContext
@@ -12,7 +12,7 @@ import latibro.automation.nativeimpl.context.tileentity.multi.CoreTileEntityMult
 import latibro.automation.nativeimpl.context.tileentity.multi.WorldLoadedCoreTileEntityMultiLinkContext
 import net.minecraft.world.World
 
-abstract class CoreWorldLinkContext implements WorldLinkContext, CoreContext {
+abstract class CoreWorldLinkContext implements WorldLinkContext {
 
     abstract World getNativeWorld()
 

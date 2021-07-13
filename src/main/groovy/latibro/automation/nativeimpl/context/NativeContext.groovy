@@ -1,7 +1,8 @@
 package latibro.automation.nativeimpl.context
 
-import latibro.automation.core.context.Context
 
-interface NativeContext extends Context {
+import latibro.automation.core.context.OldContext
+
+interface NativeContext extends OldContext {
 
 }

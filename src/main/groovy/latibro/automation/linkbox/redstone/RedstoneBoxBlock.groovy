@@ -27,8 +27,8 @@ class RedstoneBoxBlock extends Block implements ITileEntityProvider {
 
     RedstoneBoxBlock() {
         super(Material.IRON)
-        setRegistryName("redstone_box")
-        setUnlocalizedName("automation.redstone_box")
+        setRegistryName("redstone-box")
+        setUnlocalizedName("automation.redstone-box")
         setCreativeTab(ModCreativeTabs.DEFAULT)
     }
 
@@ -50,7 +50,7 @@ class RedstoneBoxBlock extends Block implements ITileEntityProvider {
         }
 
         def tileEntity = world.getTileEntity(pos)
-        ScreenProxy.openTileEntityScreen(player, tileEntity)
+        ScreenProxy.openBlockEntityScreen(tileEntity, player)
         return true
     }
 

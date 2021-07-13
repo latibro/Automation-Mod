@@ -2,6 +2,7 @@ package latibro.automation.core.api
 
 import latibro.automation.api.API
 import latibro.automation.core.context.Context
+import latibro.automation.core.context.OldContext
 
 final class APIRegistry {
 
@@ -12,7 +13,7 @@ final class APIRegistry {
         providers.add(provider)
     }
 
-    static API getAPI(Context context) {
+    static API getAPI(OldContext context) {
         def api = providers.findResult {
             it.getAPI(context)
         }
@@ -37,6 +38,12 @@ final class APIRegistry {
     static API getAPI(String name, API api) {
         return providers.findResult {
             return it.getAPI(name, api)
+        }
+    }
+
+    static API getAPI(String name, Context context) {
+        return providers.findResult {
+            return it.getAPI(name, context)
         }
     }
 

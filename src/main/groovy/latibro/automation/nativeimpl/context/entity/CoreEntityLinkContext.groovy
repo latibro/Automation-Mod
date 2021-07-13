@@ -1,7 +1,6 @@
 package latibro.automation.nativeimpl.context.entity
 
 import groovy.transform.CompileStatic
-import latibro.automation.core.context.CoreContext
 import latibro.automation.core.context.entity.EntityLinkContext
 import latibro.automation.nativeimpl.context.entity.multi.CoreEntityMultiLinkContext
 import latibro.automation.nativeimpl.context.entity.multi.EntityNearbyCoreEntityMultiLinkContext
@@ -15,7 +14,7 @@ import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityList
 
 @CompileStatic
-abstract class CoreEntityLinkContext implements EntityLinkContext, CoreContext {
+abstract class CoreEntityLinkContext implements EntityLinkContext {
 
     abstract Entity getNativeEntity()
 

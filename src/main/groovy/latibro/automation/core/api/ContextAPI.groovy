@@ -1,9 +1,9 @@
 package latibro.automation.core.api
 
 import latibro.automation.api.API
-import latibro.automation.core.context.Context
+import latibro.automation.core.context.OldContext
 
-interface ContextAPI<T extends Context> extends API {
+interface ContextAPI<T extends OldContext> extends API {
 
     T getContext()
 

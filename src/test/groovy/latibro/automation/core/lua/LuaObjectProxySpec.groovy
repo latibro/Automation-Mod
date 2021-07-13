@@ -27,7 +27,7 @@ class LuaObjectProxySpec extends Specification {
         thrown(NullPointerException)
     }
 
-    // ***** getSource
+    // ***** getSourceObject
 
     def "getSource - return original object"() {
         given:

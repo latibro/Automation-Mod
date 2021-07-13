@@ -2,11 +2,21 @@ package latibro.automation.proxy
 
 import groovy.transform.CompileStatic
 import latibro.automation.AutomationMod
+import latibro.automation.base.entity.reference.card.item.EntityReferenceSourceCardContainer
+import latibro.automation.base.entity.reference.card.item.EntityReferenceSourceCardItem
+import latibro.automation.base.entity.reference.card.item.EntityReferenceSourceCardScreen
+import latibro.automation.base.location.block.reference.card.BlockLocationReferenceSourceCardContainer
+import latibro.automation.base.location.block.reference.card.BlockLocationReferenceSourceCardItem
+import latibro.automation.base.location.block.reference.card.BlockLocationReferenceSourceCardScreen
+import latibro.automation.base.world.reference.card.WorldReferenceSourceCardContainer
+import latibro.automation.base.world.reference.card.WorldReferenceSourceCardItem
+import latibro.automation.base.world.reference.card.WorldReferenceSourceCardScreen
+import latibro.automation.computer.relaybox.block.ComputerRelayBoxBlockEntity
+import latibro.automation.computer.relaybox.block.ComputerRelayBoxContainer
+import latibro.automation.computer.relaybox.block.ComputerRelayBoxScreen
 import latibro.automation.linkbox.data.DataBoxContainer
 import latibro.automation.linkbox.data.DataBoxScreen
 import latibro.automation.linkbox.data.DataBoxTileEntity
-import latibro.automation.linkbox.entity.*
-import latibro.automation.linkbox.location.*
 import latibro.automation.linkbox.redstone.RedstoneBoxContainer
 import latibro.automation.linkbox.redstone.RedstoneBoxScreen
 import latibro.automation.linkbox.redstone.RedstoneBoxTileEntity
@@ -20,13 +30,13 @@ import net.minecraftforge.fml.common.network.IGuiHandler
 @CompileStatic
 class ScreenProxy implements IGuiHandler {
 
-    static final int TILE_ENTITY_SCREEN = 1
+    static final int BLOCK_ENTITY_SCREEN = 1
     static final int HELD_ITEM_SCREEN = 2
 
-    static void openTileEntityScreen(EntityPlayer player, TileEntity tileEntity) {
-        def world = tileEntity.world
-        def pos = tileEntity.pos
-        player.openGui(AutomationMod.instance, ScreenProxy.TILE_ENTITY_SCREEN, world, pos.getX(), pos.getY(), pos.getZ())
+    static void openBlockEntityScreen(TileEntity blockEntity, EntityPlayer player) {
+        def world = blockEntity.world
+        def pos = blockEntity.pos
+        player.openGui(AutomationMod.instance, ScreenProxy.BLOCK_ENTITY_SCREEN, world, pos.getX(), pos.getY(), pos.getZ())
     }
 
     static void openHeldItemScreen(EntityPlayer player) {
@@ -35,32 +45,32 @@ class ScreenProxy implements IGuiHandler {
 
     @Override
     Object getServerGuiElement(int screenId, EntityPlayer player, World world, int x, int y, int z) {
-        if (screenId == TILE_ENTITY_SCREEN) {
+        if (screenId == BLOCK_ENTITY_SCREEN) {
             def pos = new BlockPos(x, y, z)
-            def tileEntity = world.getTileEntity(pos)
+            def blockEntity = world.getTileEntity(pos)
 
-            if (tileEntity instanceof EntityLinkBoxTileEntity) {
-                return new EntityLinkBoxContainer(tileEntity, player)
+            if (blockEntity instanceof DataBoxTileEntity) {
+                return new DataBoxContainer(blockEntity)
             }
-            if (tileEntity instanceof LocationLinkBoxTileEntity) {
-                return new LocationLinkBoxContainer(tileEntity, player)
+            if (blockEntity instanceof RedstoneBoxTileEntity) {
+                return new RedstoneBoxContainer(blockEntity)
             }
-            if (tileEntity instanceof DataBoxTileEntity) {
-                return new DataBoxContainer(tileEntity)
-            }
-            if (tileEntity instanceof RedstoneBoxTileEntity) {
-                return new RedstoneBoxContainer(tileEntity)
+            if (blockEntity instanceof ComputerRelayBoxBlockEntity) {
+                return new ComputerRelayBoxContainer(blockEntity, player)
             }
         }
         if (screenId == HELD_ITEM_SCREEN) {
             def itemStack = player.getHeldItem(EnumHand.MAIN_HAND)
             def item = itemStack.item
 
-            if (item instanceof LocationLinkCardItem) {
-                return new LocationLinkCardContainer(player)
+            if (item instanceof WorldReferenceSourceCardItem) {
+                return new WorldReferenceSourceCardContainer(player.inventoryContainer, itemStack)
             }
-            if (item instanceof EntityLinkCardItem) {
-                return new EntityLinkCardContainer(player)
+            if (item instanceof BlockLocationReferenceSourceCardItem) {
+                return new BlockLocationReferenceSourceCardContainer(player.inventoryContainer, itemStack)
+            }
+            if (item instanceof EntityReferenceSourceCardItem) {
+                return new EntityReferenceSourceCardContainer(player.inventoryContainer, itemStack)
             }
         }
         return null
@@ -68,25 +78,25 @@ class ScreenProxy implements IGuiHandler {
 
     @Override
     Object getClientGuiElement(int screenId, EntityPlayer player, World world, int x, int y, int z) {
-        def serverGuiElement = getServerGuiElement(screenId, player, world, x, y, z)
+        def container = getServerGuiElement(screenId, player, world, x, y, z)
 
-        if (serverGuiElement instanceof EntityLinkBoxContainer) {
-            return new EntityLinkBoxScreen(serverGuiElement)
+        if (container instanceof WorldReferenceSourceCardContainer) {
+            return new WorldReferenceSourceCardScreen(container)
         }
-        if (serverGuiElement instanceof EntityLinkCardContainer) {
-            return new EntityLinkCardScreen(serverGuiElement)
+        if (container instanceof EntityReferenceSourceCardContainer) {
+            return new EntityReferenceSourceCardScreen(container)
         }
-        if (serverGuiElement instanceof LocationLinkBoxContainer) {
-            return new LocationLinkBoxScreen(serverGuiElement)
+        if (container instanceof BlockLocationReferenceSourceCardContainer) {
+            return new BlockLocationReferenceSourceCardScreen(container)
         }
-        if (serverGuiElement instanceof LocationLinkCardContainer) {
-            return new LocationLinkCardScreen(serverGuiElement)
+        if (container instanceof DataBoxContainer) {
+            return new DataBoxScreen(container)
         }
-        if (serverGuiElement instanceof DataBoxContainer) {
-            return new DataBoxScreen(serverGuiElement)
+        if (container instanceof RedstoneBoxContainer) {
+            return new RedstoneBoxScreen(container)
         }
-        if (serverGuiElement instanceof RedstoneBoxContainer) {
-            return new RedstoneBoxScreen(serverGuiElement)
+        if (container instanceof ComputerRelayBoxContainer) {
+            return new ComputerRelayBoxScreen(container)
         }
         return null
     }

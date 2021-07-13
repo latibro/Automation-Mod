@@ -1,22 +1,32 @@
-itemGroup.automation.default=Automation
+# Item Group
+itemGroup.automation.default = Automation Mod
 
-tile.automation.server_link_box.name=Server Link Box
+# Server Source Card
+item.automation.server-source-card = Server Source Card
 
-tile.automation.world_link_box.name=World Link Box
+# World Reference Source Card
+item.automation.world-reference-source-card.name = World Reference Source Card
+item.automation.world-reference-source-card.reference.name = World name
 
-tile.automation.entity_link_box.name=Entity Link Box
-item.automation.entity_link_card.name=Entity Link Card
-item.automation.entity_link_card.entity.uuid.name=Entity ID
+# Entity Source Card
+item.automation.entity-reference-source-card = Entity Reference Source Card
+item.automation.entity-reference-source-card.reference.uuid = Entity ID
 
-tile.automation.location_link_box.name=Location Link Box
-item.automation.location_link_card.name=Location Link Card
-item.automation.location_link_card.location.name=Location
-item.automation.location_link_card.location.x.name=X (+east / -west)
-item.automation.location_link_card.location.y.name=Y (+up / -down)
-item.automation.location_link_card.location.z.name=Z (+south / -north)
+# Block Location Reference Source Card
+item.automation.block-location-reference-source-card = Block Location Reference Source Card
+item.automation.block-location-reference-source-card.reference.world.name = World name
+item.automation.block-location-reference-source-card.reference.coordinates.x = X coordinate (+east / -west)
+item.automation.block-location-reference-source-card.reference.coordinates.y = Y coordinate (+up / -down)
+item.automation.block-location-reference-source-card.reference.coordinates.z = Z coordinate (+south / -north)
 
-tile.automation.data_box.name=Data Box
-tile.automation.data_box.data.name=Data
+# Computer Relay Box
+tile.automation.computer-relay-box = Computer Relay Box
+tile.automation.computer-relay-box.source-cards = Source Cards
 
-tile.automation.redstone_box.name=Redstone Box
-tile.automation.redstone_box.power_level.name=Power level
+# Data Box
+tile.automation.data-box = Data Box
+tile.automation.data-box.data = Data
+
+# Redstone Box
+tile.automation.redstone-box = Redstone Box
+tile.automation.redstone-box.power-level = Power level

@@ -1,17 +1,21 @@
 package latibro.automation.proxy
 
-
 import groovy.transform.CompileStatic
 import latibro.automation.AutomationMod
 import latibro.automation.ModBlocks
 import latibro.automation.ModItems
+import latibro.automation.base.entity.reference.EntityReferenceSourceProvider
+import latibro.automation.base.world.reference.WorldReferenceSourceProvider
 import latibro.automation.core.api.APIRegistry
-import latibro.automation.core.context.ContextRegistry
-import latibro.automation.integration.computercraft.TileEntityPeripheralProvider
-import latibro.automation.integration.immersiverailroading.ImmersiveRailroadingAPIProvider
-import latibro.automation.integration.immersiverailroading.ImmersiveRailroadingContextProvider
+import latibro.automation.core.source.SourceRegistry
+import latibro.automation.core.source.card.SourceCardSourceProvider
+import latibro.automation.integration.computercraft.BlockEntityPeripheralProvider
+import latibro.automation.integration.immersiverailroading.ImmersiveRailroadingLuaAPIProvider
+import latibro.automation.integration.minecraft.MinecraftLuaAPIProvider
+import latibro.automation.integration.universalmodcore.CustomEntitySourceProvider
 import latibro.automation.linkbox.data.DataBoxAPIProvider
 import latibro.automation.linkbox.redstone.RedstoneBoxAPIProvider
+import latibro.automation.lua.api.LuaAPIRegistry
 import latibro.automation.nativeimpl.context.chunk.EntityCoreChunkLinkContext
 import net.minecraft.block.Block
 import net.minecraft.item.Item
@@ -50,18 +54,33 @@ class CommonProxy {
         })
         MinecraftForge.EVENT_BUS.register(EntityCoreChunkLinkContext)
 
+        SourceRegistry.INSTANCE.register(new SourceCardSourceProvider())
+
+        SourceRegistry.INSTANCE.register(new EntityReferenceSourceProvider())
+        SourceRegistry.INSTANCE.register(new WorldReferenceSourceProvider())
+
         APIRegistry.register(new DataBoxAPIProvider())
         APIRegistry.register(new RedstoneBoxAPIProvider())
 
+        LuaAPIRegistry.INSTANCE.register(new MinecraftLuaAPIProvider())
+
+        if (Loader.isModLoaded("opencomputers")) {
+            AutomationMod.logger.debug("Found OpenComputers")
+        }
+
         if (Loader.isModLoaded("computercraft")) {
             AutomationMod.logger.debug("Found ComputerCraft")
-            TileEntityPeripheralProvider.init()
+            BlockEntityPeripheralProvider.init()
+        }
+
+        if (Loader.isModLoaded("universalmodcore")) {
+            AutomationMod.logger.debug("Found Universal Mod Core")
+            SourceRegistry.INSTANCE.register(new CustomEntitySourceProvider())
         }
 
         if (Loader.isModLoaded("immersiverailroading")) {
             AutomationMod.logger.debug("Found Immersive Railroading")
-            ContextRegistry.register(new ImmersiveRailroadingContextProvider())
-            APIRegistry.register(new ImmersiveRailroadingAPIProvider())
+            LuaAPIRegistry.INSTANCE.register(new ImmersiveRailroadingLuaAPIProvider())
         }
     }
 

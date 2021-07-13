@@ -1,14 +1,13 @@
 package latibro.automation.nativeimpl.context.tileentity
 
 import groovy.transform.CompileStatic
-import latibro.automation.core.context.CoreContext
 import latibro.automation.core.context.tileentity.TileEntityLinkContext
 import latibro.automation.nativeimpl.context.location.CoreLocationLinkContext
 import latibro.automation.nativeimpl.context.location.TileEntityCoreLocationLinkContext
 import net.minecraft.tileentity.TileEntity
 
 @CompileStatic
-abstract class CoreTileEntityLinkContext implements TileEntityLinkContext, CoreContext {
+abstract class CoreTileEntityLinkContext implements TileEntityLinkContext {
 
     abstract TileEntity getNativeTileEntity()
 
